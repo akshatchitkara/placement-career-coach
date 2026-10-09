@@ -31,15 +31,15 @@ def main() -> None:
     st.set_page_config(page_title="Placement Career Coach", layout="wide")
 
     pages = [
-        st.Page(profile_page.render, title="Profile", default=True),
-        st.Page(career_selection_page.render, title="Career & Semester"),
-        st.Page(roadmap_page.render, title="Roadmap"),
-        st.Page(assessment_page.render, title="Skills Check"),
-        st.Page(results_page.render, title="Results"),
-        st.Page(coaching_page.render, title="Coaching Plan"),
-        st.Page(weekly_plan_page.render, title="Weekly Plan"),
-        st.Page(progress_page.render, title="Progress"),
-        st.Page(ai_settings_page.render, title="AI Settings"),
+        st.Page(profile_page.render, title="Profile", default=True, url_path="profile"),
+        st.Page(career_selection_page.render, title="Career & Semester", url_path="career"),
+        st.Page(roadmap_page.render, title="Roadmap", url_path="roadmap"),
+        st.Page(assessment_page.render, title="Skills Check", url_path="assessment"),
+        st.Page(results_page.render, title="Results", url_path="results"),
+        st.Page(coaching_page.render, title="Coaching Plan", url_path="coaching"),
+        st.Page(weekly_plan_page.render, title="Weekly Plan", url_path="weekly-plan"),
+        st.Page(progress_page.render, title="Progress", url_path="progress"),
+        st.Page(ai_settings_page.render, title="AI Settings", url_path="ai-settings"),
     ]
     nav = st.navigation(pages)
     nav.run()

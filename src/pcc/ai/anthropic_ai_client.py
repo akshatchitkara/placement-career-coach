@@ -14,11 +14,13 @@ class AnthropicAiClient(AiClient):
         self._client = anthropic.Anthropic(api_key=config.api_key, timeout=config.timeout_seconds)
 
     def generate(self, prompt: str, *, system: str | None = None, temperature: float = 0.2) -> str:
+        # anthropic>=1.13 dropped `temperature` from Messages.create entirely (verified
+        # against the installed SDK's signature/source -- not accepted by this API version).
+        # The interface still takes it so callers stay provider-agnostic; it's a no-op here.
         try:
             response = self._client.messages.create(
                 model=self._model,
                 max_tokens=2048,
-                temperature=temperature,
                 system=system or "",
                 messages=[{"role": "user", "content": prompt}],
             )

@@ -17,5 +17,8 @@ def get_connection(db_path: str) -> sqlite3.Connection:
 
 
 def init_schema(conn: sqlite3.Connection) -> None:
-    conn.executescript(_SCHEMA_PATH.read_text(encoding="utf-8"))
+    schema_sql = _SCHEMA_PATH.read_text(encoding="utf-8")
+    schema_sql = schema_sql.replace("CREATE TABLE ", "CREATE TABLE IF NOT EXISTS ")
+    schema_sql = schema_sql.replace("CREATE INDEX ", "CREATE INDEX IF NOT EXISTS ")
+    conn.executescript(schema_sql)
     conn.commit()
