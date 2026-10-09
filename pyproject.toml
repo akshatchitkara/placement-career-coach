@@ -21,4 +21,4 @@ pythonpath = ["src"]
 testpaths = ["tests"]
 
 [tool.coverage.run]
-source = ["src/pcc/domain/scoring", "src/pcc/domain/weekly_plan_builder.py"]
+source = ["pcc.domain.scoring", "pcc.domain.weekly_plan_builder", "pcc.domain.progress"]

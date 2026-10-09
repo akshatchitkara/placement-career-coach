@@ -22,7 +22,7 @@ def render() -> None:
         return
 
     names = {s.skill_id: s.name for s in load_skills()}
-    st.caption("Baseline knowledge check")
+    st.caption("Re-check" if result.attempt_type == "retest" else "Baseline knowledge check")
     render_level_badge(
         result.level, result.scope_description, result.overall_score, result.level_notes
     )

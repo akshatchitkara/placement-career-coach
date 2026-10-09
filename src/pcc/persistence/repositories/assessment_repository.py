@@ -17,6 +17,7 @@ class AttemptRecord(BaseModel):
     shuffle_seed: int
     config_snapshot_json: str
     submitted: bool
+    submitted_at: str | None = None
 
 
 def _now() -> str:
@@ -32,6 +33,7 @@ def _to_record(row: sqlite3.Row) -> AttemptRecord:
         shuffle_seed=row["shuffle_seed"],
         config_snapshot_json=row["config_snapshot_json"],
         submitted=row["submitted_at"] is not None,
+        submitted_at=row["submitted_at"],
     )
 
 
@@ -74,6 +76,15 @@ def get_latest_submitted_attempt(conn: sqlite3.Connection, profile_id: int) -> A
         (profile_id,),
     ).fetchone()
     return _to_record(row) if row else None
+
+
+def list_submitted_attempts(conn: sqlite3.Connection, profile_id: int) -> list[AttemptRecord]:
+    rows = conn.execute(
+        "SELECT * FROM assessment_attempts WHERE profile_id = ? AND submitted_at IS NOT NULL "
+        "ORDER BY submitted_at ASC, id ASC",
+        (profile_id,),
+    ).fetchall()
+    return [_to_record(r) for r in rows]
 
 
 def seen_question_ids_oldest_first(conn: sqlite3.Connection, profile_id: int) -> list[str]:

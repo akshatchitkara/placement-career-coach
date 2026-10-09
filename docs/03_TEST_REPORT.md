@@ -87,7 +87,7 @@ Deviations noted: local Python available is 3.14 (blueprint specifies 3.11) -- n
 ## M3 — Assessment flow
 
 | Item | Result | Notes |
-|---|---|---|
+| --- | --- | --- |
 | Question selection: 3 per skill, fixed 1/1/1 difficulty mix, 12 for DevOps Sem 3 | **Pass** | `select_questions`; seeded, so the same seed gives the same list |
 | Unseen-first, then least-recently-seen reuse | **Pass** | unit-tested; the full re-test flow is M5 (T-17 not fully closed until then) |
 | Seeded option shuffle, reproducible for review | **Pass** | order saved per response in `displayed_order_json`; answer position varies across seeds |
@@ -97,12 +97,12 @@ Deviations noted: local Python available is 3.14 (blueprint specifies 3.11) -- n
 | Results page: score, level + scope, per-skill `correct/answered`, level rules, coverage | **Pass** | FR-06 |
 | Roadmap position and weakest skill on results (FR-07, FR-08) | **Pass** | position looks from the student's current semester onward |
 | Section 10.7 worked example through the real controller | **Pass** | 50.0, Intermediate, Linux weakest on tie, position Linux, coverage 4/14 |
-| T-03 perfect single-semester check caps at Advanced with a full-path note | **Pass** | |
-| T-08 no major gap, next skill offered | **Pass** | position -> Networking Fundamentals |
+| T-03 perfect single-semester check caps at Advanced with a full-path note | **Pass** |  |
+| T-08 no major gap, next skill offered | **Pass** | position -&gt; Networking Fundamentals |
 | T-18 results restored by a new controller on the same DB (partial: coaching/weekly plan are M4/M5) | **Pass** (partial) | identical result object, which also shows T-01 |
 | T-20 changed thresholds do not alter a past attempt | **Pass** | results are re-derived from the attempt's own snapshot |
 | T-21 build/communication skills "assessed later", not scored | **Pass** | Sem 6 DevOps: capstone, interview prep |
-| T-22 thin bank -> "coming soon" | **Pass** | Java/MEAN/AI and DevOps Sem 4-6 show it; the check can't be started |
+| T-22 thin bank -&gt; "coming soon" | **Pass** | Java/MEAN/AI and DevOps Sem 4-6 show it; the check can't be started |
 | Full suite + lint + mypy + app smoke | **Pass** | 115 tests, ruff clean, mypy clean on `domain/` + `workflow/`, scoring coverage 96%, full-app headless render has no exceptions |
 | Looked at in a real browser | **Pass** | see "Real-browser verification (M2-M4)" below; also found and fixed the Start-button bug |
 
@@ -111,16 +111,16 @@ Deviations noted: local Python available is 3.14 (blueprint specifies 3.11) -- n
 ## M4 — Coaching flow
 
 | Item | Result | Notes |
-|---|---|---|
+| --- | --- | --- |
 | Coaching agent: AI drafts, validate, one repair attempt, template fallback | **Pass** | `agents/coaching_agent.py`; mock mode skips the AI call and uses the template directly |
 | Coaching validator V-CO-01..06 | **Pass** | task count, link to a missed question or concept, skill matches the computed weakest, time limit from config, success check, no URLs |
 | Template fallback is always valid | **Pass** | property-tested for 1, 2 and 3 misses with same/different concepts; 3-5 tasks, within the time limit |
 | Curated practice templates for the 12 concepts the DevOps Sem 3 bank tests | **Pass** | `skills.json`; content validator now fails if a tested concept has no template or a template holds a URL |
-| Plan built after submit only when a weakest skill exists | **Pass** | state goes `RESULTS_READY` -> `COACHING_READY`; with "no major gap" no plan is made and state stays `RESULTS_READY` (M5 routes it to the weekly plan) |
+| Plan built after submit only when a weakest skill exists | **Pass** | state goes `RESULTS_READY` -&gt; `COACHING_READY`; with "no major gap" no plan is made and state stays `RESULTS_READY` (M5 routes it to the weekly plan) |
 | Coaching page: diagnosis, per-task "what went wrong / do this / done when", linked question | **Pass** | FR-09; source label says curated or AI-drafted |
 | Plan saved and restored on reopen; older plans superseded | **Pass** | `coaching_plans` |
 | T-12 plan for a different skill than the computed weakest is rejected | **Pass** | AI cannot change the weakest skill |
-| T-13 task with no link to a missed question or concept is rejected | **Pass** | |
+| T-13 task with no link to a missed question or concept is rejected | **Pass** |  |
 | T-14 URL from AI rejected (coaching + roadmap) | **Pass** | every text field checked |
 | T-15 AI off/unavailable: DevOps flow completes with templates | **Pass** | through check, results and coaching |
 | T-16 empty/malformed AI response: no crash, fallback, nothing unvalidated shown | **Pass** | `""`, `{}`, non-JSON, wrong shape, `[]` |
@@ -137,7 +137,7 @@ Deviations noted: local Python available is 3.14 (blueprint specifies 3.11) -- n
 Driven in Microsoft Edge with Playwright (headless, 1280x900) against a second copy of the app on port 8502 with a throwaway database, so no real data was touched. The script lives outside the repo (it needs Playwright and Edge). Final run: **23 checks, all passed, no uncaught browser errors.**
 
 | Step | Result | What was observed |
-|---|---|---|
+| --- | --- | --- |
 | Sidebar lists all pages | **Pass** | Profile, Career & Semester, Roadmap, Skills Check, Results, Coaching Plan, Weekly Plan, Progress, AI Settings, M1 Preview |
 | Profile: enter a name and start | **Pass** | "Signed in as ..." shown |
 | Career: "Doctor" typed under "My career isn't listed" | **Pass** | "not supported yet" message; no roadmap created (T-19) |
@@ -150,19 +150,43 @@ Driven in Microsoft Edge with Playwright (headless, 1280x900) against a second c
 | Coaching page | **Pass** | Focus skill Linux Fundamentals, 5 tasks (about 110 min), each with what went wrong, what to do, how to know it is done, and the linked question; no URLs on the page |
 | Reload the browser, reopen the profile | **Pass** | coaching plan and results still present (T-18, partial: weekly plan is M5) |
 
-**UI bugs found only in the browser (both fixed, commit `5502587`):**
+**UI bugs found only in the browser (both fixed, commit** `5502587`**):**
+
 1. The "Start skills check" button stayed on screen above the questions after the check started. Fixed by redrawing in the in-progress state.
 2. Roadmap and profile pages showed "Devops Engineer" (title-cased id). They now show the catalog name, "DevOps Engineer". This second fix was covered by the unit/UI suite but the browser journey was not re-run after it.
 
 **Operational finding:** Streamlit did not reliably pick up edits to page modules while a server was running (the first retest still showed the old button). Restart the server after code changes.
 
-**Content note (not a defect):** roadmap `focus` and `deliverable` text is generic template wording ("Foundations: <skill>", "Produce a short artifact demonstrating ... applied to a realistic task"). It passes validation but is placeholder-quality.
+**Content note (not a defect):** roadmap `focus` and `deliverable` text is generic template wording ("Foundations: ", "Produce a short artifact demonstrating ... applied to a realistic task"). It passes validation but is placeholder-quality.
 
 **Not covered in the browser:** the AI Settings page and live provider calls, Tier B careers (Java/MEAN/AI) "coming soon" state, Semesters 4-6, and the M1 Preview page.
 
 ## M5 — Weekly loop
 
-Not started.
+| Item | Result | Notes |
+|---|---|---|
+| Weekly plan builder: pure rules, 3-5 tasks, within the time limit | **Pass** | `domain/weekly_plan_builder.py`, 100% line coverage; Section 10.7 example reproduced (2 coaching + Shell revision + Python light revision + re-check) |
+| Rules from Section 4.5: max 2 coaching tasks, next roadmap topic when no gap, revision for skills < 80, closing re-check | **Pass** | lowest-priority tasks are dropped first when over the time limit; re-check is always kept; short weeks are padded to the minimum |
+| Re-check date = plan date + `retest_after_days` | **Pass** | read from config; shown on the plan and the Skills Check page |
+| Weekly plan created with the check and saved | **Pass** | state ends at `WEEKLY_PLAN_ACTIVE`; profiles saved before M5 (stuck at `RESULTS_READY`/`COACHING_READY`) get their plan on next load |
+| Weekly plan page: tasks, completion checks, tick-off with progress, re-check banner | **Pass** | ticks persist in `tasks_done_json` and survive a browser reload |
+| Re-check prompt: "due" banner when the date arrives, early re-check allowed | **Pass** | clock injected in tests; due after exactly 7 days (not at 6) |
+| **T-17** re-test uses unseen questions first, no duplicates within a test | **Pass** | baseline then re-check share no questions; a third check reuses the least recently seen; browser run confirmed 12 unseen |
+| **T-18** close and reopen: profile, roadmap, last results, coaching plan and weekly plan restored | **Pass** | full restore incl. ticked tasks (closes the partial items from M3/M4) |
+| Progress page: latest vs previous, per-skill before/after, level change, history | **Pass** | FR-13; mentor prompt below 40%, flag after two drops in a row (Section 4.4); "N skills still below the mastery bar" close target |
+| Re-check results labelled as such; older weekly plan can no longer be edited | **Pass** | |
+| Full suite + lint + mypy + content validation | **Pass** | 203 tests, ruff clean, mypy clean on `domain/` + `workflow/`, coverage: scoring 96%, weekly builder 100%, progress 100% |
+| Real browser (Edge): baseline -> weekly plan -> tick -> reload -> early re-check -> progress | **Pass** | 25 checks in the M5 run, no uncaught browser errors; screenshots reviewed |
+| Live AI provider | **Not verified** | no API key; weekly plan and progress use no AI by design |
+
+**Bugs found while building M5 (fixed):**
+1. *Wrong "next skill" when nothing is weak.* The weakest-skill selector breaks ties toward the earliest skill, so with everything mastered it offered the skill after Linux (Shell Scripting, already mastered) as "next". Found by the new weekly-plan test; the Results page showed the same wrong text. Fixed in the evaluation agent: "next" is now the roadmap position (first skill still to do). Regression test added.
+2. *Weekly plan padding.* With nothing specific to do, the builder padded one task and landed at 2 (< minimum of 3). Found by a unit test; now pads as many tasks as needed.
+3. *Coverage config.* The weekly plan builder was listed by file path, so coverage reported it as "never imported". It is now measured by module name.
+
+**Flow change:** after a check the profile now ends at `WEEKLY_PLAN_ACTIVE` (the coaching plan and weekly plan are both built at submit, as in the blueprint's sequence diagram). `COACHING_READY` is now a transient state. M3/M4 tests that asserted the old end state were updated.
+
+**Not covered in the browser:** the "re-check is due" banner (needs 7 days to pass; covered with an injected clock in integration tests), Tier B careers, Semesters 4-6.
 
 ## M6 — Reliability and polish
 

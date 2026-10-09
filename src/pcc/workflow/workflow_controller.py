@@ -1,13 +1,15 @@
 """Orchestrates the student journey. UI calls this; it calls agents, content and persistence.
 
 Scope so far: profiles, career selection, roadmap (M2); skills check and results (M3);
-coaching plan (M4).
+coaching plan (M4); weekly plan, re-checks and progress (M5).
 """
 
 import secrets
 import sqlite3
+from collections.abc import Callable
 from contextlib import closing
 from dataclasses import dataclass
+from datetime import UTC, date, datetime
 from typing import Literal
 
 from pcc.agents.coaching_agent import generate_coaching_plan
@@ -34,6 +36,7 @@ from pcc.core.constants import SEMESTERS
 from pcc.core.exceptions import PccError
 from pcc.domain.career_resolver import resolve_career
 from pcc.domain.enums import WorkflowState, is_quiz_assessable
+from pcc.domain.progress import AttemptSummary, ProgressView, build_progress
 from pcc.domain.schemas.assessment_schemas import (
     Answer,
     AssessmentScope,
@@ -48,7 +51,14 @@ from pcc.domain.schemas.coaching_schemas import (
     MissedQuestion,
 )
 from pcc.domain.schemas.question_schemas import Question
-from pcc.domain.schemas.roadmap_schemas import Roadmap, Skill
+from pcc.domain.schemas.roadmap_schemas import Roadmap, RoadmapMonth, Skill
+from pcc.domain.schemas.weekly_plan_schemas import (
+    RoadmapFocus,
+    WeeklyPlanConfig,
+    WeeklyPlanContext,
+    WeeklyPlanView,
+)
+from pcc.domain.weekly_plan_builder import build_weekly_plan
 from pcc.persistence.database import get_connection, init_schema
 from pcc.persistence.repositories.ai_provider_settings_repository import get_active_config
 from pcc.persistence.repositories.assessment_repository import (
@@ -57,6 +67,7 @@ from pcc.persistence.repositories.assessment_repository import (
     get_attempt,
     get_latest_submitted_attempt,
     get_open_attempt,
+    list_submitted_attempts,
     load_answers,
     save_submission,
     seen_question_ids_oldest_first,
@@ -74,6 +85,11 @@ from pcc.persistence.repositories.roadmap_repository import (
     get_active_roadmap,
     save_active_roadmap,
 )
+from pcc.persistence.repositories.weekly_plan_repository import (
+    get_latest_weekly_plan,
+    save_weekly_plan,
+    set_done_task_ids,
+)
 from pcc.workflow.workflow_transitions import assert_transition
 
 MAX_DISPLAY_NAME_LENGTH = 40
@@ -87,8 +103,14 @@ class CareerSelectionResult:
 
 
 class WorkflowController:
-    def __init__(self, db_path: str, ai_client: AiClient | None = None) -> None:
+    def __init__(
+        self,
+        db_path: str,
+        ai_client: AiClient | None = None,
+        today: Callable[[], date] | None = None,
+    ) -> None:
         self._db_path = db_path
+        self._today = today or (lambda: datetime.now(UTC).date())  # injectable for tests
         self._ai_client = ai_client  # None -> resolved from saved provider settings per call
         with closing(self._connect()) as conn:
             init_schema(conn)
@@ -186,6 +208,7 @@ class WorkflowController:
                 sem: [m.skill_id for m in months if m.semester == sem] for sem in SEMESTERS
             },
             bank=load_question_bank(profile.career_id),
+            months_by_skill={m.skill_id: m for m in months},
         )
 
     @staticmethod
@@ -225,7 +248,11 @@ class WorkflowController:
         return settings, scope, questions
 
     def start_assessment(self, profile_id: int) -> AssessmentSession:
-        """Starts a baseline check, or resumes the open one (same seed -> same questions)."""
+        """Starts a baseline check or a re-check, or resumes the open one.
+
+        Resuming re-selects from the stored seed, so the same questions come back.
+        """
+        self.sync_state(profile_id)
         with closing(self._connect()) as conn:
             ctx = self._check_context(conn, profile_id)
             attempt = get_open_attempt(conn, profile_id)
@@ -237,11 +264,21 @@ class WorkflowController:
                         "Assessment coming soon: no skill in this semester has a reviewed "
                         "question bank yet."
                     )
-                assert_transition(ctx.profile.workflow_state, WorkflowState.ASSESSMENT_IN_PROGRESS)
+                state = ctx.profile.workflow_state
+                if state == WorkflowState.ROADMAP_READY:
+                    attempt_type = "baseline"
+                elif state in (WorkflowState.WEEKLY_PLAN_ACTIVE, WorkflowState.RETEST_DUE):
+                    attempt_type = "retest"
+                    if state == WorkflowState.WEEKLY_PLAN_ACTIVE:  # re-checking before the due date
+                        assert_transition(state, WorkflowState.RETEST_DUE)
+                        state = WorkflowState.RETEST_DUE
+                else:
+                    raise PccError("A check cannot be started right now.")
+                assert_transition(state, WorkflowState.ASSESSMENT_IN_PROGRESS)
                 attempt_id = create_attempt(
                     conn,
                     profile_id,
-                    attempt_type="baseline",
+                    attempt_type=attempt_type,
                     scope_description=f"Semester {scope.semester} skills",
                     shuffle_seed=secrets.randbits(31),
                     config_snapshot_json=settings.model_dump_json(),
@@ -254,6 +291,7 @@ class WorkflowController:
             _, _, questions = self._questions_for(ctx, attempt, seen)
         return AssessmentSession(
             attempt_id=attempt.id,
+            attempt_type=attempt.attempt_type,
             scope_description=attempt.scope_description,
             questions=present(questions, ctx.skills_by_id, attempt.shuffle_seed),
         )
@@ -268,6 +306,7 @@ class WorkflowController:
     ) -> EvaluationResult:
         return evaluate(
             attempt_id=attempt.id,
+            attempt_type=attempt.attempt_type,
             scope_description=attempt.scope_description,
             answers=answers,
             questions_by_id={q.question_id: q for q in ctx.bank},
@@ -324,8 +363,165 @@ class WorkflowController:
                 save_active_plan(conn, profile_id, attempt_id, plan)
                 assert_transition(WorkflowState.RESULTS_READY, WorkflowState.COACHING_READY)
                 set_workflow_state(conn, profile_id, WorkflowState.COACHING_READY)
+            self._plan_week(conn, ctx, attempt_id, result, settings)
             conn.commit()
         return result
+
+    # --- weekly loop (M5) ---------------------------------------------------------------------
+    def _plan_week(
+        self,
+        conn: sqlite3.Connection,
+        ctx: "_CheckContext",
+        attempt_id: int,
+        result: EvaluationResult,
+        settings: AppSettings,
+    ) -> None:
+        """Builds and saves this week's plan by rules, then moves to WEEKLY_PLAN_ACTIVE."""
+        profile_id = ctx.profile.id
+        weakest = result.weakest
+        focus_skill_id: str | None = None
+        if weakest.status == "no_major_gap":
+            focus_skill_id = weakest.next_roadmap_skill_id
+        elif weakest.status == "insufficient_evidence":
+            focus_skill_id = result.position.skill_id
+        month = ctx.months_by_skill.get(focus_skill_id or "")
+        focus = (
+            RoadmapFocus(
+                skill_id=month.skill_id,
+                skill_name=ctx.skills_by_id[month.skill_id].name,
+                topics=month.topics,
+                deliverable=month.deliverable,
+            )
+            if month
+            else None
+        )
+        tags = {q.question_id: q.concept_tag for q in ctx.bank}
+        missed: dict[str, list[str]] = {}
+        for review in result.reviews:
+            if not review.is_correct:
+                bucket = missed.setdefault(review.skill_id, [])
+                if tags[review.question_id] not in bucket:
+                    bucket.append(tags[review.question_id])
+
+        plan = build_weekly_plan(
+            WeeklyPlanContext(
+                today=self._today(),
+                weakest=weakest,
+                coaching_plan=get_active_plan(conn, profile_id)
+                if weakest.status == "weakest_found"
+                else None,
+                skill_scores=result.skill_scores,
+                skill_names={sid: s.name for sid, s in ctx.skills_by_id.items()},
+                missed_concepts_by_skill=missed,
+                roadmap_focus=focus,
+                mastery_threshold=settings.mastery_threshold,
+            ),
+            WeeklyPlanConfig(
+                min_tasks=settings.weekly_plan.min_tasks,
+                max_tasks=settings.weekly_plan.max_tasks,
+                max_total_minutes=settings.weekly_plan.max_total_minutes,
+                retest_after_days=settings.retest_after_days,
+            ),
+        )
+        save_weekly_plan(conn, profile_id, attempt_id, plan)
+        current = get_profile(conn, profile_id)
+        assert current is not None
+        assert_transition(current.workflow_state, WorkflowState.WEEKLY_PLAN_ACTIVE)
+        set_workflow_state(conn, profile_id, WorkflowState.WEEKLY_PLAN_ACTIVE)
+
+    def sync_state(self, profile_id: int) -> None:
+        """Keeps stored state honest: completes a missing weekly plan, flags a due re-check.
+
+        Safe to call on every page load. The first part repairs profiles saved before the
+        weekly plan existed (they stopped at RESULTS_READY or COACHING_READY).
+        """
+        with closing(self._connect()) as conn:
+            profile = get_profile(conn, profile_id)
+            if profile is None or not profile.career_id:
+                return
+            if profile.workflow_state in (
+                WorkflowState.RESULTS_READY,
+                WorkflowState.COACHING_READY,
+            ):
+                attempt = get_latest_submitted_attempt(conn, profile_id)
+                if attempt is not None:
+                    ctx = self._check_context(conn, profile_id)
+                    settings = AppSettings.model_validate_json(attempt.config_snapshot_json)
+                    answers = load_answers(conn, attempt.id)
+                    result = self._evaluate(
+                        ctx, attempt, answers, settings, self._scope(ctx, settings)
+                    )
+                    self._plan_week(conn, ctx, attempt.id, result, settings)
+                    conn.commit()
+                    profile = get_profile(conn, profile_id)
+                    assert profile is not None
+            if profile.workflow_state == WorkflowState.WEEKLY_PLAN_ACTIVE:
+                latest = get_latest_weekly_plan(conn, profile_id)
+                if latest is not None and self._today() >= latest[1].retest_due_date:
+                    assert_transition(profile.workflow_state, WorkflowState.RETEST_DUE)
+                    set_workflow_state(conn, profile_id, WorkflowState.RETEST_DUE)
+                    conn.commit()
+
+    def get_weekly_plan(self, profile_id: int) -> WeeklyPlanView | None:
+        self.sync_state(profile_id)
+        with closing(self._connect()) as conn:
+            latest = get_latest_weekly_plan(conn, profile_id)
+        if latest is None:
+            return None
+        plan_id, plan, done = latest
+        days_left = max((plan.retest_due_date - self._today()).days, 0)
+        return WeeklyPlanView(
+            plan_id=plan_id,
+            plan=plan,
+            done_task_ids=done,
+            retest_due=days_left == 0,
+            days_until_retest=days_left,
+        )
+
+    def set_task_done(self, profile_id: int, plan_id: int, task_id: str, done: bool) -> None:
+        with closing(self._connect()) as conn:
+            latest = get_latest_weekly_plan(conn, profile_id)
+            if latest is None or latest[0] != plan_id:
+                raise PccError("That weekly plan is no longer current.")
+            if task_id not in {t.task_id for t in latest[1].tasks}:
+                raise PccError("Unknown task.")
+            ids = set(latest[2])
+            if done:
+                ids.add(task_id)
+            else:
+                ids.discard(task_id)
+            set_done_task_ids(conn, plan_id, sorted(ids))
+            conn.commit()
+
+    def get_progress(self, profile_id: int) -> ProgressView:
+        """Every submitted check, re-derived from its own snapshot, plus latest-vs-previous."""
+        with closing(self._connect()) as conn:
+            records = list_submitted_attempts(conn, profile_id)
+            if not records:
+                return build_progress([], 60)
+            ctx = self._check_context(conn, profile_id)
+            summaries = []
+            for record in records:
+                settings = AppSettings.model_validate_json(record.config_snapshot_json)
+                result = self._evaluate(
+                    ctx,
+                    record,
+                    load_answers(conn, record.id),
+                    settings,
+                    self._scope(ctx, settings),
+                )
+                summaries.append(
+                    AttemptSummary(
+                        attempt_id=record.id,
+                        attempt_type=record.attempt_type,
+                        submitted_at=record.submitted_at or "",
+                        overall_score=result.overall_score,
+                        level=result.level,
+                        skill_scores=result.skill_scores,
+                    )
+                )
+            latest_settings = AppSettings.model_validate_json(records[-1].config_snapshot_json)
+        return build_progress(summaries, latest_settings.mastery_threshold)
 
     # --- coaching (M4) ------------------------------------------------------------------------
     def _coach(
@@ -394,6 +590,7 @@ class _CheckContext:
     roadmap_order: list[str]
     semester_skill_ids: dict[int, list[str]]
     bank: list[Question]
+    months_by_skill: dict[str, RoadmapMonth]
 
 
 def get_controller() -> WorkflowController:

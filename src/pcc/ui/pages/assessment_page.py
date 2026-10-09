@@ -1,4 +1,7 @@
-"""Skills check (FR-04, FR-05): current-semester quiz skills, every question required."""
+"""Skills check (FR-04, FR-05): current-semester quiz skills, every question required.
+
+Also hosts the re-check (FR-13): same skills, unseen questions first.
+"""
 
 import streamlit as st
 
@@ -8,24 +11,30 @@ from pcc.domain.enums import WorkflowState
 from pcc.ui.components.question_card import render_question_card
 from pcc.workflow.workflow_controller import get_controller
 
+_FLASH_KEY = "check_just_submitted"
+
 
 def render() -> None:
     st.title("Skills Check")
-    st.caption("Baseline knowledge check. Graded by code, not AI.")
+    st.caption("Knowledge check. Graded by code, not AI.")
     controller = get_controller()
     profile_id = st.session_state.get("profile_id")
     profile = controller.get_profile(profile_id) if profile_id else None
     if profile is None:
         st.info("Create or pick a profile on the **Profile** page first.")
         return
-    if profile.workflow_state in (WorkflowState.PROFILE_READY, WorkflowState.CAREER_SELECTED):
+    controller.sync_state(profile.id)
+    profile = controller.get_profile(profile.id)
+    assert profile is not None
+
+    if st.session_state.pop(_FLASH_KEY, False):
+        st.success(
+            "Submitted. See **Results** for your level, **Coaching Plan** and **Weekly Plan** "
+            "for what to do next."
+        )
+    state = profile.workflow_state
+    if state in (WorkflowState.PROFILE_READY, WorkflowState.CAREER_SELECTED):
         st.info("Build your roadmap on **Career & Semester** before taking the check.")
-        return
-    if profile.workflow_state not in (
-        WorkflowState.ROADMAP_READY,
-        WorkflowState.ASSESSMENT_IN_PROGRESS,
-    ):
-        st.success("Your check is done. See **Results** in the sidebar.")
         return
 
     names = {s.skill_id: s.name for s in load_skills()}
@@ -49,8 +58,23 @@ def render() -> None:
         return
 
     try:
-        if profile.workflow_state == WorkflowState.ROADMAP_READY:
-            if not st.button("Start skills check", type="primary"):
+        if state in (
+            WorkflowState.ROADMAP_READY,
+            WorkflowState.WEEKLY_PLAN_ACTIVE,
+            WorkflowState.RETEST_DUE,
+        ):
+            label = "Start skills check"
+            if state != WorkflowState.ROADMAP_READY:
+                view = controller.get_weekly_plan(profile.id)
+                if view is not None and view.retest_due:
+                    st.warning("Your re-check is due. Unseen questions are used first.")
+                elif view is not None:
+                    st.info(
+                        f"Your re-check is planned for {view.plan.retest_due_date:%d %b %Y}. "
+                        "You can take it early; unseen questions are used first."
+                    )
+                label = "Start re-check"
+            if not st.button(label, type="primary"):
                 return
             controller.start_assessment(profile.id)
             st.rerun()  # redraw in the in-progress state so the Start button disappears
@@ -59,7 +83,8 @@ def render() -> None:
         st.error(str(exc))
         return
 
-    st.subheader(f"{session.scope_description} · {len(session.questions)} questions")
+    kind = "Re-check" if session.attempt_type == "retest" else "Skills check"
+    st.subheader(f"{kind} · {session.scope_description} · {len(session.questions)} questions")
     with st.form(f"check_{session.attempt_id}"):
         selections = {
             q.question_id: render_question_card(i, q, f"a{session.attempt_id}")
@@ -77,5 +102,5 @@ def render() -> None:
     except PccError as exc:
         st.error(str(exc))
         return
-    st.success("Submitted. Open **Results** in the sidebar to see your level.")
+    st.session_state[_FLASH_KEY] = True
     st.rerun()

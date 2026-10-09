@@ -74,7 +74,7 @@ def test_section_10_7_worked_example_end_to_end(db_path):
     assert result.position.skill_id == "linux_fundamentals"
     assert result.coverage_ratio == pytest.approx(4 / 14)
     assert len(result.reviews) == 12
-    assert controller.get_profile(profile.id).workflow_state == WorkflowState.COACHING_READY
+    assert controller.get_profile(profile.id).workflow_state == WorkflowState.WEEKLY_PLAN_ACTIVE
 
 
 def test_perfect_single_semester_caps_at_advanced_with_coverage_note(db_path):
@@ -89,6 +89,8 @@ def test_perfect_single_semester_caps_at_advanced_with_coverage_note(db_path):
     assert result.weakest.status == "no_major_gap"  # T-08
     assert result.position.label == "advance_to_next_semester"
     assert result.position.skill_id == "networking_fundamentals"
+    # regression: "next" is the first skill still to do, not the one after the tie-break pick
+    assert result.weakest.next_roadmap_skill_id == "networking_fundamentals"
 
 
 def test_attempt_is_persisted_with_counts_and_config_snapshot(db_path):

@@ -54,6 +54,7 @@ class QuestionReview(BaseModel):
 
 class AssessmentSession(BaseModel):
     attempt_id: int
+    attempt_type: str = "baseline"
     scope_description: str
     questions: list[PresentedQuestion]
 
@@ -69,6 +70,7 @@ class AssessmentScope(BaseModel):
 
 class EvaluationResult(BaseModel):
     attempt_id: int
+    attempt_type: str = "baseline"
     scope_description: str
     overall_score: float
     level: Level

@@ -162,3 +162,73 @@ def test_coaching_page_explains_when_there_is_no_plan():
     _complete_check(profile_id, correct_first_n=3)  # everything right -> no major gap
     at = _run("coaching_page", profile_id)
     assert any("No coaching plan" in i.value for i in at.info)
+
+
+def test_weekly_plan_page_shows_tasks_and_remembers_ticks():
+    profile_id = _signed_in_with_roadmap("Asha", "devops_engineer")
+    at = _run("weekly_plan_page", profile_id)
+    assert any("Skills Check" in i.value for i in at.info)  # nothing before the first check
+
+    _complete_check(profile_id, correct_first_n=1)
+    at = _run("weekly_plan_page", profile_id)
+    assert not at.exception
+    assert 3 <= len(at.checkbox) <= 5
+    assert any("Re-check on" in i.value for i in at.info)
+
+    at.checkbox[0].check().run()
+    assert not at.exception
+    again = _run("weekly_plan_page", profile_id)
+    assert again.checkbox[0].value is True and again.checkbox[1].value is False
+
+
+def test_recheck_and_progress_journey():
+    profile_id = _signed_in_with_roadmap("Ravi", "devops_engineer")
+    at = _run("progress_page", profile_id)
+    assert any("No checks yet" in i.value for i in at.info)
+
+    _complete_check(profile_id, correct_first_n=0)
+    at = _run("progress_page", profile_id)
+    assert not at.exception
+    assert any("Your baseline is" in m.value for m in at.markdown)
+    assert any("below 40%" in w.value for w in at.warning)  # mentor prompt
+
+    at = _run("assessment_page", profile_id)  # re-check offered, early
+    assert any("re-check is planned" in i.value for i in at.info)
+    assert at.button[0].label == "Start re-check"
+    _complete_check_retest(profile_id, correct_first_n=3)
+
+    at = _run("progress_page", profile_id)
+    assert not at.exception
+    assert [m.label for m in at.metric] == ["Overall score", "Level"]
+    assert any("→" in m.value for m in at.markdown)  # "33% -> 100%" style lines
+    assert len(at.dataframe[0].value) == 2
+
+
+def _complete_check_retest(profile_id: int, correct_first_n: int) -> None:
+    from pcc.content.content_loader import load_question_bank
+
+    bank = {q.question_id: q for q in load_question_bank("devops_engineer")}
+    at = _run("assessment_page", profile_id)
+    at.button[0].click().run()  # Start re-check
+    assert len(at.radio) == 12
+    seen: dict[str, int] = {}
+    for radio in at.radio:
+        q = bank[radio.key.split("_", 1)[1]]
+        n = seen.get(q.skill_id, 0)
+        seen[q.skill_id] = n + 1
+        right = q.correct_option_id
+        radio.set_value(
+            right
+            if n < correct_first_n
+            else next(o.option_id for o in q.options if o.option_id != right)
+        )
+    at.button[-1].click().run()
+    assert not at.exception
+
+
+def test_results_page_labels_a_recheck():
+    profile_id = _signed_in_with_roadmap("Meera", "devops_engineer")
+    _complete_check(profile_id, correct_first_n=1)
+    _complete_check_retest(profile_id, correct_first_n=3)
+    at = _run("results_page", profile_id)
+    assert any(c.value == "Re-check" for c in at.caption)

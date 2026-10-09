@@ -87,6 +87,7 @@ def present(
 def evaluate(
     *,
     attempt_id: int,
+    attempt_type: str,
     scope_description: str,
     answers: list[Answer],
     questions_by_id: dict[str, Question],
@@ -119,6 +120,11 @@ def evaluate(
         order_from_here, set(scope_skill_ids), scores, settings.mastery_threshold
     )
 
+    if weakest.status == "no_major_gap":
+        # The selector only knows the weakest skill, so its "next" can point at a skill that
+        # was just mastered. The position is the first skill still to do, which is what to offer.
+        weakest = weakest.model_copy(update={"next_roadmap_skill_id": position.skill_id})
+
     ordered_scores: list[SkillScore] = []
     for skill_id in roadmap_order:
         if skill_id in scores:
@@ -145,6 +151,7 @@ def evaluate(
 
     return EvaluationResult(
         attempt_id=attempt_id,
+        attempt_type=attempt_type,
         scope_description=scope_description,
         overall_score=overall,
         level=level,

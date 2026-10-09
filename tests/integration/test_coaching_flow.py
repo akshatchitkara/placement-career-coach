@@ -80,7 +80,7 @@ def test_weakest_skill_gets_a_valid_plan_linked_to_missed_questions(db_path):
     for task in view.plan.tasks:  # every task is traceable to a mistake
         assert task.linked_question_id in missed_linux
         assert task.linked_question_id in view.question_stems
-    assert controller.get_profile(profile.id).workflow_state == WorkflowState.COACHING_READY
+    assert controller.get_profile(profile.id).workflow_state == WorkflowState.WEEKLY_PLAN_ACTIVE
 
 
 def test_plan_is_saved_and_restored_after_reopening(db_path):
@@ -100,7 +100,7 @@ def test_no_coaching_when_there_is_no_major_gap(db_path):
     profile, _, result = _take_check(controller, dict.fromkeys(WORKED, 3))  # T-08
     assert result.weakest.status == "no_major_gap"
     assert controller.get_coaching_plan(profile.id) is None
-    assert controller.get_profile(profile.id).workflow_state == WorkflowState.RESULTS_READY
+    assert controller.get_profile(profile.id).workflow_state == WorkflowState.WEEKLY_PLAN_ACTIVE
 
 
 def _echo_valid_plan(prompt: str) -> str:
@@ -156,7 +156,7 @@ def test_t15_t16_ai_down_or_garbage_still_completes_the_flow(db_path):
         profile, _, _ = _take_check(controller, WORKED, name=name)
         view = controller.get_coaching_plan(profile.id)
         assert view.plan.generation_source == "template"
-        assert controller.get_profile(profile.id).workflow_state == WorkflowState.COACHING_READY
+        assert controller.get_profile(profile.id).workflow_state == WorkflowState.WEEKLY_PLAN_ACTIVE
 
 
 def test_scores_are_identical_whatever_the_ai_says(db_path, tmp_path):
