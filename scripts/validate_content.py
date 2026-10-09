@@ -9,36 +9,17 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
-from pcc.content.content_loader import (
-    load_careers,
-    load_question_bank,
-    load_roadmap_template,
-    load_skills,
-)
-from pcc.content.content_validator import validate_all
-from pcc.core.exceptions import ContentValidationError
+from pcc.content.content_loader import load_careers, load_skills
+from pcc.content.content_validator import check_installed_content
 
 
 def main() -> int:
-    careers = load_careers()
-    skills = load_skills()
-    roadmaps = {}
-    question_banks = {}
-    for career in careers:
-        try:
-            roadmaps[career.career_id] = load_roadmap_template(career.career_id)
-        except FileNotFoundError:
-            print(f"WARNING: no roadmap template for '{career.career_id}' yet")
-        question_banks[career.career_id] = load_question_bank(career.career_id)
-
-    try:
-        validate_all(careers, skills, roadmaps, question_banks)
-    except ContentValidationError as exc:
+    issues = check_installed_content()
+    if issues:
         print("Content validation FAILED:\n")
-        print(str(exc))
+        print("\n".join(issues))
         return 1
-
-    print(f"Content validation passed: {len(careers)} careers, {len(skills)} skills.")
+    print(f"Content validation passed: {len(load_careers())} careers, {len(load_skills())} skills.")
     return 0
 
 

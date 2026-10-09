@@ -45,8 +45,9 @@ def create_attempt(
     scope_description: str,
     shuffle_seed: int,
     config_snapshot_json: str,
+    started_at: str | None = None,
 ) -> int:
-    now = _now()
+    now = started_at or _now()
     cursor = conn.execute(
         "INSERT INTO assessment_attempts (profile_id, attempt_type, scope_description, "
         "shuffle_seed, started_at, config_snapshot_json, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)",
@@ -119,8 +120,9 @@ def save_submission(
     correct_by_question: dict[str, bool],
     displayed_order_by_question: dict[str, list[str]],
     result: EvaluationResult,
+    submitted_at: str | None = None,
 ) -> None:
-    now = _now()
+    now = submitted_at or _now()
     for answer in answers:
         conn.execute(
             "INSERT INTO assessment_responses (attempt_id, question_id, selected_option_id, "

@@ -171,3 +171,39 @@ def validate_all(
 
     if issues:
         raise ContentValidationError("\n".join(issues))
+
+
+def check_installed_content() -> list[str]:
+    """Loads everything under data/content/ and returns every problem found (empty = healthy).
+
+    Used at app start-up and by scripts/validate_content.py. Never raises: an unreadable file
+    is reported as a problem so the app can show it instead of crashing.
+    """
+    from pcc.content.content_loader import (
+        load_app_settings,
+        load_careers,
+        load_question_bank,
+        load_roadmap_template,
+        load_skills,
+    )
+
+    try:
+        load_app_settings()
+        careers = load_careers()
+        skills = load_skills()
+        roadmaps: dict[str, Roadmap] = {}
+        banks: dict[str, list[Question]] = {}
+        issues: list[str] = []
+        for career in careers:
+            try:
+                roadmaps[career.career_id] = load_roadmap_template(career.career_id)
+            except FileNotFoundError:
+                issues.append(f"roadmap_templates/{career.career_id}.json is missing")
+            banks[career.career_id] = load_question_bank(career.career_id)
+        try:
+            validate_all(careers, skills, roadmaps, banks)
+        except ContentValidationError as exc:
+            issues += str(exc).splitlines()
+    except Exception as exc:  # noqa: BLE001 -- any unreadable or malformed file is a finding
+        return [f"content could not be loaded ({type(exc).__name__}: {exc})"]
+    return issues

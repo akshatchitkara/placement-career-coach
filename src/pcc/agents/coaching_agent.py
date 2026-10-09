@@ -16,6 +16,7 @@ from pcc.agents.fallbacks.coaching_fallback import template_plan
 from pcc.agents.validators.coaching_validator import validate_coaching_plan
 from pcc.ai.ai_client import AiClient
 from pcc.ai.json_response_parser import parse_json_object
+from pcc.ai.safe_generate import generate_with_retry
 from pcc.core.exceptions import AiOutputInvalidError, AiUnavailableError
 from pcc.domain.schemas.coaching_schemas import CoachingInput, CoachingPlan
 
@@ -52,7 +53,7 @@ def _build_prompt(context: CoachingInput, repair_errors: list[str]) -> str:
 def _attempt(
     client: AiClient, context: CoachingInput, repair_errors: list[str]
 ) -> tuple[CoachingPlan | None, list[str]]:
-    raw = client.generate(_build_prompt(context, repair_errors), temperature=0.2)
+    raw = generate_with_retry(client, _build_prompt(context, repair_errors))
     try:
         payload = parse_json_object(raw)
         payload["generation_source"] = "ai"

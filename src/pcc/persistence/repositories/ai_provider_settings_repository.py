@@ -6,13 +6,14 @@ from datetime import UTC, datetime
 from pcc.ai.provider_config import AiProviderConfig
 
 
-def get_active_config(conn: sqlite3.Connection) -> AiProviderConfig:
+def get_saved_config(conn: sqlite3.Connection) -> AiProviderConfig | None:
+    """The provider saved on the AI Settings page, or None if the student never saved one."""
     row = conn.execute(
         "SELECT provider_type, base_url, api_key, model_name FROM ai_provider_settings "
         "WHERE is_active = 1 ORDER BY id DESC LIMIT 1"
     ).fetchone()
     if row is None:
-        return AiProviderConfig()
+        return None
     return AiProviderConfig(
         provider_type=row["provider_type"],
         base_url=row["base_url"],
@@ -31,3 +32,7 @@ def save_config(conn: sqlite3.Connection, config: AiProviderConfig) -> None:
         (config.provider_type, config.base_url, config.api_key, config.model_name, now, now),
     )
     conn.commit()
+
+
+def get_active_config(conn: sqlite3.Connection) -> AiProviderConfig:
+    return get_saved_config(conn) or AiProviderConfig()

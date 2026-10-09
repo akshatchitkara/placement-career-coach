@@ -16,6 +16,7 @@ from pcc.agents.fallbacks.roadmap_fallback import template_roadmap
 from pcc.agents.validators.roadmap_validator import validate_roadmap
 from pcc.ai.ai_client import AiClient
 from pcc.ai.json_response_parser import parse_json_object
+from pcc.ai.safe_generate import generate_with_retry
 from pcc.core.exceptions import AiOutputInvalidError, AiUnavailableError
 from pcc.domain.schemas.roadmap_schemas import Roadmap
 
@@ -50,7 +51,7 @@ def _attempt(
     catalog_skill_ids: set[str],
     repair_errors: list[str],
 ) -> tuple[Roadmap | None, list[str]]:
-    raw = client.generate(_build_prompt(career_name, template, repair_errors), temperature=0.2)
+    raw = generate_with_retry(client, _build_prompt(career_name, template, repair_errors))
     try:
         payload = parse_json_object(raw)
         candidate = Roadmap.model_validate(

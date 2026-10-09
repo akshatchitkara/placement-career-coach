@@ -9,7 +9,7 @@ from pcc.core.exceptions import AiUnavailableError
 
 class AnthropicAiClient(AiClient):
     def __init__(self, config: AiProviderConfig) -> None:
-        self._model = config.model_name or "claude-sonnet-5"
+        self._model = config.model_name or "claude-sonnet-5-5"
         self._timeout = config.timeout_seconds
         self._client = anthropic.Anthropic(api_key=config.api_key, timeout=config.timeout_seconds)
 

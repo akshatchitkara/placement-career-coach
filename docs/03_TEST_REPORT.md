@@ -164,9 +164,9 @@ Driven in Microsoft Edge with Playwright (headless, 1280x900) against a second c
 ## M5 — Weekly loop
 
 | Item | Result | Notes |
-|---|---|---|
+| --- | --- | --- |
 | Weekly plan builder: pure rules, 3-5 tasks, within the time limit | **Pass** | `domain/weekly_plan_builder.py`, 100% line coverage; Section 10.7 example reproduced (2 coaching + Shell revision + Python light revision + re-check) |
-| Rules from Section 4.5: max 2 coaching tasks, next roadmap topic when no gap, revision for skills < 80, closing re-check | **Pass** | lowest-priority tasks are dropped first when over the time limit; re-check is always kept; short weeks are padded to the minimum |
+| Rules from Section 4.5: max 2 coaching tasks, next roadmap topic when no gap, revision for skills &lt; 80, closing re-check | **Pass** | lowest-priority tasks are dropped first when over the time limit; re-check is always kept; short weeks are padded to the minimum |
 | Re-check date = plan date + `retest_after_days` | **Pass** | read from config; shown on the plan and the Skills Check page |
 | Weekly plan created with the check and saved | **Pass** | state ends at `WEEKLY_PLAN_ACTIVE`; profiles saved before M5 (stuck at `RESULTS_READY`/`COACHING_READY`) get their plan on next load |
 | Weekly plan page: tasks, completion checks, tick-off with progress, re-check banner | **Pass** | ticks persist in `tasks_done_json` and survive a browser reload |
@@ -174,14 +174,15 @@ Driven in Microsoft Edge with Playwright (headless, 1280x900) against a second c
 | **T-17** re-test uses unseen questions first, no duplicates within a test | **Pass** | baseline then re-check share no questions; a third check reuses the least recently seen; browser run confirmed 12 unseen |
 | **T-18** close and reopen: profile, roadmap, last results, coaching plan and weekly plan restored | **Pass** | full restore incl. ticked tasks (closes the partial items from M3/M4) |
 | Progress page: latest vs previous, per-skill before/after, level change, history | **Pass** | FR-13; mentor prompt below 40%, flag after two drops in a row (Section 4.4); "N skills still below the mastery bar" close target |
-| Re-check results labelled as such; older weekly plan can no longer be edited | **Pass** | |
+| Re-check results labelled as such; older weekly plan can no longer be edited | **Pass** |  |
 | Full suite + lint + mypy + content validation | **Pass** | 203 tests, ruff clean, mypy clean on `domain/` + `workflow/`, coverage: scoring 96%, weekly builder 100%, progress 100% |
-| Real browser (Edge): baseline -> weekly plan -> tick -> reload -> early re-check -> progress | **Pass** | 25 checks in the M5 run, no uncaught browser errors; screenshots reviewed |
+| Real browser (Edge): baseline -&gt; weekly plan -&gt; tick -&gt; reload -&gt; early re-check -&gt; progress | **Pass** | 25 checks in the M5 run, no uncaught browser errors; screenshots reviewed |
 | Live AI provider | **Not verified** | no API key; weekly plan and progress use no AI by design |
 
 **Bugs found while building M5 (fixed):**
+
 1. *Wrong "next skill" when nothing is weak.* The weakest-skill selector breaks ties toward the earliest skill, so with everything mastered it offered the skill after Linux (Shell Scripting, already mastered) as "next". Found by the new weekly-plan test; the Results page showed the same wrong text. Fixed in the evaluation agent: "next" is now the roadmap position (first skill still to do). Regression test added.
-2. *Weekly plan padding.* With nothing specific to do, the builder padded one task and landed at 2 (< minimum of 3). Found by a unit test; now pads as many tasks as needed.
+2. *Weekly plan padding.* With nothing specific to do, the builder padded one task and landed at 2 (&lt; minimum of 3). Found by a unit test; now pads as many tasks as needed.
 3. *Coverage config.* The weekly plan builder was listed by file path, so coverage reported it as "never imported". It is now measured by module name.
 
 **Flow change:** after a check the profile now ends at `WEEKLY_PLAN_ACTIVE` (the coaching plan and weekly plan are both built at submit, as in the blueprint's sequence diagram). `COACHING_READY` is now a transient state. M3/M4 tests that asserted the old end state were updated.
@@ -190,7 +191,74 @@ Driven in Microsoft Edge with Playwright (headless, 1280x900) against a second c
 
 ## M6 — Reliability and polish
 
-Not started.
+| Item | Result | Notes |
+|---|---|---|
+| Whole journey completes with identical scoring when the AI fails in 7 ways | **Pass** | provider down, provider crashes, empty reply, not JSON, wrong shape, prompt injection, hostile JSON; plus offline. `tests/integration/test_ai_modes.py` (21 tests) |
+| Provider timeouts/errors: one retry, then fallback; slow failures are not retried | **Pass** | a failure that took over 10 s is not retried, so a 30 s timeout costs the student at most about 30 s, not 60 s |
+| Any provider exception (not just the expected one) falls back instead of crashing | **Pass** | OpenAI-compatible replies of the wrong shape and unexpected SDK errors are treated as "unavailable" |
+| AI is bounded: no retry loops | **Pass** | at most 12 calls for the whole two-check journey in every failure mode |
+| `.env` AI settings are honoured: saved provider, then `PCC_AI_MODE=live` + key, then offline | **Pass** | previously `PCC_AI_MODE`, the key and the timeout were never read |
+| "Offline mode" banner; warning when live is requested without a key | **Pass** | sidebar; also shows the active provider when AI is on |
+| Error boundary on every page: expected problems shown plainly, bugs show a calm message and hide internals | **Pass** | `st.rerun` / `st.stop` pass through |
+| Start-up content check; app refuses to run on broken content and says why | **Pass** | unreadable file, duplicate ids and a missing roadmap template are all reported; also used by `validate_content.py` |
+| Clear message when the database cannot be opened | **Pass** | |
+| Demo reset: `reset_demo.py` seeds Asha, Ravi, Meera through the real controller | **Pass** | Ravi = blueprint worked example (50.0, Intermediate); Meera 50.0 -> 91.7, Intermediate -> Advanced, position moves to Networking; attempts carry dates from the seeded clock |
+| `reset_demo.py` refuses to delete a database holding real profiles without `--force` | **Pass** | |
+| Reopening the app restores the last profile | **Pass** | a reload used to drop the signed-in profile; sidebar names who is signed in |
+| Developer "M1 Preview" page hidden by default | **Pass** | `PCC_SHOW_DEV_PAGES=true` shows it |
+| README rewritten: setup (Windows and Unix), demo path, AI, limits, layout | **Pass** | |
+| Full suite + lint + format + mypy + content validation | **Pass** | 280 tests; ruff and mypy clean; coverage: scoring 96%, weekly builder and progress 100% |
+| Real browser (Edge), seeded fresh launch: 31 checks | **Pass** | dev page hidden/shown, offline banner, three demo profiles, AI configured but unreachable end to end; no uncaught browser errors |
+| Earlier journeys re-run in the browser after the M6 changes | **Pass** | M2-M4 journey 24 checks, M5 journey 25 checks, all passing |
+| Live AI provider end to end | **Not verified** | no API key available; only fake clients and an unreachable endpoint were exercised |
+| Error page for a crashing page / broken content shown in a real browser | **Not verified** | covered headlessly (`tests/ui/test_error_handling.py`); not provoked in Edge |
+
+**Bugs found while building M6 (all fixed):**
+1. *A malformed reply from an OpenAI-compatible provider raised a raw `KeyError`* and would have bypassed the fallback and crashed the flow.
+2. *`.env` AI configuration was ignored.* `PCC_AI_MODE=live` with a key did nothing, so the documented offline/live switch could not work.
+3. *Two timeouts in a row.* The planned "retry once" could double the wait; now skipped when the first failure was already slow.
+4. *Reload dropped the signed-in profile.* Found in the real browser; data was safe but the student had to pick their profile again.
+5. *Wrong default Anthropic model id* (`claude-sonnet-5`); now `claude-sonnet-5-5`.
+
+**Browser finding, not a defect:** with an unreachable AI the roadmap build takes about 4 s (two quick failures); navigating away mid-build cancels it, which is how Streamlit works.
+
+---
+
+## Prototype acceptance checklist (blueprint Section 3.4)
+
+| Item | Result | Evidence |
+|---|---|---|
+| DevOps Engineer works end to end without an AI key | **Pass** | offline journey in Edge (profile -> roadmap -> check -> results -> coaching -> weekly plan -> re-check -> progress); `test_ai_modes.py` offline scenario |
+| Roadmap has exactly semesters 3-6 and 16 month entries, all skill ids valid | **Pass** | content validator (start-up and `validate_content.py`), roadmap validator V-RM-01..08, 16 expanders in the browser |
+| Assessment questions map only to roadmap skill ids | **Pass** | content validator rejects unknown skill ids (T-11) |
+| Same answers give the same score and level | **Pass** | T-01; results re-derived identically after reopening |
+| Level boundary tests pass | **Pass** | 0, 39.9, 40, 64.9, 65, 84.9, 85, 100 |
+| Weakest-skill logic excludes skills with fewer than 2 answers | **Pass** | T-05, T-07 |
+| Industry-ready gate and coverage rule tested | **Pass** | T-02, T-03, T-04 |
+| Every coaching task links to a missed question id or concept tag | **Pass** | V-CO-02 / T-13; every fallback plan validated by property test |
+| Invalid AI output falls back or shows a clear, recoverable message | **Pass** | T-14, T-16 and the seven failure drills; offline banner and fallback messages |
+| Progress persists after closing and reopening the app | **Pass** | T-18; browser reload keeps plan, results, ticks and the signed-in profile |
+| Re-test uses unseen questions first | **Pass** | T-17; 12 unseen questions confirmed in the browser |
+| Demo runs from a fresh launch with no manual data edits | **Pass** | `reset_demo.py` then launch; seeded profiles verified in the browser |
+| Product note answers every assignment question and matches the app | **Not verified** | M7 |
+
+## Critical test cases (blueprint Section 17.3)
+
+| ID | Result | ID | Result |
+|---|---|---|---|
+| T-01 same answers, same result | **Pass** | T-12 coaching for another skill rejected | **Pass** |
+| T-02 skill gate downgrades Industry-ready | **Pass** | T-13 unlinked coaching task rejected | **Pass** |
+| T-03 single-semester caps at Advanced | **Pass** | T-14 URL from AI rejected | **Pass** |
+| T-04 full-path Industry-ready | **Pass** | T-15 AI unavailable, flow completes | **Pass** |
+| T-05 one answer is not enough evidence | **Pass** | T-16 empty/malformed AI response | **Pass** |
+| T-06 tie goes to earlier roadmap skill | **Pass** | T-17 re-test unseen first, no duplicates | **Pass** |
+| T-07 no evidence, no weakest skill | **Pass** | T-18 close and reopen restores everything | **Pass** |
+| T-08 no major gap, next skill offered | **Pass** | T-19 non-CS career message | **Pass** |
+| T-09 roadmap missing semester/month rejected | **Pass** | T-20 later threshold change leaves old attempt alone | **Pass** |
+| T-10 AI reorders skills rejected | **Pass** | T-21 unbuilt skill types "assessed later" | **Pass** |
+| T-11 question with unknown skill fails the validator | **Pass** | T-22 thin bank is "coming soon" | **Pass** |
+
+**Honest limits of this report:** the AI paths were exercised with scripted fake clients and failure drills, never a live provider. UI behaviour was checked headlessly and in Edge on Windows only. Only DevOps Semester 3 has a question bank.
 
 ## M7 — Product note
 

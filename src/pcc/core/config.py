@@ -15,6 +15,7 @@ class Settings(BaseSettings):
     db_path: str = "./data/runtime/pcc.db"
     log_level: str = "INFO"
     demo_mode: bool = Field(default=False)
+    show_dev_pages: bool = Field(default=False)  # the M1 content/scoring preview page
 
 
 settings = Settings()

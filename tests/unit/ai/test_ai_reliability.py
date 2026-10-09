@@ -1,0 +1,170 @@
+import json
+
+import httpx
+import pytest
+from tests.conftest import ScriptedAiClient
+
+from pcc.ai.json_response_parser import parse_json_object
+from pcc.ai.openai_compatible_ai_client import OpenAiCompatibleAiClient
+from pcc.ai.provider_config import AiProviderConfig, resolve_provider_config
+from pcc.ai.safe_generate import generate_with_retry
+from pcc.core.exceptions import AiOutputInvalidError, AiUnavailableError
+
+
+# --- one retry, then give up as "unavailable" -----------------------------------------------
+def test_success_makes_one_call():
+    client = ScriptedAiClient("ok")
+    assert generate_with_retry(client, "p") == "ok"
+    assert client.calls == 1
+
+
+def test_a_brief_failure_is_retried_once():
+    client = ScriptedAiClient(AiUnavailableError("blip"), "ok")
+    assert generate_with_retry(client, "p") == "ok"
+    assert client.calls == 2
+
+
+def test_two_failures_raise_unavailable_without_a_third_call():
+    client = ScriptedAiClient(AiUnavailableError("down"))
+    with pytest.raises(AiUnavailableError):
+        generate_with_retry(client, "p")
+    assert client.calls == 2
+
+
+def test_a_slow_failure_is_not_retried_so_the_student_never_waits_for_two_timeouts(monkeypatch):
+    clock = iter([0.0, 31.0, 31.0, 62.0])  # first attempt "took" 31 s
+
+    monkeypatch.setattr("pcc.ai.safe_generate.time.monotonic", lambda: next(clock))
+    client = ScriptedAiClient(AiUnavailableError("timeout"))
+    with pytest.raises(AiUnavailableError):
+        generate_with_retry(client, "p")
+    assert client.calls == 1
+
+
+def test_a_fast_failure_is_still_retried(monkeypatch):
+    clock = iter([0.0, 0.2, 0.2, 0.4])
+    monkeypatch.setattr("pcc.ai.safe_generate.time.monotonic", lambda: next(clock))
+    client = ScriptedAiClient(AiUnavailableError("503"), "ok")
+    assert generate_with_retry(client, "p") == "ok"
+    assert client.calls == 2
+
+
+@pytest.mark.parametrize("error", [KeyError("choices"), ValueError("x"), RuntimeError("sdk bug")])
+def test_unexpected_provider_errors_are_treated_as_unavailable(error):
+    client = ScriptedAiClient(error)
+    with pytest.raises(AiUnavailableError):
+        generate_with_retry(client, "p")
+    assert client.calls == 2
+
+
+# --- provider responses of the wrong shape -------------------------------------------------
+class _FakeResponse:
+    def __init__(self, payload, status=200):
+        self._payload, self.status_code = payload, status
+
+    def raise_for_status(self):
+        if self.status_code >= 400:
+            raise httpx.HTTPStatusError("bad", request=None, response=None)
+
+    def json(self):
+        if isinstance(self._payload, Exception):
+            raise self._payload
+        return self._payload
+
+
+def _client() -> OpenAiCompatibleAiClient:
+    config = AiProviderConfig(
+        provider_type="custom_openai_compatible", base_url="http://x/v1", api_key="k"
+    )
+    return OpenAiCompatibleAiClient(config)
+
+
+@pytest.mark.parametrize(
+    "payload",
+    [
+        {},
+        {"choices": []},
+        {"choices": [{}]},
+        {"choices": [{"message": {}}]},
+        ValueError("not json"),
+    ],
+)
+def test_openai_compatible_malformed_success_is_unavailable_not_a_crash(monkeypatch, payload):
+    monkeypatch.setattr(httpx, "post", lambda *a, **k: _FakeResponse(payload))
+    with pytest.raises(AiUnavailableError):
+        _client().generate("hi")
+
+
+def test_openai_compatible_http_error_is_unavailable(monkeypatch):
+    monkeypatch.setattr(httpx, "post", lambda *a, **k: _FakeResponse({}, status=500))
+    with pytest.raises(AiUnavailableError):
+        _client().generate("hi")
+
+
+def test_openai_compatible_good_response(monkeypatch):
+    good = {"choices": [{"message": {"content": "hello"}}]}
+    monkeypatch.setattr(httpx, "post", lambda *a, **k: _FakeResponse(good))
+    assert _client().generate("hi") == "hello"
+
+
+# --- parser ---------------------------------------------------------------------------------
+@pytest.mark.parametrize(
+    "raw", ["", "   ", "plain words", "[1, 2]", "{broken", '"just a string"', "null"]
+)
+def test_parser_rejects_non_objects_with_a_typed_error(raw):
+    with pytest.raises(AiOutputInvalidError):
+        parse_json_object(raw)
+
+
+def test_parser_accepts_fenced_and_preambled_json():
+    assert parse_json_object('```json\n{"a": 1}\n```') == {"a": 1}
+    assert parse_json_object('Sure! Here it is: {"a": 1} Hope that helps.') == {"a": 1}
+    assert parse_json_object(json.dumps({"b": [1]})) == {"b": [1]}
+
+
+# --- which provider is used -----------------------------------------------------------------
+def _resolve(saved=None, mode="mock", key="changeme", model="changeme", timeout=30):
+    return resolve_provider_config(
+        saved,
+        env_mode=mode,
+        env_api_key=key,
+        env_model_name=model,
+        env_timeout_seconds=timeout,
+    )
+
+
+def test_default_is_mock_with_no_warning():
+    config, warning = _resolve()
+    assert config.provider_type == "mock" and warning == ""
+
+
+def test_env_live_with_a_key_uses_anthropic_and_the_env_timeout():
+    config, warning = _resolve(mode="live", key="sk-abc", model="claude-x", timeout=12)
+    assert (config.provider_type, config.api_key, config.model_name) == (
+        "anthropic",
+        "sk-abc",
+        "claude-x",
+    )
+    assert config.timeout_seconds == 12 and warning == ""
+
+
+def test_env_live_with_placeholder_model_leaves_the_default_model():
+    config, _ = _resolve(mode="LIVE", key="sk-abc", model="changeme")
+    assert config.model_name is None
+
+
+@pytest.mark.parametrize("key", ["", "  ", "changeme", "CHANGEME"])
+def test_env_live_without_a_real_key_falls_back_to_mock_with_a_warning(key):
+    config, warning = _resolve(mode="live", key=key)
+    assert config.provider_type == "mock" and "no API key" in warning
+
+
+def test_a_provider_saved_in_the_app_beats_the_env():
+    saved = AiProviderConfig(provider_type="openai", api_key="k")
+    config, warning = _resolve(saved, mode="live", key="sk-env")
+    assert config.provider_type == "openai" and warning == ""
+
+
+def test_an_explicitly_saved_mock_beats_env_live():
+    config, _ = _resolve(AiProviderConfig(provider_type="mock"), mode="live", key="sk-env")
+    assert config.provider_type == "mock"

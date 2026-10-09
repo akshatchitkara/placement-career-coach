@@ -38,4 +38,7 @@ class OpenAiCompatibleAiClient(AiClient):
         except httpx.HTTPError as exc:
             raise AiUnavailableError(str(exc)) from exc
 
-        return str(response.json()["choices"][0]["message"]["content"])
+        try:
+            return str(response.json()["choices"][0]["message"]["content"])
+        except (ValueError, KeyError, IndexError, TypeError) as exc:
+            raise AiUnavailableError("provider returned an unexpected response shape") from exc

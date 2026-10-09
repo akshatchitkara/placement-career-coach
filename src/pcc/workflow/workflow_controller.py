@@ -23,6 +23,7 @@ from pcc.agents.roadmap_agent import generate_roadmap
 from pcc.ai.ai_client import AiClient
 from pcc.ai.ai_client_factory import build_ai_client
 from pcc.ai.mock_ai_client import MockAiClient
+from pcc.ai.provider_config import AiStatus, resolve_provider_config
 from pcc.content.content_loader import (
     AppSettings,
     compute_skill_assessability,
@@ -60,7 +61,7 @@ from pcc.domain.schemas.weekly_plan_schemas import (
 )
 from pcc.domain.weekly_plan_builder import build_weekly_plan
 from pcc.persistence.database import get_connection, init_schema
-from pcc.persistence.repositories.ai_provider_settings_repository import get_active_config
+from pcc.persistence.repositories.ai_provider_settings_repository import get_saved_config
 from pcc.persistence.repositories.assessment_repository import (
     AttemptRecord,
     create_attempt,
@@ -115,12 +116,41 @@ class WorkflowController:
         with closing(self._connect()) as conn:
             init_schema(conn)
 
+    def _now_iso(self) -> str:
+        """Timestamp on the controller's clock, so seeded or test data carries sensible dates."""
+        return datetime.combine(self._today(), datetime.now(UTC).time(), tzinfo=UTC).isoformat()
+
     def _connect(self) -> sqlite3.Connection:
         return get_connection(self._db_path)
 
+    def _resolve_ai(self, conn: sqlite3.Connection) -> tuple[AiClient | None, AiStatus]:
+        """The live client (None when offline) and what to tell the student about it."""
+        if self._ai_client is not None:  # injected (tests); always treated as live
+            return self._ai_client, AiStatus(offline=False, label="AI: live")
+        from pcc.core.config import settings
+
+        config, warning = resolve_provider_config(
+            get_saved_config(conn),
+            env_mode=settings.ai_mode,
+            env_api_key=settings.ai_api_key,
+            env_model_name=settings.ai_model_name,
+            env_timeout_seconds=settings.ai_timeout_seconds,
+        )
+        client = build_ai_client(config)
+        if isinstance(client, MockAiClient):
+            if config.provider_type != "mock" and not warning:
+                warning = "The configured AI provider could not be set up."
+            return None, AiStatus(
+                offline=True, label="Offline mode: curated roadmaps and coaching", warning=warning
+            )
+        return client, AiStatus(offline=False, label=f"AI: {config.provider_type} (live)")
+
     def _resolve_ai_client(self, conn: sqlite3.Connection) -> AiClient | None:
-        client = self._ai_client or build_ai_client(get_active_config(conn))
-        return None if isinstance(client, MockAiClient) else client
+        return self._resolve_ai(conn)[0]
+
+    def get_ai_status(self) -> AiStatus:
+        with closing(self._connect()) as conn:
+            return self._resolve_ai(conn)[1]
 
     # --- profiles -------------------------------------------------------------------------
     def open_profile(self, display_name: str) -> Profile:
@@ -133,6 +163,11 @@ class WorkflowController:
     def list_profiles(self) -> list[Profile]:
         with closing(self._connect()) as conn:
             return list_profiles(conn)
+
+    def last_active_profile(self) -> Profile | None:
+        """The most recently active profile: a local single-user app reopens where you left off."""
+        profiles = self.list_profiles()
+        return profiles[0] if profiles else None
 
     def get_profile(self, profile_id: int) -> Profile | None:
         with closing(self._connect()) as conn:
@@ -282,6 +317,7 @@ class WorkflowController:
                     scope_description=f"Semester {scope.semester} skills",
                     shuffle_seed=secrets.randbits(31),
                     config_snapshot_json=settings.model_dump_json(),
+                    started_at=self._now_iso(),
                 )
                 set_workflow_state(conn, profile_id, WorkflowState.ASSESSMENT_IN_PROGRESS)
                 conn.commit()
@@ -356,6 +392,7 @@ class WorkflowController:
                     for qid, q in expected.items()
                 },
                 result=result,
+                submitted_at=self._now_iso(),
             )
             set_workflow_state(conn, profile_id, WorkflowState.RESULTS_READY)
             if result.weakest.status == "weakest_found" and result.weakest.skill_id:
