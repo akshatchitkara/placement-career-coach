@@ -80,6 +80,7 @@ Deviations noted: local Python available is 3.14 (blueprint specifies 3.11) -- n
 | T-19 non-CS career -&gt; "not supported yet" + supported list, no roadmap | **Pass** | Doctor, Chartered Accountant, Pilot, Chef; invalid characters/length rejected |
 | Full suite + lint + mypy + app smoke | **Pass** | 89 tests, ruff clean, mypy clean on `domain/` + `workflow/`, headless full-app render has no exceptions |
 | Live AI provider personalising a roadmap | **Not verified** | no API key available; only scripted fake clients were exercised |
+| Profile, career picker and roadmap pages in a real browser | **Pass** | see "Real-browser verification (M2-M4)" below |
 
 **Fixes while integrating:** mypy now follows imports from `workflow/` into `ai/` and `content/`; typed `parse_json_object`, `_read_json` and the OpenAI client return so `mypy` stays clean.
 
@@ -103,7 +104,7 @@ Deviations noted: local Python available is 3.14 (blueprint specifies 3.11) -- n
 | T-21 build/communication skills "assessed later", not scored | **Pass** | Sem 6 DevOps: capstone, interview prep |
 | T-22 thin bank -> "coming soon" | **Pass** | Java/MEAN/AI and DevOps Sem 4-6 show it; the check can't be started |
 | Full suite + lint + mypy + app smoke | **Pass** | 115 tests, ruff clean, mypy clean on `domain/` + `workflow/`, scoring coverage 96%, full-app headless render has no exceptions |
-| Looked at in a real browser | **Not verified** | UI was exercised headlessly with Streamlit's test harness only |
+| Looked at in a real browser | **Pass** | see "Real-browser verification (M2-M4)" below; also found and fixed the Start-button bug |
 
 **Known limits:** only the DevOps Semester 3 bank exists, so DevOps Sem 4-6 and the other careers can't be assessed yet. The full-path check and re-test flow are later milestones.
 
@@ -127,9 +128,37 @@ Deviations noted: local Python available is 3.14 (blueprint specifies 3.11) -- n
 | Prompts hold no student identity | **Pass** | asserted on the prompt text |
 | Full suite + lint + mypy + app smoke | **Pass** | 159 tests, ruff clean, mypy clean on `domain/` + `workflow/`, scoring coverage 96%, content validation passes |
 | A live AI provider writing a coaching plan | **Not verified** | no API key available; only scripted fake AI clients were used |
-| Looked at in a real browser | **Not verified** | UI exercised headlessly with Streamlit's test harness |
+| Looked at in a real browser | **Pass** | see "Real-browser verification (M2-M4)" below |
 
 **Test change:** the M3 worked-example test now expects `COACHING_READY` after submit, since a weakest skill now triggers a plan.
+
+## Real-browser verification (M2-M4)
+
+Driven in Microsoft Edge with Playwright (headless, 1280x900) against a second copy of the app on port 8502 with a throwaway database, so no real data was touched. The script lives outside the repo (it needs Playwright and Edge). Final run: **23 checks, all passed, no uncaught browser errors.**
+
+| Step | Result | What was observed |
+|---|---|---|
+| Sidebar lists all pages | **Pass** | Profile, Career & Semester, Roadmap, Skills Check, Results, Coaching Plan, Weekly Plan, Progress, AI Settings, M1 Preview |
+| Profile: enter a name and start | **Pass** | "Signed in as ..." shown |
+| Career: "Doctor" typed under "My career isn't listed" | **Pass** | "not supported yet" message; no roadmap created (T-19) |
+| Career: DevOps Engineer, Semester 3 | **Pass** | "Roadmap ready" |
+| Roadmap page | **Pass** | Semesters 3-6 present, 16 month entries, Semester 3 marked "you are in this semester" |
+| Skills Check: scope and start | **Pass** | "Assessed now" lists 4 skills; 12 questions shown; Start button hidden once the check runs |
+| Skills Check: submit with nothing answered | **Pass** | refused with "Answer every question" (FR-05) |
+| Skills Check: submit 1 correct per skill | **Pass** | accepted |
+| Results page | **Pass** | 33.3%, Beginner, "Level for Semester 3 skills", level rules and 29% coverage, per-skill `correct/answered` (1/3 each), Linux flagged weakest, "You are here: Linux Fundamentals" |
+| Coaching page | **Pass** | Focus skill Linux Fundamentals, 5 tasks (about 110 min), each with what went wrong, what to do, how to know it is done, and the linked question; no URLs on the page |
+| Reload the browser, reopen the profile | **Pass** | coaching plan and results still present (T-18, partial: weekly plan is M5) |
+
+**UI bugs found only in the browser (both fixed, commit `5502587`):**
+1. The "Start skills check" button stayed on screen above the questions after the check started. Fixed by redrawing in the in-progress state.
+2. Roadmap and profile pages showed "Devops Engineer" (title-cased id). They now show the catalog name, "DevOps Engineer". This second fix was covered by the unit/UI suite but the browser journey was not re-run after it.
+
+**Operational finding:** Streamlit did not reliably pick up edits to page modules while a server was running (the first retest still showed the old button). Restart the server after code changes.
+
+**Content note (not a defect):** roadmap `focus` and `deliverable` text is generic template wording ("Foundations: <skill>", "Produce a short artifact demonstrating ... applied to a realistic task"). It passes validation but is placeholder-quality.
+
+**Not covered in the browser:** the AI Settings page and live provider calls, Tier B careers (Java/MEAN/AI) "coming soon" state, Semesters 4-6, and the M1 Preview page.
 
 ## M5 — Weekly loop
 
