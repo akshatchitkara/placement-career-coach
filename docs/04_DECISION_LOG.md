@@ -16,5 +16,8 @@ Decisions A1-A16 and open items D1-D6 are carried from the blueprint (`00_PROJEC
 | A26 | Results are re-derived from stored answers and the attempt's `config_snapshot_json` instead of storing every derived field | Keeps one source of truth, makes T-01/T-18/T-20 true by construction; `skill_scores` and level are still saved for reporting | M3 implementation, 2026-10-09 |
 | A27 | A started check is resumed by re-selecting questions from the stored `shuffle_seed` | The schema has no column for the chosen question list; selection is deterministic and the "seen" set cannot change while an attempt is open | M3 implementation, 2026-10-09 |
 | A28 | Roadmap position is computed from the student's current semester onward | Section 10.6 limits it to the tested scope; searching from Sem 3 would mark a Sem 4 student as "advance" on skills they were never tested on | M3 implementation, 2026-10-09 |
+| A29 | `Skill.practice_templates` became a typed `PracticeTemplate` model (was `list[dict[str, str]]`) and the validator requires one per tested concept | The fallback plan needs `estimated_minutes` as a number and a guarantee that real banks never fall back to invented content | M4 implementation, 2026-10-09 |
+| A30 | Fallback plan = one practice task per missed concept, a teach-back task, then re-work tasks for missed questions, capped at 5 | Guarantees 3-5 tasks that each trace to a mistake for any 1-3 misses, within the time limit | M4 implementation, 2026-10-09 |
+| A31 | The model's `retest_after_days` is ignored; config (`app_settings.json`) decides | Keeps timing rules in one place and out of AI hands | M4 implementation, 2026-10-09 |
 
 Open decisions D1-D6 (blueprint Appendix B) remain at their stated defaults unless revisited.

@@ -46,6 +46,7 @@ def render() -> None:
     weakest = result.weakest
     if weakest.status == "weakest_found" and weakest.skill_id:
         st.error(f"**{names[weakest.skill_id]}** is your weakest skill.")
+        st.caption("Your practice plan for it is on the **Coaching Plan** page.")
     elif weakest.status == "no_major_gap":
         nxt = names.get(weakest.next_roadmap_skill_id or "")
         st.success("No major gap found." + (f" Next on your roadmap: **{nxt}**." if nxt else ""))

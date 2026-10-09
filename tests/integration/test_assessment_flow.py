@@ -74,7 +74,7 @@ def test_section_10_7_worked_example_end_to_end(db_path):
     assert result.position.skill_id == "linux_fundamentals"
     assert result.coverage_ratio == pytest.approx(4 / 14)
     assert len(result.reviews) == 12
-    assert controller.get_profile(profile.id).workflow_state == WorkflowState.RESULTS_READY
+    assert controller.get_profile(profile.id).workflow_state == WorkflowState.COACHING_READY
 
 
 def test_perfect_single_semester_caps_at_advanced_with_coverage_note(db_path):

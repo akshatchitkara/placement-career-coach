@@ -1,6 +1,7 @@
 """Orchestrates the student journey. UI calls this; it calls agents, content and persistence.
 
-Scope so far: profiles, career selection, roadmap (M2); skills check and results (M3).
+Scope so far: profiles, career selection, roadmap (M2); skills check and results (M3);
+coaching plan (M4).
 """
 
 import secrets
@@ -9,6 +10,7 @@ from contextlib import closing
 from dataclasses import dataclass
 from typing import Literal
 
+from pcc.agents.coaching_agent import generate_coaching_plan
 from pcc.agents.evaluation_agent import (
     evaluate,
     present,
@@ -39,6 +41,12 @@ from pcc.domain.schemas.assessment_schemas import (
     EvaluationResult,
 )
 from pcc.domain.schemas.career_schemas import Career
+from pcc.domain.schemas.coaching_schemas import (
+    CoachingInput,
+    CoachingPlan,
+    CoachingPlanView,
+    MissedQuestion,
+)
 from pcc.domain.schemas.question_schemas import Question
 from pcc.domain.schemas.roadmap_schemas import Roadmap, Skill
 from pcc.persistence.database import get_connection, init_schema
@@ -53,6 +61,7 @@ from pcc.persistence.repositories.assessment_repository import (
     save_submission,
     seen_question_ids_oldest_first,
 )
+from pcc.persistence.repositories.coaching_repository import get_active_plan, save_active_plan
 from pcc.persistence.repositories.profile_repository import (
     Profile,
     get_or_create_profile,
@@ -310,8 +319,60 @@ class WorkflowController:
                 result=result,
             )
             set_workflow_state(conn, profile_id, WorkflowState.RESULTS_READY)
+            if result.weakest.status == "weakest_found" and result.weakest.skill_id:
+                plan = self._coach(conn, ctx, result, settings)
+                save_active_plan(conn, profile_id, attempt_id, plan)
+                assert_transition(WorkflowState.RESULTS_READY, WorkflowState.COACHING_READY)
+                set_workflow_state(conn, profile_id, WorkflowState.COACHING_READY)
             conn.commit()
         return result
+
+    # --- coaching (M4) ------------------------------------------------------------------------
+    def _coach(
+        self,
+        conn: sqlite3.Connection,
+        ctx: "_CheckContext",
+        result: EvaluationResult,
+        settings: AppSettings,
+    ) -> CoachingPlan:
+        """Coaching receives the computed weakest skill; it can never pick or change it."""
+        skill = ctx.skills_by_id[str(result.weakest.skill_id)]
+        tags = {q.question_id: q.concept_tag for q in ctx.bank}
+        career = next(c for c in load_careers() if c.career_id == ctx.profile.career_id)
+        context = CoachingInput(
+            career_name=career.name,
+            skill_id=skill.skill_id,
+            skill_name=skill.name,
+            level=result.level.value,
+            missed=[
+                MissedQuestion(
+                    question_id=r.question_id,
+                    concept_tag=tags[r.question_id],
+                    stem=r.stem,
+                    selected_option_text=r.selected_option_text,
+                    correct_option_text=r.correct_option_text,
+                    explanation=r.explanation,
+                )
+                for r in result.reviews
+                if r.skill_id == skill.skill_id and not r.is_correct
+            ],
+            practice_templates=skill.practice_templates,
+            max_total_minutes=settings.weekly_plan.max_total_minutes,
+            retest_after_days=settings.retest_after_days,
+        )
+        return generate_coaching_plan(context, self._resolve_ai_client(conn)).plan
+
+    def get_coaching_plan(self, profile_id: int) -> CoachingPlanView | None:
+        with closing(self._connect()) as conn:
+            plan = get_active_plan(conn, profile_id)
+            if plan is None:
+                return None
+            ctx = self._check_context(conn, profile_id)
+        return CoachingPlanView(
+            plan=plan,
+            skill_name=ctx.skills_by_id[plan.skill_id].name,
+            question_stems={q.question_id: q.stem for q in ctx.bank},
+        )
 
     def get_latest_results(self, profile_id: int) -> EvaluationResult | None:
         """Re-derives results from stored answers + the attempt's config snapshot (T-18, T-20)."""

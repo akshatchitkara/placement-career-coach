@@ -120,3 +120,45 @@ def test_results_page_before_any_check():
     profile_id = _signed_in_with_roadmap("Meera", "devops_engineer")
     at = _run("results_page", profile_id)
     assert any("No results yet" in i.value for i in at.info)
+
+
+def _complete_check(profile_id: int, correct_first_n: int) -> None:
+    from pcc.content.content_loader import load_question_bank
+
+    bank = {q.question_id: q for q in load_question_bank("devops_engineer")}
+    at = _run("assessment_page", profile_id)
+    at.button[0].click().run()
+    seen: dict[str, int] = {}
+    for radio in at.radio:
+        q = bank[radio.key.split("_", 1)[1]]
+        n = seen.get(q.skill_id, 0)
+        seen[q.skill_id] = n + 1
+        right = q.correct_option_id
+        if n < correct_first_n:
+            radio.set_value(right)
+        else:
+            radio.set_value(next(o.option_id for o in q.options if o.option_id != right))
+    at.button[-1].click().run()
+    assert not at.exception
+
+
+def test_weak_result_leads_to_a_coaching_plan_page():
+    profile_id = _signed_in_with_roadmap("Asha", "devops_engineer")
+    _complete_check(profile_id, correct_first_n=0)  # everything wrong
+
+    at = _run("coaching_page", profile_id)
+    assert not at.exception
+    assert any("Focus skill" in s.value for s in at.subheader)
+    assert 3 <= len(at.markdown) and sum("Do this:" in m.value for m in at.markdown) >= 3
+    assert any("You're done when" in m.value for m in at.markdown)
+    assert not any("http" in m.value for m in at.markdown)
+
+
+def test_coaching_page_explains_when_there_is_no_plan():
+    profile_id = _signed_in_with_roadmap("Ravi", "devops_engineer")
+    at = _run("coaching_page", profile_id)
+    assert any("Skills Check" in i.value for i in at.info)
+
+    _complete_check(profile_id, correct_first_n=3)  # everything right -> no major gap
+    at = _run("coaching_page", profile_id)
+    assert any("No coaching plan" in i.value for i in at.info)

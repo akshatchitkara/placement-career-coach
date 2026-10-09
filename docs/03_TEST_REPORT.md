@@ -109,7 +109,27 @@ Deviations noted: local Python available is 3.14 (blueprint specifies 3.11) -- n
 
 ## M4 — Coaching flow
 
-Not started.
+| Item | Result | Notes |
+|---|---|---|
+| Coaching agent: AI drafts, validate, one repair attempt, template fallback | **Pass** | `agents/coaching_agent.py`; mock mode skips the AI call and uses the template directly |
+| Coaching validator V-CO-01..06 | **Pass** | task count, link to a missed question or concept, skill matches the computed weakest, time limit from config, success check, no URLs |
+| Template fallback is always valid | **Pass** | property-tested for 1, 2 and 3 misses with same/different concepts; 3-5 tasks, within the time limit |
+| Curated practice templates for the 12 concepts the DevOps Sem 3 bank tests | **Pass** | `skills.json`; content validator now fails if a tested concept has no template or a template holds a URL |
+| Plan built after submit only when a weakest skill exists | **Pass** | state goes `RESULTS_READY` -> `COACHING_READY`; with "no major gap" no plan is made and state stays `RESULTS_READY` (M5 routes it to the weekly plan) |
+| Coaching page: diagnosis, per-task "what went wrong / do this / done when", linked question | **Pass** | FR-09; source label says curated or AI-drafted |
+| Plan saved and restored on reopen; older plans superseded | **Pass** | `coaching_plans` |
+| T-12 plan for a different skill than the computed weakest is rejected | **Pass** | AI cannot change the weakest skill |
+| T-13 task with no link to a missed question or concept is rejected | **Pass** | |
+| T-14 URL from AI rejected (coaching + roadmap) | **Pass** | every text field checked |
+| T-15 AI off/unavailable: DevOps flow completes with templates | **Pass** | through check, results and coaching |
+| T-16 empty/malformed AI response: no crash, fallback, nothing unvalidated shown | **Pass** | `""`, `{}`, non-JSON, wrong shape, `[]` |
+| AI cannot influence scores | **Pass** | a model replying `{"overall_score": 100}` leaves score, level and weakest unchanged |
+| Prompts hold no student identity | **Pass** | asserted on the prompt text |
+| Full suite + lint + mypy + app smoke | **Pass** | 159 tests, ruff clean, mypy clean on `domain/` + `workflow/`, scoring coverage 96%, content validation passes |
+| A live AI provider writing a coaching plan | **Not verified** | no API key available; only scripted fake AI clients were used |
+| Looked at in a real browser | **Not verified** | UI exercised headlessly with Streamlit's test harness |
+
+**Test change:** the M3 worked-example test now expects `COACHING_READY` after submit, since a weakest skill now triggers a plan.
 
 ## M5 — Weekly loop
 

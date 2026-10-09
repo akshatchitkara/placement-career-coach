@@ -7,6 +7,17 @@ from pydantic import BaseModel, Field
 from pcc.domain.enums import SkillType
 
 
+class PracticeTemplate(BaseModel):
+    """Curated practice task for one concept tag; the coaching fallback is built from these."""
+
+    concept_tag: str
+    title: str
+    action: str
+    success_check: str
+    resource_hint: str = ""
+    estimated_minutes: int = Field(gt=0, le=120)
+
+
 class Skill(BaseModel):
     """career_ids is a list, not a single id: a few skills (e.g. git_version_control,
     interview_preparation) are legitimately shared across multiple roadmaps rather
@@ -17,7 +28,7 @@ class Skill(BaseModel):
     career_ids: list[str] = Field(min_length=1)
     skill_type: SkillType
     concept_tags: list[str] = Field(default_factory=list)
-    practice_templates: list[dict[str, str]] = Field(default_factory=list)
+    practice_templates: list[PracticeTemplate] = Field(default_factory=list)
     resources: list[dict[str, str]] = Field(default_factory=list)
 
 

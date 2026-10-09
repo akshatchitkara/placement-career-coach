@@ -120,3 +120,35 @@ def test_validate_all_raises_contentvalidationerror_on_any_issue():
         assert "unknown career_id" in str(exc)
     else:
         raise AssertionError("expected ContentValidationError")
+
+
+def test_practice_templates_cover_every_tested_concept_and_hold_no_urls():
+    from pcc.content.content_loader import load_question_bank, load_skills
+    from pcc.content.content_validator import validate_practice_templates
+
+    skills = load_skills()
+    banks = {"devops_engineer": load_question_bank("devops_engineer")}
+    assert validate_practice_templates(skills, banks) == []
+
+    broken = []
+    for skill in skills:
+        if skill.skill_id == "linux_fundamentals":
+            templates = [t for t in skill.practice_templates if t.concept_tag != "file_permissions"]
+            templates[0] = templates[0].model_copy(update={"action": "see https://x.example"})
+            skill = skill.model_copy(update={"practice_templates": templates})
+        broken.append(skill)
+    issues = validate_practice_templates(broken, banks)
+    assert any("no practice template" in i and "file_permissions" in i for i in issues)
+    assert any("contains a URL" in i for i in issues)
+
+
+def test_template_for_an_unknown_concept_tag_is_flagged():
+    from pcc.content.content_loader import load_skills
+    from pcc.content.content_validator import validate_practice_templates
+
+    skills = load_skills()
+    first = skills[0].practice_templates or load_skills()[0].practice_templates
+    assert first  # linux_fundamentals is first and has curated templates
+    bad = first[0].model_copy(update={"concept_tag": "not_a_tag"})
+    skills[0] = skills[0].model_copy(update={"practice_templates": [bad]})
+    assert any("unknown concept_tag" in i for i in validate_practice_templates(skills, {}))

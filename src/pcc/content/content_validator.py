@@ -114,6 +114,40 @@ def validate_question_bank(
     return issues
 
 
+def validate_practice_templates(
+    skills: list[Skill], question_banks: dict[str, list[Question]]
+) -> list[str]:
+    """Templates must target the skill's own tags, hold no URLs, and cover every tag a
+    question tests (so the coaching fallback never has to invent content for a real bank)."""
+    issues = []
+    tested: dict[str, set[str]] = {}
+    for questions in question_banks.values():
+        for q in questions:
+            tested.setdefault(q.skill_id, set()).add(q.concept_tag)
+
+    for skill in skills:
+        prefix = f"skills.json: skill '{skill.skill_id}'"
+        have = set()
+        for template in skill.practice_templates:
+            have.add(template.concept_tag)
+            if template.concept_tag not in skill.concept_tags:
+                issues.append(
+                    f"{prefix} template targets unknown concept_tag '{template.concept_tag}'"
+                )
+            fields = (
+                template.title,
+                template.action,
+                template.success_check,
+                template.resource_hint,
+            )
+            if any(_URL_PATTERN.search(f) for f in fields):
+                issues.append(f"{prefix} template '{template.concept_tag}' contains a URL")
+        missing = tested.get(skill.skill_id, set()) - have
+        if missing:
+            issues.append(f"{prefix} has questions but no practice template for {sorted(missing)}")
+    return issues
+
+
 def validate_all(
     careers: list[Career],
     skills: list[Skill],
@@ -132,6 +166,8 @@ def validate_all(
             issues += validate_roadmap(roadmap, career_skills)
         questions = question_banks.get(career.career_id, [])
         issues += validate_question_bank(questions, career_skills, career.career_id)
+
+    issues += validate_practice_templates(skills, question_banks)
 
     if issues:
         raise ContentValidationError("\n".join(issues))

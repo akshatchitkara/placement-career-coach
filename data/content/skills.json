@@ -11,7 +11,32 @@
       "process_management",
       "filesystem_navigation"
     ],
-    "practice_templates": [],
+    "practice_templates": [
+      {
+        "concept_tag": "file_permissions",
+        "title": "Permission digits drill",
+        "action": "Create 5 files and set their modes from a table (644, 600, 755, 750, 700) with chmod. Check each with ls -l and write down what the owner, group and others digits allow.",
+        "success_check": "Explain every digit of 755 and 640 without notes.",
+        "resource_hint": "man chmod; search: linux file permissions octal",
+        "estimated_minutes": 30
+      },
+      {
+        "concept_tag": "process_management",
+        "title": "Process control lab",
+        "action": "Start a long-running command such as sleep 300 in the background. Find it with ps and pgrep, stop it with kill (SIGTERM), then move a second job between foreground and background with jobs, fg and bg.",
+        "success_check": "Show the PID of a running process and stop it without using kill -9.",
+        "resource_hint": "man ps; man kill; search: linux process states and signals",
+        "estimated_minutes": 35
+      },
+      {
+        "concept_tag": "filesystem_navigation",
+        "title": "Filesystem tour",
+        "action": "Use cd, pwd, ls -la and find to visit /etc, /var/log and your home directory. Create a nested path with mkdir -p and locate a file by name with find.",
+        "success_check": "Reach the same directory using both an absolute and a relative path.",
+        "resource_hint": "man find; search: linux filesystem hierarchy standard",
+        "estimated_minutes": 30
+      }
+    ],
     "resources": []
   },
   {
@@ -26,7 +51,32 @@
       "conditionals_and_loops",
       "text_processing_grep_sed_awk"
     ],
-    "practice_templates": [],
+    "practice_templates": [
+      {
+        "concept_tag": "bash_variables_and_quoting",
+        "title": "Quoting experiments",
+        "action": "Write a script that stores a value containing spaces in a variable and prints it unquoted, in double quotes and in single quotes. Add command substitution with $(...) and a default value with ${var:-default}.",
+        "success_check": "Predict the output of each quoting variant before running it.",
+        "resource_hint": "bash manual: quoting; search: bash quoting rules",
+        "estimated_minutes": 30
+      },
+      {
+        "concept_tag": "conditionals_and_loops",
+        "title": "Loop and test script",
+        "action": "Write a script that loops over the entries of a directory with for, labels each as a file or directory using [[ -f ]] and [[ -d ]] inside if/elif/else, and uses a while read loop to process a text file line by line.",
+        "success_check": "The script runs correctly on an empty directory and on filenames that contain spaces.",
+        "resource_hint": "search: bash if for while examples",
+        "estimated_minutes": 40
+      },
+      {
+        "concept_tag": "text_processing_grep_sed_awk",
+        "title": "Log slicing practice",
+        "action": "Take a sample log file. Use grep to filter lines, sed to replace a pattern and awk to print and total one column. Chain them with pipes to answer three questions about the log.",
+        "success_check": "Explain what each command in your pipeline contributes.",
+        "resource_hint": "man grep; search: awk print column sum",
+        "estimated_minutes": 40
+      }
+    ],
     "resources": []
   },
   {
@@ -41,7 +91,32 @@
       "subprocess_and_scripting",
       "error_handling"
     ],
-    "practice_templates": [],
+    "practice_templates": [
+      {
+        "concept_tag": "file_and_os_operations",
+        "title": "Folder organiser script",
+        "action": "Write a Python script using pathlib that lists a directory, creates a subfolder for each file extension and moves the files into them.",
+        "success_check": "Run it twice on the same folder with no errors and no duplicate moves.",
+        "resource_hint": "python docs: pathlib; search: python shutil move",
+        "estimated_minutes": 40
+      },
+      {
+        "concept_tag": "subprocess_and_scripting",
+        "title": "Command runner",
+        "action": "Use subprocess.run with a list of arguments to run git --version, capture stdout and the return code, and print a clear message when the return code is not zero. Add a main guard and one argparse option.",
+        "success_check": "Explain why the command is passed as a list instead of a shell string.",
+        "resource_hint": "python docs: subprocess.run; search: python argparse basics",
+        "estimated_minutes": 35
+      },
+      {
+        "concept_tag": "error_handling",
+        "title": "Failure-proof script",
+        "action": "Write a script that reads a config file. Use try/except/else/finally to handle a missing file and invalid content separately, log each error and exit with a non-zero status.",
+        "success_check": "Trigger each error path on purpose and show the matching message.",
+        "resource_hint": "python docs: errors and exceptions; search: python custom exceptions",
+        "estimated_minutes": 30
+      }
+    ],
     "resources": []
   },
   {
@@ -58,7 +133,32 @@
       "staging_and_committing",
       "remote_workflows"
     ],
-    "practice_templates": [],
+    "practice_templates": [
+      {
+        "concept_tag": "branching_and_merging",
+        "title": "Branch and merge lab",
+        "action": "In a scratch repository, create a feature branch, commit on it and on main, merge it, then create and resolve a deliberate merge conflict.",
+        "success_check": "Explain fast-forward versus merge-commit using git log --graph --oneline on your repo.",
+        "resource_hint": "git docs: git-branch, git-merge; search: git merge conflict resolve",
+        "estimated_minutes": 40
+      },
+      {
+        "concept_tag": "staging_and_committing",
+        "title": "Clean commit practice",
+        "action": "Change three files, stage only two of them, commit with a clear message and then amend that message. Run git status and git diff --staged before and after each step.",
+        "success_check": "Show what is staged, unstaged and committed at each step using git status.",
+        "resource_hint": "git docs: git-add, git-commit; search: git staging area explained",
+        "estimated_minutes": 25
+      },
+      {
+        "concept_tag": "remote_workflows",
+        "title": "Remote round trip",
+        "action": "Create a bare repository locally, add it as a remote, push a branch, clone it into a second folder, change a file there and push. Back in the first copy, git fetch then git pull, and fix a rejected push on purpose.",
+        "success_check": "Explain the difference between git fetch and git pull.",
+        "resource_hint": "git docs: git-remote, git-push; search: git fetch vs pull",
+        "estimated_minutes": 40
+      }
+    ],
     "resources": []
   },
   {
