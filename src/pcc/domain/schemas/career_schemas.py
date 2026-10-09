@@ -2,7 +2,7 @@
 
 from typing import Literal
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 class Career(BaseModel):
@@ -10,3 +10,4 @@ class Career(BaseModel):
     name: str
     tier: Literal["A", "B", "C"]
     description: str = ""
+    aliases: list[str] = Field(default_factory=list)

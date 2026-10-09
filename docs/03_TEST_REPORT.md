@@ -63,7 +63,25 @@ Deviations noted: local Python available is 3.14 (blueprint specifies 3.11) -- n
 **`make` is not installed in this dev shell** (git-bash on Windows) -- all Makefile-wrapped commands were verified by running their underlying command directly (`ruff`, `mypy`, `pytest`, `python scripts/validate_content.py`), not via the `make` binary itself.
 
 ## M2 — Roadmap flow
-Not started.
+
+| Item | Result | Notes |
+|---|---|---|
+| Career picker (4 careers + typed career) and semester select | **Pass** | `career_selection_page`; headless UI test drives it |
+| Roadmap agent: AI rewords, never reorders; one repair attempt; template fallback | **Pass** | `agents/roadmap_agent.py`; mock mode skips AI and uses the template directly |
+| Roadmap validator V-RM-01..08 | **Pass** | V-RM-06 enforced through V-RM-04 (fixed sequence = template, which respects prerequisites) |
+| SQLite profile + roadmap persistence | **Pass** | `profile_repository`, `roadmap_repository`; one active roadmap per profile |
+| Roadmap page shows Sem 3-6 and 16 months for DevOps | **Pass** | 16 expanders, 4 semester headings, current semester expanded |
+| T-09 missing semester/month rejected, template used | **Pass** | validator unit tests + agent fallback test |
+| T-10 AI reorders skills -> rejected (V-RM-04), template used | **Pass** | |
+| T-14 / V-RM-08 URL in AI text rejected | **Pass** | roadmap part only; coaching part lands in M4 |
+| T-15 AI disabled/unavailable -> DevOps flow completes with template | **Pass** | integration test with an unavailable AI client |
+| T-16 empty/malformed AI response -> no crash, fallback (roadmap part) | **Pass** | `""`, `{}`, non-JSON, wrong shape, array |
+| T-18 close and reopen: profile + roadmap restored (weekly plan/results part is M3+) | **Pass** (partial) | new controller on same DB file |
+| T-19 non-CS career -> "not supported yet" + supported list, no roadmap | **Pass** | Doctor, Chartered Accountant, Pilot, Chef; invalid characters/length rejected |
+| Full suite + lint + mypy + app smoke | **Pass** | 89 tests, ruff clean, mypy clean on `domain/` + `workflow/`, headless full-app render has no exceptions |
+| Live AI provider personalising a roadmap | **Not verified** | no API key available; only scripted fake clients were exercised |
+
+**Fixes while integrating:** mypy now follows imports from `workflow/` into `ai/` and `content/`; typed `parse_json_object`, `_read_json` and the OpenAI client return so `mypy` stays clean.
 
 ## M3 — Assessment flow
 Not started.

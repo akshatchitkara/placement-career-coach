@@ -23,4 +23,4 @@ Mock mode (no key) is a first-class feature: the entire student journey works of
 
 ## Status
 
-Milestone M0 (Foundation) complete. See `docs/03_TEST_REPORT.md` for acceptance results and `docs/00_PROJECT_BLUEPRINT.md` Section 18 for the full milestone plan.
+Milestones M0 (Foundation), M1 (content and scoring) and M2 (profile, career picker, roadmap) complete. See `docs/03_TEST_REPORT.md` for acceptance results and `docs/00_PROJECT_BLUEPRINT.md` Section 18 for the full milestone plan.

@@ -3,24 +3,56 @@
     "career_id": "devops_engineer",
     "name": "DevOps Engineer",
     "tier": "A",
-    "description": "Builds and operates the pipelines, infrastructure and observability that ship software reliably."
+    "description": "Builds and operates the pipelines, infrastructure and observability that ship software reliably.",
+    "aliases": [
+      "devops",
+      "dev ops",
+      "site reliability engineer",
+      "sre",
+      "cloud engineer",
+      "platform engineer"
+    ]
   },
   {
     "career_id": "mean_stack_developer",
     "name": "MEAN Stack Developer",
     "tier": "B",
-    "description": "Builds full-stack web applications with MongoDB, Express, Angular and Node.js."
+    "description": "Builds full-stack web applications with MongoDB, Express, Angular and Node.js.",
+    "aliases": [
+      "mean stack",
+      "mean",
+      "full stack developer",
+      "fullstack developer",
+      "full stack web developer",
+      "web developer",
+      "node developer"
+    ]
   },
   {
     "career_id": "java_backend_developer",
     "name": "Java Backend Developer",
     "tier": "B",
-    "description": "Builds backend services and APIs using Java, Spring and relational databases."
+    "description": "Builds backend services and APIs using Java, Spring and relational databases.",
+    "aliases": [
+      "java developer",
+      "java backend",
+      "backend developer",
+      "spring developer",
+      "spring boot developer"
+    ]
   },
   {
     "career_id": "ai_developer",
     "name": "AI Developer",
     "tier": "B",
-    "description": "Builds machine learning models and GenAI applications, from data to deployment."
+    "description": "Builds machine learning models and GenAI applications, from data to deployment.",
+    "aliases": [
+      "ai engineer",
+      "ml engineer",
+      "machine learning engineer",
+      "genai developer",
+      "data scientist",
+      "ai ml developer"
+    ]
   }
 ]

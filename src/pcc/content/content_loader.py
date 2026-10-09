@@ -2,6 +2,7 @@
 
 import json
 from pathlib import Path
+from typing import Any
 
 from pydantic import BaseModel
 
@@ -34,7 +35,7 @@ class AppSettings(BaseModel):
     retest_after_days: int
 
 
-def _read_json(relative_path: str) -> object:
+def _read_json(relative_path: str) -> Any:
     path = _CONTENT_DIR / relative_path
     return json.loads(path.read_text(encoding="utf-8"))
 

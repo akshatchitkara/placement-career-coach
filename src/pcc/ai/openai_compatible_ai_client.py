@@ -38,4 +38,4 @@ class OpenAiCompatibleAiClient(AiClient):
         except httpx.HTTPError as exc:
             raise AiUnavailableError(str(exc)) from exc
 
-        return response.json()["choices"][0]["message"]["content"]
+        return str(response.json()["choices"][0]["message"]["content"])

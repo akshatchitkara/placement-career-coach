@@ -1,6 +1,12 @@
 """Streamlit entry point. UI pages hold no scoring rules, SQL or prompts (Section 7.3)."""
 
+import sys
+from pathlib import Path
+
 import streamlit as st
+
+# `streamlit run` puts only this file's folder on sys.path; make `pcc` importable without install.
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from pcc.core.config import settings
 from pcc.core.logging_config import configure_logging
@@ -10,6 +16,7 @@ from pcc.ui.pages import (
     assessment_page,
     career_selection_page,
     coaching_page,
+    m1_preview_page,
     profile_page,
     progress_page,
     results_page,
@@ -40,6 +47,7 @@ def main() -> None:
         st.Page(weekly_plan_page.render, title="Weekly Plan", url_path="weekly-plan"),
         st.Page(progress_page.render, title="Progress", url_path="progress"),
         st.Page(ai_settings_page.render, title="AI Settings", url_path="ai-settings"),
+        st.Page(m1_preview_page.render, title="M1 Preview", url_path="m1-preview"),
     ]
     nav = st.navigation(pages)
     nav.run()
