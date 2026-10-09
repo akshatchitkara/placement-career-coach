@@ -1,0 +1,198 @@
+{
+  "career_id": "mean_stack_developer",
+  "months": [
+    {
+      "semester": 3,
+      "month_index": 1,
+      "skill_id": "javascript_fundamentals",
+      "focus": "Web foundations: JavaScript Fundamentals",
+      "topics": [
+        "closures and scope",
+        "async and promises",
+        "array object methods"
+      ],
+      "deliverable": "Produce a short artifact demonstrating javascript fundamentals applied to a realistic task."
+    },
+    {
+      "semester": 3,
+      "month_index": 2,
+      "skill_id": "html_css_fundamentals",
+      "focus": "Web foundations: HTML & CSS Fundamentals",
+      "topics": [
+        "semantic html",
+        "flexbox and grid",
+        "responsive design"
+      ],
+      "deliverable": "Produce a short artifact demonstrating html & css fundamentals applied to a realistic task."
+    },
+    {
+      "semester": 3,
+      "month_index": 3,
+      "skill_id": "git_version_control",
+      "focus": "Web foundations: Git Version Control",
+      "topics": [
+        "branching and merging",
+        "staging and committing",
+        "remote workflows"
+      ],
+      "deliverable": "Produce a short artifact demonstrating git version control applied to a realistic task."
+    },
+    {
+      "semester": 3,
+      "month_index": 4,
+      "skill_id": "nodejs_fundamentals",
+      "focus": "Web foundations: Node.js Fundamentals",
+      "topics": [
+        "event loop",
+        "modules and npm",
+        "file and stream apis"
+      ],
+      "deliverable": "Produce a short artifact demonstrating node.js fundamentals applied to a realistic task."
+    },
+    {
+      "semester": 4,
+      "month_index": 1,
+      "skill_id": "typescript_essentials",
+      "focus": "Back end and data: TypeScript Essentials",
+      "topics": [
+        "types and interfaces",
+        "generics",
+        "narrowing"
+      ],
+      "deliverable": "Produce a short artifact demonstrating typescript essentials applied to a realistic task."
+    },
+    {
+      "semester": 4,
+      "month_index": 2,
+      "skill_id": "express_rest_apis",
+      "focus": "Back end and data: Express REST APIs",
+      "topics": [
+        "routing and middleware",
+        "error handling",
+        "request validation"
+      ],
+      "deliverable": "Produce a short artifact demonstrating express rest apis applied to a realistic task."
+    },
+    {
+      "semester": 4,
+      "month_index": 3,
+      "skill_id": "mongodb_data_modeling",
+      "focus": "Back end and data: MongoDB Data Modeling",
+      "topics": [
+        "schema design",
+        "indexing",
+        "aggregation pipeline"
+      ],
+      "deliverable": "Produce a short artifact demonstrating mongodb data modeling applied to a realistic task."
+    },
+    {
+      "semester": 4,
+      "month_index": 4,
+      "skill_id": "authentication_authorization",
+      "focus": "Back end and data: Authentication & Authorization",
+      "topics": [
+        "jwt and sessions",
+        "role based access",
+        "password hashing"
+      ],
+      "deliverable": "Produce a short artifact demonstrating authentication & authorization applied to a realistic task."
+    },
+    {
+      "semester": 5,
+      "month_index": 1,
+      "skill_id": "angular_core_concepts",
+      "focus": "Front end and quality: Angular Core Concepts",
+      "topics": [
+        "components and modules",
+        "data binding",
+        "dependency injection"
+      ],
+      "deliverable": "Produce a short artifact demonstrating angular core concepts applied to a realistic task."
+    },
+    {
+      "semester": 5,
+      "month_index": 2,
+      "skill_id": "rxjs_and_state_management",
+      "focus": "Front end and quality: RxJS & State Management",
+      "topics": [
+        "observables and operators",
+        "subjects",
+        "state patterns"
+      ],
+      "deliverable": "Produce a short artifact demonstrating rxjs & state management applied to a realistic task."
+    },
+    {
+      "semester": 5,
+      "month_index": 3,
+      "skill_id": "testing_web_applications",
+      "focus": "Front end and quality: Testing Web Applications",
+      "topics": [
+        "unit vs integration",
+        "mocking",
+        "test coverage"
+      ],
+      "deliverable": "Produce a short artifact demonstrating testing web applications applied to a realistic task."
+    },
+    {
+      "semester": 5,
+      "month_index": 4,
+      "skill_id": "ci_cd_and_deployment",
+      "focus": "Front end and quality: CI/CD and Deployment",
+      "topics": [
+        "pipeline stages",
+        "build triggers",
+        "artifact promotion"
+      ],
+      "deliverable": "Produce a short artifact demonstrating ci/cd and deployment applied to a realistic task."
+    },
+    {
+      "semester": 6,
+      "month_index": 1,
+      "skill_id": "web_security_and_performance",
+      "focus": "Production and hiring: Web Security & Performance",
+      "topics": [
+        "xss and csrf",
+        "caching strategies",
+        "bundle optimization"
+      ],
+      "deliverable": "Produce a short artifact demonstrating web security & performance applied to a realistic task."
+    },
+    {
+      "semester": 6,
+      "month_index": 2,
+      "skill_id": "system_design_basics",
+      "focus": "Production and hiring: System Design Basics",
+      "topics": [
+        "load balancing",
+        "caching layers",
+        "database scaling"
+      ],
+      "deliverable": "Produce a short artifact demonstrating system design basics applied to a realistic task."
+    },
+    {
+      "semester": 6,
+      "month_index": 3,
+      "skill_id": "capstone_mean",
+      "focus": "Production and hiring: MEAN Capstone",
+      "topics": [
+        "end to end app",
+        "core concepts",
+        "common pitfalls"
+      ],
+      "deliverable": "Produce a short artifact demonstrating mean capstone applied to a realistic task."
+    },
+    {
+      "semester": 6,
+      "month_index": 4,
+      "skill_id": "interview_preparation",
+      "focus": "Production and hiring: Interview Preparation",
+      "topics": [
+        "behavioral and technical prep",
+        "core concepts",
+        "common pitfalls"
+      ],
+      "deliverable": "Produce a short artifact demonstrating interview preparation applied to a realistic task."
+    }
+  ],
+  "generation_source": "template"
+}

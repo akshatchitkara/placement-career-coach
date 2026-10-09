@@ -1,0 +1,198 @@
+{
+  "career_id": "devops_engineer",
+  "months": [
+    {
+      "semester": 3,
+      "month_index": 1,
+      "skill_id": "linux_fundamentals",
+      "focus": "Foundations: Linux Fundamentals",
+      "topics": [
+        "file permissions",
+        "process management",
+        "filesystem navigation"
+      ],
+      "deliverable": "Produce a short artifact demonstrating linux fundamentals applied to a realistic task."
+    },
+    {
+      "semester": 3,
+      "month_index": 2,
+      "skill_id": "shell_scripting",
+      "focus": "Foundations: Shell Scripting",
+      "topics": [
+        "bash variables and quoting",
+        "conditionals and loops",
+        "text processing grep sed awk"
+      ],
+      "deliverable": "Produce a short artifact demonstrating shell scripting applied to a realistic task."
+    },
+    {
+      "semester": 3,
+      "month_index": 3,
+      "skill_id": "python_for_automation",
+      "focus": "Foundations: Python for Automation",
+      "topics": [
+        "file and os operations",
+        "subprocess and scripting",
+        "error handling"
+      ],
+      "deliverable": "Produce a short artifact demonstrating python for automation applied to a realistic task."
+    },
+    {
+      "semester": 3,
+      "month_index": 4,
+      "skill_id": "git_version_control",
+      "focus": "Foundations: Git Version Control",
+      "topics": [
+        "branching and merging",
+        "staging and committing",
+        "remote workflows"
+      ],
+      "deliverable": "Produce a short artifact demonstrating git version control applied to a realistic task."
+    },
+    {
+      "semester": 4,
+      "month_index": 1,
+      "skill_id": "networking_fundamentals",
+      "focus": "Build and ship: Networking Fundamentals",
+      "topics": [
+        "tcp ip basics",
+        "dns and http",
+        "ports and firewalls"
+      ],
+      "deliverable": "Produce a short artifact demonstrating networking fundamentals applied to a realistic task."
+    },
+    {
+      "semester": 4,
+      "month_index": 2,
+      "skill_id": "ci_cd_pipelines",
+      "focus": "Build and ship: CI/CD Pipelines",
+      "topics": [
+        "pipeline stages",
+        "build triggers",
+        "artifact promotion"
+      ],
+      "deliverable": "Produce a short artifact demonstrating ci/cd pipelines applied to a realistic task."
+    },
+    {
+      "semester": 4,
+      "month_index": 3,
+      "skill_id": "docker_containers",
+      "focus": "Build and ship: Docker Containers",
+      "topics": [
+        "images and layers",
+        "dockerfile basics",
+        "volumes and networking"
+      ],
+      "deliverable": "Produce a short artifact demonstrating docker containers applied to a realistic task."
+    },
+    {
+      "semester": 4,
+      "month_index": 4,
+      "skill_id": "cloud_fundamentals",
+      "focus": "Build and ship: Cloud Fundamentals",
+      "topics": [
+        "compute storage network",
+        "iam basics",
+        "regions and availability"
+      ],
+      "deliverable": "Produce a short artifact demonstrating cloud fundamentals applied to a realistic task."
+    },
+    {
+      "semester": 5,
+      "month_index": 1,
+      "skill_id": "kubernetes_orchestration",
+      "focus": "Orchestrate and automate: Kubernetes Orchestration",
+      "topics": [
+        "pods and deployments",
+        "services and ingress",
+        "scaling and health checks"
+      ],
+      "deliverable": "Produce a short artifact demonstrating kubernetes orchestration applied to a realistic task."
+    },
+    {
+      "semester": 5,
+      "month_index": 2,
+      "skill_id": "terraform_iac",
+      "focus": "Orchestrate and automate: Terraform (IaC)",
+      "topics": [
+        "providers and resources",
+        "state management",
+        "modules and variables"
+      ],
+      "deliverable": "Produce a short artifact demonstrating terraform (iac) applied to a realistic task."
+    },
+    {
+      "semester": 5,
+      "month_index": 3,
+      "skill_id": "configuration_management",
+      "focus": "Orchestrate and automate: Configuration Management",
+      "topics": [
+        "idempotent playbooks",
+        "inventory management",
+        "secrets handling"
+      ],
+      "deliverable": "Produce a short artifact demonstrating configuration management applied to a realistic task."
+    },
+    {
+      "semester": 5,
+      "month_index": 4,
+      "skill_id": "gitops_and_deployment_strategies",
+      "focus": "Orchestrate and automate: GitOps & Deployment Strategies",
+      "topics": [
+        "blue green and canary",
+        "rollback strategies",
+        "declarative sync"
+      ],
+      "deliverable": "Produce a short artifact demonstrating gitops & deployment strategies applied to a realistic task."
+    },
+    {
+      "semester": 6,
+      "month_index": 1,
+      "skill_id": "monitoring_observability",
+      "focus": "Operate and get hired: Monitoring & Observability",
+      "topics": [
+        "metrics and dashboards",
+        "logging pipelines",
+        "alerting and slos"
+      ],
+      "deliverable": "Produce a short artifact demonstrating monitoring & observability applied to a realistic task."
+    },
+    {
+      "semester": 6,
+      "month_index": 2,
+      "skill_id": "devsecops_basics",
+      "focus": "Operate and get hired: DevSecOps Basics",
+      "topics": [
+        "dependency scanning",
+        "secrets in pipelines",
+        "least privilege"
+      ],
+      "deliverable": "Produce a short artifact demonstrating devsecops basics applied to a realistic task."
+    },
+    {
+      "semester": 6,
+      "month_index": 3,
+      "skill_id": "capstone_devops",
+      "focus": "Operate and get hired: DevOps Capstone",
+      "topics": [
+        "end to end pipeline",
+        "core concepts",
+        "common pitfalls"
+      ],
+      "deliverable": "Produce a short artifact demonstrating devops capstone applied to a realistic task."
+    },
+    {
+      "semester": 6,
+      "month_index": 4,
+      "skill_id": "interview_preparation",
+      "focus": "Operate and get hired: Interview Preparation",
+      "topics": [
+        "behavioral and technical prep",
+        "core concepts",
+        "common pitfalls"
+      ],
+      "deliverable": "Produce a short artifact demonstrating interview preparation applied to a realistic task."
+    }
+  ],
+  "generation_source": "template"
+}

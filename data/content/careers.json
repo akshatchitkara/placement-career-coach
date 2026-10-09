@@ -1,0 +1,26 @@
+[
+  {
+    "career_id": "devops_engineer",
+    "name": "DevOps Engineer",
+    "tier": "A",
+    "description": "Builds and operates the pipelines, infrastructure and observability that ship software reliably."
+  },
+  {
+    "career_id": "mean_stack_developer",
+    "name": "MEAN Stack Developer",
+    "tier": "B",
+    "description": "Builds full-stack web applications with MongoDB, Express, Angular and Node.js."
+  },
+  {
+    "career_id": "java_backend_developer",
+    "name": "Java Backend Developer",
+    "tier": "B",
+    "description": "Builds backend services and APIs using Java, Spring and relational databases."
+  },
+  {
+    "career_id": "ai_developer",
+    "name": "AI Developer",
+    "tier": "B",
+    "description": "Builds machine learning models and GenAI applications, from data to deployment."
+  }
+]

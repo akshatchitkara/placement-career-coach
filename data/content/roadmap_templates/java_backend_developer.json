@@ -1,0 +1,198 @@
+{
+  "career_id": "java_backend_developer",
+  "months": [
+    {
+      "semester": 3,
+      "month_index": 1,
+      "skill_id": "java_core_oop",
+      "focus": "Core Java and data: Java Core & OOP",
+      "topics": [
+        "inheritance and polymorphism",
+        "interfaces vs abstract classes",
+        "exception handling"
+      ],
+      "deliverable": "Produce a short artifact demonstrating java core & oop applied to a realistic task."
+    },
+    {
+      "semester": 3,
+      "month_index": 2,
+      "skill_id": "collections_and_generics",
+      "focus": "Core Java and data: Collections & Generics",
+      "topics": [
+        "list set map",
+        "generics bounds",
+        "comparators"
+      ],
+      "deliverable": "Produce a short artifact demonstrating collections & generics applied to a realistic task."
+    },
+    {
+      "semester": 3,
+      "month_index": 3,
+      "skill_id": "dsa_problem_solving",
+      "focus": "Core Java and data: DSA Problem Solving",
+      "topics": [
+        "time complexity",
+        "arrays and strings",
+        "recursion"
+      ],
+      "deliverable": "Produce a short artifact demonstrating dsa problem solving applied to a realistic task."
+    },
+    {
+      "semester": 3,
+      "month_index": 4,
+      "skill_id": "sql_and_relational_databases",
+      "focus": "Core Java and data: SQL & Relational Databases",
+      "topics": [
+        "joins",
+        "normalization",
+        "indexing"
+      ],
+      "deliverable": "Produce a short artifact demonstrating sql & relational databases applied to a realistic task."
+    },
+    {
+      "semester": 4,
+      "month_index": 1,
+      "skill_id": "spring_boot_fundamentals",
+      "focus": "Spring foundations: Spring Boot Fundamentals",
+      "topics": [
+        "autoconfiguration",
+        "dependency injection",
+        "application properties"
+      ],
+      "deliverable": "Produce a short artifact demonstrating spring boot fundamentals applied to a realistic task."
+    },
+    {
+      "semester": 4,
+      "month_index": 2,
+      "skill_id": "rest_api_design",
+      "focus": "Spring foundations: REST API Design",
+      "topics": [
+        "resource modeling",
+        "status codes",
+        "versioning"
+      ],
+      "deliverable": "Produce a short artifact demonstrating rest api design applied to a realistic task."
+    },
+    {
+      "semester": 4,
+      "month_index": 3,
+      "skill_id": "jpa_hibernate",
+      "focus": "Spring foundations: JPA & Hibernate",
+      "topics": [
+        "entity mapping",
+        "lazy vs eager",
+        "transactions"
+      ],
+      "deliverable": "Produce a short artifact demonstrating jpa & hibernate applied to a realistic task."
+    },
+    {
+      "semester": 4,
+      "month_index": 4,
+      "skill_id": "multithreading_and_concurrency",
+      "focus": "Spring foundations: Multithreading & Concurrency",
+      "topics": [
+        "thread lifecycle",
+        "synchronization",
+        "executor services"
+      ],
+      "deliverable": "Produce a short artifact demonstrating multithreading & concurrency applied to a realistic task."
+    },
+    {
+      "semester": 5,
+      "month_index": 1,
+      "skill_id": "spring_security",
+      "focus": "Secure, distributed services: Spring Security",
+      "topics": [
+        "authentication filters",
+        "authorization rules",
+        "csrf protection"
+      ],
+      "deliverable": "Produce a short artifact demonstrating spring security applied to a realistic task."
+    },
+    {
+      "semester": 5,
+      "month_index": 2,
+      "skill_id": "microservices_architecture",
+      "focus": "Secure, distributed services: Microservices Architecture",
+      "topics": [
+        "service boundaries",
+        "api gateway",
+        "circuit breakers"
+      ],
+      "deliverable": "Produce a short artifact demonstrating microservices architecture applied to a realistic task."
+    },
+    {
+      "semester": 5,
+      "month_index": 3,
+      "skill_id": "messaging_and_events",
+      "focus": "Secure, distributed services: Messaging & Events",
+      "topics": [
+        "pub sub",
+        "message queues",
+        "event driven design"
+      ],
+      "deliverable": "Produce a short artifact demonstrating messaging & events applied to a realistic task."
+    },
+    {
+      "semester": 5,
+      "month_index": 4,
+      "skill_id": "testing_junit_mockito",
+      "focus": "Secure, distributed services: Testing: JUnit & Mockito",
+      "topics": [
+        "unit vs integration",
+        "mocking",
+        "test coverage"
+      ],
+      "deliverable": "Produce a short artifact demonstrating testing: junit & mockito applied to a realistic task."
+    },
+    {
+      "semester": 6,
+      "month_index": 1,
+      "skill_id": "docker_and_deployment",
+      "focus": "Production and hiring: Docker & Deployment",
+      "topics": [
+        "images and layers",
+        "dockerfile basics",
+        "container orchestration basics"
+      ],
+      "deliverable": "Produce a short artifact demonstrating docker & deployment applied to a realistic task."
+    },
+    {
+      "semester": 6,
+      "month_index": 2,
+      "skill_id": "system_design_basics",
+      "focus": "Production and hiring: System Design Basics",
+      "topics": [
+        "load balancing",
+        "caching layers",
+        "database scaling"
+      ],
+      "deliverable": "Produce a short artifact demonstrating system design basics applied to a realistic task."
+    },
+    {
+      "semester": 6,
+      "month_index": 3,
+      "skill_id": "capstone_java",
+      "focus": "Production and hiring: Java Capstone",
+      "topics": [
+        "end to end service",
+        "core concepts",
+        "common pitfalls"
+      ],
+      "deliverable": "Produce a short artifact demonstrating java capstone applied to a realistic task."
+    },
+    {
+      "semester": 6,
+      "month_index": 4,
+      "skill_id": "interview_preparation",
+      "focus": "Production and hiring: Interview Preparation",
+      "topics": [
+        "behavioral and technical prep",
+        "core concepts",
+        "common pitfalls"
+      ],
+      "deliverable": "Produce a short artifact demonstrating interview preparation applied to a realistic task."
+    }
+  ],
+  "generation_source": "template"
+}

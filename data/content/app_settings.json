@@ -1,0 +1,13 @@
+{
+  "level_lower_bounds": { "intermediate": 40, "advanced": 65, "industry_ready": 85 },
+  "mastery_threshold": 60,
+  "industry_ready_min_skill_score": 60,
+  "min_answered_for_evidence": 2,
+  "questions_per_skill": 3,
+  "difficulty_mix_per_skill": { "easy": 1, "medium": 1, "hard": 1 },
+  "min_bank_questions_per_skill": 6,
+  "full_path_questions_per_skill": 2,
+  "learning_months_per_semester": 4,
+  "weekly_plan": { "min_tasks": 3, "max_tasks": 5, "max_total_minutes": 240 },
+  "retest_after_days": 7
+}

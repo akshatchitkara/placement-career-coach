@@ -1,0 +1,868 @@
+[
+  {
+    "skill_id": "linux_fundamentals",
+    "name": "Linux Fundamentals",
+    "career_ids": [
+      "devops_engineer"
+    ],
+    "skill_type": "conceptual",
+    "concept_tags": [
+      "file_permissions",
+      "process_management",
+      "filesystem_navigation"
+    ],
+    "practice_templates": [],
+    "resources": []
+  },
+  {
+    "skill_id": "shell_scripting",
+    "name": "Shell Scripting",
+    "career_ids": [
+      "devops_engineer"
+    ],
+    "skill_type": "conceptual",
+    "concept_tags": [
+      "bash_variables_and_quoting",
+      "conditionals_and_loops",
+      "text_processing_grep_sed_awk"
+    ],
+    "practice_templates": [],
+    "resources": []
+  },
+  {
+    "skill_id": "python_for_automation",
+    "name": "Python for Automation",
+    "career_ids": [
+      "devops_engineer"
+    ],
+    "skill_type": "conceptual",
+    "concept_tags": [
+      "file_and_os_operations",
+      "subprocess_and_scripting",
+      "error_handling"
+    ],
+    "practice_templates": [],
+    "resources": []
+  },
+  {
+    "skill_id": "git_version_control",
+    "name": "Git Version Control",
+    "career_ids": [
+      "devops_engineer",
+      "mean_stack_developer",
+      "ai_developer"
+    ],
+    "skill_type": "conceptual",
+    "concept_tags": [
+      "branching_and_merging",
+      "staging_and_committing",
+      "remote_workflows"
+    ],
+    "practice_templates": [],
+    "resources": []
+  },
+  {
+    "skill_id": "networking_fundamentals",
+    "name": "Networking Fundamentals",
+    "career_ids": [
+      "devops_engineer"
+    ],
+    "skill_type": "conceptual",
+    "concept_tags": [
+      "tcp_ip_basics",
+      "dns_and_http",
+      "ports_and_firewalls"
+    ],
+    "practice_templates": [],
+    "resources": []
+  },
+  {
+    "skill_id": "ci_cd_pipelines",
+    "name": "CI/CD Pipelines",
+    "career_ids": [
+      "devops_engineer"
+    ],
+    "skill_type": "conceptual",
+    "concept_tags": [
+      "pipeline_stages",
+      "build_triggers",
+      "artifact_promotion"
+    ],
+    "practice_templates": [],
+    "resources": []
+  },
+  {
+    "skill_id": "docker_containers",
+    "name": "Docker Containers",
+    "career_ids": [
+      "devops_engineer"
+    ],
+    "skill_type": "conceptual",
+    "concept_tags": [
+      "images_and_layers",
+      "dockerfile_basics",
+      "volumes_and_networking"
+    ],
+    "practice_templates": [],
+    "resources": []
+  },
+  {
+    "skill_id": "cloud_fundamentals",
+    "name": "Cloud Fundamentals",
+    "career_ids": [
+      "devops_engineer"
+    ],
+    "skill_type": "conceptual",
+    "concept_tags": [
+      "compute_storage_network",
+      "iam_basics",
+      "regions_and_availability"
+    ],
+    "practice_templates": [],
+    "resources": []
+  },
+  {
+    "skill_id": "kubernetes_orchestration",
+    "name": "Kubernetes Orchestration",
+    "career_ids": [
+      "devops_engineer"
+    ],
+    "skill_type": "conceptual",
+    "concept_tags": [
+      "pods_and_deployments",
+      "services_and_ingress",
+      "scaling_and_health_checks"
+    ],
+    "practice_templates": [],
+    "resources": []
+  },
+  {
+    "skill_id": "terraform_iac",
+    "name": "Terraform (IaC)",
+    "career_ids": [
+      "devops_engineer"
+    ],
+    "skill_type": "conceptual",
+    "concept_tags": [
+      "providers_and_resources",
+      "state_management",
+      "modules_and_variables"
+    ],
+    "practice_templates": [],
+    "resources": []
+  },
+  {
+    "skill_id": "configuration_management",
+    "name": "Configuration Management",
+    "career_ids": [
+      "devops_engineer"
+    ],
+    "skill_type": "conceptual",
+    "concept_tags": [
+      "idempotent_playbooks",
+      "inventory_management",
+      "secrets_handling"
+    ],
+    "practice_templates": [],
+    "resources": []
+  },
+  {
+    "skill_id": "gitops_and_deployment_strategies",
+    "name": "GitOps & Deployment Strategies",
+    "career_ids": [
+      "devops_engineer"
+    ],
+    "skill_type": "conceptual",
+    "concept_tags": [
+      "blue_green_and_canary",
+      "rollback_strategies",
+      "declarative_sync"
+    ],
+    "practice_templates": [],
+    "resources": []
+  },
+  {
+    "skill_id": "monitoring_observability",
+    "name": "Monitoring & Observability",
+    "career_ids": [
+      "devops_engineer"
+    ],
+    "skill_type": "conceptual",
+    "concept_tags": [
+      "metrics_and_dashboards",
+      "logging_pipelines",
+      "alerting_and_slos"
+    ],
+    "practice_templates": [],
+    "resources": []
+  },
+  {
+    "skill_id": "devsecops_basics",
+    "name": "DevSecOps Basics",
+    "career_ids": [
+      "devops_engineer"
+    ],
+    "skill_type": "conceptual",
+    "concept_tags": [
+      "dependency_scanning",
+      "secrets_in_pipelines",
+      "least_privilege"
+    ],
+    "practice_templates": [],
+    "resources": []
+  },
+  {
+    "skill_id": "capstone_devops",
+    "name": "DevOps Capstone",
+    "career_ids": [
+      "devops_engineer"
+    ],
+    "skill_type": "build",
+    "concept_tags": [
+      "end_to_end_pipeline"
+    ],
+    "practice_templates": [],
+    "resources": []
+  },
+  {
+    "skill_id": "interview_preparation",
+    "name": "Interview Preparation",
+    "career_ids": [
+      "devops_engineer",
+      "mean_stack_developer",
+      "java_backend_developer",
+      "ai_developer"
+    ],
+    "skill_type": "communication",
+    "concept_tags": [
+      "behavioral_and_technical_prep"
+    ],
+    "practice_templates": [],
+    "resources": []
+  },
+  {
+    "skill_id": "javascript_fundamentals",
+    "name": "JavaScript Fundamentals",
+    "career_ids": [
+      "mean_stack_developer"
+    ],
+    "skill_type": "conceptual",
+    "concept_tags": [
+      "closures_and_scope",
+      "async_and_promises",
+      "array_object_methods"
+    ],
+    "practice_templates": [],
+    "resources": []
+  },
+  {
+    "skill_id": "html_css_fundamentals",
+    "name": "HTML & CSS Fundamentals",
+    "career_ids": [
+      "mean_stack_developer"
+    ],
+    "skill_type": "conceptual",
+    "concept_tags": [
+      "semantic_html",
+      "flexbox_and_grid",
+      "responsive_design"
+    ],
+    "practice_templates": [],
+    "resources": []
+  },
+  {
+    "skill_id": "nodejs_fundamentals",
+    "name": "Node.js Fundamentals",
+    "career_ids": [
+      "mean_stack_developer"
+    ],
+    "skill_type": "conceptual",
+    "concept_tags": [
+      "event_loop",
+      "modules_and_npm",
+      "file_and_stream_apis"
+    ],
+    "practice_templates": [],
+    "resources": []
+  },
+  {
+    "skill_id": "typescript_essentials",
+    "name": "TypeScript Essentials",
+    "career_ids": [
+      "mean_stack_developer"
+    ],
+    "skill_type": "conceptual",
+    "concept_tags": [
+      "types_and_interfaces",
+      "generics",
+      "narrowing"
+    ],
+    "practice_templates": [],
+    "resources": []
+  },
+  {
+    "skill_id": "express_rest_apis",
+    "name": "Express REST APIs",
+    "career_ids": [
+      "mean_stack_developer"
+    ],
+    "skill_type": "conceptual",
+    "concept_tags": [
+      "routing_and_middleware",
+      "error_handling",
+      "request_validation"
+    ],
+    "practice_templates": [],
+    "resources": []
+  },
+  {
+    "skill_id": "mongodb_data_modeling",
+    "name": "MongoDB Data Modeling",
+    "career_ids": [
+      "mean_stack_developer"
+    ],
+    "skill_type": "conceptual",
+    "concept_tags": [
+      "schema_design",
+      "indexing",
+      "aggregation_pipeline"
+    ],
+    "practice_templates": [],
+    "resources": []
+  },
+  {
+    "skill_id": "authentication_authorization",
+    "name": "Authentication & Authorization",
+    "career_ids": [
+      "mean_stack_developer"
+    ],
+    "skill_type": "conceptual",
+    "concept_tags": [
+      "jwt_and_sessions",
+      "role_based_access",
+      "password_hashing"
+    ],
+    "practice_templates": [],
+    "resources": []
+  },
+  {
+    "skill_id": "angular_core_concepts",
+    "name": "Angular Core Concepts",
+    "career_ids": [
+      "mean_stack_developer"
+    ],
+    "skill_type": "conceptual",
+    "concept_tags": [
+      "components_and_modules",
+      "data_binding",
+      "dependency_injection"
+    ],
+    "practice_templates": [],
+    "resources": []
+  },
+  {
+    "skill_id": "rxjs_and_state_management",
+    "name": "RxJS & State Management",
+    "career_ids": [
+      "mean_stack_developer"
+    ],
+    "skill_type": "conceptual",
+    "concept_tags": [
+      "observables_and_operators",
+      "subjects",
+      "state_patterns"
+    ],
+    "practice_templates": [],
+    "resources": []
+  },
+  {
+    "skill_id": "testing_web_applications",
+    "name": "Testing Web Applications",
+    "career_ids": [
+      "mean_stack_developer"
+    ],
+    "skill_type": "conceptual",
+    "concept_tags": [
+      "unit_vs_integration",
+      "mocking",
+      "test_coverage"
+    ],
+    "practice_templates": [],
+    "resources": []
+  },
+  {
+    "skill_id": "ci_cd_and_deployment",
+    "name": "CI/CD and Deployment",
+    "career_ids": [
+      "mean_stack_developer"
+    ],
+    "skill_type": "conceptual",
+    "concept_tags": [
+      "pipeline_stages",
+      "build_triggers",
+      "artifact_promotion"
+    ],
+    "practice_templates": [],
+    "resources": []
+  },
+  {
+    "skill_id": "web_security_and_performance",
+    "name": "Web Security & Performance",
+    "career_ids": [
+      "mean_stack_developer"
+    ],
+    "skill_type": "conceptual",
+    "concept_tags": [
+      "xss_and_csrf",
+      "caching_strategies",
+      "bundle_optimization"
+    ],
+    "practice_templates": [],
+    "resources": []
+  },
+  {
+    "skill_id": "system_design_basics",
+    "name": "System Design Basics",
+    "career_ids": [
+      "mean_stack_developer",
+      "java_backend_developer"
+    ],
+    "skill_type": "conceptual",
+    "concept_tags": [
+      "load_balancing",
+      "caching_layers",
+      "database_scaling"
+    ],
+    "practice_templates": [],
+    "resources": []
+  },
+  {
+    "skill_id": "capstone_mean",
+    "name": "MEAN Capstone",
+    "career_ids": [
+      "mean_stack_developer"
+    ],
+    "skill_type": "build",
+    "concept_tags": [
+      "end_to_end_app"
+    ],
+    "practice_templates": [],
+    "resources": []
+  },
+  {
+    "skill_id": "java_core_oop",
+    "name": "Java Core & OOP",
+    "career_ids": [
+      "java_backend_developer"
+    ],
+    "skill_type": "conceptual",
+    "concept_tags": [
+      "inheritance_and_polymorphism",
+      "interfaces_vs_abstract_classes",
+      "exception_handling"
+    ],
+    "practice_templates": [],
+    "resources": []
+  },
+  {
+    "skill_id": "collections_and_generics",
+    "name": "Collections & Generics",
+    "career_ids": [
+      "java_backend_developer"
+    ],
+    "skill_type": "conceptual",
+    "concept_tags": [
+      "list_set_map",
+      "generics_bounds",
+      "comparators"
+    ],
+    "practice_templates": [],
+    "resources": []
+  },
+  {
+    "skill_id": "dsa_problem_solving",
+    "name": "DSA Problem Solving",
+    "career_ids": [
+      "java_backend_developer"
+    ],
+    "skill_type": "conceptual",
+    "concept_tags": [
+      "time_complexity",
+      "arrays_and_strings",
+      "recursion"
+    ],
+    "practice_templates": [],
+    "resources": []
+  },
+  {
+    "skill_id": "sql_and_relational_databases",
+    "name": "SQL & Relational Databases",
+    "career_ids": [
+      "java_backend_developer"
+    ],
+    "skill_type": "conceptual",
+    "concept_tags": [
+      "joins",
+      "normalization",
+      "indexing"
+    ],
+    "practice_templates": [],
+    "resources": []
+  },
+  {
+    "skill_id": "spring_boot_fundamentals",
+    "name": "Spring Boot Fundamentals",
+    "career_ids": [
+      "java_backend_developer"
+    ],
+    "skill_type": "conceptual",
+    "concept_tags": [
+      "autoconfiguration",
+      "dependency_injection",
+      "application_properties"
+    ],
+    "practice_templates": [],
+    "resources": []
+  },
+  {
+    "skill_id": "rest_api_design",
+    "name": "REST API Design",
+    "career_ids": [
+      "java_backend_developer"
+    ],
+    "skill_type": "conceptual",
+    "concept_tags": [
+      "resource_modeling",
+      "status_codes",
+      "versioning"
+    ],
+    "practice_templates": [],
+    "resources": []
+  },
+  {
+    "skill_id": "jpa_hibernate",
+    "name": "JPA & Hibernate",
+    "career_ids": [
+      "java_backend_developer"
+    ],
+    "skill_type": "conceptual",
+    "concept_tags": [
+      "entity_mapping",
+      "lazy_vs_eager",
+      "transactions"
+    ],
+    "practice_templates": [],
+    "resources": []
+  },
+  {
+    "skill_id": "multithreading_and_concurrency",
+    "name": "Multithreading & Concurrency",
+    "career_ids": [
+      "java_backend_developer"
+    ],
+    "skill_type": "conceptual",
+    "concept_tags": [
+      "thread_lifecycle",
+      "synchronization",
+      "executor_services"
+    ],
+    "practice_templates": [],
+    "resources": []
+  },
+  {
+    "skill_id": "spring_security",
+    "name": "Spring Security",
+    "career_ids": [
+      "java_backend_developer"
+    ],
+    "skill_type": "conceptual",
+    "concept_tags": [
+      "authentication_filters",
+      "authorization_rules",
+      "csrf_protection"
+    ],
+    "practice_templates": [],
+    "resources": []
+  },
+  {
+    "skill_id": "microservices_architecture",
+    "name": "Microservices Architecture",
+    "career_ids": [
+      "java_backend_developer"
+    ],
+    "skill_type": "conceptual",
+    "concept_tags": [
+      "service_boundaries",
+      "api_gateway",
+      "circuit_breakers"
+    ],
+    "practice_templates": [],
+    "resources": []
+  },
+  {
+    "skill_id": "messaging_and_events",
+    "name": "Messaging & Events",
+    "career_ids": [
+      "java_backend_developer"
+    ],
+    "skill_type": "conceptual",
+    "concept_tags": [
+      "pub_sub",
+      "message_queues",
+      "event_driven_design"
+    ],
+    "practice_templates": [],
+    "resources": []
+  },
+  {
+    "skill_id": "testing_junit_mockito",
+    "name": "Testing: JUnit & Mockito",
+    "career_ids": [
+      "java_backend_developer"
+    ],
+    "skill_type": "conceptual",
+    "concept_tags": [
+      "unit_vs_integration",
+      "mocking",
+      "test_coverage"
+    ],
+    "practice_templates": [],
+    "resources": []
+  },
+  {
+    "skill_id": "docker_and_deployment",
+    "name": "Docker & Deployment",
+    "career_ids": [
+      "java_backend_developer"
+    ],
+    "skill_type": "conceptual",
+    "concept_tags": [
+      "images_and_layers",
+      "dockerfile_basics",
+      "container_orchestration_basics"
+    ],
+    "practice_templates": [],
+    "resources": []
+  },
+  {
+    "skill_id": "capstone_java",
+    "name": "Java Capstone",
+    "career_ids": [
+      "java_backend_developer"
+    ],
+    "skill_type": "build",
+    "concept_tags": [
+      "end_to_end_service"
+    ],
+    "practice_templates": [],
+    "resources": []
+  },
+  {
+    "skill_id": "python_for_data_science",
+    "name": "Python for Data Science",
+    "career_ids": [
+      "ai_developer"
+    ],
+    "skill_type": "conceptual",
+    "concept_tags": [
+      "numpy_basics",
+      "data_structures",
+      "vectorization"
+    ],
+    "practice_templates": [],
+    "resources": []
+  },
+  {
+    "skill_id": "math_for_ml",
+    "name": "Math for ML",
+    "career_ids": [
+      "ai_developer"
+    ],
+    "skill_type": "conceptual",
+    "concept_tags": [
+      "linear_algebra_basics",
+      "probability_and_stats",
+      "calculus_intuition"
+    ],
+    "practice_templates": [],
+    "resources": []
+  },
+  {
+    "skill_id": "data_analysis_with_pandas",
+    "name": "Data Analysis with Pandas",
+    "career_ids": [
+      "ai_developer"
+    ],
+    "skill_type": "conceptual",
+    "concept_tags": [
+      "dataframes_and_series",
+      "groupby_and_merge",
+      "missing_data"
+    ],
+    "practice_templates": [],
+    "resources": []
+  },
+  {
+    "skill_id": "machine_learning_fundamentals",
+    "name": "Machine Learning Fundamentals",
+    "career_ids": [
+      "ai_developer"
+    ],
+    "skill_type": "conceptual",
+    "concept_tags": [
+      "supervised_vs_unsupervised",
+      "bias_variance",
+      "train_test_split"
+    ],
+    "practice_templates": [],
+    "resources": []
+  },
+  {
+    "skill_id": "feature_engineering_and_evaluation",
+    "name": "Feature Engineering & Evaluation",
+    "career_ids": [
+      "ai_developer"
+    ],
+    "skill_type": "conceptual",
+    "concept_tags": [
+      "feature_scaling",
+      "cross_validation",
+      "evaluation_metrics"
+    ],
+    "practice_templates": [],
+    "resources": []
+  },
+  {
+    "skill_id": "deep_learning_fundamentals",
+    "name": "Deep Learning Fundamentals",
+    "career_ids": [
+      "ai_developer"
+    ],
+    "skill_type": "conceptual",
+    "concept_tags": [
+      "neural_network_basics",
+      "backpropagation",
+      "activation_functions"
+    ],
+    "practice_templates": [],
+    "resources": []
+  },
+  {
+    "skill_id": "nlp_fundamentals",
+    "name": "NLP Fundamentals",
+    "career_ids": [
+      "ai_developer"
+    ],
+    "skill_type": "conceptual",
+    "concept_tags": [
+      "tokenization",
+      "embeddings",
+      "sequence_models"
+    ],
+    "practice_templates": [],
+    "resources": []
+  },
+  {
+    "skill_id": "llm_and_prompt_engineering",
+    "name": "LLM & Prompt Engineering",
+    "career_ids": [
+      "ai_developer"
+    ],
+    "skill_type": "conceptual",
+    "concept_tags": [
+      "prompt_structuring",
+      "few_shot_examples",
+      "context_windows"
+    ],
+    "practice_templates": [],
+    "resources": []
+  },
+  {
+    "skill_id": "rag_and_vector_databases",
+    "name": "RAG & Vector Databases",
+    "career_ids": [
+      "ai_developer"
+    ],
+    "skill_type": "conceptual",
+    "concept_tags": [
+      "embeddings_and_similarity",
+      "chunking_strategies",
+      "retrieval_pipelines"
+    ],
+    "practice_templates": [],
+    "resources": []
+  },
+  {
+    "skill_id": "ai_apis_and_agents",
+    "name": "AI APIs & Agents",
+    "career_ids": [
+      "ai_developer"
+    ],
+    "skill_type": "conceptual",
+    "concept_tags": [
+      "tool_use_patterns",
+      "api_integration",
+      "agent_loops"
+    ],
+    "practice_templates": [],
+    "resources": []
+  },
+  {
+    "skill_id": "mlops_basics",
+    "name": "MLOps Basics",
+    "career_ids": [
+      "ai_developer"
+    ],
+    "skill_type": "conceptual",
+    "concept_tags": [
+      "model_versioning",
+      "experiment_tracking",
+      "pipeline_automation"
+    ],
+    "practice_templates": [],
+    "resources": []
+  },
+  {
+    "skill_id": "model_deployment_and_serving",
+    "name": "Model Deployment & Serving",
+    "career_ids": [
+      "ai_developer"
+    ],
+    "skill_type": "conceptual",
+    "concept_tags": [
+      "serving_frameworks",
+      "latency_and_batching",
+      "monitoring_drift"
+    ],
+    "practice_templates": [],
+    "resources": []
+  },
+  {
+    "skill_id": "responsible_ai_and_evaluation",
+    "name": "Responsible AI & Evaluation",
+    "career_ids": [
+      "ai_developer"
+    ],
+    "skill_type": "conceptual",
+    "concept_tags": [
+      "bias_and_fairness",
+      "hallucination_evaluation",
+      "safety_guardrails"
+    ],
+    "practice_templates": [],
+    "resources": []
+  },
+  {
+    "skill_id": "capstone_ai",
+    "name": "AI Capstone",
+    "career_ids": [
+      "ai_developer"
+    ],
+    "skill_type": "build",
+    "concept_tags": [
+      "end_to_end_ai_app"
+    ],
+    "practice_templates": [],
+    "resources": []
+  }
+]

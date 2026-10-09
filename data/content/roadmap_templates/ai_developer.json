@@ -1,0 +1,198 @@
+{
+  "career_id": "ai_developer",
+  "months": [
+    {
+      "semester": 3,
+      "month_index": 1,
+      "skill_id": "python_for_data_science",
+      "focus": "Data and math foundations: Python for Data Science",
+      "topics": [
+        "numpy basics",
+        "data structures",
+        "vectorization"
+      ],
+      "deliverable": "Produce a short artifact demonstrating python for data science applied to a realistic task."
+    },
+    {
+      "semester": 3,
+      "month_index": 2,
+      "skill_id": "math_for_ml",
+      "focus": "Data and math foundations: Math for ML",
+      "topics": [
+        "linear algebra basics",
+        "probability and stats",
+        "calculus intuition"
+      ],
+      "deliverable": "Produce a short artifact demonstrating math for ml applied to a realistic task."
+    },
+    {
+      "semester": 3,
+      "month_index": 3,
+      "skill_id": "data_analysis_with_pandas",
+      "focus": "Data and math foundations: Data Analysis with Pandas",
+      "topics": [
+        "dataframes and series",
+        "groupby and merge",
+        "missing data"
+      ],
+      "deliverable": "Produce a short artifact demonstrating data analysis with pandas applied to a realistic task."
+    },
+    {
+      "semester": 3,
+      "month_index": 4,
+      "skill_id": "git_version_control",
+      "focus": "Data and math foundations: Git Version Control",
+      "topics": [
+        "branching and merging",
+        "staging and committing",
+        "remote workflows"
+      ],
+      "deliverable": "Produce a short artifact demonstrating git version control applied to a realistic task."
+    },
+    {
+      "semester": 4,
+      "month_index": 1,
+      "skill_id": "machine_learning_fundamentals",
+      "focus": "Machine learning: Machine Learning Fundamentals",
+      "topics": [
+        "supervised vs unsupervised",
+        "bias variance",
+        "train test split"
+      ],
+      "deliverable": "Produce a short artifact demonstrating machine learning fundamentals applied to a realistic task."
+    },
+    {
+      "semester": 4,
+      "month_index": 2,
+      "skill_id": "feature_engineering_and_evaluation",
+      "focus": "Machine learning: Feature Engineering & Evaluation",
+      "topics": [
+        "feature scaling",
+        "cross validation",
+        "evaluation metrics"
+      ],
+      "deliverable": "Produce a short artifact demonstrating feature engineering & evaluation applied to a realistic task."
+    },
+    {
+      "semester": 4,
+      "month_index": 3,
+      "skill_id": "deep_learning_fundamentals",
+      "focus": "Machine learning: Deep Learning Fundamentals",
+      "topics": [
+        "neural network basics",
+        "backpropagation",
+        "activation functions"
+      ],
+      "deliverable": "Produce a short artifact demonstrating deep learning fundamentals applied to a realistic task."
+    },
+    {
+      "semester": 4,
+      "month_index": 4,
+      "skill_id": "nlp_fundamentals",
+      "focus": "Machine learning: NLP Fundamentals",
+      "topics": [
+        "tokenization",
+        "embeddings",
+        "sequence models"
+      ],
+      "deliverable": "Produce a short artifact demonstrating nlp fundamentals applied to a realistic task."
+    },
+    {
+      "semester": 5,
+      "month_index": 1,
+      "skill_id": "llm_and_prompt_engineering",
+      "focus": "Build AI applications: LLM & Prompt Engineering",
+      "topics": [
+        "prompt structuring",
+        "few shot examples",
+        "context windows"
+      ],
+      "deliverable": "Produce a short artifact demonstrating llm & prompt engineering applied to a realistic task."
+    },
+    {
+      "semester": 5,
+      "month_index": 2,
+      "skill_id": "rag_and_vector_databases",
+      "focus": "Build AI applications: RAG & Vector Databases",
+      "topics": [
+        "embeddings and similarity",
+        "chunking strategies",
+        "retrieval pipelines"
+      ],
+      "deliverable": "Produce a short artifact demonstrating rag & vector databases applied to a realistic task."
+    },
+    {
+      "semester": 5,
+      "month_index": 3,
+      "skill_id": "ai_apis_and_agents",
+      "focus": "Build AI applications: AI APIs & Agents",
+      "topics": [
+        "tool use patterns",
+        "api integration",
+        "agent loops"
+      ],
+      "deliverable": "Produce a short artifact demonstrating ai apis & agents applied to a realistic task."
+    },
+    {
+      "semester": 5,
+      "month_index": 4,
+      "skill_id": "mlops_basics",
+      "focus": "Build AI applications: MLOps Basics",
+      "topics": [
+        "model versioning",
+        "experiment tracking",
+        "pipeline automation"
+      ],
+      "deliverable": "Produce a short artifact demonstrating mlops basics applied to a realistic task."
+    },
+    {
+      "semester": 6,
+      "month_index": 1,
+      "skill_id": "model_deployment_and_serving",
+      "focus": "Ship and get hired: Model Deployment & Serving",
+      "topics": [
+        "serving frameworks",
+        "latency and batching",
+        "monitoring drift"
+      ],
+      "deliverable": "Produce a short artifact demonstrating model deployment & serving applied to a realistic task."
+    },
+    {
+      "semester": 6,
+      "month_index": 2,
+      "skill_id": "responsible_ai_and_evaluation",
+      "focus": "Ship and get hired: Responsible AI & Evaluation",
+      "topics": [
+        "bias and fairness",
+        "hallucination evaluation",
+        "safety guardrails"
+      ],
+      "deliverable": "Produce a short artifact demonstrating responsible ai & evaluation applied to a realistic task."
+    },
+    {
+      "semester": 6,
+      "month_index": 3,
+      "skill_id": "capstone_ai",
+      "focus": "Ship and get hired: AI Capstone",
+      "topics": [
+        "end to end ai app",
+        "core concepts",
+        "common pitfalls"
+      ],
+      "deliverable": "Produce a short artifact demonstrating ai capstone applied to a realistic task."
+    },
+    {
+      "semester": 6,
+      "month_index": 4,
+      "skill_id": "interview_preparation",
+      "focus": "Ship and get hired: Interview Preparation",
+      "topics": [
+        "behavioral and technical prep",
+        "core concepts",
+        "common pitfalls"
+      ],
+      "deliverable": "Produce a short artifact demonstrating interview preparation applied to a realistic task."
+    }
+  ],
+  "generation_source": "template"
+}

@@ -1,0 +1,434 @@
+[
+  {
+    "question_id": "q_linux_fundamentals_001",
+    "skill_id": "linux_fundamentals",
+    "concept_tag": "file_permissions",
+    "difficulty": "easy",
+    "stem": "A file has permission mode 644 (rw-r--r--). What can users in the file's group do?",
+    "options": [
+      { "option_id": "opt_a", "text": "Read only" },
+      { "option_id": "opt_b", "text": "Read and write" },
+      { "option_id": "opt_c", "text": "Read, write, and execute" },
+      { "option_id": "opt_d", "text": "Nothing" }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "644 breaks down as owner=rw(6), group=r(4), others=r(4). The group digit 4 grants read only.",
+    "review_status": "approved",
+    "source": "ai_drafted_human_reviewed",
+    "reviewed_on": "2026-10-10"
+  },
+  {
+    "question_id": "q_linux_fundamentals_002",
+    "skill_id": "linux_fundamentals",
+    "concept_tag": "filesystem_navigation",
+    "difficulty": "easy",
+    "stem": "Which command prints the full path of your current working directory?",
+    "options": [
+      { "option_id": "opt_a", "text": "pwd" },
+      { "option_id": "opt_b", "text": "ls" },
+      { "option_id": "opt_c", "text": "cd" },
+      { "option_id": "opt_d", "text": "mkdir" }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "pwd (print working directory) outputs the absolute path of the shell's current directory.",
+    "review_status": "approved",
+    "source": "ai_drafted_human_reviewed",
+    "reviewed_on": "2026-10-10"
+  },
+  {
+    "question_id": "q_linux_fundamentals_003",
+    "skill_id": "linux_fundamentals",
+    "concept_tag": "file_permissions",
+    "difficulty": "medium",
+    "stem": "A file has mode 640. Who can read it?",
+    "options": [
+      { "option_id": "opt_a", "text": "Owner only" },
+      { "option_id": "opt_b", "text": "Owner and group" },
+      { "option_id": "opt_c", "text": "Everyone" },
+      { "option_id": "opt_d", "text": "Group only" }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "6 = rw for owner, 4 = r for group, 0 = nothing for others. So owner and group can read.",
+    "review_status": "approved",
+    "source": "ai_drafted_human_reviewed",
+    "reviewed_on": "2026-10-10"
+  },
+  {
+    "question_id": "q_linux_fundamentals_004",
+    "skill_id": "linux_fundamentals",
+    "concept_tag": "filesystem_navigation",
+    "difficulty": "medium",
+    "stem": "You are in /home/user/projects. Which command takes you to /home/user?",
+    "options": [
+      { "option_id": "opt_a", "text": "cd .." },
+      { "option_id": "opt_b", "text": "cd ." },
+      { "option_id": "opt_c", "text": "cd /" },
+      { "option_id": "opt_d", "text": "cd ~/projects" }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "'..' refers to the parent directory, so 'cd ..' moves up one level from /home/user/projects to /home/user.",
+    "review_status": "approved",
+    "source": "ai_drafted_human_reviewed",
+    "reviewed_on": "2026-10-10"
+  },
+  {
+    "question_id": "q_linux_fundamentals_005",
+    "skill_id": "linux_fundamentals",
+    "concept_tag": "process_management",
+    "difficulty": "hard",
+    "stem": "You want to ask process 4521 to shut down gracefully (not kill it forcefully). Which command does this?",
+    "options": [
+      { "option_id": "opt_a", "text": "kill -9 4521" },
+      { "option_id": "opt_b", "text": "kill 4521" },
+      { "option_id": "opt_c", "text": "kill -STOP 4521" },
+      { "option_id": "opt_d", "text": "killall -u 4521" }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "'kill' with no signal flag sends SIGTERM (15), a graceful shutdown request. -9 sends SIGKILL (forceful, unignorable); -STOP suspends the process without ending it; killall -u filters by username, not PID.",
+    "review_status": "approved",
+    "source": "ai_drafted_human_reviewed",
+    "reviewed_on": "2026-10-10"
+  },
+  {
+    "question_id": "q_linux_fundamentals_006",
+    "skill_id": "linux_fundamentals",
+    "concept_tag": "process_management",
+    "difficulty": "hard",
+    "stem": "Which command prints only the PIDs of all running processes named 'nginx'?",
+    "options": [
+      { "option_id": "opt_a", "text": "pgrep nginx" },
+      { "option_id": "opt_b", "text": "ps nginx" },
+      { "option_id": "opt_c", "text": "grep nginx" },
+      { "option_id": "opt_d", "text": "top nginx" }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "pgrep matches processes by name and prints their PIDs. 'ps nginx' is not valid usage, 'grep nginx' needs piped input, and 'top' doesn't take a process name argument this way.",
+    "review_status": "approved",
+    "source": "ai_drafted_human_reviewed",
+    "reviewed_on": "2026-10-10"
+  },
+  {
+    "question_id": "q_shell_scripting_001",
+    "skill_id": "shell_scripting",
+    "concept_tag": "bash_variables_and_quoting",
+    "difficulty": "easy",
+    "stem": "In bash, which syntax reads the value of a variable named NAME?",
+    "options": [
+      { "option_id": "opt_a", "text": "$NAME" },
+      { "option_id": "opt_b", "text": "%NAME" },
+      { "option_id": "opt_c", "text": "&NAME" },
+      { "option_id": "opt_d", "text": "#NAME" }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "The $ prefix expands a bash variable's value. The other symbols have different meanings (job control, backgrounding, comments).",
+    "review_status": "approved",
+    "source": "ai_drafted_human_reviewed",
+    "reviewed_on": "2026-10-10"
+  },
+  {
+    "question_id": "q_shell_scripting_002",
+    "skill_id": "shell_scripting",
+    "concept_tag": "conditionals_and_loops",
+    "difficulty": "easy",
+    "stem": "Which keyword starts a bash loop that iterates once per item in a list, e.g. `for x in a b c; do ...; done`?",
+    "options": [
+      { "option_id": "opt_a", "text": "for" },
+      { "option_id": "opt_b", "text": "if" },
+      { "option_id": "opt_c", "text": "case" },
+      { "option_id": "opt_d", "text": "until" }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "'for VAR in LIST; do ...; done' iterates VAR over each item in LIST. 'if' and 'case' are conditionals, not loops; 'until' loops on a condition, not a list.",
+    "review_status": "approved",
+    "source": "ai_drafted_human_reviewed",
+    "reviewed_on": "2026-10-10"
+  },
+  {
+    "question_id": "q_shell_scripting_003",
+    "skill_id": "shell_scripting",
+    "concept_tag": "bash_variables_and_quoting",
+    "difficulty": "medium",
+    "stem": "What does this print?\nNAME=World\necho \"Hello $NAME\"",
+    "options": [
+      { "option_id": "opt_a", "text": "Hello $NAME" },
+      { "option_id": "opt_b", "text": "Hello World" },
+      { "option_id": "opt_c", "text": "Hello" },
+      { "option_id": "opt_d", "text": "Error: NAME not defined" }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "Double quotes allow variable expansion, so $NAME is replaced with its value 'World' before printing.",
+    "review_status": "approved",
+    "source": "ai_drafted_human_reviewed",
+    "reviewed_on": "2026-10-10"
+  },
+  {
+    "question_id": "q_shell_scripting_004",
+    "skill_id": "shell_scripting",
+    "concept_tag": "text_processing_grep_sed_awk",
+    "difficulty": "medium",
+    "stem": "Which command prints only the lines containing the word 'error' from file.log?",
+    "options": [
+      { "option_id": "opt_a", "text": "grep error file.log" },
+      { "option_id": "opt_b", "text": "sed error file.log" },
+      { "option_id": "opt_c", "text": "awk error file.log" },
+      { "option_id": "opt_d", "text": "cut error file.log" }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "grep searches for a pattern and prints matching lines. sed and awk need a script/program argument, not a bare word, to filter this way; cut extracts columns, not pattern matches.",
+    "review_status": "approved",
+    "source": "ai_drafted_human_reviewed",
+    "reviewed_on": "2026-10-10"
+  },
+  {
+    "question_id": "q_shell_scripting_005",
+    "skill_id": "shell_scripting",
+    "concept_tag": "conditionals_and_loops",
+    "difficulty": "hard",
+    "stem": "What does `set -e` do at the top of a bash script?",
+    "options": [
+      { "option_id": "opt_a", "text": "Enables debug tracing of each command before it runs" },
+      { "option_id": "opt_b", "text": "Exits the script immediately if any command returns a non-zero status" },
+      { "option_id": "opt_c", "text": "Suppresses all error messages" },
+      { "option_id": "opt_d", "text": "Enables extended globbing patterns" }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "'set -e' makes the script stop at the first command that fails, instead of continuing with later commands. Debug tracing is 'set -x'; it doesn't suppress messages or affect globbing.",
+    "review_status": "approved",
+    "source": "ai_drafted_human_reviewed",
+    "reviewed_on": "2026-10-10"
+  },
+  {
+    "question_id": "q_shell_scripting_006",
+    "skill_id": "shell_scripting",
+    "concept_tag": "text_processing_grep_sed_awk",
+    "difficulty": "hard",
+    "stem": "Which command replaces only the FIRST occurrence of 'foo' with 'bar' on each line of file.txt, printing the result to stdout?",
+    "options": [
+      { "option_id": "opt_a", "text": "sed 's/foo/bar/' file.txt" },
+      { "option_id": "opt_b", "text": "sed 's/foo/bar/g' file.txt" },
+      { "option_id": "opt_c", "text": "sed -n 's/foo/bar/' file.txt" },
+      { "option_id": "opt_d", "text": "sed '/foo/bar/' file.txt" }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "Without the 'g' flag, sed's s/// command replaces only the first match per line. The 'g' flag (option b) replaces every match; '-n' (option c) suppresses automatic printing so nothing would print; option d is not valid sed syntax for substitution.",
+    "review_status": "approved",
+    "source": "ai_drafted_human_reviewed",
+    "reviewed_on": "2026-10-10"
+  },
+  {
+    "question_id": "q_python_for_automation_001",
+    "skill_id": "python_for_automation",
+    "concept_tag": "file_and_os_operations",
+    "difficulty": "easy",
+    "stem": "Which built-in function opens a file for reading in Python?",
+    "options": [
+      { "option_id": "opt_a", "text": "open()" },
+      { "option_id": "opt_b", "text": "read()" },
+      { "option_id": "opt_c", "text": "load()" },
+      { "option_id": "opt_d", "text": "file()" }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "open() returns a file object; .read() is then called on that object. load() and file() are not the standard way to open files in current Python.",
+    "review_status": "approved",
+    "source": "ai_drafted_human_reviewed",
+    "reviewed_on": "2026-10-10"
+  },
+  {
+    "question_id": "q_python_for_automation_002",
+    "skill_id": "python_for_automation",
+    "concept_tag": "error_handling",
+    "difficulty": "easy",
+    "stem": "Which block is used to catch an exception in Python?",
+    "options": [
+      { "option_id": "opt_a", "text": "except" },
+      { "option_id": "opt_b", "text": "catch" },
+      { "option_id": "opt_c", "text": "rescue" },
+      { "option_id": "opt_d", "text": "handle" }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "Python uses try/except to catch exceptions. 'catch' and 'rescue' are keywords from other languages (Java/JS, Ruby); 'handle' is not a Python keyword.",
+    "review_status": "approved",
+    "source": "ai_drafted_human_reviewed",
+    "reviewed_on": "2026-10-10"
+  },
+  {
+    "question_id": "q_python_for_automation_003",
+    "skill_id": "python_for_automation",
+    "concept_tag": "file_and_os_operations",
+    "difficulty": "medium",
+    "stem": "Which standard library module provides os.path.join() and os.listdir() for working with the filesystem?",
+    "options": [
+      { "option_id": "opt_a", "text": "os" },
+      { "option_id": "opt_b", "text": "sys" },
+      { "option_id": "opt_c", "text": "re" },
+      { "option_id": "opt_d", "text": "json" }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "The os module wraps operating-system filesystem operations. sys exposes interpreter state, re is for regular expressions, and json is for JSON encoding/decoding.",
+    "review_status": "approved",
+    "source": "ai_drafted_human_reviewed",
+    "reviewed_on": "2026-10-10"
+  },
+  {
+    "question_id": "q_python_for_automation_004",
+    "skill_id": "python_for_automation",
+    "concept_tag": "subprocess_and_scripting",
+    "difficulty": "medium",
+    "stem": "Which function runs a shell command, waits for it to finish, and returns a CompletedProcess object?",
+    "options": [
+      { "option_id": "opt_a", "text": "subprocess.run()" },
+      { "option_id": "opt_b", "text": "subprocess.Popen()" },
+      { "option_id": "opt_c", "text": "os.system()" },
+      { "option_id": "opt_d", "text": "subprocess.call()" }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "subprocess.run() is the modern, recommended API: it blocks until the command finishes and returns a CompletedProcess with output, return code, etc. Popen is lower-level and doesn't wait by itself; os.system() and subprocess.call() only return an integer exit code.",
+    "review_status": "approved",
+    "source": "ai_drafted_human_reviewed",
+    "reviewed_on": "2026-10-10"
+  },
+  {
+    "question_id": "q_python_for_automation_005",
+    "skill_id": "python_for_automation",
+    "concept_tag": "error_handling",
+    "difficulty": "hard",
+    "stem": "What does this script print?\ntry:\n    x = 1 / 0\nexcept ZeroDivisionError:\n    print('A')\nelse:\n    print('B')\nfinally:\n    print('C')",
+    "options": [
+      { "option_id": "opt_a", "text": "A then C" },
+      { "option_id": "opt_b", "text": "B then C" },
+      { "option_id": "opt_c", "text": "A then B then C" },
+      { "option_id": "opt_d", "text": "C only" }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "The division raises ZeroDivisionError, so 'A' prints from the except block. 'else' only runs if NO exception occurred, so 'B' is skipped. 'finally' always runs, so 'C' prints last.",
+    "review_status": "approved",
+    "source": "ai_drafted_human_reviewed",
+    "reviewed_on": "2026-10-10"
+  },
+  {
+    "question_id": "q_python_for_automation_006",
+    "skill_id": "python_for_automation",
+    "concept_tag": "subprocess_and_scripting",
+    "difficulty": "hard",
+    "stem": "Given `result = subprocess.run(['ls', '-l'], capture_output=True, text=True)`, how do you access the command's standard output as a string?",
+    "options": [
+      { "option_id": "opt_a", "text": "result.stdout" },
+      { "option_id": "opt_b", "text": "result.output" },
+      { "option_id": "opt_c", "text": "result.stdout.decode()" },
+      { "option_id": "opt_d", "text": "result.out" }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "With text=True, result.stdout is already a decoded str, so .decode() would fail (option c assumes bytes). CompletedProcess has no .output or .out attribute.",
+    "review_status": "approved",
+    "source": "ai_drafted_human_reviewed",
+    "reviewed_on": "2026-10-10"
+  },
+  {
+    "question_id": "q_git_version_control_001",
+    "skill_id": "git_version_control",
+    "concept_tag": "staging_and_committing",
+    "difficulty": "easy",
+    "stem": "Which command stages all changes in the current directory for the next commit?",
+    "options": [
+      { "option_id": "opt_a", "text": "git add ." },
+      { "option_id": "opt_b", "text": "git commit ." },
+      { "option_id": "opt_c", "text": "git push ." },
+      { "option_id": "opt_d", "text": "git stage --all" }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "'git add .' stages every changed file under the current directory. commit and push operate on already-staged/committed changes; 'git stage --all' is not a standard git command.",
+    "review_status": "approved",
+    "source": "ai_drafted_human_reviewed",
+    "reviewed_on": "2026-10-10"
+  },
+  {
+    "question_id": "q_git_version_control_002",
+    "skill_id": "git_version_control",
+    "concept_tag": "branching_and_merging",
+    "difficulty": "easy",
+    "stem": "Which command creates a new branch named 'feature-x' and switches to it in one step?",
+    "options": [
+      { "option_id": "opt_a", "text": "git checkout -b feature-x" },
+      { "option_id": "opt_b", "text": "git branch feature-x" },
+      { "option_id": "opt_c", "text": "git merge feature-x" },
+      { "option_id": "opt_d", "text": "git switch feature-x" }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "'checkout -b' creates the branch and switches to it immediately. 'git branch' alone only creates it without switching; 'git switch feature-x' without -c would fail since the branch doesn't exist yet.",
+    "review_status": "approved",
+    "source": "ai_drafted_human_reviewed",
+    "reviewed_on": "2026-10-10"
+  },
+  {
+    "question_id": "q_git_version_control_003",
+    "skill_id": "git_version_control",
+    "concept_tag": "staging_and_committing",
+    "difficulty": "medium",
+    "stem": "You ran `git commit -m 'fix bug'` but forgot to stage a changed file. After staging that file with `git add`, which command adds it into the previous commit instead of creating a new one?",
+    "options": [
+      { "option_id": "opt_a", "text": "git commit --amend" },
+      { "option_id": "opt_b", "text": "git commit --fixup" },
+      { "option_id": "opt_c", "text": "git rebase -i" },
+      { "option_id": "opt_d", "text": "git cherry-pick" }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "'git commit --amend' replaces the most recent commit with a new one that includes the currently staged changes. The other commands either prepare a separate fixup commit or operate on commit history/ranges, not the immediately preceding commit.",
+    "review_status": "approved",
+    "source": "ai_drafted_human_reviewed",
+    "reviewed_on": "2026-10-10"
+  },
+  {
+    "question_id": "q_git_version_control_004",
+    "skill_id": "git_version_control",
+    "concept_tag": "remote_workflows",
+    "difficulty": "medium",
+    "stem": "Which command downloads commits from a remote repository WITHOUT merging them into your current branch?",
+    "options": [
+      { "option_id": "opt_a", "text": "git fetch" },
+      { "option_id": "opt_b", "text": "git pull" },
+      { "option_id": "opt_c", "text": "git clone" },
+      { "option_id": "opt_d", "text": "git push" }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "git fetch updates your local copy of the remote's branches without touching your working branch. git pull is fetch followed by merge; clone is for an initial copy, not ongoing sync; push sends commits, it doesn't download them.",
+    "review_status": "approved",
+    "source": "ai_drafted_human_reviewed",
+    "reviewed_on": "2026-10-10"
+  },
+  {
+    "question_id": "q_git_version_control_005",
+    "skill_id": "git_version_control",
+    "concept_tag": "branching_and_merging",
+    "difficulty": "hard",
+    "stem": "During a merge, git reports a conflict in file.txt. After manually editing the file to resolve the conflict, what are the next two steps?",
+    "options": [
+      { "option_id": "opt_a", "text": "git add file.txt, then git commit" },
+      { "option_id": "opt_b", "text": "git checkout file.txt, then git push" },
+      { "option_id": "opt_c", "text": "git reset file.txt, then git merge --continue" },
+      { "option_id": "opt_d", "text": "git stash, then git merge --abort" }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "After hand-resolving a conflict, staging the file with 'git add' marks it resolved, and 'git commit' completes the merge. 'git checkout file.txt' would discard your edits; 'reset' unstages rather than resolves; 'merge --abort' cancels the merge entirely.",
+    "review_status": "approved",
+    "source": "ai_drafted_human_reviewed",
+    "reviewed_on": "2026-10-10"
+  },
+  {
+    "question_id": "q_git_version_control_006",
+    "skill_id": "git_version_control",
+    "concept_tag": "remote_workflows",
+    "difficulty": "hard",
+    "stem": "What does `git push --force` risk that `git push --force-with-lease` protects against?",
+    "options": [
+      { "option_id": "opt_a", "text": "Overwriting remote commits that someone else pushed since your last fetch" },
+      { "option_id": "opt_b", "text": "Losing local uncommitted changes" },
+      { "option_id": "opt_c", "text": "Deleting the remote branch entirely" },
+      { "option_id": "opt_d", "text": "Corrupting the local .git directory" }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "'--force-with-lease' checks that the remote branch still points where you last saw it before overwriting, so it refuses the push if someone else has pushed in the meantime. Plain '--force' overwrites blindly, which can silently discard a teammate's commits.",
+    "review_status": "approved",
+    "source": "ai_drafted_human_reviewed",
+    "reviewed_on": "2026-10-10"
+  }
+]

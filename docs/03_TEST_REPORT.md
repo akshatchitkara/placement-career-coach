@@ -33,7 +33,34 @@ Each milestone's acceptance items are recorded here as **Pass**, **Fail**, or **
 Deviations noted: local Python available is 3.14 (blueprint specifies 3.11) -- no 3.11-only feature is in use. All interactive verification used an isolated `PCC_DB_PATH` so test runs don't mutate the real demo database; the real `data/runtime/pcc.db` was reset via `make db-reset` after manual testing left it in a non-default state.
 
 ## M1 — Content and scoring core
-Not started.
+
+| Item | Result | Notes |
+|---|---|---|
+| Content validator passes against authored content | **Pass** | `scripts/validate_content.py` -> "Content validation passed: 4 careers, 58 skills." |
+| Skill maps + roadmap templates for all 4 careers | **Pass** | Generated programmatically from the blueprint's Section 2.3 tables (avoids hand-transcription errors across 64 month entries); 16 months each, validated against V-RM-01/02/03/05/07 equivalents |
+| DevOps Sem 3 question bank (24 approved questions) | **Pass** | 4 skills x 6 questions, exactly 2/2/2 easy/medium/hard per skill, hand-authored for technical accuracy; `compute_skill_assessability` confirms all 4 skills assessable |
+| Tier B careers (MEAN/Java/AI) have roadmaps but no question bank yet | **Pass** | By design (Section 2.1) -- `load_question_bank` returns `[]` gracefully, no skill in those careers reports assessable |
+| `domain/scoring/*` pure functions | **Pass** | scoring_engine, level_classifier, weakest_skill_selector, coverage_calculator, roadmap_position_locator -- 96% line coverage (exceeds the 90% bar in Section 6) |
+| Level boundary tests (Section 17.2: 0/39.9/40/64.9/65/84.9/85/100) | **Pass** | All 8 boundaries correct |
+| T-01 same answers scored twice -> identical | **Pass** | |
+| T-02 Industry-ready downgraded when one sufficient skill < gate | **Pass** | Note names the failing skill |
+| T-03 Industry-ready downgraded when coverage < 100% | **Pass** | Note recommends the full-path check |
+| T-04 full-path, 100% coverage, all skills >= 60, overall >= 85 -> Industry-ready | **Pass** | |
+| T-05 skill with 1 answered question not eligible as weakest | **Pass** | |
+| T-06 tied lowest skills -> earlier roadmap position wins | **Pass** | |
+| T-07 no skill with sufficient evidence -> no weakest skill invented | **Pass** | |
+| T-08 weakest skill >= mastery threshold -> "no major gap", next skill offered | **Pass** | |
+| T-20 config snapshot: old attempt unaffected by later threshold changes | **Pass** | Proven by construction -- every scoring function takes config as a parameter, never reads global mutable state |
+| T-21 unbuilt skill_type (build/communication) -> "assessed later", not scored | **Pass** | `is_quiz_assessable` only true for `conceptual` |
+| T-22 skill with fewer than 6 approved questions -> not assessable | **Pass** | Also verified the 2/2/2-per-difficulty requirement independently of raw count |
+| Worked example (Section 10.7) reproduced exactly | **Pass** | Linux/Shell 33.3%, Python/Git 66.7%, overall 50.0 |
+| Full test suite + lint + mypy + app smoke test | **Pass** | 43/43 tests, `ruff check`/`format` clean, `mypy` clean on `domain/`, headless `streamlit run` still HTTP 200 with M1 content loaded |
+
+**Design decision made during this pass:** `Skill.career_id` (singular) was changed to `Skill.career_ids: list[str]` before any content was authored. The blueprint's own skill maps (Section 2.3) reuse `git_version_control` across DevOps/MEAN/AI, `system_design_basics` across MEAN/Java, and `interview_preparation` across all four careers -- a single-career field would have forced duplicate skill_ids (rejected by the uniqueness rule) or duplicate skill definitions. Logged as decision A22.
+
+**Scaffolding gap found and fixed:** `tests/conftest.py` was listed in Section 12 but never created in M0; added now with the shared `skill_score_factory` fixture.
+
+**`make` is not installed in this dev shell** (git-bash on Windows) -- all Makefile-wrapped commands were verified by running their underlying command directly (`ruff`, `mypy`, `pytest`, `python scripts/validate_content.py`), not via the `make` binary itself.
 
 ## M2 — Roadmap flow
 Not started.
