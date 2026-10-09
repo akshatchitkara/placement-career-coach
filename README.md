@@ -126,7 +126,7 @@ docs/            blueprint, test report, decision log, authoring guide
 - Local, single-user, no login: a profile is just a display name.
 - One assessable bank (DevOps Semester 3). The full-path "Industry-ready" check, the Career Finder, custom CS careers and a demo answer simulator are designed but not built.
 - Roadmap focus and deliverable text is generic template wording; it passes validation but is placeholder quality.
-- A live AI provider has not been exercised end to end (no key was available); the AI paths are covered with scripted fake clients and failure drills.
+- A live AI provider has not yet produced accepted output. One real attempt (NVIDIA NIM) answered a small call, but realistic prompts were refused as overloaded or timed out, so the curated roadmap and coaching plan were shown, as designed. The AI paths are otherwise covered with scripted fake clients and failure drills.
 
 ## Status
 

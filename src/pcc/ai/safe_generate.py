@@ -15,6 +15,7 @@ from pcc.core.exceptions import AiUnavailableError
 logger = logging.getLogger(__name__)
 
 RETRY_ONLY_IF_FAILED_WITHIN_SECONDS = 10.0
+RETRY_PAUSE_SECONDS = 2.0  # an overloaded provider (503/429) rarely recovers in half a second
 
 
 def generate_with_retry(client: AiClient, prompt: str, *, temperature: float = 0.2) -> str:
@@ -34,4 +35,6 @@ def generate_with_retry(client: AiClient, prompt: str, *, temperature: float = 0
         )
         if elapsed > RETRY_ONLY_IF_FAILED_WITHIN_SECONDS:
             break
+        if attempt == 1:
+            time.sleep(RETRY_PAUSE_SECONDS)
     raise AiUnavailableError("AI provider failed") from last_error

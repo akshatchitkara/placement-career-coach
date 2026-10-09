@@ -168,3 +168,20 @@ def test_a_provider_saved_in_the_app_beats_the_env():
 def test_an_explicitly_saved_mock_beats_env_live():
     config, _ = _resolve(AiProviderConfig(provider_type="mock"), mode="live", key="sk-env")
     assert config.provider_type == "mock"
+
+
+def test_the_retry_waits_a_moment_first_so_an_overloaded_provider_can_recover(monkeypatch):
+    pauses = []
+    monkeypatch.setattr("pcc.ai.safe_generate.RETRY_PAUSE_SECONDS", 2.0)
+    monkeypatch.setattr("pcc.ai.safe_generate.time.sleep", pauses.append)
+    client = ScriptedAiClient(AiUnavailableError("503 overloaded"), "ok")
+    assert generate_with_retry(client, "p") == "ok"
+    assert pauses == [2.0]  # once, only before the retry
+
+
+def test_no_pause_when_the_first_call_succeeds(monkeypatch):
+    pauses = []
+    monkeypatch.setattr("pcc.ai.safe_generate.RETRY_PAUSE_SECONDS", 2.0)
+    monkeypatch.setattr("pcc.ai.safe_generate.time.sleep", pauses.append)
+    generate_with_retry(ScriptedAiClient("ok"), "p")
+    assert pauses == []

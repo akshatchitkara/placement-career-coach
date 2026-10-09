@@ -192,7 +192,7 @@ Driven in Microsoft Edge with Playwright (headless, 1280x900) against a second c
 ## M6 — Reliability and polish
 
 | Item | Result | Notes |
-|---|---|---|
+| --- | --- | --- |
 | Whole journey completes with identical scoring when the AI fails in 7 ways | **Pass** | provider down, provider crashes, empty reply, not JSON, wrong shape, prompt injection, hostile JSON; plus offline. `tests/integration/test_ai_modes.py` (21 tests) |
 | Provider timeouts/errors: one retry, then fallback; slow failures are not retried | **Pass** | a failure that took over 10 s is not retried, so a 30 s timeout costs the student at most about 30 s, not 60 s |
 | Any provider exception (not just the expected one) falls back instead of crashing | **Pass** | OpenAI-compatible replies of the wrong shape and unexpected SDK errors are treated as "unavailable" |
@@ -201,21 +201,22 @@ Driven in Microsoft Edge with Playwright (headless, 1280x900) against a second c
 | "Offline mode" banner; warning when live is requested without a key | **Pass** | sidebar; also shows the active provider when AI is on |
 | Error boundary on every page: expected problems shown plainly, bugs show a calm message and hide internals | **Pass** | `st.rerun` / `st.stop` pass through |
 | Start-up content check; app refuses to run on broken content and says why | **Pass** | unreadable file, duplicate ids and a missing roadmap template are all reported; also used by `validate_content.py` |
-| Clear message when the database cannot be opened | **Pass** | |
-| Demo reset: `reset_demo.py` seeds Asha, Ravi, Meera through the real controller | **Pass** | Ravi = blueprint worked example (50.0, Intermediate); Meera 50.0 -> 91.7, Intermediate -> Advanced, position moves to Networking; attempts carry dates from the seeded clock |
-| `reset_demo.py` refuses to delete a database holding real profiles without `--force` | **Pass** | |
+| Clear message when the database cannot be opened | **Pass** |  |
+| Demo reset: `reset_demo.py` seeds Asha, Ravi, Meera through the real controller | **Pass** | Ravi = blueprint worked example (50.0, Intermediate); Meera 50.0 -&gt; 91.7, Intermediate -&gt; Advanced, position moves to Networking; attempts carry dates from the seeded clock |
+| `reset_demo.py` refuses to delete a database holding real profiles without `--force` | **Pass** |  |
 | Reopening the app restores the last profile | **Pass** | a reload used to drop the signed-in profile; sidebar names who is signed in |
 | Developer "M1 Preview" page hidden by default | **Pass** | `PCC_SHOW_DEV_PAGES=true` shows it |
-| README rewritten: setup (Windows and Unix), demo path, AI, limits, layout | **Pass** | |
+| README rewritten: setup (Windows and Unix), demo path, AI, limits, layout | **Pass** |  |
 | Full suite + lint + format + mypy + content validation | **Pass** | 280 tests; ruff and mypy clean; coverage: scoring 96%, weekly builder and progress 100% |
 | Real browser (Edge), seeded fresh launch: 31 checks | **Pass** | dev page hidden/shown, offline banner, three demo profiles, AI configured but unreachable end to end; no uncaught browser errors |
 | Earlier journeys re-run in the browser after the M6 changes | **Pass** | M2-M4 journey 24 checks, M5 journey 25 checks, all passing |
-| Live AI provider end to end | **Not verified** | no API key available; only fake clients and an unreachable endpoint were exercised |
+| Live AI provider end to end | **Not verified** | see "Live AI attempt" below: a real model answered a small call, but realistic prompts were refused as overloaded or timed out, so no live AI text has yet been accepted by the validators |
 | Error page for a crashing page / broken content shown in a real browser | **Not verified** | covered headlessly (`tests/ui/test_error_handling.py`); not provoked in Edge |
 
 **Bugs found while building M6 (all fixed):**
-1. *A malformed reply from an OpenAI-compatible provider raised a raw `KeyError`* and would have bypassed the fallback and crashed the flow.
-2. *`.env` AI configuration was ignored.* `PCC_AI_MODE=live` with a key did nothing, so the documented offline/live switch could not work.
+
+1. *A malformed reply from an OpenAI-compatible provider raised a raw* `KeyError` and would have bypassed the fallback and crashed the flow.
+2. `.env` *AI configuration was ignored.* `PCC_AI_MODE=live` with a key did nothing, so the documented offline/live switch could not work.
 3. *Two timeouts in a row.* The planned "retry once" could double the wait; now skipped when the first failure was already slow.
 4. *Reload dropped the signed-in profile.* Found in the real browser; data was safe but the student had to pick their profile again.
 5. *Wrong default Anthropic model id* (`claude-sonnet-5`); now `claude-sonnet-5-5`.
@@ -227,8 +228,8 @@ Driven in Microsoft Edge with Playwright (headless, 1280x900) against a second c
 ## Prototype acceptance checklist (blueprint Section 3.4)
 
 | Item | Result | Evidence |
-|---|---|---|
-| DevOps Engineer works end to end without an AI key | **Pass** | offline journey in Edge (profile -> roadmap -> check -> results -> coaching -> weekly plan -> re-check -> progress); `test_ai_modes.py` offline scenario |
+| --- | --- | --- |
+| DevOps Engineer works end to end without an AI key | **Pass** | offline journey in Edge (profile -&gt; roadmap -&gt; check -&gt; results -&gt; coaching -&gt; weekly plan -&gt; re-check -&gt; progress); `test_ai_modes.py` offline scenario |
 | Roadmap has exactly semesters 3-6 and 16 month entries, all skill ids valid | **Pass** | content validator (start-up and `validate_content.py`), roadmap validator V-RM-01..08, 16 expanders in the browser |
 | Assessment questions map only to roadmap skill ids | **Pass** | content validator rejects unknown skill ids (T-11) |
 | Same answers give the same score and level | **Pass** | T-01; results re-derived identically after reopening |
@@ -245,7 +246,7 @@ Driven in Microsoft Edge with Playwright (headless, 1280x900) against a second c
 ## Critical test cases (blueprint Section 17.3)
 
 | ID | Result | ID | Result |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | T-01 same answers, same result | **Pass** | T-12 coaching for another skill rejected | **Pass** |
 | T-02 skill gate downgrades Industry-ready | **Pass** | T-13 unlinked coaching task rejected | **Pass** |
 | T-03 single-semester caps at Advanced | **Pass** | T-14 URL from AI rejected | **Pass** |
@@ -258,7 +259,9 @@ Driven in Microsoft Edge with Playwright (headless, 1280x900) against a second c
 | T-10 AI reorders skills rejected | **Pass** | T-21 unbuilt skill types "assessed later" | **Pass** |
 | T-11 question with unknown skill fails the validator | **Pass** | T-22 thin bank is "coming soon" | **Pass** |
 
-**Honest limits of this report:** the AI paths were exercised with scripted fake clients and failure drills, never a live provider. UI behaviour was checked headlessly and in Edge on Windows only. Only DevOps Semester 3 has a question bank.
+**Live AI attempt (NVIDIA NIM, `nvidia/nemotron-3-ultra-550b-a55b`, 2026-10-10):** the key authenticated and a tiny prompt ("reply with ok") came back in 3.6 s through the app's own adapter. The real roadmap and coaching prompts did not succeed: calls returned `503 Service temporarily overloaded` or hit the 30 s timeout, in three separate runs. Each time the app behaved as designed: the journey completed, scoring was correct (50.0, Intermediate, weakest Linux), the curated roadmap and coaching plan were shown, and the student saw "AI is unavailable; showing the curated roadmap." `moonshotai/kimi-k3` did not answer even a one-word prompt within 90 s (reasoning model), and two other model ids were retired or unavailable for the key (410/404). What this does and does not show: the fallback path is proven against a real, flaky provider; whether a live model's JSON passes the roadmap and coaching validators is still unproven. Untested idea: turning model "thinking" off (`chat_template_kwargs`) or streaming, which the adapter does not send today.
+
+**Honest limits of this report:** the AI paths were exercised with scripted fake clients and failure drills, and against a live provider only as far as described above (fallbacks proven, accepted live output not). UI behaviour was checked headlessly and in Edge on Windows only. Only DevOps Semester 3 has a question bank.
 
 ## M7 — Product note
 

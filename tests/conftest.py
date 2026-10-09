@@ -66,3 +66,9 @@ def roadmap_response(devops_template):
         return json.dumps({"months": months})
 
     return _make
+
+
+@pytest.fixture(autouse=True)
+def no_retry_pause(monkeypatch):
+    """The real pause before an AI retry would only slow the tests down."""
+    monkeypatch.setattr("pcc.ai.safe_generate.RETRY_PAUSE_SECONDS", 0.0)

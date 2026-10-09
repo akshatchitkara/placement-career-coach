@@ -30,5 +30,6 @@ Decisions A1-A16 and open items D1-D6 are carried from the blueprint (`00_PROJEC
 | A40 | A new browser session reopens the most recently active profile | Local single-user app; meets "close and reopen restores progress" (T-18) without a login. Anyone can switch profiles on the Profile page | M6 implementation, 2026-10-10 |
 | A41 | `reset_demo.py` seeds through the controller with a back-dated clock and refuses to delete a database holding non-demo profiles without `--force` | Demo data should be exactly what the real flow produces, and the script deletes a file | M6 implementation, 2026-10-10 |
 | A42 | The M1 Preview page is hidden unless `PCC_SHOW_DEV_PAGES=true` | It is a developer tool superseded by the real pages; hiding avoids confusing a demo audience but keeps it available | M6 implementation, 2026-10-10 |
+| A43 | The AI retry now waits 2 s first | A live run showed the provider answering `503 overloaded`; retrying after half a second cannot help. The pause applies only before the single retry, and tests set it to 0 | M6 follow-up, 2026-10-10 |
 
 Open decisions D1-D6 (blueprint Appendix B) remain at their stated defaults unless revisited.
