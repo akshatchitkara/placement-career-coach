@@ -1,26 +1,58 @@
 """Orchestrates the student journey. UI calls this; it calls agents, content and persistence.
 
-M2 scope: profiles, career selection, roadmap generation and restore.
+Scope so far: profiles, career selection, roadmap (M2); skills check and results (M3).
 """
 
+import secrets
 import sqlite3
 from contextlib import closing
 from dataclasses import dataclass
 from typing import Literal
 
+from pcc.agents.evaluation_agent import (
+    evaluate,
+    present,
+    select_questions,
+    shuffled_option_order,
+)
 from pcc.agents.roadmap_agent import generate_roadmap
 from pcc.ai.ai_client import AiClient
 from pcc.ai.ai_client_factory import build_ai_client
 from pcc.ai.mock_ai_client import MockAiClient
-from pcc.content.content_loader import load_careers, load_roadmap_template, load_skills
+from pcc.content.content_loader import (
+    AppSettings,
+    compute_skill_assessability,
+    load_app_settings,
+    load_careers,
+    load_question_bank,
+    load_roadmap_template,
+    load_skills,
+)
 from pcc.core.constants import SEMESTERS
 from pcc.core.exceptions import PccError
 from pcc.domain.career_resolver import resolve_career
-from pcc.domain.enums import WorkflowState
+from pcc.domain.enums import WorkflowState, is_quiz_assessable
+from pcc.domain.schemas.assessment_schemas import (
+    Answer,
+    AssessmentScope,
+    AssessmentSession,
+    EvaluationResult,
+)
 from pcc.domain.schemas.career_schemas import Career
-from pcc.domain.schemas.roadmap_schemas import Roadmap
+from pcc.domain.schemas.question_schemas import Question
+from pcc.domain.schemas.roadmap_schemas import Roadmap, Skill
 from pcc.persistence.database import get_connection, init_schema
 from pcc.persistence.repositories.ai_provider_settings_repository import get_active_config
+from pcc.persistence.repositories.assessment_repository import (
+    AttemptRecord,
+    create_attempt,
+    get_attempt,
+    get_latest_submitted_attempt,
+    get_open_attempt,
+    load_answers,
+    save_submission,
+    seen_question_ids_oldest_first,
+)
 from pcc.persistence.repositories.profile_repository import (
     Profile,
     get_or_create_profile,
@@ -125,6 +157,182 @@ class WorkflowController:
             set_workflow_state(conn, profile_id, WorkflowState.ROADMAP_READY)
             conn.commit()
         return CareerSelectionResult("roadmap_ready", result.message, result.roadmap)
+
+    # --- skills check (M3) ------------------------------------------------------------------
+    def _check_context(self, conn: sqlite3.Connection, profile_id: int) -> "_CheckContext":
+        profile = get_profile(conn, profile_id)
+        if profile is None or not profile.career_id or not profile.current_semester:
+            raise PccError("Choose a career and semester first.")
+        roadmap = get_active_roadmap(conn, profile_id)
+        if roadmap is None:
+            raise PccError("Build your roadmap first.")
+        months = sorted(roadmap.months, key=lambda m: m.month_index)
+        return _CheckContext(
+            profile=profile,
+            skills_by_id={
+                s.skill_id: s for s in load_skills() if profile.career_id in s.career_ids
+            },
+            roadmap_order=roadmap.skill_ids_in_order(),
+            semester_skill_ids={
+                sem: [m.skill_id for m in months if m.semester == sem] for sem in SEMESTERS
+            },
+            bank=load_question_bank(profile.career_id),
+        )
+
+    @staticmethod
+    def _scope(ctx: "_CheckContext", settings: AppSettings) -> AssessmentScope:
+        semester = ctx.profile.current_semester or 3
+        ready: list[str] = []
+        later: list[str] = []
+        soon: list[str] = []
+        for skill_id in ctx.semester_skill_ids[semester]:
+            if not is_quiz_assessable(ctx.skills_by_id[skill_id].skill_type):
+                later.append(skill_id)  # T-21: method not built, never scored
+            elif not compute_skill_assessability(skill_id, ctx.bank, settings):
+                soon.append(skill_id)  # T-22: bank too thin
+            else:
+                ready.append(skill_id)
+        return AssessmentScope(
+            semester=semester,
+            assessable_skill_ids=ready,
+            assessed_later_skill_ids=later,
+            coming_soon_skill_ids=soon,
+        )
+
+    def get_assessment_scope(self, profile_id: int) -> AssessmentScope:
+        with closing(self._connect()) as conn:
+            ctx = self._check_context(conn, profile_id)
+        return self._scope(ctx, load_app_settings())
+
+    @staticmethod
+    def _questions_for(
+        ctx: "_CheckContext", attempt: AttemptRecord, seen: list[str]
+    ) -> tuple[AppSettings, AssessmentScope, list[Question]]:
+        settings = AppSettings.model_validate_json(attempt.config_snapshot_json)
+        scope = WorkflowController._scope(ctx, settings)
+        questions = select_questions(
+            scope.assessable_skill_ids, ctx.bank, settings, seen, attempt.shuffle_seed
+        )
+        return settings, scope, questions
+
+    def start_assessment(self, profile_id: int) -> AssessmentSession:
+        """Starts a baseline check, or resumes the open one (same seed -> same questions)."""
+        with closing(self._connect()) as conn:
+            ctx = self._check_context(conn, profile_id)
+            attempt = get_open_attempt(conn, profile_id)
+            if attempt is None:
+                settings = load_app_settings()
+                scope = self._scope(ctx, settings)
+                if not scope.assessable_skill_ids:
+                    raise PccError(
+                        "Assessment coming soon: no skill in this semester has a reviewed "
+                        "question bank yet."
+                    )
+                assert_transition(ctx.profile.workflow_state, WorkflowState.ASSESSMENT_IN_PROGRESS)
+                attempt_id = create_attempt(
+                    conn,
+                    profile_id,
+                    attempt_type="baseline",
+                    scope_description=f"Semester {scope.semester} skills",
+                    shuffle_seed=secrets.randbits(31),
+                    config_snapshot_json=settings.model_dump_json(),
+                )
+                set_workflow_state(conn, profile_id, WorkflowState.ASSESSMENT_IN_PROGRESS)
+                conn.commit()
+                attempt = get_attempt(conn, attempt_id)
+                assert attempt is not None
+            seen = seen_question_ids_oldest_first(conn, profile_id)
+            _, _, questions = self._questions_for(ctx, attempt, seen)
+        return AssessmentSession(
+            attempt_id=attempt.id,
+            scope_description=attempt.scope_description,
+            questions=present(questions, ctx.skills_by_id, attempt.shuffle_seed),
+        )
+
+    @staticmethod
+    def _evaluate(
+        ctx: "_CheckContext",
+        attempt: AttemptRecord,
+        answers: list[Answer],
+        settings: AppSettings,
+        scope: AssessmentScope,
+    ) -> EvaluationResult:
+        return evaluate(
+            attempt_id=attempt.id,
+            scope_description=attempt.scope_description,
+            answers=answers,
+            questions_by_id={q.question_id: q for q in ctx.bank},
+            scope_skill_ids=scope.assessable_skill_ids,
+            core_skill_ids=[
+                s.skill_id for s in ctx.skills_by_id.values() if is_quiz_assessable(s.skill_type)
+            ],
+            roadmap_order=ctx.roadmap_order,
+            current_semester=ctx.profile.current_semester or 3,
+            semester_skill_ids=ctx.semester_skill_ids,
+            settings=settings,
+        )
+
+    def submit_assessment(
+        self, profile_id: int, attempt_id: int, selections: dict[str, str | None]
+    ) -> EvaluationResult:
+        """Grades by code. Every presented question must be answered (FR-05)."""
+        with closing(self._connect()) as conn:
+            ctx = self._check_context(conn, profile_id)
+            attempt = get_attempt(conn, attempt_id)
+            if attempt is None or attempt.profile_id != profile_id or attempt.submitted:
+                raise PccError("This check is not open for submission.")
+            seen = seen_question_ids_oldest_first(conn, profile_id)
+            settings, scope, questions = self._questions_for(ctx, attempt, seen)
+
+            expected = {q.question_id: q for q in questions}
+            if set(selections) != set(expected) or any(v is None for v in selections.values()):
+                raise PccError("Answer every question before submitting.")
+            answers = []
+            for qid in expected:  # presentation order
+                option_id = str(selections[qid])
+                if option_id not in {o.option_id for o in expected[qid].options}:
+                    raise PccError("An answer does not match the question's options.")
+                answers.append(Answer(question_id=qid, selected_option_id=option_id))
+
+            result = self._evaluate(ctx, attempt, answers, settings, scope)
+            save_submission(
+                conn,
+                attempt_id,
+                answers=answers,
+                correct_by_question={
+                    a.question_id: a.selected_option_id == expected[a.question_id].correct_option_id
+                    for a in answers
+                },
+                displayed_order_by_question={
+                    qid: shuffled_option_order(q, attempt.shuffle_seed)
+                    for qid, q in expected.items()
+                },
+                result=result,
+            )
+            set_workflow_state(conn, profile_id, WorkflowState.RESULTS_READY)
+            conn.commit()
+        return result
+
+    def get_latest_results(self, profile_id: int) -> EvaluationResult | None:
+        """Re-derives results from stored answers + the attempt's config snapshot (T-18, T-20)."""
+        with closing(self._connect()) as conn:
+            attempt = get_latest_submitted_attempt(conn, profile_id)
+            if attempt is None:
+                return None
+            ctx = self._check_context(conn, profile_id)
+            settings = AppSettings.model_validate_json(attempt.config_snapshot_json)
+            answers = load_answers(conn, attempt.id)
+        scope = self._scope(ctx, settings)
+        return self._evaluate(ctx, attempt, answers, settings, scope)
+
+
+@dataclass(frozen=True)
+class _CheckContext:
+    profile: Profile
+    skills_by_id: dict[str, Skill]
+    roadmap_order: list[str]
+    semester_skill_ids: dict[int, list[str]]
+    bank: list[Question]
 
 
 def get_controller() -> WorkflowController:

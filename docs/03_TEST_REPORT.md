@@ -7,13 +7,13 @@ Each milestone's acceptance items are recorded here as **Pass**, **Fail**, or **
 ### Full re-verification pass (2026-10-09, second session)
 
 | Item | Result | Notes |
-|---|---|---|
+| --- | --- | --- |
 | `make lint` (`ruff check`, `ruff format --check`, `mypy domain/ workflow/`) | **Pass** | Clean across `src/`, `tests/`, `scripts/` |
 | `make test` (`pytest --cov`) | **Pass** | 1/1 passed: `test_init_schema_is_idempotent` (schema uses `CREATE TABLE/INDEX IF NOT EXISTS`, confirmed safe to re-run) |
 | `make db-init`, run twice | **Pass** | Idempotent, no error on second run |
 | `make validate-content` | **Pass** | No-op stub (no content yet, by design -- content lands in M1) |
 | `make db-reset` | **Pass** | Deletes and recreates the DB file cleanly |
-| Every page route serves and every page's `render()` executes without exception | **Pass** | Verified two ways: (1) full headless `streamlit run`, curled all 9 `url_path` routes -> HTTP 200, no server traceback; (2) `AppTest` driving each page's `render()` directly -- the first attempt gave a false pass because pointing `AppTest.from_file` at a page module never calls `render()` (nothing executes); fixed by wrapping each page in a one-line script that imports and calls `render()`, which now genuinely exercises the code |
+| Every page route serves and every page's `render()` executes without exception | **Pass** | Verified two ways: (1) full headless `streamlit run`, curled all 9 `url_path` routes -&gt; HTTP 200, no server traceback; (2) `AppTest` driving each page's `render()` directly -- the first attempt gave a false pass because pointing `AppTest.from_file` at a page module never calls `render()` (nothing executes); fixed by wrapping each page in a one-line script that imports and calls `render()`, which now genuinely exercises the code |
 | AI Settings page: mock / openai / nvidia / custom / anthropic selectable, fields show correctly per provider | **Pass** | `AppTest` interaction script: selectbox + text_input counts verified per provider (mock=0 fields, others=3) |
 | AI Settings page: Test Connection against a real endpoint with a fake key | **Pass** | OpenAI and Anthropic both returned a clean `401 Unauthorized` surfaced as `st.error(...)` -- confirms requests are correctly formed and reach the real API, and that failures never crash the page |
 | AI Settings page: Test Connection against an unreachable custom URL | **Pass** | Connection-refused surfaced as `st.error(...)`, no crash |
@@ -25,9 +25,9 @@ Each milestone's acceptance items are recorded here as **Pass**, **Fail**, or **
 **Scaffolding gap found and fixed:** `scripts/validate_content.py`, `reset_demo.py`, and `generate_question_drafts.py` were listed in Section 12 and referenced by the Makefile but were never created in the first M0 pass. Added as no-op/partial stubs so `make validate-content` and `make db-reset` don't fail before M1.
 
 | Earlier items (first pass) | Result | Notes |
-|---|---|---|
+| --- | --- | --- |
 | `make run` opens the app shell | **Pass** | Headless Streamlit run, `HTTP 200` |
-| Mock AI client callable end-to-end with no key | **Pass** | `build_ai_client(AiProviderConfig())` -> `MockAiClient`, `.generate()` returns `"{}"` |
+| Mock AI client callable end-to-end with no key | **Pass** | `build_ai_client(AiProviderConfig())` -&gt; `MockAiClient`, `.generate()` returns `"{}"` |
 | AI Settings page can write/read a row in `ai_provider_settings`; factory picks it up | **Pass** | Saved an `openai` config, reloaded it, factory returned `OpenAiCompatibleAiClient` |
 
 Deviations noted: local Python available is 3.14 (blueprint specifies 3.11) -- no 3.11-only feature is in use. All interactive verification used an isolated `PCC_DB_PATH` so test runs don't mutate the real demo database; the real `data/runtime/pcc.db` was reset via `make db-reset` after manual testing left it in a non-default state.
@@ -35,24 +35,24 @@ Deviations noted: local Python available is 3.14 (blueprint specifies 3.11) -- n
 ## M1 — Content and scoring core
 
 | Item | Result | Notes |
-|---|---|---|
-| Content validator passes against authored content | **Pass** | `scripts/validate_content.py` -> "Content validation passed: 4 careers, 58 skills." |
+| --- | --- | --- |
+| Content validator passes against authored content | **Pass** | `scripts/validate_content.py` -&gt; "Content validation passed: 4 careers, 58 skills." |
 | Skill maps + roadmap templates for all 4 careers | **Pass** | Generated programmatically from the blueprint's Section 2.3 tables (avoids hand-transcription errors across 64 month entries); 16 months each, validated against V-RM-01/02/03/05/07 equivalents |
 | DevOps Sem 3 question bank (24 approved questions) | **Pass** | 4 skills x 6 questions, exactly 2/2/2 easy/medium/hard per skill, hand-authored for technical accuracy; `compute_skill_assessability` confirms all 4 skills assessable |
 | Tier B careers (MEAN/Java/AI) have roadmaps but no question bank yet | **Pass** | By design (Section 2.1) -- `load_question_bank` returns `[]` gracefully, no skill in those careers reports assessable |
 | `domain/scoring/*` pure functions | **Pass** | scoring_engine, level_classifier, weakest_skill_selector, coverage_calculator, roadmap_position_locator -- 96% line coverage (exceeds the 90% bar in Section 6) |
 | Level boundary tests (Section 17.2: 0/39.9/40/64.9/65/84.9/85/100) | **Pass** | All 8 boundaries correct |
-| T-01 same answers scored twice -> identical | **Pass** | |
-| T-02 Industry-ready downgraded when one sufficient skill < gate | **Pass** | Note names the failing skill |
-| T-03 Industry-ready downgraded when coverage < 100% | **Pass** | Note recommends the full-path check |
-| T-04 full-path, 100% coverage, all skills >= 60, overall >= 85 -> Industry-ready | **Pass** | |
-| T-05 skill with 1 answered question not eligible as weakest | **Pass** | |
-| T-06 tied lowest skills -> earlier roadmap position wins | **Pass** | |
-| T-07 no skill with sufficient evidence -> no weakest skill invented | **Pass** | |
-| T-08 weakest skill >= mastery threshold -> "no major gap", next skill offered | **Pass** | |
+| T-01 same answers scored twice -&gt; identical | **Pass** |  |
+| T-02 Industry-ready downgraded when one sufficient skill &lt; gate | **Pass** | Note names the failing skill |
+| T-03 Industry-ready downgraded when coverage &lt; 100% | **Pass** | Note recommends the full-path check |
+| T-04 full-path, 100% coverage, all skills &gt;= 60, overall &gt;= 85 -&gt; Industry-ready | **Pass** |  |
+| T-05 skill with 1 answered question not eligible as weakest | **Pass** |  |
+| T-06 tied lowest skills -&gt; earlier roadmap position wins | **Pass** |  |
+| T-07 no skill with sufficient evidence -&gt; no weakest skill invented | **Pass** |  |
+| T-08 weakest skill &gt;= mastery threshold -&gt; "no major gap", next skill offered | **Pass** |  |
 | T-20 config snapshot: old attempt unaffected by later threshold changes | **Pass** | Proven by construction -- every scoring function takes config as a parameter, never reads global mutable state |
-| T-21 unbuilt skill_type (build/communication) -> "assessed later", not scored | **Pass** | `is_quiz_assessable` only true for `conceptual` |
-| T-22 skill with fewer than 6 approved questions -> not assessable | **Pass** | Also verified the 2/2/2-per-difficulty requirement independently of raw count |
+| T-21 unbuilt skill_type (build/communication) -&gt; "assessed later", not scored | **Pass** | `is_quiz_assessable` only true for `conceptual` |
+| T-22 skill with fewer than 6 approved questions -&gt; not assessable | **Pass** | Also verified the 2/2/2-per-difficulty requirement independently of raw count |
 | Worked example (Section 10.7) reproduced exactly | **Pass** | Linux/Shell 33.3%, Python/Git 66.7%, overall 50.0 |
 | Full test suite + lint + mypy + app smoke test | **Pass** | 43/43 tests, `ruff check`/`format` clean, `mypy` clean on `domain/`, headless `streamlit run` still HTTP 200 with M1 content loaded |
 
@@ -60,40 +60,65 @@ Deviations noted: local Python available is 3.14 (blueprint specifies 3.11) -- n
 
 **Scaffolding gap found and fixed:** `tests/conftest.py` was listed in Section 12 but never created in M0; added now with the shared `skill_score_factory` fixture.
 
-**`make` is not installed in this dev shell** (git-bash on Windows) -- all Makefile-wrapped commands were verified by running their underlying command directly (`ruff`, `mypy`, `pytest`, `python scripts/validate_content.py`), not via the `make` binary itself.
+`make` **is not installed in this dev shell** (git-bash on Windows) -- all Makefile-wrapped commands were verified by running their underlying command directly (`ruff`, `mypy`, `pytest`, `python scripts/validate_content.py`), not via the `make` binary itself.
 
 ## M2 — Roadmap flow
 
 | Item | Result | Notes |
-|---|---|---|
+| --- | --- | --- |
 | Career picker (4 careers + typed career) and semester select | **Pass** | `career_selection_page`; headless UI test drives it |
 | Roadmap agent: AI rewords, never reorders; one repair attempt; template fallback | **Pass** | `agents/roadmap_agent.py`; mock mode skips AI and uses the template directly |
 | Roadmap validator V-RM-01..08 | **Pass** | V-RM-06 enforced through V-RM-04 (fixed sequence = template, which respects prerequisites) |
 | SQLite profile + roadmap persistence | **Pass** | `profile_repository`, `roadmap_repository`; one active roadmap per profile |
 | Roadmap page shows Sem 3-6 and 16 months for DevOps | **Pass** | 16 expanders, 4 semester headings, current semester expanded |
 | T-09 missing semester/month rejected, template used | **Pass** | validator unit tests + agent fallback test |
-| T-10 AI reorders skills -> rejected (V-RM-04), template used | **Pass** | |
+| T-10 AI reorders skills -&gt; rejected (V-RM-04), template used | **Pass** |  |
 | T-14 / V-RM-08 URL in AI text rejected | **Pass** | roadmap part only; coaching part lands in M4 |
-| T-15 AI disabled/unavailable -> DevOps flow completes with template | **Pass** | integration test with an unavailable AI client |
-| T-16 empty/malformed AI response -> no crash, fallback (roadmap part) | **Pass** | `""`, `{}`, non-JSON, wrong shape, array |
+| T-15 AI disabled/unavailable -&gt; DevOps flow completes with template | **Pass** | integration test with an unavailable AI client |
+| T-16 empty/malformed AI response -&gt; no crash, fallback (roadmap part) | **Pass** | `""`, `{}`, non-JSON, wrong shape, array |
 | T-18 close and reopen: profile + roadmap restored (weekly plan/results part is M3+) | **Pass** (partial) | new controller on same DB file |
-| T-19 non-CS career -> "not supported yet" + supported list, no roadmap | **Pass** | Doctor, Chartered Accountant, Pilot, Chef; invalid characters/length rejected |
+| T-19 non-CS career -&gt; "not supported yet" + supported list, no roadmap | **Pass** | Doctor, Chartered Accountant, Pilot, Chef; invalid characters/length rejected |
 | Full suite + lint + mypy + app smoke | **Pass** | 89 tests, ruff clean, mypy clean on `domain/` + `workflow/`, headless full-app render has no exceptions |
 | Live AI provider personalising a roadmap | **Not verified** | no API key available; only scripted fake clients were exercised |
 
 **Fixes while integrating:** mypy now follows imports from `workflow/` into `ai/` and `content/`; typed `parse_json_object`, `_read_json` and the OpenAI client return so `mypy` stays clean.
 
 ## M3 — Assessment flow
-Not started.
+
+| Item | Result | Notes |
+|---|---|---|
+| Question selection: 3 per skill, fixed 1/1/1 difficulty mix, 12 for DevOps Sem 3 | **Pass** | `select_questions`; seeded, so the same seed gives the same list |
+| Unseen-first, then least-recently-seen reuse | **Pass** | unit-tested; the full re-test flow is M5 (T-17 not fully closed until then) |
+| Seeded option shuffle, reproducible for review | **Pass** | order saved per response in `displayed_order_json`; answer position varies across seeds |
+| Answer key never sent to the UI | **Pass** | `PresentedQuestion` has no `correct_option_id` |
+| Assessment page: start, resume, all questions required (FR-05) | **Pass** | resuming re-derives the same questions from the stored seed; unanswered or partial submit rejected, nothing saved |
+| Submit grades by code, saves attempt, responses, skill scores | **Pass** | 1 attempt row, 12 responses, 4 skill scores, 1 weakest; config snapshot stored |
+| Results page: score, level + scope, per-skill `correct/answered`, level rules, coverage | **Pass** | FR-06 |
+| Roadmap position and weakest skill on results (FR-07, FR-08) | **Pass** | position looks from the student's current semester onward |
+| Section 10.7 worked example through the real controller | **Pass** | 50.0, Intermediate, Linux weakest on tie, position Linux, coverage 4/14 |
+| T-03 perfect single-semester check caps at Advanced with a full-path note | **Pass** | |
+| T-08 no major gap, next skill offered | **Pass** | position -> Networking Fundamentals |
+| T-18 results restored by a new controller on the same DB (partial: coaching/weekly plan are M4/M5) | **Pass** (partial) | identical result object, which also shows T-01 |
+| T-20 changed thresholds do not alter a past attempt | **Pass** | results are re-derived from the attempt's own snapshot |
+| T-21 build/communication skills "assessed later", not scored | **Pass** | Sem 6 DevOps: capstone, interview prep |
+| T-22 thin bank -> "coming soon" | **Pass** | Java/MEAN/AI and DevOps Sem 4-6 show it; the check can't be started |
+| Full suite + lint + mypy + app smoke | **Pass** | 115 tests, ruff clean, mypy clean on `domain/` + `workflow/`, scoring coverage 96%, full-app headless render has no exceptions |
+| Looked at in a real browser | **Not verified** | UI was exercised headlessly with Streamlit's test harness only |
+
+**Known limits:** only the DevOps Semester 3 bank exists, so DevOps Sem 4-6 and the other careers can't be assessed yet. The full-path check and re-test flow are later milestones.
 
 ## M4 — Coaching flow
+
 Not started.
 
 ## M5 — Weekly loop
+
 Not started.
 
 ## M6 — Reliability and polish
+
 Not started.
 
 ## M7 — Product note
+
 Not started.

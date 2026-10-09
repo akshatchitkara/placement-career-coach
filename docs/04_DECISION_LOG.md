@@ -13,5 +13,8 @@ Decisions A1-A16 and open items D1-D6 are carried from the blueprint (`00_PROJEC
 | A23 | Added `Career.aliases` (careers.json) and `domain/career_resolver.py` for typed career input | FR-17/T-19 need free-text input matched to the catalog without AI; aliases keep the matching data-driven | M2 implementation, 2026-10-09 |
 | A24 | In mock mode the roadmap agent skips the AI call and uses the template | Mock returns no roadmap, so calling it would only burn a repair attempt; result is identical and deterministic | M2 implementation, 2026-10-09 |
 | A25 | Career re-selection is allowed from `ROADMAP_READY` (back to `CAREER_SELECTED`) until the first check starts | Lets a student change their mind in M2 without orphaning attempts; later states do not allow it | M2 implementation, 2026-10-09 |
+| A26 | Results are re-derived from stored answers and the attempt's `config_snapshot_json` instead of storing every derived field | Keeps one source of truth, makes T-01/T-18/T-20 true by construction; `skill_scores` and level are still saved for reporting | M3 implementation, 2026-10-09 |
+| A27 | A started check is resumed by re-selecting questions from the stored `shuffle_seed` | The schema has no column for the chosen question list; selection is deterministic and the "seen" set cannot change while an attempt is open | M3 implementation, 2026-10-09 |
+| A28 | Roadmap position is computed from the student's current semester onward | Section 10.6 limits it to the tested scope; searching from Sem 3 would mark a Sem 4 student as "advance" on skills they were never tested on | M3 implementation, 2026-10-09 |
 
 Open decisions D1-D6 (blueprint Appendix B) remain at their stated defaults unless revisited.
