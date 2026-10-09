@@ -48,12 +48,13 @@ def render() -> None:
         )
         return
 
-    if profile.workflow_state == WorkflowState.ROADMAP_READY and not st.button(
-        "Start skills check", type="primary"
-    ):
-        return
     try:
-        session = controller.start_assessment(profile.id)
+        if profile.workflow_state == WorkflowState.ROADMAP_READY:
+            if not st.button("Start skills check", type="primary"):
+                return
+            controller.start_assessment(profile.id)
+            st.rerun()  # redraw in the in-progress state so the Start button disappears
+        session = controller.start_assessment(profile.id)  # resumes the open attempt
     except PccError as exc:
         st.error(str(exc))
         return

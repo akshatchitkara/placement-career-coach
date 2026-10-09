@@ -35,8 +35,9 @@ def render() -> None:
         return
     st.success(f"Signed in as **{profile.display_name}**.")
     if profile.career_id:
+        career_names = {c.career_id: c.name for c in controller.list_careers()}
         st.write(
-            f"Career: **{profile.career_id.replace('_', ' ').title()}** · "
+            f"Career: **{career_names.get(profile.career_id, profile.career_id)}** · "
             f"Semester **{profile.current_semester}** · "
             f"Progress: `{profile.workflow_state.value}`"
         )

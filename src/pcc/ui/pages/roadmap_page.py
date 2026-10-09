@@ -26,8 +26,9 @@ def render() -> None:
         st.info("No roadmap yet. Choose a career on **Career & Semester**.")
         return
 
+    career_names = {c.career_id: c.name for c in controller.list_careers()}
     st.caption(
-        f"{roadmap.career_id.replace('_', ' ').title()} · Semesters 3-6 · "
+        f"{career_names.get(roadmap.career_id, roadmap.career_id)} · Semesters 3-6 · "
         f"{len(roadmap.months)} months · {_SOURCE_LABELS[roadmap.generation_source]}"
     )
     skill_names = {s.skill_id: s.name for s in load_skills()}
