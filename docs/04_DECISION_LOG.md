@@ -31,5 +31,8 @@ Decisions A1-A16 and open items D1-D6 are carried from the blueprint (`00_PROJEC
 | A41 | `reset_demo.py` seeds through the controller with a back-dated clock and refuses to delete a database holding non-demo profiles without `--force` | Demo data should be exactly what the real flow produces, and the script deletes a file | M6 implementation, 2026-10-10 |
 | A42 | The M1 Preview page is hidden unless `PCC_SHOW_DEV_PAGES=true` | It is a developer tool superseded by the real pages; hiding avoids confusing a demo audience but keeps it available | M6 implementation, 2026-10-10 |
 | A43 | The AI retry now waits 2 s first | A live run showed the provider answering `503 overloaded`; retrying after half a second cannot help. The pause applies only before the single retry, and tests set it to 0 | M6 follow-up, 2026-10-10 |
+| A44 | The Anthropic adapter allows up to 8,192 output tokens (was 2,048) | A live run showed a 16-month roadmap in JSON needs about 2,500+ tokens; the old cap truncated every reply. The model only bills for what it writes | M6 follow-up, 2026-10-10 |
+| A45 | The coaching prompt tells the model to write to the student in the second person | The first live plan said "the student decodes..." to the person reading it | M6 follow-up, 2026-10-10 |
+| A46 | Agents log the ids of the validation rules that rejected an AI reply (never the reply text) | Needed to explain slow runs and fallbacks without logging AI or student text | M6 follow-up, 2026-10-10 |
 
 Open decisions D1-D6 (blueprint Appendix B) remain at their stated defaults unless revisited.

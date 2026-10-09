@@ -50,6 +50,13 @@ def _build_prompt(context: CoachingInput, repair_errors: list[str]) -> str:
     )
 
 
+def _log_rejection(errors: list[str]) -> None:
+    rules = sorted({e.split(":", 1)[0] for e in errors})  # rule ids only, never AI or student text
+    logger.info(
+        "coaching_agent prompt=%s attempt_rejected rules=%s", PROMPT_VERSION, ",".join(rules)
+    )
+
+
 def _attempt(
     client: AiClient, context: CoachingInput, repair_errors: list[str]
 ) -> tuple[CoachingPlan | None, list[str]]:
@@ -59,9 +66,15 @@ def _attempt(
         payload["generation_source"] = "ai"
         plan = CoachingPlan.model_validate(payload)
     except (AiOutputInvalidError, ValidationError) as exc:
+        logger.info(
+            "coaching_agent prompt=%s attempt_rejected reason=%s",
+            PROMPT_VERSION,
+            type(exc).__name__,
+        )
         return None, [f"unparseable or incomplete plan ({type(exc).__name__})"]
     errors = validate_coaching_plan(plan, context.skill_id, context)
     if errors:
+        _log_rejection(errors)
         return None, errors
     plan = plan.model_copy(
         update={

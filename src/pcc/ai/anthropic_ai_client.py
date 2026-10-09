@@ -6,6 +6,9 @@ from pcc.ai.ai_client import AiClient
 from pcc.ai.provider_config import AiProviderConfig
 from pcc.core.exceptions import AiUnavailableError
 
+# A 16-month roadmap in JSON is over 2,500 tokens; a lower cap cuts the reply mid-string.
+MAX_OUTPUT_TOKENS = 8192
+
 
 class AnthropicAiClient(AiClient):
     def __init__(self, config: AiProviderConfig) -> None:
@@ -20,7 +23,7 @@ class AnthropicAiClient(AiClient):
         try:
             response = self._client.messages.create(
                 model=self._model,
-                max_tokens=2048,
+                max_tokens=MAX_OUTPUT_TOKENS,
                 system=system or "",
                 messages=[{"role": "user", "content": prompt}],
             )

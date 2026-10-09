@@ -210,7 +210,7 @@ Driven in Microsoft Edge with Playwright (headless, 1280x900) against a second c
 | Full suite + lint + format + mypy + content validation | **Pass** | 280 tests; ruff and mypy clean; coverage: scoring 96%, weekly builder and progress 100% |
 | Real browser (Edge), seeded fresh launch: 31 checks | **Pass** | dev page hidden/shown, offline banner, three demo profiles, AI configured but unreachable end to end; no uncaught browser errors |
 | Earlier journeys re-run in the browser after the M6 changes | **Pass** | M2-M4 journey 24 checks, M5 journey 25 checks, all passing |
-| Live AI provider end to end | **Not verified** | see "Live AI attempt" below: a real model answered a small call, but realistic prompts were refused as overloaded or timed out, so no live AI text has yet been accepted by the validators |
+| Live AI provider end to end | **Pass** (Anthropic) | see "Live AI verification (Anthropic)" below. NVIDIA NIM was attempted earlier and did not complete (service overloaded); see "Live AI attempt" |
 | Error page for a crashing page / broken content shown in a real browser | **Not verified** | covered headlessly (`tests/ui/test_error_handling.py`); not provoked in Edge |
 
 **Bugs found while building M6 (all fixed):**
@@ -259,9 +259,20 @@ Driven in Microsoft Edge with Playwright (headless, 1280x900) against a second c
 | T-10 AI reorders skills rejected | **Pass** | T-21 unbuilt skill types "assessed later" | **Pass** |
 | T-11 question with unknown skill fails the validator | **Pass** | T-22 thin bank is "coming soon" | **Pass** |
 
+**Live AI verification (Anthropic, `claude-haiku-5-5`, provider saved on the AI Settings page, 2026-10-10):** the app reported "AI: anthropic (live)"; a ping answered in 1.2-1.3 s. Run through the controller and then in Edge:
+
+| Step | Result | Observed |
+|---|---|---|
+| Roadmap personalised by AI and accepted by V-RM-01..08 | **Pass** | 7.7-12.6 s; 16 months, order unchanged, no URLs; labelled "Curated sequence, wording personalised by AI" |
+| Coaching plan drafted by AI and accepted by V-CO-01..06 | **Pass** | 10.8-27.7 s; 4 tasks, 135-150 min, each tied to a missed question or concept; labelled "AI-drafted plan, checked against your results" |
+| Scoring, level, weakest skill unaffected by the AI | **Pass** | 50.0, Intermediate, Linux in every run |
+| Browser journey (profile -> roadmap -> check -> results -> coaching -> weekly plan -> progress) | **Pass** | 22 checks, no uncaught browser errors; coaching reads as advice to "you", no "the student", no URLs |
+
+Bugs only a live provider could reveal (both fixed): (1) the Anthropic adapter capped replies at 2,048 tokens, which cut a 16-month roadmap off mid-string, so every live roadmap would have been rejected and replaced by the curated one (regression test added); (2) the coaching prompt let the model write about "the student" instead of to the reader. The agents now also log which rule ids rejected a reply (ids only, no text). One first browser attempt timed out after 120 s waiting for the submit with no coaching call logged; it did not recur in two later runs and is unexplained (likely a missed click in the script, not confirmed). Coaching latency varied from 11 s to 28 s depending on the call; the student sees a spinner meanwhile.
+
 **Live AI attempt (NVIDIA NIM, `nvidia/nemotron-3-ultra-550b-a55b`, 2026-10-10):** the key authenticated and a tiny prompt ("reply with ok") came back in 3.6 s through the app's own adapter. The real roadmap and coaching prompts did not succeed: calls returned `503 Service temporarily overloaded` or hit the 30 s timeout, in three separate runs. Each time the app behaved as designed: the journey completed, scoring was correct (50.0, Intermediate, weakest Linux), the curated roadmap and coaching plan were shown, and the student saw "AI is unavailable; showing the curated roadmap." `moonshotai/kimi-k3` did not answer even a one-word prompt within 90 s (reasoning model), and two other model ids were retired or unavailable for the key (410/404). What this does and does not show: the fallback path is proven against a real, flaky provider; whether a live model's JSON passes the roadmap and coaching validators is still unproven. Untested idea: turning model "thinking" off (`chat_template_kwargs`) or streaming, which the adapter does not send today.
 
-**Honest limits of this report:** the AI paths were exercised with scripted fake clients and failure drills, and against a live provider only as far as described above (fallbacks proven, accepted live output not). UI behaviour was checked headlessly and in Edge on Windows only. Only DevOps Semester 3 has a question bank.
+**Honest limits of this report:** the AI paths were exercised with scripted fake clients and failure drills, and against two live providers: Anthropic (accepted live output, verified) and NVIDIA NIM (fallbacks proven against an overloaded service, no accepted output). Only one model, `claude-haiku-5-5`, was used for the Anthropic run. UI behaviour was checked headlessly and in Edge on Windows only. Only DevOps Semester 3 has a question bank.
 
 ## M7 — Product note
 

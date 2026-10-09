@@ -14,6 +14,7 @@ Rules:
 - Total estimated_minutes across tasks must not exceed {max_total_minutes}.
 - Every task needs a "success_check" the student can observe (for example "explain X without notes").
 - "resource_hint" is a topic or search phrase only. Never include URLs or links anywhere.
+- Write directly to the student in the second person ("you"). Never say "the student".
 - Do not grade, score or change the level. You only write advice.
 
 {repair_note}

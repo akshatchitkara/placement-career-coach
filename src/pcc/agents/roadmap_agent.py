@@ -62,9 +62,18 @@ def _attempt(
             }
         )
     except (AiOutputInvalidError, ValidationError) as exc:
+        logger.info(
+            "roadmap_agent prompt=%s attempt_rejected reason=%s", PROMPT_VERSION, type(exc).__name__
+        )
         return None, [f"unparseable or incomplete roadmap ({type(exc).__name__})"]
     errors = validate_roadmap(candidate, template, catalog_skill_ids)
-    return (candidate, []) if not errors else (None, errors)
+    if errors:
+        rules = sorted({e.split(":", 1)[0] for e in errors})  # rule ids only
+        logger.info(
+            "roadmap_agent prompt=%s attempt_rejected rules=%s", PROMPT_VERSION, ",".join(rules)
+        )
+        return None, errors
+    return candidate, []
 
 
 def generate_roadmap(
