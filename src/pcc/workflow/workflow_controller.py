@@ -67,6 +67,7 @@ from pcc.domain.schemas.tutor_schemas import (
 )
 from pcc.domain.schemas.weekly_plan_schemas import (
     RoadmapFocus,
+    WeeklyPlan,
     WeeklyPlanConfig,
     WeeklyPlanContext,
     WeeklyPlanView,
@@ -108,8 +109,11 @@ from pcc.persistence.repositories.weekly_plan_repository import (
     get_latest_weekly_plan,
     save_weekly_plan,
     set_done_task_ids,
+    update_weekly_plan,
 )
 from pcc.workflow.workflow_transitions import assert_transition
+
+WEEKLY_MINUTES_RANGE = (90, 300)
 
 MAX_DISPLAY_NAME_LENGTH = 40
 
@@ -440,15 +444,17 @@ class WorkflowController:
         return result
 
     # --- weekly loop (M5) ---------------------------------------------------------------------
-    def _plan_week(
+    def _build_week(
         self,
         conn: sqlite3.Connection,
         ctx: "_CheckContext",
-        attempt_id: int,
         result: EvaluationResult,
         settings: AppSettings,
-    ) -> None:
-        """Builds and saves this week's plan by rules, then moves to WEEKLY_PLAN_ACTIVE."""
+        *,
+        today: date,
+        max_minutes: int,
+    ) -> WeeklyPlan:
+        """The rule-built plan for a result. Pure given its inputs, so a rebuild is repeatable."""
         profile_id = ctx.profile.id
         weakest = result.weakest
         focus_skill_id: str | None = None
@@ -475,9 +481,9 @@ class WorkflowController:
                 if tags[review.question_id] not in bucket:
                     bucket.append(tags[review.question_id])
 
-        plan = build_weekly_plan(
+        return build_weekly_plan(
             WeeklyPlanContext(
-                today=self._today(),
+                today=today,
                 weakest=weakest,
                 coaching_plan=get_active_plan(conn, profile_id)
                 if weakest.status == "weakest_found"
@@ -491,9 +497,28 @@ class WorkflowController:
             WeeklyPlanConfig(
                 min_tasks=settings.weekly_plan.min_tasks,
                 max_tasks=settings.weekly_plan.max_tasks,
-                max_total_minutes=settings.weekly_plan.max_total_minutes,
+                max_total_minutes=max_minutes,
                 retest_after_days=settings.retest_after_days,
             ),
+        )
+
+    def _plan_week(
+        self,
+        conn: sqlite3.Connection,
+        ctx: "_CheckContext",
+        attempt_id: int,
+        result: EvaluationResult,
+        settings: AppSettings,
+    ) -> None:
+        """Builds and saves this week's plan by rules, then moves to WEEKLY_PLAN_ACTIVE."""
+        profile_id = ctx.profile.id
+        plan = self._build_week(
+            conn,
+            ctx,
+            result,
+            settings,
+            today=self._today(),
+            max_minutes=settings.weekly_plan.max_total_minutes,
         )
         save_weekly_plan(conn, profile_id, attempt_id, plan)
         current = get_profile(conn, profile_id)
@@ -549,6 +574,32 @@ class WorkflowController:
             retest_due=days_left == 0,
             days_until_retest=days_left,
         )
+
+    def set_weekly_capacity(self, profile_id: int, max_minutes: int) -> None:
+        """Rebuilds this week with a different time budget. Same week, same re-check date.
+
+        The same rules drop the lowest-priority tasks first. Ticks on tasks that remain are kept.
+        """
+        low, high = WEEKLY_MINUTES_RANGE
+        if not low <= max_minutes <= high:
+            raise PccError(f"Choose between {low} and {high} minutes for the week.")
+        with closing(self._connect()) as conn:
+            latest = get_latest_weekly_plan(conn, profile_id)
+            attempt = get_latest_submitted_attempt(conn, profile_id)
+            if latest is None or attempt is None:
+                raise PccError("You have no weekly plan yet.")
+            plan_id, current, done = latest
+            ctx = self._check_context(conn, profile_id)
+            settings = AppSettings.model_validate_json(attempt.config_snapshot_json)
+            result = self._evaluate(
+                ctx, attempt, load_answers(conn, attempt.id), settings, self._scope(ctx, settings)
+            )
+            plan = self._build_week(
+                conn, ctx, result, settings, today=current.week_start_date, max_minutes=max_minutes
+            )
+            keep = {t.task_id for t in plan.tasks}
+            update_weekly_plan(conn, plan_id, plan, [d for d in done if d in keep])
+            conn.commit()
 
     def set_task_done(self, profile_id: int, plan_id: int, task_id: str, done: bool) -> None:
         with closing(self._connect()) as conn:

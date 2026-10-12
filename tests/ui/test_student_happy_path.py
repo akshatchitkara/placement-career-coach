@@ -195,7 +195,7 @@ def test_weekly_plan_page_shows_tasks_and_remembers_ticks():
     _complete_check(profile_id, correct_first_n=1)
     at = _run("weekly_plan_page", profile_id)
     assert not at.exception
-    assert 3 <= len(at.checkbox) <= 5
+    assert 2 <= len(at.checkbox) <= 4  # study tasks; the re-check is a card, not a tick
     assert any("Re-check on" in i.value for i in at.info)
 
     at.checkbox[0].check().run()

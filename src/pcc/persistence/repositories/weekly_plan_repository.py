@@ -46,3 +46,13 @@ def set_done_task_ids(conn: sqlite3.Connection, plan_id: int, done_task_ids: lis
         "UPDATE weekly_plans SET tasks_done_json = ? WHERE id = ?",
         (json.dumps(sorted(set(done_task_ids))), plan_id),
     )
+
+
+def update_weekly_plan(
+    conn: sqlite3.Connection, plan_id: int, plan: WeeklyPlan, done_task_ids: list[str]
+) -> None:
+    """Replaces a week's tasks in place (same week, same re-check date), keeping valid ticks."""
+    conn.execute(
+        "UPDATE weekly_plans SET plan_json = ?, tasks_done_json = ? WHERE id = ?",
+        (plan.model_dump_json(), json.dumps(sorted(set(done_task_ids))), plan_id),
+    )
