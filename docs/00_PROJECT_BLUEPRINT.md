@@ -39,7 +39,7 @@
 22. [Product Note Outline](#22-product-note-outline)
 23. [Post-Submission Roadmap](#23-post-submission-roadmap)
 24. [AI Coding Assistant Contract](#24-ai-coding-assistant-contract)
-- [Appendix A: Decision Log](#appendix-a-decision-log) · [Appendix B: Open Decisions](#appendix-b-open-decisions) · [Appendix C: Glossary](#appendix-c-glossary)
+- [Appendix A: Decision Log](#appendix-a-decision-log) · [Appendix B: Open Decisions](#appendix-b-open-decisions) · [Appendix C: Glossary](#appendix-c-glossary) · [Appendix D: Changes Since This Blueprint](#appendix-d-changes-since-this-blueprint)
 
 ---
 
@@ -1266,3 +1266,19 @@ Use this document as the build contract.
 | Workflow controller | Deterministic orchestrator that sequences modules |
 | Fallback | Pre-authored template used when AI is unavailable or invalid |
 | Profile | Display name used to save progress; not an account |
+
+---
+
+## Appendix D: Changes Since This Blueprint
+
+The blueprint is the original spec and is left as written. This appendix records where the built app now differs. Scoring, level rules, the weakest-skill and position logic, the workflow states, the AI guardrails and the persistence rules are **unchanged**. The decision log (`docs/04_DECISION_LOG.md`, A47-A60) gives the reason for each item.
+
+| Area | Blueprint | Now |
+|---|---|---|
+| Pages and navigation | Flat list of pages; Profile first | A Home page with a five-step journey tracker and one "next step" button; pages grouped (Plan, Assess, Improve, Account); buttons replace "open X in the sidebar"; theme in `.streamlit/config.toml` |
+| Question banks | DevOps Semester 3 only; other careers roadmap-only (Tier B Sem 3 banks were an M8 stretch item) | All four careers have a Semester 3 bank (24 questions each) and practice templates. Semesters 4-6 still "coming soon" and the pages say which semesters have a check. 60 of the questions are `ai_drafted`, not yet reviewed by a person |
+| Skills check | One form with every question | One question at a time with progress, Back/Next, and an unanswered list. Grading and selection unchanged |
+| Results | Metrics, table, weakest-skill box | Score and level with a four-step ladder, "biggest opportunity" wording, per-skill bars with the mastery line, full numbers kept in an expander |
+| Coaching | A read-only plan of 3-5 tasks | Same plan, plus a coach per task: explain differently, example, free question (300 characters, 12 messages per task) and a practice quiz on seen questions graded by code. New: `agents/tutor_agent.py`, validator rules V-TU-01..04, prompt `tutor_reply_v1.md`, table `coaching_messages`. Tasks 1-2 share a done-checkbox with the weekly plan |
+| Weekly plan | A checkbox list with a re-check date | A seven-day schedule plus a re-check day, task links, a time-budget picker that rebuilds the week in place, a completion message, and an `.ics` calendar export. New: `domain/week_schedule.py`, `domain/calendar_export.py` |
+| Not built | Section 5 "Build next/later" items | Still not built: Semesters 4-6 banks, full-path check, Career Finder, custom CS career, answer simulator, regenerating a coaching plan, coaching more than one weak skill, per-task skip or swap, streaks |

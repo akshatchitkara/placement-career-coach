@@ -1,14 +1,14 @@
 """Asks the configured AI provider for draft questions per skill/difficulty.
 
-See blueprint Section 11.1. M1 scope -- requires skills.json to exist
-first. Stub only, so the file is present per Section 12 ahead of M1.
+Not implemented. Drafts were written by prompting an assistant and saving JSON by hand;
+see docs/02_QUESTION_AUTHORING_GUIDE.md for the format and the review process.
 """
 
 import sys
 
 
 def main() -> int:
-    print("Question draft generation is implemented in M1.")
+    print("Not implemented. See docs/02_QUESTION_AUTHORING_GUIDE.md.")
     return 0
 
 
