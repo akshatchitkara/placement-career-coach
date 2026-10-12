@@ -173,7 +173,32 @@
       "dns_and_http",
       "ports_and_firewalls"
     ],
-    "practice_templates": [],
+    "practice_templates": [
+      {
+        "concept_tag": "tcp_ip_basics",
+        "title": "Watch a handshake",
+        "action": "Capture a request to a local web server with Wireshark or tcpdump. Find the SYN, SYN-ACK and ACK packets and note the sequence numbers.",
+        "success_check": "Explain each packet of the handshake and why TCP needs it.",
+        "resource_hint": "search: tcpdump tcp three way handshake",
+        "estimated_minutes": 30
+      },
+      {
+        "concept_tag": "dns_and_http",
+        "title": "Trace a name lookup",
+        "action": "Use dig to look up A, CNAME and NS records for a domain, check the TTL, then request the page with curl -v and read the status line and headers.",
+        "success_check": "Explain what the TTL controls and what happens between typing a URL and the first byte.",
+        "resource_hint": "search: dig command examples; curl -v http headers",
+        "estimated_minutes": 30
+      },
+      {
+        "concept_tag": "ports_and_firewalls",
+        "title": "Open and close a port",
+        "action": "Start a service on a port, test it with nc, add a firewall rule that blocks it, test again, then allow it only from your own address.",
+        "success_check": "Explain why the rule order and the default policy matter.",
+        "resource_hint": "search: ufw or iptables basic rules",
+        "estimated_minutes": 30
+      }
+    ],
     "resources": []
   },
   {
@@ -188,7 +213,32 @@
       "build_triggers",
       "artifact_promotion"
     ],
-    "practice_templates": [],
+    "practice_templates": [
+      {
+        "concept_tag": "pipeline_stages",
+        "title": "Build a three-stage pipeline",
+        "action": "Create a pipeline for a small repository with build, test and package stages. Make a test fail on purpose and watch the later stages skip.",
+        "success_check": "Explain why the later stages did not run and what each stage produces.",
+        "resource_hint": "search: github actions workflow jobs needs",
+        "estimated_minutes": 40
+      },
+      {
+        "concept_tag": "build_triggers",
+        "title": "Try each trigger",
+        "action": "Configure triggers for a push, a pull request and a nightly schedule. Add path filters so a README change does not start a full build.",
+        "success_check": "Explain when each trigger fires and why path filters save time.",
+        "resource_hint": "search: ci path filters on push pull_request schedule",
+        "estimated_minutes": 30
+      },
+      {
+        "concept_tag": "artifact_promotion",
+        "title": "Promote one artifact",
+        "action": "Build an image once, tag it with the commit SHA, deploy that tag to a test environment, then deploy the same tag to a second one without rebuilding.",
+        "success_check": "Show that both environments run an identical digest and explain why that matters.",
+        "resource_hint": "search: build once deploy many artifact promotion",
+        "estimated_minutes": 40
+      }
+    ],
     "resources": []
   },
   {
@@ -203,7 +253,32 @@
       "dockerfile_basics",
       "volumes_and_networking"
     ],
-    "practice_templates": [],
+    "practice_templates": [
+      {
+        "concept_tag": "images_and_layers",
+        "title": "Inspect layers",
+        "action": "Build an image, run docker history on it, then reorder the Dockerfile so dependency installs come before the source copy. Rebuild after a code change and compare the cache use.",
+        "success_check": "Explain which layers were reused and why the order mattered.",
+        "resource_hint": "search: docker build cache layers history",
+        "estimated_minutes": 30
+      },
+      {
+        "concept_tag": "dockerfile_basics",
+        "title": "Write a Dockerfile",
+        "action": "Containerise a small app with FROM, WORKDIR, COPY, RUN, EXPOSE and CMD. Then change CMD to ENTRYPOINT plus CMD and override the arguments at docker run.",
+        "success_check": "Explain the difference between CMD and ENTRYPOINT without notes.",
+        "resource_hint": "search: dockerfile reference cmd entrypoint",
+        "estimated_minutes": 30
+      },
+      {
+        "concept_tag": "volumes_and_networking",
+        "title": "Persist data and connect containers",
+        "action": "Run a database with a named volume, remove the container and start it again to see the data survive. Put an app and the database on a user-defined network and reach it by name.",
+        "success_check": "Explain why the data survived and why name resolution works on that network.",
+        "resource_hint": "search: docker volumes user defined bridge network",
+        "estimated_minutes": 40
+      }
+    ],
     "resources": []
   },
   {
@@ -218,7 +293,32 @@
       "iam_basics",
       "regions_and_availability"
     ],
-    "practice_templates": [],
+    "practice_templates": [
+      {
+        "concept_tag": "compute_storage_network",
+        "title": "Build a small network",
+        "action": "In a free-tier account create a VPC with a public and a private subnet, a NAT gateway, and one instance in each. Check which can reach the internet and which can be reached from it.",
+        "success_check": "Draw the network from memory and explain the route tables.",
+        "resource_hint": "search: aws vpc public private subnet nat gateway tutorial",
+        "estimated_minutes": 60
+      },
+      {
+        "concept_tag": "iam_basics",
+        "title": "Least-privilege role",
+        "action": "Create a role that can only read one bucket, attach it to an instance, and confirm that writing and reading another bucket both fail.",
+        "success_check": "Explain why a role is safer than an access key in a config file.",
+        "resource_hint": "search: aws iam role instance profile least privilege",
+        "estimated_minutes": 40
+      },
+      {
+        "concept_tag": "regions_and_availability",
+        "title": "Design for a zone failure",
+        "action": "Sketch an architecture across two availability zones with a load balancer. List what fails and what survives if one zone goes down, and set an RTO and RPO for it.",
+        "success_check": "Explain RTO and RPO and which part of your design each depends on.",
+        "resource_hint": "search: high availability multi az architecture rto rpo",
+        "estimated_minutes": 40
+      }
+    ],
     "resources": []
   },
   {
@@ -233,7 +333,32 @@
       "services_and_ingress",
       "scaling_and_health_checks"
     ],
-    "practice_templates": [],
+    "practice_templates": [
+      {
+        "concept_tag": "pods_and_deployments",
+        "title": "Roll out and roll back",
+        "action": "On a local cluster create a Deployment with 3 replicas, change the image, watch the rolling update, then undo it with kubectl rollout undo.",
+        "success_check": "Explain what a pod, a ReplicaSet and a Deployment each do.",
+        "resource_hint": "search: kubectl rollout status undo kind minikube",
+        "estimated_minutes": 40
+      },
+      {
+        "concept_tag": "services_and_ingress",
+        "title": "Expose an app",
+        "action": "Create a ClusterIP Service for a Deployment, reach it from another pod, then add an Ingress with two paths routing to two Services.",
+        "success_check": "Explain how a request travels from the browser to a pod.",
+        "resource_hint": "search: kubernetes service ingress path routing tutorial",
+        "estimated_minutes": 45
+      },
+      {
+        "concept_tag": "scaling_and_health_checks",
+        "title": "Probes and autoscaling",
+        "action": "Add readiness and liveness probes to a Deployment, break the endpoint on purpose and watch the difference, then add a Horizontal Pod Autoscaler and load the app.",
+        "success_check": "Explain what each probe does when it fails and how the HPA decides replicas.",
+        "resource_hint": "search: kubernetes liveness readiness probe hpa",
+        "estimated_minutes": 45
+      }
+    ],
     "resources": []
   },
   {
@@ -248,7 +373,32 @@
       "state_management",
       "modules_and_variables"
     ],
-    "practice_templates": [],
+    "practice_templates": [
+      {
+        "concept_tag": "providers_and_resources",
+        "title": "Plan, apply, destroy",
+        "action": "Write a configuration for one small resource, run init, plan and apply, change an argument and read the plan, then destroy. Rename the resource block and read the plan again.",
+        "success_check": "Explain what each command does and why renaming looks like a replacement.",
+        "resource_hint": "search: terraform getting started plan apply destroy",
+        "estimated_minutes": 40
+      },
+      {
+        "concept_tag": "state_management",
+        "title": "Remote state and drift",
+        "action": "Move state to a remote backend with locking, change a resource by hand in the console and run plan to see the drift.",
+        "success_check": "Explain what the state file records and why two people must not share a local one.",
+        "resource_hint": "search: terraform remote backend state locking",
+        "estimated_minutes": 40
+      },
+      {
+        "concept_tag": "modules_and_variables",
+        "title": "Make a module",
+        "action": "Turn a group of resources into a module with input variables and outputs, call it twice with different values, and mark one input sensitive.",
+        "success_check": "Explain what sensitive does and does not protect.",
+        "resource_hint": "search: terraform modules variables outputs sensitive",
+        "estimated_minutes": 40
+      }
+    ],
     "resources": []
   },
   {
@@ -263,7 +413,32 @@
       "inventory_management",
       "secrets_handling"
     ],
-    "practice_templates": [],
+    "practice_templates": [
+      {
+        "concept_tag": "idempotent_playbooks",
+        "title": "Prove idempotence",
+        "action": "Write a playbook that installs a package, copies a config file and starts a service. Run it twice and compare the changed counts, then replace a task with a raw shell command and run it twice again.",
+        "success_check": "Explain why the second run showed no changes and what a handler adds.",
+        "resource_hint": "search: ansible idempotent modules handlers",
+        "estimated_minutes": 40
+      },
+      {
+        "concept_tag": "inventory_management",
+        "title": "Groups and variables",
+        "action": "Build an inventory with two groups, group variables and a host variable. Use ansible-inventory to show the result and target one group with --limit.",
+        "success_check": "Explain how variable precedence resolves a value set in two places.",
+        "resource_hint": "search: ansible inventory group_vars host_vars",
+        "estimated_minutes": 30
+      },
+      {
+        "concept_tag": "secrets_handling",
+        "title": "Vault a secret",
+        "action": "Encrypt a variables file with ansible-vault, use it in a playbook, and confirm the secret never appears in plain text in the repository or the output.",
+        "success_check": "Explain why the secret is safe in Git and how you would rotate it.",
+        "resource_hint": "search: ansible vault encrypt file no_log",
+        "estimated_minutes": 30
+      }
+    ],
     "resources": []
   },
   {
@@ -278,7 +453,32 @@
       "rollback_strategies",
       "declarative_sync"
     ],
-    "practice_templates": [],
+    "practice_templates": [
+      {
+        "concept_tag": "blue_green_and_canary",
+        "title": "Switch traffic safely",
+        "action": "Run two versions of a small app behind a proxy. Do a blue-green switch, then a canary that sends 10% of requests to the new version.",
+        "success_check": "Explain when you would choose each strategy and what you would watch.",
+        "resource_hint": "search: nginx weighted upstream canary blue green",
+        "estimated_minutes": 45
+      },
+      {
+        "concept_tag": "rollback_strategies",
+        "title": "Plan a rollback",
+        "action": "Take one release that changes a database column and write its rollback plan, including how to make the migration backward compatible.",
+        "success_check": "Explain the expand, migrate and contract steps without notes.",
+        "resource_hint": "search: expand contract database migration zero downtime",
+        "estimated_minutes": 40
+      },
+      {
+        "concept_tag": "declarative_sync",
+        "title": "Try GitOps",
+        "action": "Install Argo CD or Flux on a local cluster, point it at a repository of manifests, push a change and watch it sync, then edit an object by hand and watch self-heal revert it.",
+        "success_check": "Explain why Git is the source of truth and what drift is.",
+        "resource_hint": "search: argo cd getting started self heal",
+        "estimated_minutes": 60
+      }
+    ],
     "resources": []
   },
   {
@@ -293,7 +493,32 @@
       "logging_pipelines",
       "alerting_and_slos"
     ],
-    "practice_templates": [],
+    "practice_templates": [
+      {
+        "concept_tag": "metrics_and_dashboards",
+        "title": "Build a dashboard",
+        "action": "Expose request count and latency metrics from a small service, scrape them with Prometheus and chart rate and p95 latency in Grafana.",
+        "success_check": "Explain why you chart percentiles and not just the average.",
+        "resource_hint": "search: prometheus grafana histogram quantile tutorial",
+        "estimated_minutes": 60
+      },
+      {
+        "concept_tag": "logging_pipelines",
+        "title": "Structured logs",
+        "action": "Change an app to log JSON with a request id, ship the logs to a search tool and find every line for one request across two services.",
+        "success_check": "Explain what structure and a correlation id let you do.",
+        "resource_hint": "search: structured logging json correlation id",
+        "estimated_minutes": 40
+      },
+      {
+        "concept_tag": "alerting_and_slos",
+        "title": "Set an SLO and an alert",
+        "action": "Define an availability SLO for a service, compute its error budget and write one alert on the burn rate. Say what a person should do when it fires.",
+        "success_check": "Explain the error budget and why this alert beats a CPU alert.",
+        "resource_hint": "search: sre slo error budget burn rate alert",
+        "estimated_minutes": 40
+      }
+    ],
     "resources": []
   },
   {
@@ -308,7 +533,32 @@
       "secrets_in_pipelines",
       "least_privilege"
     ],
-    "practice_templates": [],
+    "practice_templates": [
+      {
+        "concept_tag": "dependency_scanning",
+        "title": "Scan and fix",
+        "action": "Run a dependency scanner on a project, pick the highest-severity finding, upgrade or replace the library and rerun the scan.",
+        "success_check": "Explain how you decide between fixing now and accepting a risk.",
+        "resource_hint": "search: trivy or npm audit dependency scanning",
+        "estimated_minutes": 30
+      },
+      {
+        "concept_tag": "secrets_in_pipelines",
+        "title": "Find and rotate a leaked secret",
+        "action": "Add a fake secret to a test repository, detect it with a secret scanner, then remove it from history and rotate it. Move the real value into the CI secret store.",
+        "success_check": "Explain why deleting the line in a new commit is not enough.",
+        "resource_hint": "search: gitleaks detect secrets git history",
+        "estimated_minutes": 40
+      },
+      {
+        "concept_tag": "least_privilege",
+        "title": "Harden a pod",
+        "action": "Run a container as root, then change the manifest to a non-root user, a read-only root filesystem and dropped capabilities. Confirm the app still works.",
+        "success_check": "Explain what each setting protects against.",
+        "resource_hint": "search: kubernetes securitycontext runasnonroot readonlyrootfilesystem",
+        "estimated_minutes": 40
+      }
+    ],
     "resources": []
   },
   {
@@ -472,7 +722,32 @@
       "generics",
       "narrowing"
     ],
-    "practice_templates": [],
+    "practice_templates": [
+      {
+        "concept_tag": "types_and_interfaces",
+        "title": "Type a small API client",
+        "action": "Rewrite a small JavaScript module in TypeScript with interfaces for its data. Turn on strict mode and fix every error without using any.",
+        "success_check": "Explain what the compiler caught and why any would have hidden it.",
+        "resource_hint": "TypeScript handbook: everyday types",
+        "estimated_minutes": 40
+      },
+      {
+        "concept_tag": "generics",
+        "title": "Write generic helpers",
+        "action": "Write generic functions first<T>, groupBy<T, K> and a constrained function that needs an id property. Call each with two different types.",
+        "success_check": "Explain what T is and what a constraint adds.",
+        "resource_hint": "TypeScript handbook: generics",
+        "estimated_minutes": 35
+      },
+      {
+        "concept_tag": "narrowing",
+        "title": "Narrow a union",
+        "action": "Handle a value of type string | number | null with typeof and null checks, then a discriminated union of three shapes with a switch and an exhaustiveness check.",
+        "success_check": "Explain how the compiler knows the type in each branch.",
+        "resource_hint": "TypeScript handbook: narrowing",
+        "estimated_minutes": 35
+      }
+    ],
     "resources": []
   },
   {
@@ -487,7 +762,32 @@
       "error_handling",
       "request_validation"
     ],
-    "practice_templates": [],
+    "practice_templates": [
+      {
+        "concept_tag": "routing_and_middleware",
+        "title": "Build middleware",
+        "action": "Create an Express app with a logging middleware, a route-specific middleware and a router for /users. Then remove a next() call and watch the request hang.",
+        "success_check": "Explain the order middleware runs in and what next() does.",
+        "resource_hint": "Express guide: using middleware",
+        "estimated_minutes": 40
+      },
+      {
+        "concept_tag": "error_handling",
+        "title": "Central error handling",
+        "action": "Add an error-handling middleware, make an async route fail, and fix it so the error reaches the handler. Return a consistent JSON error shape.",
+        "success_check": "Explain why async errors needed extra care in Express 4.",
+        "resource_hint": "Express guide: error handling",
+        "estimated_minutes": 35
+      },
+      {
+        "concept_tag": "request_validation",
+        "title": "Validate input",
+        "action": "Add schema validation (for example with Zod or Joi) to a POST route, return 400 with field messages for bad bodies, and test with curl.",
+        "success_check": "Explain why the server validates even when the form does.",
+        "resource_hint": "search: express request validation zod joi",
+        "estimated_minutes": 35
+      }
+    ],
     "resources": []
   },
   {
@@ -502,7 +802,32 @@
       "indexing",
       "aggregation_pipeline"
     ],
-    "practice_templates": [],
+    "practice_templates": [
+      {
+        "concept_tag": "schema_design",
+        "title": "Embed or reference",
+        "action": "Model a blog with posts, comments and authors in two ways: comments embedded in posts and comments in their own collection. Query each and compare.",
+        "success_check": "Explain when you would embed and when you would reference.",
+        "resource_hint": "MongoDB docs: data modeling",
+        "estimated_minutes": 40
+      },
+      {
+        "concept_tag": "indexing",
+        "title": "Index a slow query",
+        "action": "Load 100,000 documents, run a filtered and sorted query with explain(), add a compound index and compare the plans.",
+        "success_check": "Explain why the field order in a compound index matters.",
+        "resource_hint": "MongoDB docs: indexes and explain",
+        "estimated_minutes": 40
+      },
+      {
+        "concept_tag": "aggregation_pipeline",
+        "title": "Aggregate orders",
+        "action": "Write a pipeline with $match, $group and $sort that returns total sales per customer, then add $lookup to join customer names.",
+        "success_check": "Explain what each stage receives and returns.",
+        "resource_hint": "MongoDB docs: aggregation pipeline",
+        "estimated_minutes": 40
+      }
+    ],
     "resources": []
   },
   {
@@ -517,7 +842,32 @@
       "role_based_access",
       "password_hashing"
     ],
-    "practice_templates": [],
+    "practice_templates": [
+      {
+        "concept_tag": "jwt_and_sessions",
+        "title": "Issue and verify tokens",
+        "action": "Build login and a protected route using short-lived access tokens and a refresh token. Decode a token by hand to see its payload.",
+        "success_check": "Explain what the signature protects and what the payload does not.",
+        "resource_hint": "search: jwt.io introduction access refresh token",
+        "estimated_minutes": 45
+      },
+      {
+        "concept_tag": "role_based_access",
+        "title": "Add roles",
+        "action": "Add user and admin roles and a middleware that checks the role for each route. Test that a user gets 403 on admin routes.",
+        "success_check": "Explain the difference between 401 and 403.",
+        "resource_hint": "search: express role based access control middleware",
+        "estimated_minutes": 35
+      },
+      {
+        "concept_tag": "password_hashing",
+        "title": "Hash properly",
+        "action": "Store passwords with bcrypt, compare a login attempt, and show that the same password gives two different hashes.",
+        "success_check": "Explain salts and why the hash must be slow.",
+        "resource_hint": "search: bcrypt node salt rounds",
+        "estimated_minutes": 30
+      }
+    ],
     "resources": []
   },
   {
@@ -532,7 +882,32 @@
       "data_binding",
       "dependency_injection"
     ],
-    "practice_templates": [],
+    "practice_templates": [
+      {
+        "concept_tag": "components_and_modules",
+        "title": "Build a component tree",
+        "action": "Create a parent component with two child components, pass data down with inputs and send events up with outputs.",
+        "success_check": "Explain the role of the class, template and styles.",
+        "resource_hint": "Angular docs: components",
+        "estimated_minutes": 40
+      },
+      {
+        "concept_tag": "data_binding",
+        "title": "Practise every binding",
+        "action": "Build a form that uses interpolation, property binding, event binding and two-way binding. Log what each one does.",
+        "success_check": "Explain which direction data flows for each syntax.",
+        "resource_hint": "Angular docs: template syntax",
+        "estimated_minutes": 35
+      },
+      {
+        "concept_tag": "dependency_injection",
+        "title": "Inject a service",
+        "action": "Create a service, provide it in root, inject it into two components and share state between them. Replace it with a fake in a test.",
+        "success_check": "Explain why constructor injection makes testing easier.",
+        "resource_hint": "Angular docs: dependency injection",
+        "estimated_minutes": 40
+      }
+    ],
     "resources": []
   },
   {
@@ -547,7 +922,32 @@
       "subjects",
       "state_patterns"
     ],
-    "practice_templates": [],
+    "practice_templates": [
+      {
+        "concept_tag": "observables_and_operators",
+        "title": "Operator drill",
+        "action": "Build streams with of, interval and fromEvent. Use map, filter, take, debounceTime and switchMap to make a type-ahead search against a fake API.",
+        "success_check": "Explain why switchMap is right for search and mergeMap is not.",
+        "resource_hint": "RxJS docs: operators",
+        "estimated_minutes": 40
+      },
+      {
+        "concept_tag": "subjects",
+        "title": "Subjects in practice",
+        "action": "Share one stream between two subscribers with a Subject, then replace it with a BehaviorSubject and subscribe late to see the difference.",
+        "success_check": "Explain when a BehaviorSubject is the better choice.",
+        "resource_hint": "RxJS docs: subject",
+        "estimated_minutes": 30
+      },
+      {
+        "concept_tag": "state_patterns",
+        "title": "A tiny store",
+        "action": "Build a store with a BehaviorSubject that exposes read-only state and updates it only through immutable functions.",
+        "success_check": "Explain why updates replace the object instead of changing it.",
+        "resource_hint": "search: rxjs state management behaviorsubject immutable",
+        "estimated_minutes": 40
+      }
+    ],
     "resources": []
   },
   {
@@ -562,7 +962,32 @@
       "mocking",
       "test_coverage"
     ],
-    "practice_templates": [],
+    "practice_templates": [
+      {
+        "concept_tag": "unit_vs_integration",
+        "title": "One of each",
+        "action": "Write unit tests for a pure function and one integration test that runs a route against a test database. Note what only the integration test caught.",
+        "success_check": "Explain what each level of test is for.",
+        "resource_hint": "search: testing pyramid unit integration",
+        "estimated_minutes": 40
+      },
+      {
+        "concept_tag": "mocking",
+        "title": "Mock a dependency",
+        "action": "Test a function that calls an external API by mocking the HTTP client, then add a test for a timeout response.",
+        "success_check": "Explain what the mock proves and what it cannot.",
+        "resource_hint": "search: jest mock functions",
+        "estimated_minutes": 35
+      },
+      {
+        "concept_tag": "test_coverage",
+        "title": "Read a coverage report",
+        "action": "Run coverage on a project, find a line covered by a test with no assertion, and add a meaningful assertion.",
+        "success_check": "Explain why 100% coverage is not 100% confidence.",
+        "resource_hint": "search: jest coverage report istanbul",
+        "estimated_minutes": 30
+      }
+    ],
     "resources": []
   },
   {
@@ -577,7 +1002,32 @@
       "build_triggers",
       "artifact_promotion"
     ],
-    "practice_templates": [],
+    "practice_templates": [
+      {
+        "concept_tag": "pipeline_stages",
+        "title": "A front-end pipeline",
+        "action": "Create a pipeline with lint, unit test, build and deploy-preview stages. Break a lint rule on purpose and watch it stop early.",
+        "success_check": "Explain why the stages are in that order.",
+        "resource_hint": "search: github actions node ci workflow",
+        "estimated_minutes": 40
+      },
+      {
+        "concept_tag": "build_triggers",
+        "title": "Choose triggers",
+        "action": "Add triggers for pull requests, pushes to main and a nightly schedule, and decide which stages run on each.",
+        "success_check": "Explain why a deploy runs only from main.",
+        "resource_hint": "search: github actions on push pull_request schedule",
+        "estimated_minutes": 30
+      },
+      {
+        "concept_tag": "artifact_promotion",
+        "title": "Promote a build",
+        "action": "Store the build output as a versioned artifact and deploy that same artifact to a preview and then a production environment.",
+        "success_check": "Explain why you do not rebuild for production.",
+        "resource_hint": "search: github actions upload artifact deploy",
+        "estimated_minutes": 40
+      }
+    ],
     "resources": []
   },
   {
@@ -592,7 +1042,32 @@
       "caching_strategies",
       "bundle_optimization"
     ],
-    "practice_templates": [],
+    "practice_templates": [
+      {
+        "concept_tag": "xss_and_csrf",
+        "title": "Break and fix XSS",
+        "action": "Render user input unescaped in a test page, trigger an alert with a script, then fix it with escaping and a Content-Security-Policy.",
+        "success_check": "Explain why the fix works for every input and not only that script.",
+        "resource_hint": "OWASP: cross site scripting prevention",
+        "estimated_minutes": 40
+      },
+      {
+        "concept_tag": "caching_strategies",
+        "title": "Cache headers",
+        "action": "Serve static files with hashed names and long max-age, and an HTML page with no-cache. Verify with the browser network panel.",
+        "success_check": "Explain why hashed file names allow long caching.",
+        "resource_hint": "MDN: HTTP caching",
+        "estimated_minutes": 30
+      },
+      {
+        "concept_tag": "bundle_optimization",
+        "title": "Shrink a bundle",
+        "action": "Analyse a bundle with a visualiser, split one route into a lazy chunk and compare load sizes.",
+        "success_check": "Explain what code splitting changed for the first load.",
+        "resource_hint": "search: webpack bundle analyzer code splitting",
+        "estimated_minutes": 40
+      }
+    ],
     "resources": []
   },
   {
@@ -608,7 +1083,32 @@
       "caching_layers",
       "database_scaling"
     ],
-    "practice_templates": [],
+    "practice_templates": [
+      {
+        "concept_tag": "load_balancing",
+        "title": "Balance two servers",
+        "action": "Run two copies of a small app behind nginx. Stop one and watch the balancer route around it using a health check.",
+        "success_check": "Explain what a health check does and what happens without one.",
+        "resource_hint": "search: nginx upstream health check load balancing",
+        "estimated_minutes": 40
+      },
+      {
+        "concept_tag": "caching_layers",
+        "title": "Add a cache",
+        "action": "Put a Redis or in-memory cache in front of a slow query, measure the difference, and write down when the cached value becomes stale.",
+        "success_check": "Explain the invalidation problem in your own example.",
+        "resource_hint": "search: cache aside pattern redis",
+        "estimated_minutes": 40
+      },
+      {
+        "concept_tag": "database_scaling",
+        "title": "Read replicas and shards",
+        "action": "Draw a design where reads go to replicas and writes to a primary, then a second design that shards users by id. List what gets harder with each.",
+        "success_check": "Explain the trade-off between replicas and sharding.",
+        "resource_hint": "search: database replication vs sharding",
+        "estimated_minutes": 35
+      }
+    ],
     "resources": []
   },
   {
@@ -796,7 +1296,32 @@
       "dependency_injection",
       "application_properties"
     ],
-    "practice_templates": [],
+    "practice_templates": [
+      {
+        "concept_tag": "autoconfiguration",
+        "title": "See auto-configuration at work",
+        "action": "Start a Spring Boot app with the debug flag, read the conditions report, then add and exclude a starter and watch what changes.",
+        "success_check": "Explain what @SpringBootApplication does and how auto-configuration decides.",
+        "resource_hint": "Spring Boot docs: auto-configuration",
+        "estimated_minutes": 40
+      },
+      {
+        "concept_tag": "dependency_injection",
+        "title": "Constructor injection",
+        "action": "Refactor a class from field injection to constructor injection, write a unit test that builds it without Spring, then add two implementations and resolve the conflict with @Primary.",
+        "success_check": "Explain why constructor injection is easier to test.",
+        "resource_hint": "Spring docs: dependency injection",
+        "estimated_minutes": 35
+      },
+      {
+        "concept_tag": "application_properties",
+        "title": "Profiles and overrides",
+        "action": "Add application-dev and application-prod files, set one property in three places and find which value wins using the command line and environment variables.",
+        "success_check": "Explain the property precedence order.",
+        "resource_hint": "Spring Boot docs: externalized configuration",
+        "estimated_minutes": 30
+      }
+    ],
     "resources": []
   },
   {
@@ -811,7 +1336,32 @@
       "status_codes",
       "versioning"
     ],
-    "practice_templates": [],
+    "practice_templates": [
+      {
+        "concept_tag": "resource_modeling",
+        "title": "Model a resource API",
+        "action": "Design endpoints for orders and order items with nouns and HTTP methods. Show which methods are idempotent and why that matters for retries.",
+        "success_check": "Explain why the URL names a thing and the method names the action.",
+        "resource_hint": "search: rest api design best practices resources",
+        "estimated_minutes": 35
+      },
+      {
+        "concept_tag": "status_codes",
+        "title": "Choose status codes",
+        "action": "List ten situations (created, bad input, not signed in, no permission, missing, conflict) and pick the right status code for each, then implement three.",
+        "success_check": "Explain 401 versus 403 and 400 versus 422.",
+        "resource_hint": "MDN: HTTP response status codes",
+        "estimated_minutes": 30
+      },
+      {
+        "concept_tag": "versioning",
+        "title": "Evolve an API",
+        "action": "Make one backward-compatible change and one breaking change to an endpoint and decide how a version would be introduced for the second.",
+        "success_check": "Explain what makes a change breaking.",
+        "resource_hint": "search: api versioning strategies uri header",
+        "estimated_minutes": 30
+      }
+    ],
     "resources": []
   },
   {
@@ -826,7 +1376,32 @@
       "lazy_vs_eager",
       "transactions"
     ],
-    "practice_templates": [],
+    "practice_templates": [
+      {
+        "concept_tag": "entity_mapping",
+        "title": "Map entities",
+        "action": "Map two related tables with @Entity, @Id, @ManyToOne and @OneToMany, and write a repository test that saves and reads them.",
+        "success_check": "Explain what the owning side of a relationship is.",
+        "resource_hint": "search: spring data jpa entity mapping tutorial",
+        "estimated_minutes": 45
+      },
+      {
+        "concept_tag": "lazy_vs_eager",
+        "title": "Find and fix N+1",
+        "action": "Log the SQL for a loop over parents and children, count the queries, then fix it with a join fetch or an entity graph.",
+        "success_check": "Explain why the extra queries happened and how the fix removed them.",
+        "resource_hint": "search: hibernate n+1 problem join fetch",
+        "estimated_minutes": 40
+      },
+      {
+        "concept_tag": "transactions",
+        "title": "Transactions and rollback",
+        "action": "Write a service method that saves two entities and throws on the second. Show the rollback, then call it from another method in the same class and see what changes.",
+        "success_check": "Explain why the proxy matters for @Transactional.",
+        "resource_hint": "Spring docs: transaction management declarative",
+        "estimated_minutes": 40
+      }
+    ],
     "resources": []
   },
   {
@@ -841,7 +1416,32 @@
       "synchronization",
       "executor_services"
     ],
-    "practice_templates": [],
+    "practice_templates": [
+      {
+        "concept_tag": "thread_lifecycle",
+        "title": "Watch the states",
+        "action": "Start threads that sleep, wait and block on a lock. Print their states with getState and match each to the lifecycle diagram.",
+        "success_check": "Explain NEW, RUNNABLE, BLOCKED, WAITING and TERMINATED.",
+        "resource_hint": "Java docs: Thread.State",
+        "estimated_minutes": 30
+      },
+      {
+        "concept_tag": "synchronization",
+        "title": "Race and deadlock",
+        "action": "Write a counter incremented by many threads, show lost updates, fix it with synchronized or an atomic, then create a deadlock and fix it with lock ordering.",
+        "success_check": "Explain what synchronized guarantees and how a deadlock arises.",
+        "resource_hint": "search: java race condition deadlock example",
+        "estimated_minutes": 45
+      },
+      {
+        "concept_tag": "executor_services",
+        "title": "Use a thread pool",
+        "action": "Submit 20 tasks to a fixed pool of 4 with Future results, measure the time, and compare with a cached pool and with virtual threads.",
+        "success_check": "Explain what happens to tasks that do not fit the pool.",
+        "resource_hint": "Java docs: ExecutorService",
+        "estimated_minutes": 40
+      }
+    ],
     "resources": []
   },
   {
@@ -856,7 +1456,32 @@
       "authorization_rules",
       "csrf_protection"
     ],
-    "practice_templates": [],
+    "practice_templates": [
+      {
+        "concept_tag": "authentication_filters",
+        "title": "Secure an endpoint",
+        "action": "Add Spring Security with in-memory users and BCrypt. Visit a protected endpoint with and without credentials and read the filter chain in the debug log.",
+        "success_check": "Explain what the filter chain does before a controller runs.",
+        "resource_hint": "Spring Security docs: servlet architecture",
+        "estimated_minutes": 45
+      },
+      {
+        "concept_tag": "authorization_rules",
+        "title": "Roles and methods",
+        "action": "Protect URLs with requestMatchers and a method with @PreAuthorize. Test a user and an admin, and cause a 403 by using the wrong role prefix.",
+        "success_check": "Explain hasRole versus hasAuthority.",
+        "resource_hint": "Spring Security docs: authorization",
+        "estimated_minutes": 40
+      },
+      {
+        "concept_tag": "csrf_protection",
+        "title": "CSRF in practice",
+        "action": "Submit a form to a cookie-authenticated endpoint from another page, show the forged request, then enable CSRF tokens and retry.",
+        "success_check": "Explain why a header-token API needs no CSRF token.",
+        "resource_hint": "Spring Security docs: csrf",
+        "estimated_minutes": 35
+      }
+    ],
     "resources": []
   },
   {
@@ -871,7 +1496,32 @@
       "api_gateway",
       "circuit_breakers"
     ],
-    "practice_templates": [],
+    "practice_templates": [
+      {
+        "concept_tag": "service_boundaries",
+        "title": "Split a monolith",
+        "action": "Take a small shop domain and draw service boundaries for orders, payments and catalogue. Write what data each owns and what events cross the boundaries.",
+        "success_check": "Explain why each service owns its database.",
+        "resource_hint": "search: microservices bounded context decomposition",
+        "estimated_minutes": 40
+      },
+      {
+        "concept_tag": "api_gateway",
+        "title": "Add a gateway",
+        "action": "Put Spring Cloud Gateway or nginx in front of two services with routing and a rate limit.",
+        "success_check": "Explain which concerns belong in the gateway and which do not.",
+        "resource_hint": "Spring Cloud Gateway docs",
+        "estimated_minutes": 45
+      },
+      {
+        "concept_tag": "circuit_breakers",
+        "title": "Break the circuit",
+        "action": "Add Resilience4j to a call, make the downstream service fail, and watch the breaker open and half-open. Add backoff to the retry.",
+        "success_check": "Explain the three breaker states and the retry storm risk.",
+        "resource_hint": "Resilience4j docs: circuit breaker",
+        "estimated_minutes": 45
+      }
+    ],
     "resources": []
   },
   {
@@ -886,7 +1536,32 @@
       "message_queues",
       "event_driven_design"
     ],
-    "practice_templates": [],
+    "practice_templates": [
+      {
+        "concept_tag": "pub_sub",
+        "title": "Publish and subscribe",
+        "action": "Run a local broker, publish to a topic and attach two subscribers. Add a third later and see what it receives.",
+        "success_check": "Explain the difference between a queue and a topic.",
+        "resource_hint": "search: rabbitmq or kafka pub sub tutorial",
+        "estimated_minutes": 40
+      },
+      {
+        "concept_tag": "message_queues",
+        "title": "Acknowledge and retry",
+        "action": "Make a consumer crash before acknowledging, watch the redelivery, then add a dead-letter queue for a message that always fails.",
+        "success_check": "Explain why a message can arrive twice.",
+        "resource_hint": "search: message queue acknowledgement dead letter queue",
+        "estimated_minutes": 40
+      },
+      {
+        "concept_tag": "event_driven_design",
+        "title": "Make a handler idempotent",
+        "action": "Process an order-created event, send it twice and make the second delivery harmless using an id check.",
+        "success_check": "Explain at-least-once delivery and why idempotence is required.",
+        "resource_hint": "search: idempotent consumer pattern",
+        "estimated_minutes": 35
+      }
+    ],
     "resources": []
   },
   {
@@ -901,7 +1576,32 @@
       "mocking",
       "test_coverage"
     ],
-    "practice_templates": [],
+    "practice_templates": [
+      {
+        "concept_tag": "unit_vs_integration",
+        "title": "Test at two levels",
+        "action": "Write a unit test for a service with mocked collaborators and a @SpringBootTest integration test for the same flow with a test database.",
+        "success_check": "Explain what each level can and cannot catch.",
+        "resource_hint": "Spring Boot docs: testing",
+        "estimated_minutes": 40
+      },
+      {
+        "concept_tag": "mocking",
+        "title": "Stub and verify",
+        "action": "Use Mockito to stub a repository, assert the result, verify a call happened once and verify another never happened.",
+        "success_check": "Explain stubbing versus verifying.",
+        "resource_hint": "Mockito docs: when thenReturn verify",
+        "estimated_minutes": 35
+      },
+      {
+        "concept_tag": "test_coverage",
+        "title": "Read coverage honestly",
+        "action": "Generate a JaCoCo report, find a covered line with no real assertion and strengthen the test.",
+        "success_check": "Explain why a high percentage is not enough.",
+        "resource_hint": "search: jacoco coverage report maven",
+        "estimated_minutes": 30
+      }
+    ],
     "resources": []
   },
   {
@@ -916,7 +1616,32 @@
       "dockerfile_basics",
       "container_orchestration_basics"
     ],
-    "practice_templates": [],
+    "practice_templates": [
+      {
+        "concept_tag": "dockerfile_basics",
+        "title": "Multi-stage image",
+        "action": "Containerise a Spring Boot app with a multi-stage Dockerfile and compare its size with a single-stage build.",
+        "success_check": "Explain what each stage holds and why the result is smaller.",
+        "resource_hint": "search: spring boot docker multi stage build",
+        "estimated_minutes": 40
+      },
+      {
+        "concept_tag": "images_and_layers",
+        "title": "Cache-friendly layers",
+        "action": "Order the Dockerfile so dependencies download before the source is copied and measure rebuild time after a one-line change.",
+        "success_check": "Explain which layers were reused.",
+        "resource_hint": "search: docker layer caching maven",
+        "estimated_minutes": 30
+      },
+      {
+        "concept_tag": "container_orchestration_basics",
+        "title": "Size container memory",
+        "action": "Run the app with a small memory limit, trigger an OOM kill, then fix it by setting the heap relative to the limit.",
+        "success_check": "Explain why the JVM needs more memory than the heap.",
+        "resource_hint": "search: jvm container memory maxrampercentage",
+        "estimated_minutes": 40
+      }
+    ],
     "resources": []
   },
   {
@@ -1064,7 +1789,32 @@
       "bias_variance",
       "train_test_split"
     ],
-    "practice_templates": [],
+    "practice_templates": [
+      {
+        "concept_tag": "supervised_vs_unsupervised",
+        "title": "Classify the problem",
+        "action": "For ten problems (spam, customer segments, price prediction, anomaly detection and so on) decide supervised or unsupervised and name an algorithm. Run one of each on a small dataset.",
+        "success_check": "Explain what a label is and which of your examples needed one.",
+        "resource_hint": "scikit-learn docs: choosing the right estimator",
+        "estimated_minutes": 35
+      },
+      {
+        "concept_tag": "bias_variance",
+        "title": "Over- and underfit",
+        "action": "Fit polynomial models of degree 1, 4 and 15 to noisy data and plot training and test error for each.",
+        "success_check": "Explain which model overfits and what regularisation changes.",
+        "resource_hint": "search: bias variance tradeoff polynomial regression sklearn",
+        "estimated_minutes": 40
+      },
+      {
+        "concept_tag": "train_test_split",
+        "title": "Split without leaking",
+        "action": "Split a classification dataset three ways: random, stratified and by time. Compare the class balance and the scores.",
+        "success_check": "Explain why the test set stays untouched until the end.",
+        "resource_hint": "scikit-learn docs: train_test_split stratify",
+        "estimated_minutes": 30
+      }
+    ],
     "resources": []
   },
   {
@@ -1079,7 +1829,32 @@
       "cross_validation",
       "evaluation_metrics"
     ],
-    "practice_templates": [],
+    "practice_templates": [
+      {
+        "concept_tag": "feature_scaling",
+        "title": "Scale and compare",
+        "action": "Train KNN on unscaled and then standardised features and compare the scores. Fit the scaler on the training data only.",
+        "success_check": "Explain why scaling matters for distance-based models and what leakage means.",
+        "resource_hint": "scikit-learn docs: preprocessing StandardScaler",
+        "estimated_minutes": 35
+      },
+      {
+        "concept_tag": "cross_validation",
+        "title": "Cross-validate",
+        "action": "Evaluate one model with 5-fold cross-validation and a stratified version, and compare the spread of scores with a single split.",
+        "success_check": "Explain why the average over folds is more trustworthy.",
+        "resource_hint": "scikit-learn docs: cross-validation",
+        "estimated_minutes": 35
+      },
+      {
+        "concept_tag": "evaluation_metrics",
+        "title": "Beyond accuracy",
+        "action": "On an imbalanced dataset compute accuracy, precision, recall, F1 and a confusion matrix for a model that always predicts the majority class and for a real model.",
+        "success_check": "Explain why accuracy misled and what precision and recall each answer.",
+        "resource_hint": "scikit-learn docs: classification metrics",
+        "estimated_minutes": 40
+      }
+    ],
     "resources": []
   },
   {
@@ -1094,7 +1869,32 @@
       "backpropagation",
       "activation_functions"
     ],
-    "practice_templates": [],
+    "practice_templates": [
+      {
+        "concept_tag": "neural_network_basics",
+        "title": "A network by hand",
+        "action": "Compute a forward pass for a two-layer network on paper with small numbers, then confirm it in NumPy. Train a tiny network and try three learning rates.",
+        "success_check": "Explain weights, bias and what a too-high learning rate does.",
+        "resource_hint": "search: neural network from scratch numpy",
+        "estimated_minutes": 50
+      },
+      {
+        "concept_tag": "backpropagation",
+        "title": "Follow the gradient",
+        "action": "Derive the gradient for a one-neuron model by hand, compare it with a numerical estimate, and watch gradients shrink in a deep sigmoid network.",
+        "success_check": "Explain the chain rule's role and the vanishing gradient problem.",
+        "resource_hint": "3Blue1Brown: backpropagation",
+        "estimated_minutes": 50
+      },
+      {
+        "concept_tag": "activation_functions",
+        "title": "Compare activations",
+        "action": "Train the same small network with sigmoid, tanh and ReLU and compare the learning curves.",
+        "success_check": "Explain why non-linearity is needed and why ReLU is common.",
+        "resource_hint": "search: activation functions comparison relu sigmoid tanh",
+        "estimated_minutes": 35
+      }
+    ],
     "resources": []
   },
   {
@@ -1109,7 +1909,32 @@
       "embeddings",
       "sequence_models"
     ],
-    "practice_templates": [],
+    "practice_templates": [
+      {
+        "concept_tag": "tokenization",
+        "title": "Tokenize text",
+        "action": "Tokenize the same sentences with a word splitter and a subword tokenizer. Look at how rare and misspelled words are handled.",
+        "success_check": "Explain why subword tokens avoid unknown words.",
+        "resource_hint": "Hugging Face course: tokenizers",
+        "estimated_minutes": 30
+      },
+      {
+        "concept_tag": "embeddings",
+        "title": "Explore embeddings",
+        "action": "Embed a list of words or sentences, find nearest neighbours by cosine similarity and plot them in two dimensions.",
+        "success_check": "Explain what closeness means in an embedding space.",
+        "resource_hint": "search: sentence-transformers cosine similarity example",
+        "estimated_minutes": 40
+      },
+      {
+        "concept_tag": "sequence_models",
+        "title": "Attention by hand",
+        "action": "Compute self-attention for a three-token example with small matrices, then compare with an RNN on a long-range task.",
+        "success_check": "Explain what the attention weights say and why they help with distant words.",
+        "resource_hint": "search: illustrated transformer self attention",
+        "estimated_minutes": 50
+      }
+    ],
     "resources": []
   },
   {
@@ -1124,7 +1949,32 @@
       "few_shot_examples",
       "context_windows"
     ],
-    "practice_templates": [],
+    "practice_templates": [
+      {
+        "concept_tag": "prompt_structuring",
+        "title": "Rewrite prompts",
+        "action": "Take five vague prompts and rewrite each with a role, task, format and constraints. Compare the outputs.",
+        "success_check": "Explain which parts of the prompt changed the answer most.",
+        "resource_hint": "search: prompt engineering guide structure",
+        "estimated_minutes": 35
+      },
+      {
+        "concept_tag": "few_shot_examples",
+        "title": "Zero-shot to few-shot",
+        "action": "Classify support tickets with no examples, then with three balanced examples, then with unbalanced ones, and compare.",
+        "success_check": "Explain how the examples steer the model and how they can bias it.",
+        "resource_hint": "search: few shot prompting examples classification",
+        "estimated_minutes": 35
+      },
+      {
+        "concept_tag": "context_windows",
+        "title": "Hit the limit",
+        "action": "Count tokens for a long conversation, push it past the model's limit and then add trimming or summarising to stay inside it.",
+        "success_check": "Explain what happens at the limit and your strategy for staying under it.",
+        "resource_hint": "search: tiktoken count tokens context window",
+        "estimated_minutes": 35
+      }
+    ],
     "resources": []
   },
   {
@@ -1139,7 +1989,32 @@
       "chunking_strategies",
       "retrieval_pipelines"
     ],
-    "practice_templates": [],
+    "practice_templates": [
+      {
+        "concept_tag": "embeddings_and_similarity",
+        "title": "Search by meaning",
+        "action": "Embed a small set of documents into a vector index and compare keyword search with semantic search for five questions.",
+        "success_check": "Explain when semantic search finds what keywords miss.",
+        "resource_hint": "search: chroma or faiss vector search quickstart",
+        "estimated_minutes": 45
+      },
+      {
+        "concept_tag": "chunking_strategies",
+        "title": "Try chunk sizes",
+        "action": "Split one long document with three chunk sizes, with and without overlap, and see how retrieval for a fact near a boundary changes.",
+        "success_check": "Explain the trade-off between small and large chunks.",
+        "resource_hint": "search: rag chunking strategies overlap",
+        "estimated_minutes": 40
+      },
+      {
+        "concept_tag": "retrieval_pipelines",
+        "title": "Build a tiny RAG",
+        "action": "Wire retrieval to a model: retrieve three chunks, put them in the prompt and answer with citations. Add a reranker and compare.",
+        "success_check": "Explain each step of the pipeline and where answers can go wrong.",
+        "resource_hint": "search: rag pipeline tutorial reranker",
+        "estimated_minutes": 60
+      }
+    ],
     "resources": []
   },
   {
@@ -1154,7 +2029,32 @@
       "api_integration",
       "agent_loops"
     ],
-    "practice_templates": [],
+    "practice_templates": [
+      {
+        "concept_tag": "tool_use_patterns",
+        "title": "Give a model a tool",
+        "action": "Define a function schema for a calculator or weather lookup, let the model call it, validate the arguments in code and return the result.",
+        "success_check": "Explain why the arguments are validated.",
+        "resource_hint": "search: llm function calling tutorial",
+        "estimated_minutes": 45
+      },
+      {
+        "concept_tag": "api_integration",
+        "title": "Call an API safely",
+        "action": "Call a model API from a server route with the key in an environment variable, handle 429 with backoff and time out slow calls.",
+        "success_check": "Explain why the key never goes to the browser.",
+        "resource_hint": "search: exponential backoff rate limit retry",
+        "estimated_minutes": 35
+      },
+      {
+        "concept_tag": "agent_loops",
+        "title": "Bound an agent",
+        "action": "Build a loop that plans, calls a tool and observes, with a step limit and a budget. Make a tool fail and check the loop stops.",
+        "success_check": "Explain why the limits live in code.",
+        "resource_hint": "search: agent loop react pattern simple",
+        "estimated_minutes": 50
+      }
+    ],
     "resources": []
   },
   {
@@ -1169,7 +2069,32 @@
       "experiment_tracking",
       "pipeline_automation"
     ],
-    "practice_templates": [],
+    "practice_templates": [
+      {
+        "concept_tag": "model_versioning",
+        "title": "Register a model",
+        "action": "Train two models, log them to a registry with metrics and the data version, promote one to staging and roll back.",
+        "success_check": "Explain what a registry entry must hold to reproduce a model.",
+        "resource_hint": "MLflow docs: model registry",
+        "estimated_minutes": 40
+      },
+      {
+        "concept_tag": "experiment_tracking",
+        "title": "Track experiments",
+        "action": "Run five experiments with different parameters, log parameters and metrics and compare them in a tracker. Repeat one with new seeds.",
+        "success_check": "Explain why one run is not enough to compare two models.",
+        "resource_hint": "MLflow docs: tracking",
+        "estimated_minutes": 40
+      },
+      {
+        "concept_tag": "pipeline_automation",
+        "title": "Automate retraining",
+        "action": "Write a script that loads data, trains, evaluates and saves a model, then run it from a scheduled job or CI workflow. Make the feature code shared with serving.",
+        "success_check": "Explain training-serving skew and how shared code prevents it.",
+        "resource_hint": "search: ml pipeline automation ci training",
+        "estimated_minutes": 50
+      }
+    ],
     "resources": []
   },
   {
@@ -1184,7 +2109,32 @@
       "latency_and_batching",
       "monitoring_drift"
     ],
-    "practice_templates": [],
+    "practice_templates": [
+      {
+        "concept_tag": "serving_frameworks",
+        "title": "Serve a model",
+        "action": "Wrap a trained model in a FastAPI endpoint with a validated input schema, test it with curl and containerise it.",
+        "success_check": "Explain the contract between client and model.",
+        "resource_hint": "FastAPI docs: first steps",
+        "estimated_minutes": 45
+      },
+      {
+        "concept_tag": "latency_and_batching",
+        "title": "Measure latency",
+        "action": "Load-test the endpoint, record p50 and p99, then add batching and compare throughput and tail latency.",
+        "success_check": "Explain the throughput and latency trade-off.",
+        "resource_hint": "search: model serving batching latency throughput",
+        "estimated_minutes": 45
+      },
+      {
+        "concept_tag": "monitoring_drift",
+        "title": "Detect drift",
+        "action": "Compare the feature distributions of training data with shifted live-like data using a statistical test and a chart. Set an alert threshold.",
+        "success_check": "Explain how you would notice drift without labels.",
+        "resource_hint": "search: data drift detection ks test evidently",
+        "estimated_minutes": 45
+      }
+    ],
     "resources": []
   },
   {
@@ -1199,7 +2149,32 @@
       "hallucination_evaluation",
       "safety_guardrails"
     ],
-    "practice_templates": [],
+    "practice_templates": [
+      {
+        "concept_tag": "bias_and_fairness",
+        "title": "Audit a model for bias",
+        "action": "Train a classifier, compute approval and error rates per group, and write down which differences concern you and why.",
+        "success_check": "Explain why equal accuracy is not enough.",
+        "resource_hint": "search: fairlearn metrics by group tutorial",
+        "estimated_minutes": 45
+      },
+      {
+        "concept_tag": "hallucination_evaluation",
+        "title": "Check groundedness",
+        "action": "Ask a RAG system twenty questions, mark each claim as supported or not by the retrieved text, and report a groundedness rate.",
+        "success_check": "Explain how you measure hallucination.",
+        "resource_hint": "search: rag evaluation faithfulness groundedness",
+        "estimated_minutes": 45
+      },
+      {
+        "concept_tag": "safety_guardrails",
+        "title": "Add guardrails",
+        "action": "Add an input filter and an output check to an LLM app, then try five prompt injection attempts and record which get through.",
+        "success_check": "Explain why a system prompt alone is not a defence.",
+        "resource_hint": "OWASP: top 10 for LLM applications",
+        "estimated_minutes": 40
+      }
+    ],
     "resources": []
   },
   {

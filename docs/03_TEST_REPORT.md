@@ -6,11 +6,11 @@ Each milestone's acceptance items are recorded here as **Pass**, **Fail**, or **
 
 | Check | Result |
 |---|---|
-| Automated suite | 356 passed (unit, integration, headless UI) |
+| Automated suite | 358 passed (unit, integration, headless UI) |
 | Lint, formatting, types (domain and workflow, strict), content validation | Clean |
 | Real browser (Edge, Playwright), offline | Journeys for DevOps and Java; home and navigation; one-question check; results; weekly plan; progress dashboard with the seeded demo profiles |
 | Real browser, live Anthropic (`claude-haiku-5-5`) | DevOps journey: roadmap, check, results, coaching plan, coach chat, quiz |
-| Not verified | Live AI for MEAN, Java and AI careers; other AI providers; a person's review of the question banks; the product note (M7) |
+| Not verified | Live AI for MEAN, Java and AI careers; other AI providers; a person's review of the question banks (about 300 questions are unreviewed drafts); the product note (M7) |
 
 The sections below keep each milestone's results as they were recorded. Test counts in older sections are the counts at that time.
 
@@ -295,6 +295,20 @@ Not built: skipping or swapping a single task, streaks across weeks, and replaci
 Two layout bugs found only in the browser and fixed: the trend chart's right-hand labels were clipped and overlapped the level guide labels, and on a phone the chart shrank until its text was unreadable. The chart now keeps its margins and scrolls sideways on narrow screens.
 
 Not built: a time filter, per-skill drill-down pages, and goal setting. Level guide lines use the current thresholds, not each past check's snapshot.
+
+## Semester 4-6 question banks (2026-10-12)
+
+| Check | Result |
+|---|---|
+| Content validation: 58 skills, every question's skill, tag and options valid, no URLs, a practice template for every tested concept tag | Pass |
+| Every one of the 14 quiz skills per career has 6 questions in a 2 / 2 / 2 difficulty split | Pass (builder check and `test_every_quiz_skill_of_every_career_is_assessable`) |
+| Question counts per semester: 24, 24, 24 and 12 for Semesters 3 to 6, for DevOps and MEAN | Pass |
+| All 16 career and semester combinations start a check, grade it, reach the weekly plan (12 questions, or 6 in Semester 6) | Pass (parametrised integration test) |
+| Answer-length cue: the right answer is the longest option in 36% of new questions, down from 70% in the first draft | Improved, not zero; see the authoring guide |
+| "Coming soon" for a thin bank, tested with a simulated bank | Pass |
+| A person's review of the new questions | **Not done.** Labelled `ai_drafted` |
+
+Not checked: that every technical statement in 240 new questions is correct. The assistant that wrote them also re-read them once; that is not independent review.
 
 ## Prototype acceptance checklist (blueprint Section 3.4)
 

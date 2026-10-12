@@ -47,7 +47,7 @@ After `python scripts/reset_demo.py`, pick a profile on the **Profile** page (or
 | **Ravi** | One baseline check | The blueprint's worked example: 50.0, Intermediate, weakest skill Linux, a coaching plan and a weekly plan |
 | **Meera** | Baseline plus an improved re-check | **Progress**: 50.0 → 91.7, Intermediate → Advanced, three skills up and one unchanged, roadmap position moved on to Networking |
 
-All four careers (DevOps, MEAN, Java, AI) can complete a Semester 3 check. Also try typing a non-CS career such as "Doctor" under *My career isn't listed*: you get a clear "not supported yet" message and the list of supported careers.
+All four careers (DevOps, MEAN, Java, AI) can complete a check in any of Semesters 3 to 6. Also try typing a non-CS career such as "Doctor" under *My career isn't listed*: you get a clear "not supported yet" message and the list of supported careers.
 
 ## What each page does
 
@@ -93,8 +93,8 @@ The key is stored in plain text in the local SQLite file. That is acceptable for
 
 - [`data/content/`](data/content) holds the content: careers, skills, 16-month roadmap templates for 4 careers, practice templates and the question banks.
 - The app validates this content at start-up and refuses to run on broken files, with a message saying what is wrong. Run it yourself with `python scripts/validate_content.py`.
-- **Question bank coverage:** all four careers have a **Semester 3** bank (4 assessable skills, 24 questions each). Semesters 4-6 have roadmaps but show "assessment coming soon" and name the semesters that do have a check. Adding a bank needs at least 6 approved questions per skill (2 per difficulty); see the [authoring guide](docs/02_QUESTION_AUTHORING_GUIDE.md).
-- **Review status:** the 60 MEAN, Java and AI questions written after the first prototype are labelled `ai_drafted` and have **not been reviewed by a person**. The DevOps questions (and the Git questions copied from them) are labelled `ai_drafted_human_reviewed`, but that label was set during the first build and the repository holds no record of who reviewed them, so treat it as unconfirmed. Review them, then keep or change the label.
+- **Question bank coverage:** all four careers have questions for **Semesters 3 to 6**: every one of the 14 quiz skills has 6 questions (2 easy, 2 medium, 2 hard), which is 24 per full semester and 12 in Semester 6 (84 per career). Capstone and interview skills are not quizzed and show as "assessed later". Adding or extending a bank needs at least 6 approved questions per skill; see the [authoring guide](docs/02_QUESTION_AUTHORING_GUIDE.md).
+- **Review status:** about 300 questions across the four banks (everything for MEAN, Java and AI except the shared Git questions, and Semesters 4-6 for DevOps) are labelled `ai_drafted` and have **not been reviewed by a person**. The 24 DevOps Semester 3 questions (and the Git questions copied from them) are labelled `ai_drafted_human_reviewed`, but that label was set during the first build and the repository holds no record of who reviewed them, so treat it as unconfirmed. Review them, then keep or change the label.
 - Learner state (profiles, attempts, plans, coach chats) is in `data/runtime/pcc.db` (SQLite, git-ignored). `python scripts/reset_demo.py` recreates it. **It deletes the database**, so it refuses to run if real profiles exist unless you pass `--force`.
 
 ## Tests and checks
@@ -107,7 +107,7 @@ python -m mypy src/pcc/domain src/pcc/workflow
 python scripts/validate_content.py
 ```
 
-The suite (about 350 tests) covers the scoring rules and level boundaries, validators, fallbacks, the whole journey for every career with the AI failing in seven different ways (down, crashing, empty, not JSON, wrong shape, prompt injection, hostile JSON), the coach (limits, fallbacks, quiz), the weekly schedule and calendar export, persistence and restore, and the Streamlit pages (headless). Real-browser checks (Edge, via Playwright) are recorded in the test report; their scripts are not part of the repository.
+The suite (about 360 tests) covers the scoring rules and level boundaries, validators, fallbacks, the whole journey for every career with the AI failing in seven different ways (down, crashing, empty, not JSON, wrong shape, prompt injection, hostile JSON), the coach (limits, fallbacks, quiz), the weekly schedule and calendar export, persistence and restore, and the Streamlit pages (headless). Real-browser checks (Edge, via Playwright) are recorded in the test report; their scripts are not part of the repository.
 
 ## Project layout
 
@@ -130,8 +130,8 @@ docs/            blueprint, test report, decision log, authoring guide
 ## Known limits
 
 - Local, single-user, no login: a profile is just a display name.
-- Only Semester 3 has questions, for each of the four careers. Semesters 4-6, the full-path "Industry-ready" check, the Career Finder, custom CS careers and a demo answer simulator are designed but not built.
-- The 60 newer questions are unreviewed drafts (see above).
+- The full-path "Industry-ready" check, the Career Finder, custom CS careers and a demo answer simulator are designed but not built.
+- Most questions are unreviewed drafts written by an assistant (see above). A student's level is only as trustworthy as the questions behind it.
 - Roadmap focus and deliverable text is generic template wording; it passes validation but is placeholder quality.
 - Coaching covers the single weakest skill. The plan cannot be regenerated, because the weekly plan is built from it.
 - Coach replies and AI plans take several seconds on a live model; there is a spinner but no streaming.

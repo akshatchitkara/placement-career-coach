@@ -718,5 +718,1805 @@
     "review_status": "approved",
     "source": "ai_drafted_human_reviewed",
     "reviewed_on": "2026-10-10"
+  },
+  {
+    "question_id": "q_typescript_essentials_001",
+    "skill_id": "typescript_essentials",
+    "concept_tag": "types_and_interfaces",
+    "difficulty": "easy",
+    "stem": "When does TypeScript check types?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "At run time, while the code is executing"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Only when the formatting rules are checked"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "At compile time, before the code runs"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "While network requests are being sent"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "TypeScript's checks happen during compilation. The emitted JavaScript contains no type information.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_typescript_essentials_002",
+    "skill_id": "typescript_essentials",
+    "concept_tag": "types_and_interfaces",
+    "difficulty": "easy",
+    "stem": "Which declaration defines an object type with a name and an age?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "const Person = { name: string, age: number }"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "type Person = name: string, age: number"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "class Person => { name: string; age: number; id: string }"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "interface Person { name: string; age: number }"
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "An interface (or type alias) describes the shape of an object. The other forms are not valid TypeScript.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_typescript_essentials_003",
+    "skill_id": "typescript_essentials",
+    "concept_tag": "narrowing",
+    "difficulty": "medium",
+    "stem": "What is the type of x inside the if block? function f(x: string | number) { if (typeof x === 'string') { x; } }",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "string"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "number"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "string | number"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "never"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "A typeof check narrows a union. Inside the block the compiler knows x is a string.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_typescript_essentials_004",
+    "skill_id": "typescript_essentials",
+    "concept_tag": "generics",
+    "difficulty": "medium",
+    "stem": "What does function first<T>(items: T[]): T mean?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "It returns the first element converted into a string"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "It returns an element of the same type as the array's elements"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "It accepts only arrays that contain numbers"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "It returns a new array that holds just the first element of the input"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "T is a placeholder. Passing a string[] makes T a string, so the return type is string.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_typescript_essentials_005",
+    "skill_id": "typescript_essentials",
+    "concept_tag": "narrowing",
+    "difficulty": "hard",
+    "stem": "Which is a safe way to handle a value of type unknown?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Assert it to any and call its methods directly"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Cast it to the expected type without checking it"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Narrow it with checks such as typeof before using it"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Declare it as never so the compiler stops complaining"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "unknown forces you to prove what a value is before use. any and unchecked casts switch the safety off.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_typescript_essentials_006",
+    "skill_id": "typescript_essentials",
+    "concept_tag": "generics",
+    "difficulty": "hard",
+    "stem": "What does T extends { id: number } do in a generic?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Makes T inherit all the run-time methods of an object literal"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Requires T to be exactly the type { id: number }"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Adds an id property to every value of type T"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Restricts T to types that have a numeric id property"
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "The constraint allows any type with at least an id: number, so the function can safely read item.id.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_express_rest_apis_001",
+    "skill_id": "express_rest_apis",
+    "concept_tag": "routing_and_middleware",
+    "difficulty": "easy",
+    "stem": "Which call defines an Express route that handles GET requests to /users?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "app.fetch('/users', handler)"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "app.route.get = '/users'"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "app.get('/users', handler)"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "app.users.get(handler)"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "Express exposes one method per HTTP verb, such as app.get and app.post, taking a path and a handler.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_express_rest_apis_002",
+    "skill_id": "express_rest_apis",
+    "concept_tag": "request_validation",
+    "difficulty": "easy",
+    "stem": "Why validate request bodies on the server even if the front end already validates them?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Front-end checks are not allowed to run in browsers"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Servers validate data faster than any browser can"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "HTTP forbids sending invalid data to a server"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Clients can be bypassed, so the server must not trust its input"
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "Anyone can send a request with curl and skip your form. The server is the only check you control.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_express_rest_apis_003",
+    "skill_id": "express_rest_apis",
+    "concept_tag": "routing_and_middleware",
+    "difficulty": "medium",
+    "stem": "What happens if a middleware neither sends a response nor calls next()?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "The request hangs until the client times out"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Express sends a 404 automatically after a short delay"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Express skips the middleware and moves on to the route"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "The server process exits with an error message"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "Express waits for either a response or next(). Doing neither leaves the request open.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_express_rest_apis_004",
+    "skill_id": "express_rest_apis",
+    "concept_tag": "error_handling",
+    "difficulty": "medium",
+    "stem": "How does Express recognise an error-handling middleware?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "It must always be registered before every other middleware"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "It is declared with four parameters: err, req, res and next"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Its function name has to end with the word Handler"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "It is attached with app.catch instead of app.use"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "The four-argument signature is what marks it as an error handler, and it is registered after the routes.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_express_rest_apis_005",
+    "skill_id": "express_rest_apis",
+    "concept_tag": "error_handling",
+    "difficulty": "hard",
+    "stem": "An async route handler in Express 4 throws inside an awaited call. What is needed so the error reaches the error middleware?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Nothing, because Express 4 forwards all async errors automatically"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Return the error object as the response body directly"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Catch it and pass it to next(err), or use a wrapper that does so"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Call res.end() inside a finally block to close the response"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "Express 4 does not catch rejected promises. Without next(err) the request hangs or the process crashes.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_express_rest_apis_006",
+    "skill_id": "express_rest_apis",
+    "concept_tag": "request_validation",
+    "difficulty": "hard",
+    "stem": "Which response is most appropriate when a JSON body fails validation?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "200 OK with an empty body to avoid leaking details"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "500 Internal Server Error with the full stack trace attached for debugging"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "404 Not Found because the expected data was missing"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "400 Bad Request with a message naming the invalid fields"
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "400 tells the client its request was wrong, and field-level messages let it fix the problem. A 500 would blame the server.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_mongodb_data_modeling_001",
+    "skill_id": "mongodb_data_modeling",
+    "concept_tag": "schema_design",
+    "difficulty": "easy",
+    "stem": "In MongoDB, what is a document?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "A row in a table with a fixed set of columns"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "A file stored in a directory on the server"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "A JSON-like record stored in a collection"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "A saved query together with its result set"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "Documents are BSON records with flexible fields, grouped into collections.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_mongodb_data_modeling_002",
+    "skill_id": "mongodb_data_modeling",
+    "concept_tag": "indexing",
+    "difficulty": "easy",
+    "stem": "What is the main purpose of an index in MongoDB?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "To encrypt the fields stored in a collection"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "To limit how many documents a query can return"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "To back up the collection automatically"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "To speed up queries on the indexed fields"
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "An index lets MongoDB find matching documents without scanning the whole collection, at some cost to writes.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_mongodb_data_modeling_003",
+    "skill_id": "mongodb_data_modeling",
+    "concept_tag": "schema_design",
+    "difficulty": "medium",
+    "stem": "A blog post has a handful of comments that are always shown with it. Which model fits best?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Embed the comments as an array inside the post document"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Store each comment in a separate database server"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Keep comments in a separate collection with no link back to the post"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Store only the comment count and discard the text"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "Data read together and bounded in size is usually embedded, which needs one read instead of many.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_mongodb_data_modeling_004",
+    "skill_id": "mongodb_data_modeling",
+    "concept_tag": "aggregation_pipeline",
+    "difficulty": "medium",
+    "stem": "Which pipeline computes the total sales per customer?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "$match on customer followed by $skip"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "$group by customer with a $sum of the amount"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "$project the amount and then $limit to one"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "$sort by customer and then $unwind the amount"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "$group collects documents by a key and accumulators such as $sum compute totals for each group.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_mongodb_data_modeling_005",
+    "skill_id": "mongodb_data_modeling",
+    "concept_tag": "indexing",
+    "difficulty": "hard",
+    "stem": "A query filters on status and sorts by createdAt. Which compound index serves it best?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "{ createdAt: 1 } on its own"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "{ status: 1 } on its own"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "{ status: 1, createdAt: 1 }"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "{ createdAt: 1, status: 1 }"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "Equality fields come first, then the sort field, so MongoDB can jump to one status and read it already sorted.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_mongodb_data_modeling_006",
+    "skill_id": "mongodb_data_modeling",
+    "concept_tag": "schema_design",
+    "difficulty": "hard",
+    "stem": "Why can unbounded arrays inside a document be a problem?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "MongoDB cannot store arrays inside documents at all"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Arrays are always sorted, which wastes processing time"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Indexes cannot be created on a collection that has arrays"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Documents have a 16 MB size limit and large arrays make updates slow"
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "An array that keeps growing can hit the size limit. Reference child documents in their own collection instead.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_authentication_authorization_001",
+    "skill_id": "authentication_authorization",
+    "concept_tag": "password_hashing",
+    "difficulty": "easy",
+    "stem": "How should passwords be stored?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "In plain text so support staff can recover them"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "As salted hashes made with a slow algorithm such as bcrypt"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Encrypted with one single key that is stored right beside the data"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "As a fast unsalted MD5 hash of each password"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "Hashes cannot be reversed, salts defeat precomputed tables and a deliberately slow algorithm hampers guessing.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_authentication_authorization_002",
+    "skill_id": "authentication_authorization",
+    "concept_tag": "jwt_and_sessions",
+    "difficulty": "easy",
+    "stem": "A JSON Web Token has three parts. What are they?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Username, password and salt"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Request line, response body and cookie jar"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Header, payload and signature"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Key, value and expiry"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "The header names the algorithm, the payload holds the claims and the signature proves it was not altered.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_authentication_authorization_003",
+    "skill_id": "authentication_authorization",
+    "concept_tag": "role_based_access",
+    "difficulty": "medium",
+    "stem": "What is the difference between authentication and authorization?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Authentication decides what you may do; authorization proves who you are"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "They are two names for the same login check"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Authentication happens on the client and authorization in the browser cache"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Authentication proves who you are; authorization decides what you may do"
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "First the system identifies you, then it checks your role or permissions for each action.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_authentication_authorization_004",
+    "skill_id": "authentication_authorization",
+    "concept_tag": "jwt_and_sessions",
+    "difficulty": "medium",
+    "stem": "Why should passwords or other secrets not be put in a JWT payload?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "The payload is only encoded, so anyone holding the token can read it"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "The payload is encrypted but too small to hold much data"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Tokens are deleted by the server after a single request"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "JWT libraries refuse to sign any payloads that contain plain strings"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "Base64 encoding is not encryption. A signed token is tamper-proof, not secret.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_authentication_authorization_005",
+    "skill_id": "authentication_authorization",
+    "concept_tag": "password_hashing",
+    "difficulty": "hard",
+    "stem": "Why add a unique salt to each password before hashing?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "The hash can then be reversed when a user forgets the password"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Identical passwords get different hashes and precomputed tables stop working"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Hashing runs faster on large tables of users"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "The password becomes encrypted instead of hashed"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "Without salts, two users with the same password share a hash and one rainbow table cracks every account.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_authentication_authorization_006",
+    "skill_id": "authentication_authorization",
+    "concept_tag": "jwt_and_sessions",
+    "difficulty": "hard",
+    "stem": "A JWT access token is valid for 7 days and a user's account is then disabled. What is the risk?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "None, because disabling an account invalidates every issued token"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "The token stops working as soon as the user logs in elsewhere"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "The token still works until it expires unless the server also checks a deny list"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "The token becomes valid for read operations only"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "Stateless tokens are not looked up on each request. Use short lifetimes with refresh tokens, or a revocation check.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_angular_core_concepts_001",
+    "skill_id": "angular_core_concepts",
+    "concept_tag": "components_and_modules",
+    "difficulty": "easy",
+    "stem": "What does an Angular component combine?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "A database schema, a route definition and a unit test"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "A server, a client and a compiler"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "A TypeScript class, a template and styles"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "A service, a pipe and a build script"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "The class holds the logic, the template the markup and the styles the look of one piece of the interface.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_angular_core_concepts_002",
+    "skill_id": "angular_core_concepts",
+    "concept_tag": "data_binding",
+    "difficulty": "easy",
+    "stem": "Which syntax is property binding in an Angular template?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "(value)=\"name\""
+      },
+      {
+        "option_id": "opt_b",
+        "text": "{{value}}=\"name\""
+      },
+      {
+        "option_id": "opt_c",
+        "text": "#value=\"name\""
+      },
+      {
+        "option_id": "opt_d",
+        "text": "[value]=\"name\""
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "Square brackets bind a component value to an element property. Parentheses bind events.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_angular_core_concepts_003",
+    "skill_id": "angular_core_concepts",
+    "concept_tag": "dependency_injection",
+    "difficulty": "medium",
+    "stem": "How does Angular give a component access to a service?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "It injects the service instance through the component's constructor"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "The component creates it with new inside its template"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "The service is copied into each template at compile time"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Components import a global variable that is named after the service"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "Angular's injector creates and supplies instances, which keeps components loosely coupled and easy to test.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_angular_core_concepts_004",
+    "skill_id": "angular_core_concepts",
+    "concept_tag": "data_binding",
+    "difficulty": "medium",
+    "stem": "What does [(ngModel)] do?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "It binds from the template to the class only"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "It gives two-way binding between a form control and a component property"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "It runs an event handler only when the form is submitted"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "It adds or removes elements from the page structure"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "[(ngModel)] combines property binding and event binding, so changes flow in both directions.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_angular_core_concepts_005",
+    "skill_id": "angular_core_concepts",
+    "concept_tag": "components_and_modules",
+    "difficulty": "hard",
+    "stem": "With OnPush change detection, when is a component checked again?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Whenever any timer fires anywhere in the application"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Whenever the route changes, whatever its inputs are"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "When an input reference changes, an event fires in it, or it is marked for check"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Whenever the browser window is resized by the user"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "OnPush skips a component unless its inputs change by reference or an event originates inside it, which saves work.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_angular_core_concepts_006",
+    "skill_id": "angular_core_concepts",
+    "concept_tag": "dependency_injection",
+    "difficulty": "hard",
+    "stem": "What does providedIn: 'root' do for a service?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Creates a new instance for every component that injects it"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Restricts the service to the root component only"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Loads the service lazily when its own route opens"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Registers one application-wide instance that can be tree-shaken if unused"
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "A root-provided service is a singleton. The build can drop it if nothing injects it.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_rxjs_and_state_management_001",
+    "skill_id": "rxjs_and_state_management",
+    "concept_tag": "observables_and_operators",
+    "difficulty": "easy",
+    "stem": "When does an Observable start producing values?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "As soon as the file that defines it is loaded"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "When the component's template finishes rendering"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "When something subscribes to it"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Only after the first operator is added to it"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "Observables are lazy. Nothing happens until subscribe() is called.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_rxjs_and_state_management_002",
+    "skill_id": "rxjs_and_state_management",
+    "concept_tag": "subjects",
+    "difficulty": "easy",
+    "stem": "What is a Subject in RxJS?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "A function that converts a promise into a plain number value"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "An operator that delays values by one second"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "A component that displays streamed data"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "An observable that can also be pushed values with next()"
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "A Subject is both an observable and an observer, so you can multicast values to many subscribers.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_rxjs_and_state_management_003",
+    "skill_id": "rxjs_and_state_management",
+    "concept_tag": "observables_and_operators",
+    "difficulty": "medium",
+    "stem": "Which operator transforms each emitted value into a new value?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "map"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "filter"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "take"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "tap"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "map applies a function to every value. filter drops values, take limits how many pass and tap only performs side effects.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_rxjs_and_state_management_004",
+    "skill_id": "rxjs_and_state_management",
+    "concept_tag": "subjects",
+    "difficulty": "medium",
+    "stem": "How does a BehaviorSubject differ from a plain Subject?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "It only emits the very first value that was pushed"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "It holds a current value and gives it to new subscribers immediately"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "It completes after the first subscriber disconnects"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "It cannot be subscribed to more than once"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "Late subscribers to a BehaviorSubject get the latest value straight away, which suits state.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_rxjs_and_state_management_005",
+    "skill_id": "rxjs_and_state_management",
+    "concept_tag": "observables_and_operators",
+    "difficulty": "hard",
+    "stem": "In a type-ahead search, which operator cancels the previous request when a new value arrives?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "mergeMap"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "concatMap"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "switchMap"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "exhaustMap"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "switchMap unsubscribes from the previous inner observable, so stale responses never overwrite newer ones.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_rxjs_and_state_management_006",
+    "skill_id": "rxjs_and_state_management",
+    "concept_tag": "state_patterns",
+    "difficulty": "hard",
+    "stem": "Why avoid mutating state objects in a store pattern?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "JavaScript blocks mutation of objects inside modules"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Immutable objects always use less memory than mutable ones"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Stores can only hold primitive values such as numbers"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Immutable updates make changes detectable and predictable for subscribers"
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "Replacing the object lets reference checks and OnPush spot changes, and keeps past states for debugging.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_testing_web_applications_001",
+    "skill_id": "testing_web_applications",
+    "concept_tag": "unit_vs_integration",
+    "difficulty": "easy",
+    "stem": "What does a unit test usually check?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "The whole system running in production"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "One small piece of code in isolation"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "How fast the network connection is"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Whether the interface looks pleasant"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "Unit tests are small and fast because they test one function or class with its dependencies controlled.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_testing_web_applications_002",
+    "skill_id": "testing_web_applications",
+    "concept_tag": "mocking",
+    "difficulty": "easy",
+    "stem": "Why mock an external API in a unit test?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "So the test always passes whatever the code does"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Because real APIs refuse requests from test runners"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "So the test is fast, repeatable and independent of the network"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "So the API provider can read the test results"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "A mock gives a controlled response, so failures point to your code and not to a slow or unavailable service.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_testing_web_applications_003",
+    "skill_id": "testing_web_applications",
+    "concept_tag": "test_coverage",
+    "difficulty": "medium",
+    "stem": "A project has 100% line coverage. What can you conclude?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "The code contains no bugs of any kind"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Every possible input has been tested"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "All branches and error paths are verified"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Every line ran during the tests, but not that the assertions are meaningful"
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "Coverage shows what executed, not what was checked. A test with no assertions still raises coverage.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_testing_web_applications_004",
+    "skill_id": "testing_web_applications",
+    "concept_tag": "unit_vs_integration",
+    "difficulty": "medium",
+    "stem": "Which test best catches a mismatch between an API and its database schema?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "An integration test that calls the API against a test database"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "A unit test with every dependency replaced by a mock"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "A linter rule that checks indentation in the files"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "A screenshot comparison of the home page"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "Only a test that uses the real database can notice that a column or type does not match.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_testing_web_applications_005",
+    "skill_id": "testing_web_applications",
+    "concept_tag": "mocking",
+    "difficulty": "hard",
+    "stem": "A test mocks the database and always passes, yet the real query is wrong. What is the lesson?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Mocks should never be used in any kind of test"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Mocks only verify your assumptions, so add an integration test for the real query"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "The test needs more mocks to cover more lines"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Database queries cannot be tested automatically"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "A mock returns whatever you told it to, so it cannot show that the real query works.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_testing_web_applications_006",
+    "skill_id": "testing_web_applications",
+    "concept_tag": "unit_vs_integration",
+    "difficulty": "hard",
+    "stem": "How are flaky tests best handled?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Re-run until they pass and ignore the failures"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Delete the test so that the whole pipeline turns green again quickly"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Find the cause, such as shared state or timing, and fix it"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Add sleeps of several seconds to every test"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "Flaky tests hide real failures and teach people to ignore red builds. Fixing the cause restores trust.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_ci_cd_and_deployment_001",
+    "skill_id": "ci_cd_and_deployment",
+    "concept_tag": "pipeline_stages",
+    "difficulty": "easy",
+    "stem": "What is the purpose of a lint stage in CI?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "To deploy the code to a staging server"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "To catch style problems and simple errors before tests run"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "To compress the images in the build output"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "To rotate the production database credentials"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "Linting is fast and gives early feedback on code quality before slower stages begin.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_ci_cd_and_deployment_002",
+    "skill_id": "ci_cd_and_deployment",
+    "concept_tag": "build_triggers",
+    "difficulty": "easy",
+    "stem": "A pipeline runs every night at 2 am. What kind of trigger is this?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "A manual approval gate"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "A webhook from a pull request"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "A scheduled trigger"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "A dependency update event"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "Schedules start a pipeline at fixed times, which suits long tests or dependency checks.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_ci_cd_and_deployment_003",
+    "skill_id": "ci_cd_and_deployment",
+    "concept_tag": "pipeline_stages",
+    "difficulty": "medium",
+    "stem": "Why run fast unit tests before slow end-to-end tests?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "End-to-end tests cannot run before unit tests exist"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Unit tests are required by the CI provider's terms"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Slow tests are only allowed to run after the deployment has finished"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Cheap failures are found early, saving time and compute"
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "Ordering stages from fastest to slowest gives quick feedback and avoids wasting resources on a broken build.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_ci_cd_and_deployment_004",
+    "skill_id": "ci_cd_and_deployment",
+    "concept_tag": "artifact_promotion",
+    "difficulty": "medium",
+    "stem": "A front-end build output is stored as a versioned artifact. Why?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "So the same tested build can be deployed to each environment"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Because browsers refuse to run unversioned JavaScript files at all"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "So the source code can be deleted after building"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "To avoid running any tests on the artifact"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "A stored, versioned artifact makes deployments reproducible and rollbacks a matter of redeploying a version.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_ci_cd_and_deployment_005",
+    "skill_id": "ci_cd_and_deployment",
+    "concept_tag": "build_triggers",
+    "difficulty": "hard",
+    "stem": "A pull request from a fork runs your pipeline with secrets exposed. Why is this risky?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Forks always slow the pipeline down to a crawl"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Untrusted code could print or send the secrets to an attacker"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Secrets expire as soon as a fork reads them"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Pull requests cannot be merged when secrets exist"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "A fork's code runs inside your pipeline. Restrict secrets to trusted branches or require approval first.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_ci_cd_and_deployment_006",
+    "skill_id": "ci_cd_and_deployment",
+    "concept_tag": "artifact_promotion",
+    "difficulty": "hard",
+    "stem": "What does a blue-green deployment need that a simple in-place deployment does not?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "A separate Git repository for each environment"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Manual approval for each individual commit"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Two production environments so traffic can be switched between them"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "A rewrite of the application as microservices"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "Blue-green runs the new version beside the old one and flips traffic, which gives zero downtime and fast rollback.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_web_security_and_performance_001",
+    "skill_id": "web_security_and_performance",
+    "concept_tag": "xss_and_csrf",
+    "difficulty": "easy",
+    "stem": "What is cross-site scripting (XSS)?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Overloading a server with requests until it stops"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Injecting malicious scripts that then run in other users' browsers"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Guessing passwords with a list of common words"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Intercepting traffic on an unencrypted network"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "XSS happens when untrusted input is rendered as code, letting an attacker act as the victim on your site.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_web_security_and_performance_002",
+    "skill_id": "web_security_and_performance",
+    "concept_tag": "caching_strategies",
+    "difficulty": "easy",
+    "stem": "What does browser caching save?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "The time the server spends writing its access logs to disk"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "The effort of compiling the source code"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Repeat downloads of files that have not changed"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "The memory used by the database server"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "Cached files are reused from disk, which cuts load time and bandwidth.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_web_security_and_performance_003",
+    "skill_id": "web_security_and_performance",
+    "concept_tag": "xss_and_csrf",
+    "difficulty": "medium",
+    "stem": "Which defence stops another site from submitting forms as a logged-in user (CSRF)?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Hashing the passwords with a stronger algorithm"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Compressing response bodies with gzip"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Moving the site to a faster hosting plan"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Anti-CSRF tokens or SameSite cookies"
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "A token the attacker cannot read, or a cookie the browser will not send cross-site, breaks the forged request.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_web_security_and_performance_004",
+    "skill_id": "web_security_and_performance",
+    "concept_tag": "bundle_optimization",
+    "difficulty": "medium",
+    "stem": "What does code splitting do?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Loads parts of the app on demand instead of one large bundle"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Divides the source code between several developers"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Splits every file into one function per file"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Stores the bundle on several different servers"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "Splitting by route or feature means users download only the code they need first.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_web_security_and_performance_005",
+    "skill_id": "web_security_and_performance",
+    "concept_tag": "caching_strategies",
+    "difficulty": "hard",
+    "stem": "Static assets have hashed file names such as app.3f9a.js. Which Cache-Control setting is best?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "no-store so the browser never keeps a copy"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "A long max-age with immutable, since a change creates a new file name"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "A max-age of a few seconds so updates appear quickly"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "no-cache together with a nightly purge of the CDN"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "A content hash changes whenever the file does, so old URLs can be cached for a year without going stale.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_web_security_and_performance_006",
+    "skill_id": "web_security_and_performance",
+    "concept_tag": "xss_and_csrf",
+    "difficulty": "hard",
+    "stem": "Which is the most reliable way to stop XSS when rendering user text?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Strip the word script from every input string"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Reject any input that contains a less-than sign"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Escape output for its context and set a Content-Security-Policy"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Store the input in a database before rendering it"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "Blocklists miss variants. Context-aware escaping and a CSP defend regardless of what the input looks like.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_system_design_basics_001",
+    "skill_id": "system_design_basics",
+    "concept_tag": "load_balancing",
+    "difficulty": "easy",
+    "stem": "What does a load balancer do?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Stores a copy of every database record"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Spreads incoming requests across several servers"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Compiles the source code before each new deployment starts"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Encrypts the data stored on the disk"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "A load balancer shares traffic so no single server is overwhelmed and one failure does not stop the service.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_system_design_basics_002",
+    "skill_id": "system_design_basics",
+    "concept_tag": "caching_layers",
+    "difficulty": "easy",
+    "stem": "Why put a cache in front of a database?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "To make every write instantly permanent"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "To replace the need for any database"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "To serve repeated reads faster and reduce database load"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "To keep the data private from administrators"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "Reads of popular data come from fast memory, so the database handles fewer queries.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_system_design_basics_003",
+    "skill_id": "system_design_basics",
+    "concept_tag": "load_balancing",
+    "difficulty": "medium",
+    "stem": "A health check fails for one server behind a load balancer. What should happen?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "The balancer restarts the whole fleet of servers"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "All of the traffic is sent to the failed server to test it out"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "The balancer deletes the server from the account"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "The balancer stops sending it traffic until it passes again"
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "Health checks let the balancer route around a failing instance, which keeps users unaffected.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_system_design_basics_004",
+    "skill_id": "system_design_basics",
+    "concept_tag": "database_scaling",
+    "difficulty": "medium",
+    "stem": "What is a read replica used for?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Serving read queries so the primary handles fewer reads"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Accepting all of the writes whenever the primary is too busy"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Storing the encryption keys for the primary"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Compressing the primary's transaction log files"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "Replicas copy the primary's data and answer reads. Writes still go to the primary.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_system_design_basics_005",
+    "skill_id": "system_design_basics",
+    "concept_tag": "caching_layers",
+    "difficulty": "hard",
+    "stem": "What is the core difficulty of cache invalidation?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Caches cannot store anything bigger than one megabyte"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Knowing when cached data is stale without losing the speed benefit"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Caches always return data in the wrong order"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Invalidation is blocked by most operating systems"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "Evict too late and users see old data. Evict too often and the cache stops helping.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_system_design_basics_006",
+    "skill_id": "system_design_basics",
+    "concept_tag": "database_scaling",
+    "difficulty": "hard",
+    "stem": "What is sharding?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Copying the same data to several read-only servers"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Compressing old rows to save disk space on one server"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Splitting data across several databases by a key such as user id"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Running two databases as a primary and a standby pair"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "Sharding spreads both data and writes, at the cost of harder queries that span shards.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
   }
 ]

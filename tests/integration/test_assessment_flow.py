@@ -173,7 +173,28 @@ def test_t20_changed_thresholds_do_not_alter_a_past_attempt(db_path, monkeypatch
     assert after.level == before.level == Level.INTERMEDIATE
 
 
-def test_semester_without_a_bank_says_coming_soon_and_stays_ready(db_path):
+@pytest.fixture
+def only_semester_3_banks(monkeypatch):
+    """Simulates a career whose later semesters have no reviewed questions yet (T-22)."""
+    real = workflow_controller.load_question_bank
+    early = {
+        "linux_fundamentals",
+        "shell_scripting",
+        "python_for_automation",
+        "git_version_control",
+        "java_core_oop",
+        "collections_and_generics",
+        "dsa_problem_solving",
+        "sql_and_relational_databases",
+    }
+    monkeypatch.setattr(
+        workflow_controller,
+        "load_question_bank",
+        lambda career_id: [q for q in real(career_id) if q.skill_id in early],
+    )
+
+
+def test_semester_without_a_bank_says_coming_soon_and_stays_ready(db_path, only_semester_3_banks):
     controller, profile = _ready(db_path, career="java_backend_developer", semester=4, name="Ravi")
     scope = controller.get_assessment_scope(profile.id)
     assert scope.assessable_skill_ids == []
@@ -190,7 +211,7 @@ def test_t21_unbuilt_methods_are_assessed_later_not_scored(db_path):
     assert "capstone_devops" not in scope.assessable_skill_ids
 
 
-def test_t22_devops_semester_without_a_bank_is_coming_soon(db_path):
+def test_t22_devops_semester_without_a_bank_is_coming_soon(db_path, only_semester_3_banks):
     controller, profile = _ready(db_path, semester=4, name="Kiran")
     scope = controller.get_assessment_scope(profile.id)
     assert scope.assessable_skill_ids == []
@@ -219,7 +240,37 @@ def test_every_career_completes_a_semester_3_check(db_path, career):
     assert controller.get_weekly_plan(profile.id).plan.tasks
 
 
-def test_checkable_semesters_lists_only_semesters_with_a_bank(db_path):
+def test_every_semester_is_checkable_now_that_all_banks_exist(db_path):
+    controller = WorkflowController(db_path)
+    for career in (
+        "devops_engineer",
+        "mean_stack_developer",
+        "java_backend_developer",
+        "ai_developer",
+    ):
+        assert controller.checkable_semesters(career) == [3, 4, 5, 6]
+
+
+def test_checkable_semesters_lists_only_semesters_with_a_bank(db_path, only_semester_3_banks):
     controller = WorkflowController(db_path)
     assert controller.checkable_semesters("java_backend_developer") == [3]
     assert controller.checkable_semesters("devops_engineer") == [3]
+
+
+@pytest.mark.parametrize("semester", [3, 4, 5, 6])
+@pytest.mark.parametrize(
+    "career", ["devops_engineer", "mean_stack_developer", "java_backend_developer", "ai_developer"]
+)
+def test_every_career_completes_a_check_in_every_semester(db_path, career, semester):
+    bank = {q.question_id: q for q in load_question_bank(career)}
+    controller, profile = _ready(db_path, career=career, semester=semester, name="Asha")
+    session = controller.start_assessment(profile.id)
+    expected = (
+        6 if semester == 6 else 12
+    )  # semester 6 has two quiz skills (the rest are not quizzed)
+    assert len(session.questions) == expected
+    picks = {q.question_id: bank[q.question_id].correct_option_id for q in session.questions}
+    result = controller.submit_assessment(profile.id, session.attempt_id, picks)
+    assert result.overall_score == 100.0
+    assert controller.get_profile(profile.id).workflow_state == WorkflowState.WEEKLY_PLAN_ACTIVE
+    assert controller.get_weekly_plan(profile.id).plan.tasks

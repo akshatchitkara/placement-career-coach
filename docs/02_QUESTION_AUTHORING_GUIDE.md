@@ -83,11 +83,18 @@ Test one idea per question. For every question, check:
 
 ## Current state
 
-| Career | Semester 3 bank | Review |
+| Career | Banks | Review |
 |---|---|---|
-| DevOps Engineer | 24 questions (4 skills) | Labelled `ai_drafted_human_reviewed` during the first build, with `reviewed_on` set to a date after the commit that added them; no record of who reviewed them. **Unconfirmed** |
-| MEAN Stack, AI | 24 questions each: 18 new plus 6 Git questions shared with DevOps | The 18 are `ai_drafted`; the 6 Git questions keep the unconfirmed DevOps label |
-| Java Backend | 24 questions (4 skills) | All 24 are `ai_drafted` |
-| Semesters 4-6, all careers | None | Not written |
+| DevOps Engineer | Semesters 3-6: 84 questions (14 skills) | Semester 3 labelled `ai_drafted_human_reviewed` during the first build, with `reviewed_on` set to a date after the commit that added them; no record of who reviewed them. **Unconfirmed.** Semesters 4-6 are `ai_drafted` |
+| MEAN Stack | Semesters 3-6: 84 questions (14 skills) | The 6 Git questions shared with DevOps keep the unconfirmed label; the other 78 are `ai_drafted` |
+| Java Backend | Semesters 3-6: 84 questions (14 skills) | All 84 are `ai_drafted` |
+| AI Developer | Semesters 3-6: 84 questions (14 skills) | The 6 shared Git questions keep the unconfirmed label; the other 78 are `ai_drafted` |
 
-In all, 60 questions are `ai_drafted` and not yet reviewed by a person. An assistant-only check of those 60 found and fixed one question with two correct answers, and lengthened the wrong options in about 20 questions where the right answer stood out by length. See the test report for the record.
+`system_design_basics` is shared by MEAN and Java, so its 6 questions appear in both banks.
+
+About 300 questions are `ai_drafted` and not yet reviewed by a person. Two assistant-only checks were run on them and are not a substitute for review:
+
+1. **Correctness read-through.** Found and fixed one Semester 3 question with two correct answers.
+2. **Length cue.** In the first draft of Semesters 4-6 the right answer was the longest option in 70% of questions (25% is chance). One wrong option was lengthened in 80 questions, which brought it to 36%. The test suite rejects only the extreme case (right answer at least twice as long as every wrong one), so keep an eye on this when adding questions.
+
+Things a reviewer should look at first: questions that depend on a version or a default (Express 4 async errors, Kubernetes HPA formula, Terraform plan after a rename, Spring property precedence, Ansible handlers), arithmetic in worked examples (the 99.9% SLO budget, the HPA replicas, the 644 and 640 permission examples, Bayes), and any option an informed student could defend.

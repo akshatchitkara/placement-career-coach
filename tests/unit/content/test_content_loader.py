@@ -5,6 +5,7 @@ from pcc.content.content_loader import (
     load_app_settings,
     load_careers,
     load_question_bank,
+    load_roadmap_template,
     load_skills_for_career,
 )
 from pcc.domain.enums import SkillType, is_quiz_assessable
@@ -80,7 +81,8 @@ def test_real_devops_sem3_bank_is_fully_assessable():
         assert compute_skill_assessability(skill_id, questions, settings) is True
 
 
-def test_every_career_has_four_assessable_semester_3_skills():
+def test_every_quiz_skill_of_every_career_is_assessable():
+    """Semesters 3-6: all 14 quiz skills per career have a reviewed-size bank (6+, 2 per level)."""
     settings = load_app_settings()
     for career_id in [
         "devops_engineer",
@@ -89,12 +91,26 @@ def test_every_career_has_four_assessable_semester_3_skills():
         "ai_developer",
     ]:
         questions = load_question_bank(career_id)
-        assessable = [
-            s.skill_id
-            for s in load_skills_for_career(career_id)
-            if compute_skill_assessability(s.skill_id, questions, settings)
-        ]
-        assert len(assessable) == 4, career_id
+        quiz_skills = [s for s in load_skills_for_career(career_id) if s.skill_type == "conceptual"]
+        assert len(quiz_skills) == 14, career_id
+        for skill in quiz_skills:
+            assert compute_skill_assessability(skill.skill_id, questions, settings), (
+                career_id,
+                skill.skill_id,
+            )
+
+
+def test_each_semester_has_the_expected_number_of_questions():
+    """24 per full semester (4 skills x 6), 12 in semester 6 where two skills are not quizzed."""
+    for career_id in ["devops_engineer", "mean_stack_developer"]:
+        template = load_roadmap_template(career_id)
+        questions = load_question_bank(career_id)
+        per_skill = {q.skill_id for q in questions}
+        for semester, expected in ((3, 24), (4, 24), (5, 24), (6, 12)):
+            skill_ids = {m.skill_id for m in template.months if m.semester == semester}
+            count = sum(1 for q in questions if q.skill_id in skill_ids)
+            assert count == expected, (career_id, semester, count)
+        assert len(per_skill) == 14
 
 
 def test_careers_json_has_all_four_launch_careers():

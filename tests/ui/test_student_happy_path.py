@@ -141,7 +141,15 @@ def test_check_to_results_journey():
     assert len(results.dataframe[0].value) == 4
 
 
-def test_semester_without_a_bank_shows_coming_soon_on_the_check():
+def test_semester_without_a_bank_shows_coming_soon_on_the_check(monkeypatch):
+    from pcc.workflow import workflow_controller
+
+    real = workflow_controller.load_question_bank
+    monkeypatch.setattr(
+        workflow_controller,
+        "load_question_bank",
+        lambda career_id: [q for q in real(career_id) if q.skill_id == "java_core_oop"],
+    )
     profile_id = _signed_in_with_roadmap("Ravi", "java_backend_developer", semester=4)
     at = _run("assessment_page", profile_id)
     assert not at.exception

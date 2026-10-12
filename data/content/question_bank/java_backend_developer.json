@@ -718,5 +718,1805 @@
     "review_status": "approved",
     "source": "ai_drafted",
     "reviewed_on": ""
+  },
+  {
+    "question_id": "q_spring_boot_fundamentals_001",
+    "skill_id": "spring_boot_fundamentals",
+    "concept_tag": "autoconfiguration",
+    "difficulty": "easy",
+    "stem": "What does the @SpringBootApplication annotation enable?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Only the embedded web server and nothing else"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Auto-configuration, component scanning and configuration in one annotation"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "A database connection pool with fixed settings"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Automatic generation of REST controllers from entities"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "It combines @Configuration, @EnableAutoConfiguration and @ComponentScan, so the app configures itself from the classpath.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_spring_boot_fundamentals_002",
+    "skill_id": "spring_boot_fundamentals",
+    "concept_tag": "application_properties",
+    "difficulty": "easy",
+    "stem": "Which file holds the default configuration of a Spring Boot application?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "pom.xml, which Maven reads when it builds the project"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "web.xml inside the WEB-INF directory"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "application.properties or application.yml"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "settings.gradle in the root folder"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "Spring Boot reads application.properties or application.yml for settings such as the port and datasource URL.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_spring_boot_fundamentals_003",
+    "skill_id": "spring_boot_fundamentals",
+    "concept_tag": "dependency_injection",
+    "difficulty": "medium",
+    "stem": "Which injection style is generally preferred in Spring?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Field injection with @Autowired on private fields"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Calling new on each dependency inside the class"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Reading beans from a static global map"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Constructor injection, which makes dependencies explicit and testable"
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "Constructor injection lets you create the class in a test without Spring and makes required dependencies obvious.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_spring_boot_fundamentals_004",
+    "skill_id": "spring_boot_fundamentals",
+    "concept_tag": "autoconfiguration",
+    "difficulty": "medium",
+    "stem": "How can you stop a specific auto-configuration from being applied?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Exclude it with the exclude attribute or the spring.autoconfigure.exclude property"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Delete the starter's jar from the local Maven repository"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Rename the class that Spring detects at start-up"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Comment it out of the JVM's boot classpath"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "Auto-configurations are conditional and can be excluded explicitly when they conflict with your own setup.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_spring_boot_fundamentals_005",
+    "skill_id": "spring_boot_fundamentals",
+    "concept_tag": "application_properties",
+    "difficulty": "hard",
+    "stem": "A property is set in application.properties and also passed as a command-line argument. Which value wins?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "The application.properties value, which always overrides everything"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "The command-line argument, which has higher precedence"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "The default value that is written in the code"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Neither, because Spring refuses to start with duplicates"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "Spring Boot's external configuration order lets command-line arguments override files, which suits per-environment changes.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_spring_boot_fundamentals_006",
+    "skill_id": "spring_boot_fundamentals",
+    "concept_tag": "dependency_injection",
+    "difficulty": "hard",
+    "stem": "Two beans implement the same interface and injection fails with NoUniqueBeanDefinitionException. Which fix works?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Add @Autowired a second time to the field"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Rename the interface so that Spring finds only one matching bean"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Mark one bean @Primary or choose one with @Qualifier"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Make both beans prototype scoped instead"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "Spring needs to know which candidate to inject. @Primary sets a default and @Qualifier picks one by name.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_rest_api_design_001",
+    "skill_id": "rest_api_design",
+    "concept_tag": "status_codes",
+    "difficulty": "easy",
+    "stem": "Which status code means a resource was created?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "201 Created"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "204 No Content"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "304 Not Modified"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "400 Bad Request"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "201 is returned after a successful POST that creates a resource, ideally with a Location header.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_rest_api_design_002",
+    "skill_id": "rest_api_design",
+    "concept_tag": "resource_modeling",
+    "difficulty": "easy",
+    "stem": "Which URL best follows REST naming conventions?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "/getOrderItems?id=42"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "/orders/42/items"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "/orders/delete/42/items"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "/doOrderItemsLookup/42"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "REST URLs name resources with nouns. The HTTP method says what to do with them.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_rest_api_design_003",
+    "skill_id": "rest_api_design",
+    "concept_tag": "status_codes",
+    "difficulty": "medium",
+    "stem": "A client is signed in but lacks permission for an action. Which status code fits?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "401 Unauthorized"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "404 Not Found"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "403 Forbidden"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "409 Conflict"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "403 means the server knows who you are and refuses. 401 means you are not authenticated.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_rest_api_design_004",
+    "skill_id": "rest_api_design",
+    "concept_tag": "resource_modeling",
+    "difficulty": "medium",
+    "stem": "Which HTTP method is idempotent and replaces a resource entirely?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "POST"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "PATCH"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "DELETE"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "PUT"
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "PUT sends a full replacement and repeating it leaves the same result. PATCH changes part of a resource.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_rest_api_design_005",
+    "skill_id": "rest_api_design",
+    "concept_tag": "versioning",
+    "difficulty": "hard",
+    "stem": "Which change should force a new version of an API?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Removing or renaming a field that existing clients rely on"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Adding an optional field to a response body"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Fixing a typo in an error message's text"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Improving the speed of an existing endpoint"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "Breaking changes need a new version. Adding optional fields is backward compatible.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_rest_api_design_006",
+    "skill_id": "rest_api_design",
+    "concept_tag": "resource_modeling",
+    "difficulty": "hard",
+    "stem": "A PUT request is retried after a timeout. Why does idempotency matter?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "It makes the request body smaller on each retry"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Repeating the request leaves the same result instead of creating duplicates"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "It lets the server skip authentication on retries"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "It guarantees the first attempt was never received"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "Networks fail, so clients retry. Idempotent operations make retries safe.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_jpa_hibernate_001",
+    "skill_id": "jpa_hibernate",
+    "concept_tag": "entity_mapping",
+    "difficulty": "easy",
+    "stem": "Which annotation marks a class as a JPA entity?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "@Table on its own"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "@Component"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "@Entity"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "@Repository"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "@Entity registers the class with JPA. @Table only customises the table name.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_jpa_hibernate_002",
+    "skill_id": "jpa_hibernate",
+    "concept_tag": "entity_mapping",
+    "difficulty": "easy",
+    "stem": "Which annotation marks the primary key field of an entity?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "@Key"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "@Primary"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "@PrimaryKey"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "@Id"
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "@Id identifies the primary key and is often paired with @GeneratedValue.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_jpa_hibernate_003",
+    "skill_id": "jpa_hibernate",
+    "concept_tag": "lazy_vs_eager",
+    "difficulty": "medium",
+    "stem": "What commonly causes a LazyInitializationException?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Accessing a lazy association after the session or transaction has closed"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Loading an entity that has no primary key defined"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Using more than one entity manager in the same thread"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Mapping a collection with the wrong generic type"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "Lazy data is loaded on first access and needs an open session. Fetch it inside the transaction or use a join fetch.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_jpa_hibernate_004",
+    "skill_id": "jpa_hibernate",
+    "concept_tag": "transactions",
+    "difficulty": "medium",
+    "stem": "What does @Transactional do on a service method?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Makes the method execute on a background thread"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Runs the method in a transaction that commits or rolls back as one unit"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Caches the method's return value between calls"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Encrypts the data written by the method"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "Either every change in the method is saved or, on a runtime exception, none are.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_jpa_hibernate_005",
+    "skill_id": "jpa_hibernate",
+    "concept_tag": "lazy_vs_eager",
+    "difficulty": "hard",
+    "stem": "What is the N+1 select problem?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "N queries are merged into one by the database"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "A query returns N+1 duplicate rows for each parent"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "One query loads N parents, then N more queries load each parent's children"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "A table needs N+1 indexes before it can be queried fast"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "Looping over lazy children triggers a query per parent. A join fetch or entity graph loads them together.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_jpa_hibernate_006",
+    "skill_id": "jpa_hibernate",
+    "concept_tag": "transactions",
+    "difficulty": "hard",
+    "stem": "A @Transactional method calls another @Transactional method in the same class. Why may the inner settings be ignored?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Spring supports only one transaction per application"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Inner methods always roll back the outer transaction"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "The inner method runs against a different database"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "The call bypasses the Spring proxy, so no new transactional behaviour applies"
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "Transactions are applied by a proxy around the bean. A call inside the same object never passes through it.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_multithreading_and_concurrency_001",
+    "skill_id": "multithreading_and_concurrency",
+    "concept_tag": "thread_lifecycle",
+    "difficulty": "easy",
+    "stem": "Which method starts a new thread of execution?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "run()"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "begin()"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "execute()"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "start()"
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "start() creates the thread and calls run() on it. Calling run() directly just executes on the current thread.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_multithreading_and_concurrency_002",
+    "skill_id": "multithreading_and_concurrency",
+    "concept_tag": "executor_services",
+    "difficulty": "easy",
+    "stem": "Why use an ExecutorService instead of creating threads manually?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "It reuses a managed pool of threads"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "It makes every task run faster than a single thread can"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "It removes the need to handle exceptions in tasks"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "It guarantees tasks finish in the order they were submitted"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "Pools avoid the cost of creating threads per task and put a limit on concurrency.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_multithreading_and_concurrency_003",
+    "skill_id": "multithreading_and_concurrency",
+    "concept_tag": "synchronization",
+    "difficulty": "medium",
+    "stem": "What does the synchronized keyword guarantee for a block?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "The block always completes within a fixed time"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Only one thread at a time can run it for the same lock"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Other threads can never read any of the variables used inside it"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "The block runs on the main thread only"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "synchronized gives mutual exclusion on a lock and makes the changes visible to the next thread that takes it.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_multithreading_and_concurrency_004",
+    "skill_id": "multithreading_and_concurrency",
+    "concept_tag": "thread_lifecycle",
+    "difficulty": "medium",
+    "stem": "In which state is a thread that is waiting to enter a synchronized block held by another thread?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "WAITING"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "TERMINATED"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "BLOCKED"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "NEW"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "BLOCKED means waiting for a monitor lock. WAITING is for Object.wait or join without a timeout.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_multithreading_and_concurrency_005",
+    "skill_id": "multithreading_and_concurrency",
+    "concept_tag": "synchronization",
+    "difficulty": "hard",
+    "stem": "Two threads each hold one lock and wait for the lock the other holds. What is this called?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "A race condition"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Thread starvation"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "A memory leak"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "A deadlock"
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "Neither can proceed. Acquire locks in a consistent order or use timeouts to avoid it.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_multithreading_and_concurrency_006",
+    "skill_id": "multithreading_and_concurrency",
+    "concept_tag": "executor_services",
+    "difficulty": "hard",
+    "stem": "A fixed thread pool of 4 receives 100 tasks that each block on I/O for seconds. What is likely?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Tasks queue up, so throughput is limited by the 4 threads"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Java automatically adds threads beyond the pool size"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "All 100 tasks run at the same time on 4 cores"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "The extra tasks are rejected straight away with a RejectedExecutionException"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "A fixed pool never grows and its queue is unbounded by default. Size the pool for the work, or use virtual threads for blocking I/O.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_spring_security_001",
+    "skill_id": "spring_security",
+    "concept_tag": "authentication_filters",
+    "difficulty": "easy",
+    "stem": "In Spring Security, what runs before a request reaches a controller?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "A chain of security filters"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "A set of database triggers"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "The embedded web server's logger"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "The JPA entity manager"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "Spring Security installs a filter chain that authenticates and authorises each request first.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_spring_security_002",
+    "skill_id": "spring_security",
+    "concept_tag": "authorization_rules",
+    "difficulty": "easy",
+    "stem": "Which annotation restricts a method to users with a given role?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "@Autowired"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "@PreAuthorize"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "@Transactional"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "@Scheduled"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "@PreAuthorize checks an expression such as hasRole('ADMIN') before the method runs.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_spring_security_003",
+    "skill_id": "spring_security",
+    "concept_tag": "csrf_protection",
+    "difficulty": "medium",
+    "stem": "When is CSRF protection most important?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "When the API only accepts requests that carry no cookies or tokens at all"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "When all endpoints are served over HTTP/2"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "When authentication uses cookies that browsers send automatically"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "When every response is cached by a CDN"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "Browsers attach cookies to cross-site requests, so an attacker's page can trigger actions. Header tokens are not sent automatically.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_spring_security_004",
+    "skill_id": "spring_security",
+    "concept_tag": "authentication_filters",
+    "difficulty": "medium",
+    "stem": "Which component encodes passwords before they are stored?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "A UserDetailsService that returns the raw password text"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "A SecurityFilterChain that hashes the URL"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "An AuthenticationEntryPoint that sends a 401"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "A PasswordEncoder such as BCryptPasswordEncoder"
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "PasswordEncoder hashes with a salt and checks login attempts against the stored hash.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_spring_security_005",
+    "skill_id": "spring_security",
+    "concept_tag": "authorization_rules",
+    "difficulty": "hard",
+    "stem": "What is the difference between hasRole('ADMIN') and hasAuthority('ADMIN')?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "hasRole adds the ROLE_ prefix, so it checks for the authority ROLE_ADMIN"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "hasRole checks the HTTP method and hasAuthority checks the URL"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "They are identical in every configuration of Spring"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "hasAuthority only works with OAuth 2.0 tokens"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "Roles are authorities with a ROLE_ prefix. Using the wrong one is a common cause of unexpected 403 responses.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_spring_security_006",
+    "skill_id": "spring_security",
+    "concept_tag": "csrf_protection",
+    "difficulty": "hard",
+    "stem": "Why is CSRF protection often disabled for a stateless API that sends a JWT in the Authorization header?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "JWTs are encrypted so forged requests are impossible"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Browsers do not attach that header automatically to cross-site requests"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Spring cannot generate CSRF tokens for JSON requests"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Headers are always ignored by the same-origin policy"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "The attack relies on automatic credentials such as cookies. A header the script must set itself is not sent by a forged form.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_microservices_architecture_001",
+    "skill_id": "microservices_architecture",
+    "concept_tag": "api_gateway",
+    "difficulty": "easy",
+    "stem": "What does an API gateway provide?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "A shared database used by all services"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "A compiler for the services' source code"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "A backup copy of each service's logs"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "A single entry point that routes requests to the services"
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "Clients call one address and the gateway routes, authenticates and rate-limits on behalf of the services.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_microservices_architecture_002",
+    "skill_id": "microservices_architecture",
+    "concept_tag": "service_boundaries",
+    "difficulty": "easy",
+    "stem": "Microservices are best divided around what?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Business capabilities such as orders or payments"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Technical layers such as controllers and repositories"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "The number of developers in each office"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "The programming language used in each file"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "Splitting by capability keeps related data and logic together so teams can change a service independently.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_microservices_architecture_003",
+    "skill_id": "microservices_architecture",
+    "concept_tag": "circuit_breakers",
+    "difficulty": "medium",
+    "stem": "What does an open circuit breaker do?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Retries the call again and again continuously until it succeeds"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Fails calls fast without contacting the unhealthy service"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Routes every call to the database directly"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Restarts the unhealthy service automatically"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "After repeated failures the breaker opens and rejects calls immediately, giving the service time to recover.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_microservices_architecture_004",
+    "skill_id": "microservices_architecture",
+    "concept_tag": "service_boundaries",
+    "difficulty": "medium",
+    "stem": "Why avoid sharing one database between microservices?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Databases cannot be accessed by more than one process"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "It makes every query slower than a network call"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "It couples services through the schema, so teams cannot change independently"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "It forces all services to use the same language"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "A shared schema means one team's change can break another service. Each service should own its data.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_microservices_architecture_005",
+    "skill_id": "microservices_architecture",
+    "concept_tag": "api_gateway",
+    "difficulty": "hard",
+    "stem": "Which concern is commonly handled at the gateway?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Business rules about pricing and discounts"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Schema migrations for each separate service's own database"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Compiling and packaging each service"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Authentication, rate limiting and request routing"
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "Cross-cutting edge concerns belong in the gateway, while business rules stay in the services.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_microservices_architecture_006",
+    "skill_id": "microservices_architecture",
+    "concept_tag": "circuit_breakers",
+    "difficulty": "hard",
+    "stem": "A service retries failed calls three times with no delay during an outage. What is the risk?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "A retry storm that overloads the struggling service even further"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "The service recovers faster because it is warmed up"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Retries are always blocked by the circuit breaker's closed state"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Clients receive duplicate responses with no side effects"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "Immediate retries multiply the load on a failing service. Use backoff with jitter and a circuit breaker.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_messaging_and_events_001",
+    "skill_id": "messaging_and_events",
+    "concept_tag": "message_queues",
+    "difficulty": "easy",
+    "stem": "What is a message queue used for?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Storing static files for a web server"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Passing messages between services asynchronously"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Compiling code in the background"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Balancing incoming traffic between several data centres"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "A producer puts a message on the queue and a consumer handles it later, so neither waits for the other.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_messaging_and_events_002",
+    "skill_id": "messaging_and_events",
+    "concept_tag": "pub_sub",
+    "difficulty": "easy",
+    "stem": "In publish/subscribe, who receives a published message?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Only the first subscriber that connects"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Only the publisher that sent it"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Every subscriber of that topic"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "A random single subscriber each time"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "Pub/sub fans a message out to all current subscribers of the topic.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_messaging_and_events_003",
+    "skill_id": "messaging_and_events",
+    "concept_tag": "message_queues",
+    "difficulty": "medium",
+    "stem": "A consumer crashes after reading a message but before processing it. How do brokers avoid losing the message?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Messages are copied to every consumer in advance"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "The producer sends the message again after a fixed delay of one day"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Brokers keep no copy once a message has been read"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Acknowledgements: unacknowledged messages are delivered again"
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "The broker removes a message only after the consumer acknowledges it, so a crash leads to redelivery.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_messaging_and_events_004",
+    "skill_id": "messaging_and_events",
+    "concept_tag": "event_driven_design",
+    "difficulty": "medium",
+    "stem": "What is a benefit of event-driven communication?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Services are decoupled because producers do not wait for consumers"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Every service must know the others' addresses exactly"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Events guarantee instantly consistent data everywhere"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "No message format needs to be agreed upon"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "Producers publish facts and consumers react, so services can change and scale independently.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_messaging_and_events_005",
+    "skill_id": "messaging_and_events",
+    "concept_tag": "event_driven_design",
+    "difficulty": "hard",
+    "stem": "At-least-once delivery means consumers must be what?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Faster, because each message is guaranteed to arrive exactly once"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Idempotent, because the same message can arrive twice"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Stateless, because messages are never repeated"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Single-threaded so that ordering is never lost"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "Redelivery after failures is expected, so handling a message twice must not cause a second side effect.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_messaging_and_events_006",
+    "skill_id": "messaging_and_events",
+    "concept_tag": "pub_sub",
+    "difficulty": "hard",
+    "stem": "Why partition a topic by a key such as order id?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "To make every single consumer receive every event exactly twice"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "To avoid storing events on any disk"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "To keep related events in order within one partition"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "To let producers ignore the event schema"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "Ordering is guaranteed only within a partition, so events for one order share a key and stay in sequence.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_testing_junit_mockito_001",
+    "skill_id": "testing_junit_mockito",
+    "concept_tag": "unit_vs_integration",
+    "difficulty": "easy",
+    "stem": "Which annotation marks a JUnit 5 test method?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "@Check"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "@Run"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "@Test"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "@Verify"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "@Test from org.junit.jupiter.api identifies a method as a test.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_testing_junit_mockito_002",
+    "skill_id": "testing_junit_mockito",
+    "concept_tag": "mocking",
+    "difficulty": "easy",
+    "stem": "What does Mockito's mock() create?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "A copy of the real database connection and its open sessions"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "A thread that runs the test"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "A report of the code coverage"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "A fake object whose behaviour you control"
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "A mock stands in for a real dependency so the class under test can be checked in isolation.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_testing_junit_mockito_003",
+    "skill_id": "testing_junit_mockito",
+    "concept_tag": "mocking",
+    "difficulty": "medium",
+    "stem": "What does when(repo.find(1)).thenReturn(user) do?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Makes the mock return user whenever find(1) is called"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Saves user into the real repository permanently on every call"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Verifies that find(1) was called exactly once"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Throws an exception whenever find(1) is called"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "It stubs the mock's behaviour. Verification is a separate step using verify().",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_testing_junit_mockito_004",
+    "skill_id": "testing_junit_mockito",
+    "concept_tag": "unit_vs_integration",
+    "difficulty": "medium",
+    "stem": "Which Spring annotation starts the full application context for a test?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "@MockBean"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "@SpringBootTest"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "@AutoConfigureMockMvc"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "@Profile"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "@SpringBootTest loads the whole context, which suits integration tests. Unit tests usually avoid it.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_testing_junit_mockito_005",
+    "skill_id": "testing_junit_mockito",
+    "concept_tag": "mocking",
+    "difficulty": "hard",
+    "stem": "When is verify(mock, never()).send(any()) useful?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "To make the mocked method return null"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "To count how long the method took to run in milliseconds"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "To assert that a side effect did not happen"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "To reset the mock before the next test"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "Verification checks interactions, including that something should not have been called.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_testing_junit_mockito_006",
+    "skill_id": "testing_junit_mockito",
+    "concept_tag": "test_coverage",
+    "difficulty": "hard",
+    "stem": "Which is a weakness of chasing 100% coverage?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Coverage tools slow every test down to about one test per minute"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "High coverage makes the production code run slower"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Coverage cannot be measured for Java code"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Tests can execute code without asserting anything meaningful"
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "Coverage tells you what ran, not what was checked. Good assertions matter more than the percentage.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_docker_and_deployment_001",
+    "skill_id": "docker_and_deployment",
+    "concept_tag": "dockerfile_basics",
+    "difficulty": "easy",
+    "stem": "Which instruction copies files from the build context into the image?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "FROM"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "EXPOSE"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "COPY"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "ENV"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "COPY adds files to the image. FROM names the base, EXPOSE documents a port and ENV sets an environment variable.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_docker_and_deployment_002",
+    "skill_id": "docker_and_deployment",
+    "concept_tag": "images_and_layers",
+    "difficulty": "easy",
+    "stem": "Why use a slim base image for a Java service?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Slim images run the JVM at double the speed"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "They allow running without a Java runtime at all"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Docker refuses large base images in production"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Smaller images pull faster and have fewer packages to patch"
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "Less in the image means faster deployments and a smaller attack surface.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_docker_and_deployment_003",
+    "skill_id": "docker_and_deployment",
+    "concept_tag": "dockerfile_basics",
+    "difficulty": "medium",
+    "stem": "What is the purpose of a multi-stage build for a Spring Boot jar?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Build with the JDK, then copy only the jar into a smaller runtime image"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Run several copies of the application inside one container"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Build the jar again every time the container starts"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Share one layer between all images on the host"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "Build tools stay in the first stage and the final image holds just the runtime and the jar.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_docker_and_deployment_004",
+    "skill_id": "docker_and_deployment",
+    "concept_tag": "container_orchestration_basics",
+    "difficulty": "medium",
+    "stem": "What does an orchestrator do when a container crashes?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Stops the whole cluster until a person steps in"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Restarts or reschedules it to keep the desired count running"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Deletes the image from the registry"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Moves the database into the container"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "Orchestrators compare the desired state with the actual state and repair the difference.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_docker_and_deployment_005",
+    "skill_id": "docker_and_deployment",
+    "concept_tag": "images_and_layers",
+    "difficulty": "hard",
+    "stem": "Which ordering gives the best layer caching for a Maven project?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Copy all the source code first and fetch the dependencies afterwards"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Run the tests before copying any files in"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Copy pom.xml and fetch dependencies first, then copy the source"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Fetch dependencies only after the container starts"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "Dependencies change rarely, so their layer stays cached while the source layer is rebuilt.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_docker_and_deployment_006",
+    "skill_id": "docker_and_deployment",
+    "concept_tag": "container_orchestration_basics",
+    "difficulty": "hard",
+    "stem": "A Spring Boot pod is killed with OOMKilled. What is a likely cause?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "The pod's CPU limit was set too high for the node"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "The image was pulled from the wrong registry"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "The readiness probe returned a 200 status"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "The JVM heap plus overhead exceeded the container memory limit"
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "The JVM needs memory beyond the heap. Set the limit above heap plus metaspace and thread stacks, or use container-aware heap sizing.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_system_design_basics_001",
+    "skill_id": "system_design_basics",
+    "concept_tag": "load_balancing",
+    "difficulty": "easy",
+    "stem": "What does a load balancer do?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Stores a copy of every database record"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Spreads incoming requests across several servers"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Compiles the source code before each new deployment starts"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Encrypts the data stored on the disk"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "A load balancer shares traffic so no single server is overwhelmed and one failure does not stop the service.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_system_design_basics_002",
+    "skill_id": "system_design_basics",
+    "concept_tag": "caching_layers",
+    "difficulty": "easy",
+    "stem": "Why put a cache in front of a database?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "To make every write instantly permanent"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "To replace the need for any database"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "To serve repeated reads faster and reduce database load"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "To keep the data private from administrators"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "Reads of popular data come from fast memory, so the database handles fewer queries.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_system_design_basics_003",
+    "skill_id": "system_design_basics",
+    "concept_tag": "load_balancing",
+    "difficulty": "medium",
+    "stem": "A health check fails for one server behind a load balancer. What should happen?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "The balancer restarts the whole fleet of servers"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "All of the traffic is sent to the failed server to test it out"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "The balancer deletes the server from the account"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "The balancer stops sending it traffic until it passes again"
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "Health checks let the balancer route around a failing instance, which keeps users unaffected.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_system_design_basics_004",
+    "skill_id": "system_design_basics",
+    "concept_tag": "database_scaling",
+    "difficulty": "medium",
+    "stem": "What is a read replica used for?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Serving read queries so the primary handles fewer reads"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Accepting all of the writes whenever the primary is too busy"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Storing the encryption keys for the primary"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Compressing the primary's transaction log files"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "Replicas copy the primary's data and answer reads. Writes still go to the primary.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_system_design_basics_005",
+    "skill_id": "system_design_basics",
+    "concept_tag": "caching_layers",
+    "difficulty": "hard",
+    "stem": "What is the core difficulty of cache invalidation?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Caches cannot store anything bigger than one megabyte"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Knowing when cached data is stale without losing the speed benefit"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Caches always return data in the wrong order"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Invalidation is blocked by most operating systems"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "Evict too late and users see old data. Evict too often and the cache stops helping.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_system_design_basics_006",
+    "skill_id": "system_design_basics",
+    "concept_tag": "database_scaling",
+    "difficulty": "hard",
+    "stem": "What is sharding?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Copying the same data to several read-only servers"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Compressing old rows to save disk space on one server"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Splitting data across several databases by a key such as user id"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Running two databases as a primary and a standby pair"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "Sharding spreads both data and writes, at the cost of harder queries that span shards.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
   }
 ]

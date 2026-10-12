@@ -718,5 +718,1805 @@
     "review_status": "approved",
     "source": "ai_drafted_human_reviewed",
     "reviewed_on": "2026-10-10"
+  },
+  {
+    "question_id": "q_machine_learning_fundamentals_001",
+    "skill_id": "machine_learning_fundamentals",
+    "concept_tag": "supervised_vs_unsupervised",
+    "difficulty": "easy",
+    "stem": "Which of these is supervised learning?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Grouping customers by behaviour with no labels"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Reducing image size with no target values"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Predicting house prices from labelled past sales"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Finding unusual logins with no labelled examples"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "Supervised learning learns from examples that include the right answer. Clustering and most anomaly detection use no labels.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_machine_learning_fundamentals_002",
+    "skill_id": "machine_learning_fundamentals",
+    "concept_tag": "train_test_split",
+    "difficulty": "easy",
+    "stem": "Why hold out a test set?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "To give the model more data to learn from"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "To speed up training on large datasets"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "To remove outliers from the training data"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "To measure performance on data the model has not seen"
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "A model scores well on data it trained on. Only unseen data shows how it will do in practice.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_machine_learning_fundamentals_003",
+    "skill_id": "machine_learning_fundamentals",
+    "concept_tag": "bias_variance",
+    "difficulty": "medium",
+    "stem": "A model scores 99% on the training data and 60% on the test data. What does this suggest?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Overfitting: it has memorised the training data"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Underfitting: it is too simple to learn the patterns"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "High bias: it ignores the signal in the data"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "A well-tuned model with ordinary noise in the data"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "A large gap between training and test performance is the classic sign of overfitting.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_machine_learning_fundamentals_004",
+    "skill_id": "machine_learning_fundamentals",
+    "concept_tag": "train_test_split",
+    "difficulty": "medium",
+    "stem": "Why use a stratified split for a classification problem?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "To guarantee equal numbers of rows in each fold"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "To keep the class proportions similar in the training and test sets"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "To remove rows with missing labels from both sets"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "To randomise which features the model can see"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "With rare classes a random split can leave the test set with almost none. Stratifying keeps the mix.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_machine_learning_fundamentals_005",
+    "skill_id": "machine_learning_fundamentals",
+    "concept_tag": "bias_variance",
+    "difficulty": "hard",
+    "stem": "Which action is most likely to reduce overfitting?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Train for more epochs on the same data"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Add many more layers and extra features to the model itself"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Add regularisation or gather more training data"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Evaluate on the training set only"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "Regularisation limits model complexity and more data makes memorising harder.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_machine_learning_fundamentals_006",
+    "skill_id": "machine_learning_fundamentals",
+    "concept_tag": "supervised_vs_unsupervised",
+    "difficulty": "hard",
+    "stem": "Which pair is correctly matched?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "k-means is supervised and logistic regression is unsupervised"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Both k-means and logistic regression are unsupervised methods"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Both are supervised because each of them uses a distance measure"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "k-means is unsupervised and logistic regression is supervised"
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "k-means groups unlabelled points. Logistic regression learns from labelled examples to predict a class.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_feature_engineering_and_evaluation_001",
+    "skill_id": "feature_engineering_and_evaluation",
+    "concept_tag": "evaluation_metrics",
+    "difficulty": "easy",
+    "stem": "Which metric is the share of all predictions that were correct?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Recall"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Precision"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "F1 score"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Accuracy"
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "Accuracy is correct predictions divided by all predictions. Precision and recall look only at the positive class.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_feature_engineering_and_evaluation_002",
+    "skill_id": "feature_engineering_and_evaluation",
+    "concept_tag": "feature_scaling",
+    "difficulty": "easy",
+    "stem": "Why scale features before using k-nearest neighbours?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Features with large ranges would otherwise dominate the distance"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Scaling makes the labels easier to read"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "KNN cannot run on unscaled numbers at all"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Scaling removes the need for training data"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "KNN compares distances, so a feature measured in thousands swamps one measured in fractions.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_feature_engineering_and_evaluation_003",
+    "skill_id": "feature_engineering_and_evaluation",
+    "concept_tag": "evaluation_metrics",
+    "difficulty": "medium",
+    "stem": "Fraud affects 1% of transactions and a model that always predicts not-fraud scores 99% accuracy. What is the lesson?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "A score of 99% accuracy means the model is already nearly perfect here"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Accuracy misleads on imbalanced data, so use precision and recall"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Fraud cases should be removed before measuring anything"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Recall of 99% is guaranteed in this case"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "The model never finds a single fraud case. Recall on the fraud class would be 0.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_feature_engineering_and_evaluation_004",
+    "skill_id": "feature_engineering_and_evaluation",
+    "concept_tag": "cross_validation",
+    "difficulty": "medium",
+    "stem": "In 5-fold cross-validation, how many times is each row used for validation?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Five times"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Never"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Exactly once"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Four times in total"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "Each fold is the validation set once and part of the training set in the other four rounds.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_feature_engineering_and_evaluation_005",
+    "skill_id": "feature_engineering_and_evaluation",
+    "concept_tag": "feature_scaling",
+    "difficulty": "hard",
+    "stem": "Where must a scaler be fitted to avoid data leakage?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "On the full dataset before the split"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Separately on the test data, using its own mean and statistics"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "On the labels so the features match the targets"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "On the training data only, then applied to the test data"
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "Fitting on all the data lets test information influence training. Learn the statistics from the training set only.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_feature_engineering_and_evaluation_006",
+    "skill_id": "feature_engineering_and_evaluation",
+    "concept_tag": "evaluation_metrics",
+    "difficulty": "hard",
+    "stem": "A classifier has precision 0.9 and recall 0.3. What does that mean?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Most flagged items are right, but many true positives are missed"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Most flagged items are wrong, but only a few real positives are missed"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "The model is wrong on 90% of all predictions made"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "The model never predicts the positive class at all"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "High precision means flagged items are usually correct. Low recall means many real positives were not flagged.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_deep_learning_fundamentals_001",
+    "skill_id": "deep_learning_fundamentals",
+    "concept_tag": "neural_network_basics",
+    "difficulty": "easy",
+    "stem": "What is a neuron in a neural network?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "A database row that stores one training sample"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "A file containing the whole model's learned parameters on disk"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "A loop that repeats training until it ends"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "A unit that applies weights, a bias and an activation"
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "A neuron computes a weighted sum of its inputs plus a bias and passes it through an activation function.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_deep_learning_fundamentals_002",
+    "skill_id": "deep_learning_fundamentals",
+    "concept_tag": "activation_functions",
+    "difficulty": "easy",
+    "stem": "Why use non-linear activation functions?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "So the network can learn non-linear relationships"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "So the outputs are always between 0 and 1"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "So that training needs no gradient calculation at all"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "So each layer uses less memory"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "Without non-linearity a stack of layers collapses into a single linear transformation.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_deep_learning_fundamentals_003",
+    "skill_id": "deep_learning_fundamentals",
+    "concept_tag": "backpropagation",
+    "difficulty": "medium",
+    "stem": "What does backpropagation compute?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "The final predictions for all of the training samples"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "The gradients of the loss with respect to each weight"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "The best number of layers for the network"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "A new training dataset from the old one"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "Gradients show how to change each weight to reduce the loss, and an optimiser uses them to update the weights.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_deep_learning_fundamentals_004",
+    "skill_id": "deep_learning_fundamentals",
+    "concept_tag": "activation_functions",
+    "difficulty": "medium",
+    "stem": "Which activation is common in hidden layers because it is cheap and does not saturate for positive inputs?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Sigmoid"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Softmax"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "ReLU"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Step function"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "ReLU outputs max(0, x). Sigmoid saturates and softmax is normally used on an output layer.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_deep_learning_fundamentals_005",
+    "skill_id": "deep_learning_fundamentals",
+    "concept_tag": "backpropagation",
+    "difficulty": "hard",
+    "stem": "What is the vanishing gradient problem?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Gradients grow without bound so the weights overflow"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "The loss disappears after the first epoch of training"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Training data vanish when the batch size is too small"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Gradients shrink through many layers, so early layers learn very slowly"
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "Repeated multiplication by small numbers makes gradients tiny in early layers. ReLU and residual connections help.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_deep_learning_fundamentals_006",
+    "skill_id": "deep_learning_fundamentals",
+    "concept_tag": "neural_network_basics",
+    "difficulty": "hard",
+    "stem": "What does a learning rate that is too high often cause?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Loss that bounces around or diverges instead of settling"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Training that is extremely slow but always stable"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Weights that never change at all from their random starting values"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "A model that perfectly fits the test set"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "Large steps overshoot the minimum, so the loss oscillates or grows.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_nlp_fundamentals_001",
+    "skill_id": "nlp_fundamentals",
+    "concept_tag": "tokenization",
+    "difficulty": "easy",
+    "stem": "What is tokenization?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Translating text from one language into another"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Splitting text into smaller units such as words or subwords"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Removing every vowel from the words in a text"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Encrypting text before sending it over a network"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "Models work on numbers, so text is first split into tokens that are mapped to ids.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_nlp_fundamentals_002",
+    "skill_id": "nlp_fundamentals",
+    "concept_tag": "embeddings",
+    "difficulty": "easy",
+    "stem": "What does a word embedding represent?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "A word's position in a dictionary's alphabetical ordering list"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "The number of times a word appears in a book"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "A word as a vector that captures aspects of its meaning"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "A word's translation in another language"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "Words with similar meaning end up with nearby vectors, which lets models generalise.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_nlp_fundamentals_003",
+    "skill_id": "nlp_fundamentals",
+    "concept_tag": "embeddings",
+    "difficulty": "medium",
+    "stem": "Which measure is commonly used to compare two embeddings?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "The Hamming weight of the raw text strings"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "The length of the longer of the two sentences"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "The alphabetical distance between the words"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Cosine similarity between the two vectors"
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "Cosine similarity compares the direction of vectors and ignores their length.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_nlp_fundamentals_004",
+    "skill_id": "nlp_fundamentals",
+    "concept_tag": "tokenization",
+    "difficulty": "medium",
+    "stem": "Why do many models use subword tokenization?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "It handles rare words by breaking them into known pieces"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "It stores one token for every sentence ever seen"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "It guarantees exactly one token per character in all languages"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "It removes punctuation to make the text shorter"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "A fixed vocabulary of subwords can still represent any word, including ones never seen in training.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_nlp_fundamentals_005",
+    "skill_id": "nlp_fundamentals",
+    "concept_tag": "sequence_models",
+    "difficulty": "hard",
+    "stem": "Which limitation of RNNs does the Transformer's attention address?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Inability to handle input with more than one word"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Difficulty relating distant words and processing tokens in parallel"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "A requirement for labelled data in every task"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Lack of any way to use a vocabulary"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "Attention lets every token look at every other directly, and the computation can run in parallel across positions.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_nlp_fundamentals_006",
+    "skill_id": "nlp_fundamentals",
+    "concept_tag": "sequence_models",
+    "difficulty": "hard",
+    "stem": "In self-attention, what do the attention weights express?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "How many times each token appears in the corpus"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Which tokens should be deleted from the sequence"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "How much each token should draw on every other token"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "The order in which the tokens were originally typed by the user"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "Weights are computed from query-key similarity and used to mix the value vectors.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_llm_and_prompt_engineering_001",
+    "skill_id": "llm_and_prompt_engineering",
+    "concept_tag": "prompt_structuring",
+    "difficulty": "easy",
+    "stem": "Which prompt is more likely to give a useful answer?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Do something helpful with this email that I pasted in below for you"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Give me a summary of the email, whatever style you like"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Say whatever you think about the email that I pasted"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Summarise this email in three bullet points for a busy manager"
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "Clear prompts state the task, the format and the audience.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_llm_and_prompt_engineering_002",
+    "skill_id": "llm_and_prompt_engineering",
+    "concept_tag": "context_windows",
+    "difficulty": "easy",
+    "stem": "What is a context window?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "The maximum amount of text a model can consider at once"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "The time a model takes to produce one answer"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "The number of different users a model can serve at the same time"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "The set of languages that a model supports"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "Prompt, conversation history and the reply must all fit within the window, measured in tokens.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_llm_and_prompt_engineering_003",
+    "skill_id": "llm_and_prompt_engineering",
+    "concept_tag": "few_shot_examples",
+    "difficulty": "medium",
+    "stem": "What is few-shot prompting?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Retraining the model on a few examples overnight"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Giving a few input and output examples in the prompt to show the task"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Asking the model to answer in very few words"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Limiting the model to a few seconds of thinking"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "Examples in the prompt steer the model without changing its weights.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_llm_and_prompt_engineering_004",
+    "skill_id": "llm_and_prompt_engineering",
+    "concept_tag": "prompt_structuring",
+    "difficulty": "medium",
+    "stem": "Why separate your instructions from user-provided text with clear delimiters?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "It lets the model ignore the instructions completely"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "It makes the model's replies identical on every run"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "It helps the model treat the text as data, which reduces prompt injection"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "It lowers the token cost of every request to zero"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "Delimiters and an explicit statement that the text is data make it harder for hidden instructions to take over.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_llm_and_prompt_engineering_005",
+    "skill_id": "llm_and_prompt_engineering",
+    "concept_tag": "context_windows",
+    "difficulty": "hard",
+    "stem": "A chat grows past the context window. What typically happens if nothing handles it?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "The model automatically remembers everything through its training run"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "The window expands to fit whatever length is sent"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Only the newest word is kept and the rest is repeated"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Older messages are cut or the request fails, so context is lost"
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "Applications must trim, summarise or retrieve earlier content to stay inside the window.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_llm_and_prompt_engineering_006",
+    "skill_id": "llm_and_prompt_engineering",
+    "concept_tag": "few_shot_examples",
+    "difficulty": "hard",
+    "stem": "Few-shot examples that are all positive reviews risk what?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Biasing the model toward predicting the positive label"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Making the model refuse to classify any review"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Increasing the size of the context window of the model itself"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Teaching the model new vocabulary permanently"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "Models pick up the label balance of the examples. Mix the labels and vary the wording.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_rag_and_vector_databases_001",
+    "skill_id": "rag_and_vector_databases",
+    "concept_tag": "retrieval_pipelines",
+    "difficulty": "easy",
+    "stem": "What does RAG stand for?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Recurrent attention gating"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Retrieval-augmented generation"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Randomised answer grading"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Ranked annotation guidance system"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "RAG retrieves relevant documents and gives them to the model so its answer is grounded in them.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_rag_and_vector_databases_002",
+    "skill_id": "rag_and_vector_databases",
+    "concept_tag": "embeddings_and_similarity",
+    "difficulty": "easy",
+    "stem": "What does a vector database store?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Only the raw text files of each document"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Passwords for the users of the application"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Embeddings, so that similar items can be found quickly"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Compiled code for the model's layers"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "It indexes vectors for fast nearest-neighbour search by meaning.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_rag_and_vector_databases_003",
+    "skill_id": "rag_and_vector_databases",
+    "concept_tag": "chunking_strategies",
+    "difficulty": "medium",
+    "stem": "Why split documents into chunks before embedding them?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Embedding models cannot read more than one letter"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Chunks are required by every vector database's licence"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "It removes the need for any similarity search"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Smaller chunks give more precise retrieval and fit the context window"
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "A whole book in one vector is too vague, and it would not fit in the prompt.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_rag_and_vector_databases_004",
+    "skill_id": "rag_and_vector_databases",
+    "concept_tag": "retrieval_pipelines",
+    "difficulty": "medium",
+    "stem": "In a RAG pipeline, what role do the retrieved passages play?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "They are added to the prompt so the answer is grounded in them"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "They replace the model's weights for that request"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "They are used to retrain the model each night"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "They are shown to users instead of any answer"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "The model reads the passages as context and answers from them, which reduces hallucination.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_rag_and_vector_databases_005",
+    "skill_id": "rag_and_vector_databases",
+    "concept_tag": "chunking_strategies",
+    "difficulty": "hard",
+    "stem": "Why use overlapping chunks?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "To store every chunk twice in the database for safety"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "So a fact split across a boundary still appears whole in one chunk"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "To make embeddings of different sizes comparable"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "To skip the embedding step for the overlapped text"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "Overlap stops a sentence or idea from being cut in two with neither half retrievable.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_rag_and_vector_databases_006",
+    "skill_id": "rag_and_vector_databases",
+    "concept_tag": "embeddings_and_similarity",
+    "difficulty": "hard",
+    "stem": "Retrieval returns the right topic but the wrong details. Which change often helps?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Lower the temperature setting of the retriever to zero"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Embed the question again with a different language's tokenizer and model"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Retrieve more candidates, then rerank them with a stronger model"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Increase the chunk size to a whole book per chunk"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "Vector search is fast but approximate. A reranker reads query and passage together and orders them better.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_ai_apis_and_agents_001",
+    "skill_id": "ai_apis_and_agents",
+    "concept_tag": "api_integration",
+    "difficulty": "easy",
+    "stem": "Where should an LLM API key be kept?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "In the front-end JavaScript bundle so it is simple to reach"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "In a public repository's README for the team"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "In the query string of every request"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "On the server in a secret store, never in browser code"
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "Anything sent to a browser is visible to users. Calls go through your server, which holds the key.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_ai_apis_and_agents_002",
+    "skill_id": "ai_apis_and_agents",
+    "concept_tag": "tool_use_patterns",
+    "difficulty": "easy",
+    "stem": "What is tool use, also called function calling?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "The model asks your code to run a function and receives the result"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "The model runs shell commands directly on your laptop"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "A fine-tuning method that adds tools to the weights"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "A way to upload files to the model's training set"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "The model outputs a structured request, your code runs it and returns the result for the model to use.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_ai_apis_and_agents_003",
+    "skill_id": "ai_apis_and_agents",
+    "concept_tag": "agent_loops",
+    "difficulty": "medium",
+    "stem": "What is a basic agent loop?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Send one prompt and return whatever comes back"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Reason, call a tool, observe the result, then repeat until done"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Train a new model after each user message"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Poll a database until a person replies"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "An agent alternates between deciding what to do and acting, using each result to choose the next step.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_ai_apis_and_agents_004",
+    "skill_id": "ai_apis_and_agents",
+    "concept_tag": "api_integration",
+    "difficulty": "medium",
+    "stem": "An API returns status 429. What is the right response?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Immediately resend the request in a tight loop"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Treat it as a success and ignore the response"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Back off and retry after a delay, respecting the rate limit"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Switch to a different API key on every attempt"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "429 means too many requests. Honour Retry-After and use exponential backoff.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_ai_apis_and_agents_005",
+    "skill_id": "ai_apis_and_agents",
+    "concept_tag": "tool_use_patterns",
+    "difficulty": "hard",
+    "stem": "Why must your code validate the arguments a model produces for a tool?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Models always produce arguments that match the schema"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Validation is done by the API provider for you"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Arguments are encrypted so they cannot be tampered with"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "The model may produce wrong or malicious values, so code must check them"
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "Model output is untrusted input. Check types, ranges and permissions before acting on it.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_ai_apis_and_agents_006",
+    "skill_id": "ai_apis_and_agents",
+    "concept_tag": "agent_loops",
+    "difficulty": "hard",
+    "stem": "How can an agent loop be kept from running forever?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Set a maximum number of steps and a budget, and stop on repeated failure"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Remove the tools so the model has nothing to call"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Raise the temperature until the agent gives up"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Ask the model to promise that it will stop soon"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "Hard limits enforced in code are the only reliable guard. The model's own promises are not.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_mlops_basics_001",
+    "skill_id": "mlops_basics",
+    "concept_tag": "model_versioning",
+    "difficulty": "easy",
+    "stem": "Why version trained models?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "To make the model file smaller on disk"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "To reproduce results and roll back to an earlier model"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "To avoid ever needing to retrain the model"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "To hide the model from other team members"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "A version ties a model to the data and code that produced it, so you can compare, reproduce and revert.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_mlops_basics_002",
+    "skill_id": "mlops_basics",
+    "concept_tag": "experiment_tracking",
+    "difficulty": "easy",
+    "stem": "What should an experiment tracker record?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Only the final accuracy number from the best run"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "The names of the people who reviewed the code"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Parameters, data version, code version and metrics"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "The model's weights pasted into a plain text email"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "Recording everything that went into a run lets you explain and repeat the result.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_mlops_basics_003",
+    "skill_id": "mlops_basics",
+    "concept_tag": "pipeline_automation",
+    "difficulty": "medium",
+    "stem": "What is the benefit of automating a training pipeline?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Models no longer need any evaluation step at all"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Data quality checks become unnecessary for any newly arriving data"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Training is guaranteed to finish in the same time"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Runs are repeatable and can be triggered by new data or code"
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "Automation removes manual steps that vary between runs and makes retraining routine.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_mlops_basics_004",
+    "skill_id": "mlops_basics",
+    "concept_tag": "model_versioning",
+    "difficulty": "medium",
+    "stem": "Which belongs in a model registry entry?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Version, metrics, the data and code that produced it, and its stage"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Only the name of the data scientist's laptop"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "The raw production traffic from the last month"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "The passwords for the training cluster"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "A registry entry answers what this model is, how good it is and whether it is staging or production.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_mlops_basics_005",
+    "skill_id": "mlops_basics",
+    "concept_tag": "experiment_tracking",
+    "difficulty": "hard",
+    "stem": "Two runs differ in accuracy by 0.2% with different random seeds. What is a sound conclusion?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "The higher run is better and should ship at once"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "The difference may be noise, so repeat the runs before concluding"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Random seeds never affect training results in any way"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "The lower run has a bug in its code"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "Small gaps between single runs are often within seed-to-seed variation. Repeat and compare distributions.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_mlops_basics_006",
+    "skill_id": "mlops_basics",
+    "concept_tag": "pipeline_automation",
+    "difficulty": "hard",
+    "stem": "What is training-serving skew?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "The model's size being skewed toward the larger versions over time"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Training running on GPUs while serving uses CPUs"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Features computed differently in training than in production"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Differences between two people's notebooks"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "If production computes a feature differently, the model sees inputs it was never trained on. Share the feature code.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_model_deployment_and_serving_001",
+    "skill_id": "model_deployment_and_serving",
+    "concept_tag": "serving_frameworks",
+    "difficulty": "easy",
+    "stem": "What does serving a model mean?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Training it again on the latest data"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Exposing it so applications can request predictions"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Compressing it to a zip file for sharing"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Writing its documentation for users"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "A served model sits behind an interface, such as an HTTP API, that returns predictions on demand.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_model_deployment_and_serving_002",
+    "skill_id": "model_deployment_and_serving",
+    "concept_tag": "monitoring_drift",
+    "difficulty": "easy",
+    "stem": "What is data drift?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "The model's file changing on disk overnight"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Training data being deleted by mistake"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Production inputs change compared with the training data"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "The model forgetting its weights over time"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "When real inputs no longer resemble the training data, accuracy can fall without any code change.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_model_deployment_and_serving_003",
+    "skill_id": "model_deployment_and_serving",
+    "concept_tag": "latency_and_batching",
+    "difficulty": "medium",
+    "stem": "What does dynamic batching trade off?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Accuracy against the size of the training set"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Memory against the number of model layers"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Security against ease of deployment"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Higher throughput against slightly higher latency per request"
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "Waiting briefly to group requests uses the hardware better but each request may wait a little.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_model_deployment_and_serving_004",
+    "skill_id": "model_deployment_and_serving",
+    "concept_tag": "serving_frameworks",
+    "difficulty": "medium",
+    "stem": "Why wrap a model in an API such as FastAPI?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Any client can call it over HTTP with a defined input and output"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Models cannot run without a web browser"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "It avoids having to load the model into memory"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "It makes predictions identical in every language"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "An API gives a stable contract between the model and the applications that use it.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_model_deployment_and_serving_005",
+    "skill_id": "model_deployment_and_serving",
+    "concept_tag": "monitoring_drift",
+    "difficulty": "hard",
+    "stem": "Accuracy cannot be measured live because labels arrive weeks later. What can you monitor in the meantime?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Nothing, because monitoring must wait for the labels"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Input feature distributions and prediction distributions for drift"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Only the server's disk space and uptime"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "The number of developers using the dashboard"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "Shifts in inputs and outputs are early warnings that do not need labels.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_model_deployment_and_serving_006",
+    "skill_id": "model_deployment_and_serving",
+    "concept_tag": "latency_and_batching",
+    "difficulty": "hard",
+    "stem": "The p99 latency spikes after a deployment. Which is a sensible first check?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Retrain the model with more data right away"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Disable monitoring so the spike disappears"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Compare model load time, batch size and cold starts with the previous version"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Increase the number of training epochs"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "Start with what changed in serving. A new model size, batch setting or cold start often explains tail latency.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_responsible_ai_and_evaluation_001",
+    "skill_id": "responsible_ai_and_evaluation",
+    "concept_tag": "bias_and_fairness",
+    "difficulty": "easy",
+    "stem": "What is a common source of bias in an AI model?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Using a GPU instead of a CPU for training"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Writing the model's code in a particular programming language"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Training data that under-represents some groups"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Saving the model in a binary format"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "Models learn the patterns in their data, including gaps and skews.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_responsible_ai_and_evaluation_002",
+    "skill_id": "responsible_ai_and_evaluation",
+    "concept_tag": "hallucination_evaluation",
+    "difficulty": "easy",
+    "stem": "What is a hallucination in an LLM?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "A response that takes too long to arrive"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "An answer written in a different language"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "A reply that simply repeats the question back word for word"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "A fluent answer that is false or unsupported"
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "The text sounds confident but is not backed by the model's knowledge or the supplied sources.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_responsible_ai_and_evaluation_003",
+    "skill_id": "responsible_ai_and_evaluation",
+    "concept_tag": "bias_and_fairness",
+    "difficulty": "medium",
+    "stem": "A loan model has equal accuracy for two groups but approves far fewer people from one. What does this raise?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "A fairness concern: outcomes differ even though accuracy matches"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "A bug in the accuracy calculation formula"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Normal behaviour that never needs a review"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Overfitting to the number of approved loans"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "Equal accuracy does not mean equal treatment. Check approval rates and error rates per group.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_responsible_ai_and_evaluation_004",
+    "skill_id": "responsible_ai_and_evaluation",
+    "concept_tag": "safety_guardrails",
+    "difficulty": "medium",
+    "stem": "What is a guardrail in an AI application?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "A larger context window for long conversations"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "A check on inputs or outputs that blocks or fixes unsafe content"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "A faster GPU used only for safety testing"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "A prompt that asks the model to be extra friendly"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "Guardrails run in code around the model, so safety does not depend on the model behaving.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_responsible_ai_and_evaluation_005",
+    "skill_id": "responsible_ai_and_evaluation",
+    "concept_tag": "hallucination_evaluation",
+    "difficulty": "hard",
+    "stem": "Which method best measures whether answers are grounded in the retrieved sources?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Measure only how fluent the sentences sound"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Count the words in each generated answer"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Check each claim against the provided passages, by people or a judge model"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Compare the answer length with the question length"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "Groundedness is about whether claims are supported, which needs claim-by-claim checking.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_responsible_ai_and_evaluation_006",
+    "skill_id": "responsible_ai_and_evaluation",
+    "concept_tag": "safety_guardrails",
+    "difficulty": "hard",
+    "stem": "Why is a system prompt alone not enough to stop prompt injection?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "System prompts are ignored by every model by design"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Injection only works on models under ten billion parameters"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Attackers cannot read or write text sent to the model"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "The model may still follow instructions hidden in user or retrieved text"
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "Models cannot reliably tell instructions from data, so add input filtering, output checks and least-privilege tools.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
   }
 ]

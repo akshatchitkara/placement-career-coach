@@ -718,5 +718,1805 @@
     "review_status": "approved",
     "source": "ai_drafted_human_reviewed",
     "reviewed_on": "2026-10-10"
+  },
+  {
+    "question_id": "q_networking_fundamentals_001",
+    "skill_id": "networking_fundamentals",
+    "concept_tag": "tcp_ip_basics",
+    "difficulty": "easy",
+    "stem": "Which protocol provides reliable, ordered delivery of data between two hosts?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "TCP"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "UDP"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "ICMP"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "ARP"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "TCP numbers segments, acknowledges them and retransmits lost ones. UDP is connectionless and does none of this.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_networking_fundamentals_002",
+    "skill_id": "networking_fundamentals",
+    "concept_tag": "ports_and_firewalls",
+    "difficulty": "easy",
+    "stem": "Which default port does HTTPS use?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "80"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "443"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "22"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "8443"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "HTTPS listens on 443 by default. 80 is plain HTTP and 22 is SSH.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_networking_fundamentals_003",
+    "skill_id": "networking_fundamentals",
+    "concept_tag": "dns_and_http",
+    "difficulty": "medium",
+    "stem": "Which DNS record type maps a hostname to an IPv4 address?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "MX record"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "TXT record"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "A record"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "NS record"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "An A record holds an IPv4 address. AAAA is the IPv6 version, MX names mail servers and NS names name servers.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_networking_fundamentals_004",
+    "skill_id": "networking_fundamentals",
+    "concept_tag": "ports_and_firewalls",
+    "difficulty": "medium",
+    "stem": "A firewall allows inbound TCP 22 only from 10.0.0.0/24. A host at 10.0.1.5 tries to SSH in. What happens?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "The connection is allowed because port 22 is open to every address"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "The connection is allowed because SSH ignores any firewall source address rules"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "The connection is blocked because SSH must use port 443 instead"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "The connection is blocked because its address is outside the allowed range"
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "10.0.0.0/24 covers 10.0.0.0 to 10.0.0.255, so 10.0.1.5 does not match the rule and the default deny applies.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_networking_fundamentals_005",
+    "skill_id": "networking_fundamentals",
+    "concept_tag": "tcp_ip_basics",
+    "difficulty": "hard",
+    "stem": "Which sequence correctly describes how a TCP connection is set up?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "SYN, SYN-ACK, ACK"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "SYN, ACK, SYN-ACK"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "ACK, SYN, SYN-ACK"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "SYN-ACK, SYN, ACK"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "The client sends SYN, the server answers SYN-ACK and the client completes with ACK: the three-way handshake.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_networking_fundamentals_006",
+    "skill_id": "networking_fundamentals",
+    "concept_tag": "dns_and_http",
+    "difficulty": "hard",
+    "stem": "A DNS record has a TTL of 3600 seconds and you change its IP. Why might some users still reach the old IP for up to an hour?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Browsers refuse any new IP address until the whole computer is restarted"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Resolvers may keep serving the cached answer until the TTL expires"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Authoritative name servers reject all record changes within the first hour"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "HTTP/1.1 pins the old IP address until a new TLS handshake is performed"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "Resolvers cache answers for the TTL. Lowering the TTL before a planned change shortens this window.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_ci_cd_pipelines_001",
+    "skill_id": "ci_cd_pipelines",
+    "concept_tag": "pipeline_stages",
+    "difficulty": "easy",
+    "stem": "In a typical CI pipeline, which stage normally runs first?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Build and compile the code"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Deploy the release to production"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Promote the artifact to the live registry"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Send the release announcement email"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "Later stages need something to test and package, so the pipeline starts by building the code.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_ci_cd_pipelines_002",
+    "skill_id": "ci_cd_pipelines",
+    "concept_tag": "build_triggers",
+    "difficulty": "easy",
+    "stem": "Which event commonly triggers a CI build automatically?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "A change to the team's chat channel topic"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "A commit pushed to the repository"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "A server disk reaching fifty percent usage"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "A new member joining the organisation"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "CI systems listen for pushes and pull requests through webhooks and start a build on each.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_ci_cd_pipelines_003",
+    "skill_id": "ci_cd_pipelines",
+    "concept_tag": "artifact_promotion",
+    "difficulty": "medium",
+    "stem": "What does \"build once, promote the same artifact\" mean?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Each environment compiles its own fresh build from the source code"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Production builds are rebuilt with extra optimisation flags switched on"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "The exact artifact tested in staging is the one deployed to production"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Only the final environment stores a build artifact for later use"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "Rebuilding per environment can produce a different binary. Promoting one artifact means what you tested is what you ship.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_ci_cd_pipelines_004",
+    "skill_id": "ci_cd_pipelines",
+    "concept_tag": "pipeline_stages",
+    "difficulty": "medium",
+    "stem": "A pipeline has the stages build, unit test, integration test and deploy. The unit test stage fails. What should happen by default?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "The deploy stage still runs, since the build itself succeeded"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "The pipeline retries the build stage until the tests finally pass"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "The failed tests are ignored and logged as warnings only"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Later stages are skipped and the pipeline is marked failed"
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "Stages run in order and a failure stops the pipeline, which stops broken code from reaching deployment.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_ci_cd_pipelines_005",
+    "skill_id": "ci_cd_pipelines",
+    "concept_tag": "build_triggers",
+    "difficulty": "hard",
+    "stem": "A monorepo pipeline rebuilds every service on any commit and takes 40 minutes. Which change reduces build time most safely?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Path-based triggers that build only the services whose files changed"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Skip the tests for every service except the one deployed last"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Turn off all caching so every build always starts from a clean workspace"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Merge all services into one image so they are built together"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "Path filters keep the safety of testing what changed and avoid rebuilding what did not.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_ci_cd_pipelines_006",
+    "skill_id": "ci_cd_pipelines",
+    "concept_tag": "artifact_promotion",
+    "difficulty": "hard",
+    "stem": "Why are artifacts tagged with an immutable version such as a commit SHA instead of only latest?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Registries refuse to store images that are tagged with the name latest"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Any deployment can be traced to exact code, reproduced or rolled back"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Latest tags make images slower to pull from registries than other tags"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Old versions are deleted automatically after each new deployment"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "latest moves, so it cannot tell you what is running. A fixed tag ties a deployment to one build.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_docker_containers_001",
+    "skill_id": "docker_containers",
+    "concept_tag": "dockerfile_basics",
+    "difficulty": "easy",
+    "stem": "Which Dockerfile instruction sets the base image?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "RUN"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "CMD"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "FROM"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "COPY"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "FROM names the image the new image builds on. RUN executes a command at build time, CMD sets the default start command.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_docker_containers_002",
+    "skill_id": "docker_containers",
+    "concept_tag": "images_and_layers",
+    "difficulty": "easy",
+    "stem": "What is a Docker image?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "A running instance of an application and its process tree"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "A virtual machine that has its own kernel"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "A network bridge between several containers"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "A read-only template used to create containers"
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "An image is the packaged filesystem and metadata. A container is a running instance created from it.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_docker_containers_003",
+    "skill_id": "docker_containers",
+    "concept_tag": "volumes_and_networking",
+    "difficulty": "medium",
+    "stem": "A container writes database files to its own filesystem and the data is lost when the container is removed. What prevents this?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Mounting a volume at the database's data directory"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Publishing the database port with the -p flag"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Giving the container more memory with the --memory flag"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Using the host network mode for the container"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "A container's writable layer is deleted with it. A volume lives outside the container and survives removal.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_docker_containers_004",
+    "skill_id": "docker_containers",
+    "concept_tag": "images_and_layers",
+    "difficulty": "medium",
+    "stem": "A Dockerfile copies the source code first and then runs npm install. Why does this slow rebuilds?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Docker never caches layers created by a RUN instruction that uses a package manager"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Any source change invalidates the layer cache, so dependencies reinstall every time"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "npm install always needs a fresh network connection on each separate build"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "COPY instructions are executed when the container starts rather than at build time"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "Layers are cached in order. Copy package files first and install, then copy the rest, so the install layer is reused.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_docker_containers_005",
+    "skill_id": "docker_containers",
+    "concept_tag": "dockerfile_basics",
+    "difficulty": "hard",
+    "stem": "What is the difference between CMD and ENTRYPOINT?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "CMD runs during the image build and ENTRYPOINT runs only when the container starts"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "ENTRYPOINT can only launch shell scripts while CMD can only launch compiled binaries"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "ENTRYPOINT sets the main executable while CMD supplies default arguments that can be overridden"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "They are aliases and Docker keeps whichever one appears last in the Dockerfile"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "ENTRYPOINT defines what runs. CMD gives default arguments, which docker run can replace.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_docker_containers_006",
+    "skill_id": "docker_containers",
+    "concept_tag": "volumes_and_networking",
+    "difficulty": "hard",
+    "stem": "Two containers on the default bridge network cannot reach each other by container name. What is the usual fix?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Expose both containers' ports with the -P flag on the host"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Run both containers with the --privileged flag switched on"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Set the same hostname inside every one of the containers"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Attach both to a user-defined bridge network, which provides name resolution"
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "The default bridge does not resolve names. User-defined bridge networks include built-in DNS.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_cloud_fundamentals_001",
+    "skill_id": "cloud_fundamentals",
+    "concept_tag": "compute_storage_network",
+    "difficulty": "easy",
+    "stem": "Which kind of cloud storage suits images and backups stored as objects?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Block storage attached to one VM"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "An in-memory cache cluster"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "A relational database server"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Object storage such as S3"
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "Object storage holds files as objects behind an HTTP API, scales well and suits images and backups.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_cloud_fundamentals_002",
+    "skill_id": "cloud_fundamentals",
+    "concept_tag": "iam_basics",
+    "difficulty": "easy",
+    "stem": "What is the principle of least privilege?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Give each identity only the permissions it needs"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Grant all engineers the same broad administrator role"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Let identities choose their own permissions on demand"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Remove all permissions from service accounts entirely"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "Limiting permissions limits the damage from a mistake or a stolen credential.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_cloud_fundamentals_003",
+    "skill_id": "cloud_fundamentals",
+    "concept_tag": "regions_and_availability",
+    "difficulty": "medium",
+    "stem": "Which design survives the failure of a whole availability zone?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Run several larger instances inside a single availability zone"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Run instances across two or more availability zones behind a load balancer"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Take nightly snapshots of one instance in one zone"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Use a bigger instance type with more CPU and memory"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "A zone is a failure domain. Spreading instances across zones lets the service keep running when one fails.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_cloud_fundamentals_004",
+    "skill_id": "cloud_fundamentals",
+    "concept_tag": "compute_storage_network",
+    "difficulty": "medium",
+    "stem": "An instance in a private subnet must download updates from the internet without being reachable from it. What is typically used?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "An internet gateway attached directly to its private subnet"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "A public IP address assigned straight to the instance"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "A NAT gateway placed in a public subnet with a route from the private one"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "A VPN tunnel set up between the instance and the registry"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "A NAT gateway lets private instances start outbound connections while blocking inbound ones.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_cloud_fundamentals_005",
+    "skill_id": "cloud_fundamentals",
+    "concept_tag": "iam_basics",
+    "difficulty": "hard",
+    "stem": "An application on a VM needs to read one storage bucket. Which approach is safest?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Store an administrator access key in the application's config file"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Make the bucket public so no credentials are needed at all"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Share one engineer's personal access key through the team chat"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Attach a role with read-only access to that bucket to the VM"
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "A role gives short-lived credentials with narrow permissions and no secret to leak or rotate by hand.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_cloud_fundamentals_006",
+    "skill_id": "cloud_fundamentals",
+    "concept_tag": "regions_and_availability",
+    "difficulty": "hard",
+    "stem": "What does a Recovery Time Objective (RTO) of 15 minutes mean?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "The service should be restored within 15 minutes of an outage"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "No more than 15 minutes of data may be lost in an outage"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Backups must be taken every 15 minutes without exception"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Each deployment must finish within 15 minutes of the build starting"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "RTO is about time to recover. The amount of data you can afford to lose is the Recovery Point Objective (RPO).",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_kubernetes_orchestration_001",
+    "skill_id": "kubernetes_orchestration",
+    "concept_tag": "pods_and_deployments",
+    "difficulty": "easy",
+    "stem": "What is the smallest deployable unit in Kubernetes?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "A node"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "A pod"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "A namespace"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "A cluster"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "A pod wraps one or more containers that share networking and storage. It is what the scheduler places on a node.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_kubernetes_orchestration_002",
+    "skill_id": "kubernetes_orchestration",
+    "concept_tag": "services_and_ingress",
+    "difficulty": "easy",
+    "stem": "What gives a set of pods a stable network address?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "A ConfigMap"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "A PersistentVolume"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "A Service"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "A Namespace"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "Pods come and go with changing IPs. A Service gives them one stable address and balances across them.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_kubernetes_orchestration_003",
+    "skill_id": "kubernetes_orchestration",
+    "concept_tag": "pods_and_deployments",
+    "difficulty": "medium",
+    "stem": "You change the image tag in a Deployment. What happens by default?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "All pods are deleted at once and then recreated"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Nothing changes until each node is restarted by hand"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Only newly scheduled pods use the new image tag"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Pods are replaced gradually in a rolling update"
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "The default strategy starts new pods and removes old ones in steps, so the app stays available.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_kubernetes_orchestration_004",
+    "skill_id": "kubernetes_orchestration",
+    "concept_tag": "scaling_and_health_checks",
+    "difficulty": "medium",
+    "stem": "What does a failing readiness probe do?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "The pod is removed from Service endpoints but is not restarted"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "The pod is restarted immediately by the kubelet"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "The node is drained and marked unschedulable"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "The Deployment is rolled back automatically to its previous revision"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "Readiness controls whether traffic is sent to the pod. A failing liveness probe is what triggers a restart.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_kubernetes_orchestration_005",
+    "skill_id": "kubernetes_orchestration",
+    "concept_tag": "services_and_ingress",
+    "difficulty": "hard",
+    "stem": "Which resource routes HTTP traffic by host name and path to different Services?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "A ClusterIP Service on its own"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "An Ingress, served by an ingress controller"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "A NodePort Service on every node"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "A headless Service with no selector and no cluster IP"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "Ingress rules describe host and path routing, and an ingress controller turns them into a working proxy.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_kubernetes_orchestration_006",
+    "skill_id": "kubernetes_orchestration",
+    "concept_tag": "scaling_and_health_checks",
+    "difficulty": "hard",
+    "stem": "A Horizontal Pod Autoscaler targets 50% CPU. Two replicas average 100% CPU. About how many replicas will it aim for?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "About 3 replicas"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "About 2 replicas"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "About 4 replicas"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "About 8 replicas"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "Desired replicas = current replicas x (current metric / target) = 2 x (100 / 50) = 4.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_terraform_iac_001",
+    "skill_id": "terraform_iac",
+    "concept_tag": "providers_and_resources",
+    "difficulty": "easy",
+    "stem": "Which Terraform command previews changes without applying them?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "terraform apply"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "terraform init"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "terraform plan"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "terraform destroy"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "plan compares the configuration and state with real infrastructure and shows what would change.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_terraform_iac_002",
+    "skill_id": "terraform_iac",
+    "concept_tag": "modules_and_variables",
+    "difficulty": "easy",
+    "stem": "What is a Terraform module?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "A plugin that talks to a cloud provider's API"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "A file that stores the current state of resources"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "A command that formats the configuration files"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "A reusable group of resources defined together"
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "Modules package related resources with inputs and outputs so they can be reused.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_terraform_iac_003",
+    "skill_id": "terraform_iac",
+    "concept_tag": "state_management",
+    "difficulty": "medium",
+    "stem": "Why store Terraform state in a remote backend with locking?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "A team shares one state and two applies cannot run at once"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Terraform can then run without any provider plugins installed"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "State files are never needed again after the first apply"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Resources are created faster in parallel across many runs"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "Local state breaks teamwork. A remote backend shares it and locking prevents conflicting writes.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_terraform_iac_004",
+    "skill_id": "terraform_iac",
+    "concept_tag": "providers_and_resources",
+    "difficulty": "medium",
+    "stem": "You rename a resource block but keep the same real infrastructure. What does plan show by default?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "No changes, because the real infrastructure is unchanged"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Destroy the resource under the old name and create one under the new name"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "An error because resource names cannot be changed"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Only an update to the tags of the existing resource"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "State tracks resources by address. A new address looks like a new resource unless you add a moved block.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_terraform_iac_005",
+    "skill_id": "terraform_iac",
+    "concept_tag": "state_management",
+    "difficulty": "hard",
+    "stem": "Someone changes a security group in the cloud console by hand. What does the next terraform plan show?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "No difference at all, since Terraform ignores changes made outside of it"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "An error telling you to delete the state file first"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "A diff that reverts the manual change to match the configuration"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "A diff that copies the console change into the code"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "Terraform refreshes real state and plans to bring it back to the configuration. This is configuration drift.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_terraform_iac_006",
+    "skill_id": "terraform_iac",
+    "concept_tag": "modules_and_variables",
+    "difficulty": "hard",
+    "stem": "A variable is marked sensitive = true. What does that do?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "It encrypts the value inside the state file with a project key"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "It prevents the variable from being passed to any module"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "It deletes the value from state after the apply completes"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "It hides the value in plan and apply output, but it is still stored in state"
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "sensitive only redacts output. State can still contain the value, so protect the state backend.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_configuration_management_001",
+    "skill_id": "configuration_management",
+    "concept_tag": "idempotent_playbooks",
+    "difficulty": "easy",
+    "stem": "What does idempotent mean for a configuration task?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "It runs only once and then disables itself"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Running it repeatedly gives the same end state"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "It always restarts the service it manages"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "It runs in parallel on every server in the inventory at once"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "An idempotent task changes something only if it is not already in the desired state.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_configuration_management_002",
+    "skill_id": "configuration_management",
+    "concept_tag": "inventory_management",
+    "difficulty": "easy",
+    "stem": "In Ansible, what does the inventory define?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "The tasks that are executed on each host"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "The variable files that hold all of the project's secrets"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "The hosts and groups that playbooks run against"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "The modules that are installed locally"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "The inventory lists the machines and how they are grouped. Playbooks list what to do on them.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_configuration_management_003",
+    "skill_id": "configuration_management",
+    "concept_tag": "idempotent_playbooks",
+    "difficulty": "medium",
+    "stem": "Which task is idempotent?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "A command that appends a line to a config file on every run"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "A script that creates a new numbered backup on each run"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "A shell task that increments a counter stored in a file"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "The package module with state set to present for nginx"
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "The package module checks whether nginx is installed and acts only if it is not.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_configuration_management_004",
+    "skill_id": "configuration_management",
+    "concept_tag": "secrets_handling",
+    "difficulty": "medium",
+    "stem": "Where should database passwords used by playbooks be stored?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "In an encrypted vault or secret manager, not as plain text in the repository"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "In a plain variables file committed with the playbooks"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "In the inventory file next to the host names"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "In a comment above the task that needs them"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "Secrets in Git are exposed to everyone with access and stay in history. Use Ansible Vault or a secret manager.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_configuration_management_005",
+    "skill_id": "configuration_management",
+    "concept_tag": "inventory_management",
+    "difficulty": "hard",
+    "stem": "What is the benefit of a dynamic inventory in a cloud environment?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Playbooks run faster because fewer modules need to be loaded each time"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Hosts are discovered from the cloud API, so the list stays current as servers change"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Variables no longer need to be defined for each group of hosts"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "SSH keys are generated automatically for every newly created host"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "Servers appear and disappear in the cloud, so a hand-edited list goes stale. A dynamic inventory asks the provider.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_configuration_management_006",
+    "skill_id": "configuration_management",
+    "concept_tag": "idempotent_playbooks",
+    "difficulty": "hard",
+    "stem": "A handler is notified by two tasks on the same host in one play. How many times does it run on that host?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Twice, once after each notifying task"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Never, because handlers only run when called by name"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Once, after the tasks in the play finish"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Three times: before, between and after the tasks"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "Handlers run once at the end of the play however many tasks notify them, which avoids repeated restarts.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_gitops_and_deployment_strategies_001",
+    "skill_id": "gitops_and_deployment_strategies",
+    "concept_tag": "blue_green_and_canary",
+    "difficulty": "easy",
+    "stem": "In a blue-green deployment, what do the two colours represent?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Two branches of the same Git repository"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Two identical environments, one live and one idle"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Two teams that must approve every release"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Two databases that are kept in sync by hand every night"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "One environment serves users while the new version is prepared on the other, then traffic is switched.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_gitops_and_deployment_strategies_002",
+    "skill_id": "gitops_and_deployment_strategies",
+    "concept_tag": "declarative_sync",
+    "difficulty": "easy",
+    "stem": "In GitOps, what is the source of truth for the desired state?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "The objects currently running in the cluster"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "A runbook page in the team wiki"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "A Git repository holding the manifests"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "The log output from the last CI build"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "GitOps keeps desired state in Git and uses a controller to make the cluster match it.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_gitops_and_deployment_strategies_003",
+    "skill_id": "gitops_and_deployment_strategies",
+    "concept_tag": "blue_green_and_canary",
+    "difficulty": "medium",
+    "stem": "A canary release sends 5% of traffic to the new version. What is the main benefit?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "The new version is tested without any real traffic at all"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Both versions can share one database schema without any changes being made"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Rollouts finish faster than with any other strategy"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "A bad release affects only a small share of users before wider rollout"
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "Limiting exposure lets you watch metrics on real traffic and stop before most users are affected.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_gitops_and_deployment_strategies_004",
+    "skill_id": "gitops_and_deployment_strategies",
+    "concept_tag": "rollback_strategies",
+    "difficulty": "medium",
+    "stem": "Which approach makes rollback fastest in a blue-green deployment?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Switch the router back to the still-running previous environment"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Rebuild the previous version from source code and deploy it again later"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Restore the database from last night's backup first"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Run the pipeline again with the earlier commit message"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "The old environment is still running, so rollback is a routing change instead of a rebuild.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_gitops_and_deployment_strategies_005",
+    "skill_id": "gitops_and_deployment_strategies",
+    "concept_tag": "declarative_sync",
+    "difficulty": "hard",
+    "stem": "With self-heal enabled, a GitOps controller finds a Deployment edited by hand in the cluster. What does it do?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Copies the manual edit back into the Git repository"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Reverts the cluster object to match the manifest in Git"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Deletes the Deployment and waits for a manual approval before recreating it"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Ignores the drift until the next scheduled release"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "The controller treats Git as truth and removes drift, so lasting changes must be made through Git.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_gitops_and_deployment_strategies_006",
+    "skill_id": "gitops_and_deployment_strategies",
+    "concept_tag": "rollback_strategies",
+    "difficulty": "hard",
+    "stem": "A release includes dropping a database column. Why does this make rollback risky?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Databases cannot be changed by deployment pipelines at all"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Rollbacks always require a full restart of the database server"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "The old code may need the dropped column, so schema changes should be backward compatible"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "The column drop is automatically reversed when the pipeline fails"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "Rolling the app back does not bring the column back. Expand first, migrate, and contract in a later release.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_monitoring_observability_001",
+    "skill_id": "monitoring_observability",
+    "concept_tag": "metrics_and_dashboards",
+    "difficulty": "easy",
+    "stem": "Which of these is a metric rather than a log line?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "A stack trace printed when an exception is thrown"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Requests per second over the last minute"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "A message saying a user signed in at 10:01"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "A debug line showing a SQL statement"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "Metrics are numbers measured over time and are cheap to aggregate. Logs are individual event records.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_monitoring_observability_002",
+    "skill_id": "monitoring_observability",
+    "concept_tag": "logging_pipelines",
+    "difficulty": "easy",
+    "stem": "Why ship logs from many servers to one central place?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "To make each server's disk fill up faster"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "To stop applications from writing logs locally"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "To search and correlate them in one tool"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "To remove the need for any log retention rules"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "Debugging a request that crossed several servers needs all their logs searchable together.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_monitoring_observability_003",
+    "skill_id": "monitoring_observability",
+    "concept_tag": "alerting_and_slos",
+    "difficulty": "medium",
+    "stem": "A service has a 99.9% availability SLO over 30 days. Roughly how much downtime does that allow?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "About 7 hours"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "About 4 minutes in total"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "About 9 hours"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "About 43 minutes"
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "30 days is 43,200 minutes and 0.1% of that is about 43 minutes, which is the error budget.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_monitoring_observability_004",
+    "skill_id": "monitoring_observability",
+    "concept_tag": "metrics_and_dashboards",
+    "difficulty": "medium",
+    "stem": "Why is average latency a poor single indicator of user experience?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "A few very slow requests are hidden, so percentiles such as p95 or p99 matter"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Average latency cannot be calculated from request data at all"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Users only ever notice the fastest request in a session"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Averages are always lower than the median value"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "Averages smooth over the slow tail that users actually feel. Percentiles show it.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_monitoring_observability_005",
+    "skill_id": "monitoring_observability",
+    "concept_tag": "alerting_and_slos",
+    "difficulty": "hard",
+    "stem": "Which alerting approach is best practice?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Alert whenever any server's CPU passes 70% for a single second"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Alert on symptoms users feel, such as an error rate above the SLO threshold"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Alert on every warning line in the logs to be safe"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Alert only when a customer opens a support ticket"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "Symptom-based alerts are actionable and cut noise. Cause-based alerts on every blip train people to ignore pages.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_monitoring_observability_006",
+    "skill_id": "monitoring_observability",
+    "concept_tag": "logging_pipelines",
+    "difficulty": "hard",
+    "stem": "Why log in a structured format such as JSON?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "It makes log files smaller than any plain-text format could be"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "It removes the need to include a timestamp in each entry"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Fields can be parsed, filtered and aggregated without fragile text matching"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "It stops logs from ever containing any sensitive data"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "Key-value fields let a pipeline query by user id or status code without regular expressions.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_devsecops_basics_001",
+    "skill_id": "devsecops_basics",
+    "concept_tag": "dependency_scanning",
+    "difficulty": "easy",
+    "stem": "What does a dependency scanner look for?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Syntax errors in your own source files"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Known vulnerabilities in third-party libraries"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Slow queries in the production database server's logs"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Unused style rules in the front end"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "Scanners compare your dependency versions with databases of published vulnerabilities.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_devsecops_basics_002",
+    "skill_id": "devsecops_basics",
+    "concept_tag": "secrets_in_pipelines",
+    "difficulty": "easy",
+    "stem": "Where should a CI pipeline get an API token from?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "A constant defined in the application source code or its config file"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "A text file committed next to the pipeline file"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "The CI system's secret store, injected at run time"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "The title of the pull request that triggered it"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "Secret stores keep tokens out of the repository and can mask them in build logs.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_devsecops_basics_003",
+    "skill_id": "devsecops_basics",
+    "concept_tag": "least_privilege",
+    "difficulty": "medium",
+    "stem": "A deploy job only needs to push to one container registry. Which credential is best?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "A personal token with access to every project"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "The cloud account's root user credentials"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "An admin token that is shared by all of the team's pipelines"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "A token scoped to push images to that one registry only"
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "A narrow token limits what an attacker can do if the pipeline is compromised.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_devsecops_basics_004",
+    "skill_id": "devsecops_basics",
+    "concept_tag": "dependency_scanning",
+    "difficulty": "medium",
+    "stem": "A scan reports a critical vulnerability in a library you only use in tests. What is a sensible response?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Assess the exposure, then upgrade or record the risk with a deadline"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Ignore it permanently because test code never reaches production at all"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Delete the scanner so that it stops failing the build"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Rewrite the library from scratch before shipping anything"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "Test-only code is lower risk but not zero (build agents hold secrets). Decide deliberately and track it.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_devsecops_basics_005",
+    "skill_id": "devsecops_basics",
+    "concept_tag": "secrets_in_pipelines",
+    "difficulty": "hard",
+    "stem": "A secret was committed to Git and removed in the next commit. What should you do?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Nothing, since the latest commit no longer contains it in any file"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Rotate the secret, because it remains in the Git history"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Force-push the branch and keep using the same secret"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Rename the file so scanners no longer match it"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "Anyone who cloned the repository can read old commits. Treat the secret as exposed and replace it.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_devsecops_basics_006",
+    "skill_id": "devsecops_basics",
+    "concept_tag": "least_privilege",
+    "difficulty": "hard",
+    "stem": "Which Kubernetes setting follows least privilege for a container?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Run as root so it can install packages whenever it needs"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Mount the host's Docker socket for easier debugging"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Run as a non-root user with a read-only root filesystem"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Disable network policies so pods can talk to each other freely"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "A non-root user and read-only filesystem shrink what an attacker can do after breaking in.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
   }
 ]
