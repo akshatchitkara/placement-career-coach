@@ -6,6 +6,7 @@ from pcc.ui.components.journey import next_step, next_step_button, render_steppe
 from pcc.ui.components.level_badge import LEVEL_LABELS
 from pcc.ui.components.progress_visuals import sparkline_svg
 from pcc.ui.navigation import go_button
+from pcc.ui.text import escape_md
 from pcc.workflow.workflow_controller import get_controller
 
 _FEATURES = [
@@ -26,7 +27,7 @@ def _welcome() -> None:
     cols = st.columns(4)
     for col, (title, text) in zip(cols, _FEATURES, strict=True):
         col.markdown(
-            f'<div class="pcc-feature"><h4>{title}</h4><p>{text}</p></div>', unsafe_allow_html=True
+            f'<div class="pcc-feature"><h2>{title}</h2><p>{text}</p></div>', unsafe_allow_html=True
         )
     st.write("")
     go_button("Get started", "profile", key="home_get_started", primary=True)
@@ -43,7 +44,7 @@ def render() -> None:
 
     controller.sync_state(profile.id)
     profile = controller.get_profile(profile.id) or profile
-    st.title(f"Welcome back, {profile.display_name}")
+    st.title(f"Welcome back, {escape_md(profile.display_name)}")
     career_names = {c.career_id: c.name for c in controller.list_careers()}
     if profile.career_id:
         st.caption(
@@ -54,7 +55,7 @@ def render() -> None:
 
     message, _, _ = next_step(profile.workflow_state)
     with st.container(border=True):
-        st.subheader("Your next step")
+        st.header("Your next step")
         st.write(message)
         next_step_button(profile.workflow_state, key="home_next")
 

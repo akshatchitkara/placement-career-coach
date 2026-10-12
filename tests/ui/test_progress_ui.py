@@ -22,7 +22,7 @@ def test_effort_is_shown_next_to_the_score_change():
     profile_id = _two_checks("Asha")
     at = _run("progress_page", profile_id)
     assert not at.exception
-    assert any("Did the effort show up?" in s.value for s in at.subheader)
+    assert any("Did the effort show up?" in s.value for s in at.header)
     text = " ".join(m.value for m in at.markdown)
     assert "Week after your baseline" in text and "1 of" in text and "points" in text
     assert any("not proof" in c.value for c in at.caption)
@@ -43,7 +43,7 @@ def test_single_check_progress_points_to_the_weekly_plan():
     at = _run("progress_page", profile_id)
     assert not at.exception
     assert [m.label for m in at.metric] == ["Latest score", "Level", "Checks taken"]
-    assert not any("Did the effort show up?" in s.value for s in at.subheader)
+    assert not any("Did the effort show up?" in s.value for s in at.header)
     assert "first time measured" in " ".join(m.value for m in at.markdown)
 
 

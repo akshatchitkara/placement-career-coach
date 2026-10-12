@@ -164,3 +164,29 @@ def save_submission(
             attempt_id,
         ),
     )
+
+
+def save_draft(conn: sqlite3.Connection, attempt_id: int, answers: dict[str, str]) -> None:
+    conn.execute(
+        "INSERT INTO assessment_drafts (attempt_id, answers_json, updated_at) VALUES (?, ?, ?) "
+        "ON CONFLICT(attempt_id) DO UPDATE SET answers_json = excluded.answers_json, "
+        "updated_at = excluded.updated_at",
+        (attempt_id, json.dumps(answers, sort_keys=True), _now()),
+    )
+
+
+def load_draft(conn: sqlite3.Connection, attempt_id: int) -> dict[str, str]:
+    row = conn.execute(
+        "SELECT answers_json FROM assessment_drafts WHERE attempt_id = ?", (attempt_id,)
+    ).fetchone()
+    if row is None:
+        return {}
+    try:
+        loaded = json.loads(row["answers_json"])
+    except ValueError:
+        return {}
+    return {str(k): str(v) for k, v in loaded.items()} if isinstance(loaded, dict) else {}
+
+
+def delete_draft(conn: sqlite3.Connection, attempt_id: int) -> None:
+    conn.execute("DELETE FROM assessment_drafts WHERE attempt_id = ?", (attempt_id,))

@@ -114,3 +114,11 @@ CREATE TABLE coaching_messages (
 );
 
 CREATE INDEX idx_coaching_messages_task ON coaching_messages(coaching_plan_id, task_order);
+
+-- Answers chosen so far in an open check, so a page reload does not lose them.
+-- Deleted when the check is submitted. Never read by scoring.
+CREATE TABLE assessment_drafts (
+    attempt_id INTEGER PRIMARY KEY REFERENCES assessment_attempts(id),
+    answers_json TEXT NOT NULL,
+    updated_at TEXT NOT NULL
+);

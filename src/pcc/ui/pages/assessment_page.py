@@ -27,7 +27,8 @@ def render() -> None:
         return
     controller.sync_state(profile.id)
     profile = controller.get_profile(profile.id)
-    assert profile is not None
+    if profile is None:
+        raise PccError("Profile not found.")
 
     if st.session_state.pop(_FLASH_KEY, False):
         st.success(
@@ -100,8 +101,20 @@ def render() -> None:
         return
 
     kind = "Re-check" if session.attempt_type == "retest" else "Skills check"
-    st.subheader(f"{kind} · {session.scope_description} · {len(session.questions)} questions")
-    selections = render_check_wizard(session.attempt_id, session.questions)
+    st.header(f"{kind} · {session.scope_description} · {len(session.questions)} questions")
+
+    def save_draft(answers: dict[str, str]) -> None:
+        try:
+            controller.save_check_draft(profile.id, session.attempt_id, answers)
+        except PccError:
+            pass  # for example the check was submitted in another tab; the page catches up
+
+    selections = render_check_wizard(
+        session.attempt_id,
+        session.questions,
+        load_draft=lambda: controller.get_check_draft(profile.id, session.attempt_id),
+        save_draft=save_draft,
+    )
     if selections is None:
         return
     try:

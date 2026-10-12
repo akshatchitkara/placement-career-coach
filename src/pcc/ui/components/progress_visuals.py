@@ -163,7 +163,10 @@ def skill_change_rows(attempts: list[AttemptSummary], names: dict[str, str], mas
 
 def render_trend(attempts: list[AttemptSummary], lower_bounds: dict[str, float]) -> None:
     st.markdown(
-        f'<div class="pcc-chart">{trend_svg(attempts, lower_bounds)}</div>', unsafe_allow_html=True
+        f'<div class="pcc-chart" tabindex="0" role="group" '
+        f'aria-label="Score trend chart, scrolls sideways on narrow screens">'
+        f"{trend_svg(attempts, lower_bounds)}</div>",
+        unsafe_allow_html=True,
     )
 
 

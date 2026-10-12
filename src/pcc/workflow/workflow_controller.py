@@ -86,11 +86,14 @@ from pcc.persistence.repositories.ai_provider_settings_repository import get_sav
 from pcc.persistence.repositories.assessment_repository import (
     AttemptRecord,
     create_attempt,
+    delete_draft,
     get_attempt,
     get_latest_submitted_attempt,
     get_open_attempt,
     list_submitted_attempts,
     load_answers,
+    load_draft,
+    save_draft,
     save_submission,
     seen_question_ids_oldest_first,
 )
@@ -370,7 +373,8 @@ class WorkflowController:
                 set_workflow_state(conn, profile_id, WorkflowState.ASSESSMENT_IN_PROGRESS)
                 conn.commit()
                 attempt = get_attempt(conn, attempt_id)
-                assert attempt is not None
+                if attempt is None:
+                    raise PccError("The check could not be started.")
             seen = seen_question_ids_oldest_first(conn, profile_id)
             _, _, questions = self._questions_for(ctx, attempt, seen)
         return AssessmentSession(
@@ -403,6 +407,33 @@ class WorkflowController:
             semester_skill_ids=ctx.semester_skill_ids,
             settings=settings,
         )
+
+    def _open_attempt_questions(
+        self, conn: sqlite3.Connection, profile_id: int, attempt_id: int
+    ) -> dict[str, set[str]]:
+        """question id -> its option ids, for an open check that belongs to this profile."""
+        attempt = get_attempt(conn, attempt_id)
+        if attempt is None or attempt.profile_id != profile_id or attempt.submitted:
+            raise PccError("This check is not open.")
+        ctx = self._check_context(conn, profile_id)
+        seen = seen_question_ids_oldest_first(conn, profile_id)
+        _, _, questions = self._questions_for(ctx, attempt, seen)
+        return {q.question_id: {o.option_id for o in q.options} for q in questions}
+
+    def get_check_draft(self, profile_id: int, attempt_id: int) -> dict[str, str]:
+        """Answers saved so far in an open check; anything that no longer fits is dropped."""
+        with closing(self._connect()) as conn:
+            valid = self._open_attempt_questions(conn, profile_id, attempt_id)
+            saved = load_draft(conn, attempt_id)
+        return {q: o for q, o in saved.items() if o in valid.get(q, set())}
+
+    def save_check_draft(self, profile_id: int, attempt_id: int, answers: dict[str, str]) -> None:
+        """Keeps chosen answers so a reload does not lose them. Not graded, not a submission."""
+        with closing(self._connect()) as conn:
+            valid = self._open_attempt_questions(conn, profile_id, attempt_id)
+            kept = {q: o for q, o in answers.items() if o in valid.get(q, set())}
+            save_draft(conn, attempt_id, kept)
+            conn.commit()
 
     def submit_assessment(
         self, profile_id: int, attempt_id: int, selections: dict[str, str | None]
@@ -442,6 +473,7 @@ class WorkflowController:
                 result=result,
                 submitted_at=self._now_iso(),
             )
+            delete_draft(conn, attempt_id)
             set_workflow_state(conn, profile_id, WorkflowState.RESULTS_READY)
             if result.weakest.status == "weakest_found" and result.weakest.skill_id:
                 plan = self._coach(conn, ctx, result, settings)
@@ -537,7 +569,8 @@ class WorkflowController:
         )
         save_weekly_plan(conn, profile_id, attempt_id, plan)
         current = get_profile(conn, profile_id)
-        assert current is not None
+        if current is None:
+            raise PccError("Profile not found.")
         assert_transition(current.workflow_state, WorkflowState.WEEKLY_PLAN_ACTIVE)
         set_workflow_state(conn, profile_id, WorkflowState.WEEKLY_PLAN_ACTIVE)
 
@@ -566,7 +599,8 @@ class WorkflowController:
                     self._plan_week(conn, ctx, attempt.id, result, settings)
                     conn.commit()
                     profile = get_profile(conn, profile_id)
-                    assert profile is not None
+                    if profile is None:
+                        raise PccError("Profile not found.")
             if profile.workflow_state == WorkflowState.WEEKLY_PLAN_ACTIVE:
                 latest = get_latest_weekly_plan(conn, profile_id)
                 if latest is not None and self._today() >= latest[1].retest_due_date:

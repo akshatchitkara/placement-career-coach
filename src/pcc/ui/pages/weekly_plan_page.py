@@ -9,7 +9,9 @@ from pcc.domain.calendar_export import build_ics
 from pcc.domain.schemas.weekly_plan_schemas import WeeklyPlanView, WeeklyTask
 from pcc.domain.week_schedule import DayPlan, schedule_week
 from pcc.ui.components.page_frame import page_header, require_profile
+from pcc.ui.components.pill import pill_html
 from pcc.ui.navigation import go_button
+from pcc.ui.text import safe_md
 from pcc.workflow.workflow_controller import WorkflowController, get_controller
 
 _KIND_LABELS = {
@@ -62,13 +64,13 @@ def _task_card(
 ) -> None:
     done_ids = set(view.done_task_ids)
     checked = st.checkbox(
-        f"**{task.title}** · {task.estimated_minutes} min",
+        f"**{safe_md(task.title)}** · {task.estimated_minutes} min",
         value=task.task_id in done_ids,
         key=f"task_{view.plan_id}_{task.task_id}",
     )
     st.caption(_KIND_LABELS[task.kind])
-    st.write(task.description)
-    st.markdown(f"**You're done when:** {task.completion_check}")
+    st.write(safe_md(task.description))
+    st.markdown(f"**You're done when:** {safe_md(task.completion_check)}")
     link = _TASK_LINKS.get(task.kind)
     if link is not None:
         go_button(link[0], link[1], key=f"wk_go_{view.plan_id}_{task.task_id}")
@@ -85,11 +87,11 @@ def _day(
     is_today: bool,
 ) -> None:
     label = f"{day.day:%a %d %b}"
-    today = " :blue-badge[Today]" if is_today else ""
+    today = f" {pill_html('Today', 'info')}" if is_today else ""
     if not day.tasks:
         st.caption(f"{label}{' (today)' if is_today else ''} · rest or catch up")
         return
-    st.markdown(f"**{label}**{today} · {day.minutes} min")
+    st.markdown(f"<strong>{label}</strong>{today} · {day.minutes} min", unsafe_allow_html=True)
     with st.container(border=True):
         for index, task in enumerate(day.tasks):
             if index:
@@ -101,8 +103,8 @@ def _recheck_card(view: WeeklyPlanView, task: WeeklyTask) -> None:
     due = view.plan.retest_due_date
     st.markdown(f"**{due:%a %d %b}** · re-check day")
     with st.container(border=True):
-        st.markdown(f"**{task.title}** · {task.estimated_minutes} min")
-        st.write(task.description)
+        st.markdown(f"**{safe_md(task.title)}** · {task.estimated_minutes} min")
+        st.write(safe_md(task.description))
         if view.retest_due:
             go_button("Start my re-check", "assessment", key="wk_recheck", primary=True)
         else:

@@ -6,7 +6,9 @@ from pcc.core.exceptions import PccError
 from pcc.domain.schemas.coaching_schemas import CoachingTask
 from pcc.domain.schemas.tutor_schemas import MAX_STUDENT_TEXT, TutorKind
 from pcc.ui.components.page_frame import page_header, require_profile
+from pcc.ui.components.pill import pill
 from pcc.ui.navigation import go_button
+from pcc.ui.text import safe_md
 from pcc.workflow.workflow_controller import WorkflowController, get_controller
 
 _SOURCE_LABELS = {
@@ -41,13 +43,14 @@ def _quiz(controller: WorkflowController, profile_id: int, order: int) -> None:
         right = sum(r.is_correct for r in results)
         st.markdown(f"**Quiz result: {right} of {len(results)} right.**")
         for r in results:
-            badge = ":green-badge[Correct]" if r.is_correct else ":red-badge[Not yet]"
-            st.markdown(f"{badge} {r.stem}")
+            pill("Correct", "good") if r.is_correct else pill("Not yet", "bad")
+            st.markdown(safe_md(r.stem))
             if not r.is_correct:
                 st.write(
-                    f"You chose: {r.selected_option_text}. Right answer: {r.correct_option_text}"
+                    f"You chose: {safe_md(r.selected_option_text)}. "
+                    f"Right answer: {safe_md(r.correct_option_text)}"
                 )
-            st.caption(r.explanation)
+            st.caption(safe_md(r.explanation))
         st.caption("Practice only: this does not change your score or level.")
         if st.button("Close quiz", key=f"quiz_close_{order}"):
             st.session_state.pop(f"quiz_open_{order}", None)
@@ -61,9 +64,9 @@ def _quiz(controller: WorkflowController, profile_id: int, order: int) -> None:
     with st.form(f"quiz_form_{order}"):
         picks = {}
         for q in questions:
-            labels = {o.option_id: o.text for o in q.options}
+            labels = {o.option_id: safe_md(o.text) for o in q.options}
             picks[q.question_id] = st.radio(
-                q.stem,
+                safe_md(q.stem),
                 list(labels),
                 format_func=labels.__getitem__,
                 index=None,
@@ -87,7 +90,7 @@ def _coach_panel(controller: WorkflowController, profile_id: int, task: Coaching
     with st.expander("Ask your coach about this task", expanded=opened):
         for message in thread:
             with st.chat_message("user" if message.role == "student" else "assistant"):
-                st.write(message.content)
+                st.write(safe_md(message.content))
         error = st.session_state.pop(f"coach_error_{order}", "")
         if error:
             st.warning(error)
@@ -156,14 +159,14 @@ def render() -> None:
         return
 
     plan = view.plan
-    st.subheader(f"Focus skill: {view.skill_name}")
+    st.header(f"Focus skill: {view.skill_name}")
     st.caption(_SOURCE_LABELS[plan.generation_source])
     if plan.generation_source == "template" and not controller.get_ai_status().offline:
         st.info(
             "This plan was built from curated material because the AI's draft was unavailable "
             "or did not pass checks. It is still based on your own mistakes."
         )
-    st.write(plan.diagnosis)
+    st.write(safe_md(plan.diagnosis))
     total = sum(t.estimated_minutes for t in plan.tasks)
     st.caption(
         f"{len(plan.tasks)} tasks · about {total} minutes · "
@@ -172,16 +175,17 @@ def render() -> None:
 
     for task in plan.tasks:
         with st.container(border=True):
-            st.markdown(f"**{task.order}. {task.title}** · {task.estimated_minutes} min")
+            st.markdown(f"**{task.order}. {safe_md(task.title)}** · {task.estimated_minutes} min")
             if task.misconception:
-                st.markdown(f"*What went wrong:* {task.misconception}")
-            st.markdown(f"**Do this:** {task.action}")
-            st.markdown(f"**You're done when:** {task.success_check}")
+                st.markdown(f"*What went wrong:* {safe_md(task.misconception)}")
+            st.markdown(f"**Do this:** {safe_md(task.action)}")
+            st.markdown(f"**You're done when:** {safe_md(task.success_check)}")
             if task.resource_hint:
-                st.caption(f"Look up: {task.resource_hint}")
+                st.caption(f"Look up: {safe_md(task.resource_hint)}")
             if task.linked_question_id in view.question_stems:
                 st.caption(
-                    f"Linked to the question: {view.question_stems[task.linked_question_id]}"
+                    f"Linked to the question: "
+                    f"{safe_md(view.question_stems[task.linked_question_id])}"
                 )
             elif task.concept_tag:
                 st.caption(f"Concept: {task.concept_tag.replace('_', ' ')}")

@@ -6,6 +6,7 @@ from pcc.core.exceptions import WorkflowStateError
 from pcc.domain.enums import WorkflowState
 from pcc.ui.components.page_frame import require_profile
 from pcc.ui.navigation import go_button
+from pcc.ui.text import escape_md
 from pcc.workflow.workflow_controller import get_controller
 
 _OTHER = "__other__"
@@ -75,4 +76,4 @@ def render() -> None:
         st.session_state[_NOTICE_KEY] = result.message
         st.rerun()
     else:
-        st.error(result.message)
+        st.error(escape_md(result.message))

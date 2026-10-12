@@ -17,7 +17,7 @@ def _effort(
     weeks = controller.get_effort(profile_id)
     if not weeks:
         return
-    st.subheader("Did the effort show up?")
+    st.header("Did the effort show up?")
     order = {a.attempt_id: i for i, a in enumerate(attempts)}
     for week in weeks:
         index = order[week.from_attempt_id]
@@ -87,10 +87,10 @@ def render() -> None:
             st.write(f"Your re-check is in {view.days_until_retest} days.")
             go_button("Open this week's plan", "weekly", key="progress_weekly", primary=True)
 
-    st.subheader("Your score over time")
+    st.header("Your score over time")
     render_trend(attempts, settings.level_lower_bounds)
 
-    st.subheader("Skill by skill")
+    st.header("Skill by skill")
     render_skill_changes(attempts, names, settings.mastery_threshold)
 
     _effort(controller, profile.id, attempts)

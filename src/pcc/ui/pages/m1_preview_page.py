@@ -85,7 +85,7 @@ def _quiz(career_id: str, semester: int) -> None:
     c3.metric("Coverage of career", f"{coverage:.0%}")
     for n in notes:
         st.info(n)
-    st.subheader("Per-skill scores")
+    st.header("Per-skill scores")
     st.dataframe(
         [
             {

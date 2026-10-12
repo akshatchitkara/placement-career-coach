@@ -5,6 +5,8 @@ config (Section 16) is extended so provider/endpoint/key can be set here
 instead. Precedence: this page's saved row > .env > mock.
 """
 
+from contextlib import closing
+
 import streamlit as st
 
 from pcc.ai.ai_client_factory import build_ai_client
@@ -32,8 +34,8 @@ def render() -> None:
         "Scoring, levels and routing are always decided by code, never by AI."
     )
 
-    conn = get_connection(settings.db_path)
-    current = get_active_config(conn)
+    with closing(get_connection(settings.db_path)) as conn:  # closed even if the page fails
+        current = get_active_config(conn)
 
     provider_type = st.selectbox(
         "Provider",
@@ -51,7 +53,14 @@ def render() -> None:
             disabled=provider_type in ("openai", "nvidia"),
             help="Editable only for 'Custom' -- OpenAI and NVIDIA use their standard endpoint.",
         )
-        api_key = st.text_input("API key", value=current.api_key or "", type="password")
+        saved_key = current.api_key if current.provider_type == provider_type else None
+        typed_key = st.text_input(
+            "API key",
+            value="",  # the saved key is never sent back to the browser
+            type="password",
+            placeholder="A key is saved; leave blank to keep it" if saved_key else "",
+        )
+        api_key = typed_key or saved_key
         model_name = st.text_input("Model name", value=current.model_name or "")
 
     col1, col2 = st.columns(2)
@@ -68,10 +77,12 @@ def render() -> None:
                 client.generate("Reply with the single word: ok")
                 st.success("Connection succeeded.")
             except Exception as exc:  # noqa: BLE001 -- surface any failure, never crash the page
-                st.error(f"Connection failed: {exc}")
+                message = str(exc)
+                if api_key:
+                    message = message.replace(api_key, "***")  # providers can echo the key
+                st.error(f"Connection failed: {message}")
 
     if col2.button("Save"):
-        save_config(conn, candidate)
+        with closing(get_connection(settings.db_path)) as conn:
+            save_config(conn, candidate)
         st.success("Saved. This provider will be used from now on.")
-
-    conn.close()

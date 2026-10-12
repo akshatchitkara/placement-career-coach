@@ -5,9 +5,11 @@ import streamlit as st
 from pcc.content.content_loader import load_skills
 from pcc.ui.components.level_badge import render_level_badge
 from pcc.ui.components.page_frame import page_header, require_profile
+from pcc.ui.components.pill import pill
 from pcc.ui.components.results_visuals import level_ladder, skill_bars
 from pcc.ui.components.skill_score_table import render_skill_score_table
 from pcc.ui.navigation import go_button
+from pcc.ui.text import safe_md
 from pcc.workflow.workflow_controller import get_controller
 
 
@@ -33,7 +35,7 @@ def render() -> None:
     st.caption(f"Coverage of the career's core skills: {result.coverage_ratio:.0%}")
 
     weakest = result.weakest
-    st.subheader("What to focus on")
+    st.header("What to focus on")
     if weakest.status == "weakest_found" and weakest.skill_id:
         st.warning(
             f"**Your biggest opportunity: {names[weakest.skill_id]}.** "
@@ -47,7 +49,7 @@ def render() -> None:
         st.info("Not enough answers yet to name a skill to focus on. A re-check will help.")
     go_button("See my weekly plan", "weekly", key="results_to_weekly")
 
-    st.subheader("Your skills")
+    st.header("Your skills")
     skill_bars(
         result.skill_scores, names, result.mastery_threshold, result.min_answered_for_evidence
     )
@@ -65,9 +67,9 @@ def render() -> None:
 
     with st.expander("Review your answers"):
         for review in result.reviews:
-            badge = ":green-badge[Correct]" if review.is_correct else ":red-badge[Incorrect]"
-            st.markdown(f"{badge} **{review.stem}**")
-            st.write(f"Your answer: {review.selected_option_text}")
+            pill("Correct", "good") if review.is_correct else pill("Incorrect", "bad")
+            st.markdown(f"**{safe_md(review.stem)}**")
+            st.write(f"Your answer: {safe_md(review.selected_option_text)}")
             if not review.is_correct:
-                st.write(f"Correct answer: {review.correct_option_text}")
-            st.caption(review.explanation)
+                st.write(f"Correct answer: {safe_md(review.correct_option_text)}")
+            st.caption(safe_md(review.explanation))

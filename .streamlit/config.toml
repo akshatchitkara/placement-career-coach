@@ -11,3 +11,10 @@ gatherUsageStats = false
 
 [client]
 toolbarMode = "minimal"
+
+[server]
+# The default watcher (watchdog) runs one thread per watched folder. On Windows with Python 3.14
+# it crashed the whole server with "Fatal Python error: _PySemaphore_Wakeup" during long browser
+# test runs. Edited pages are not hot-reloaded reliably anyway, so restart the app after changes.
+fileWatcherType = "none"
+runOnSave = false

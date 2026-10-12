@@ -4,6 +4,7 @@ import streamlit as st
 
 from pcc.core.exceptions import PccError
 from pcc.ui.components.journey import next_step_button, state_label
+from pcc.ui.text import escape_md
 from pcc.workflow.workflow_controller import get_controller
 
 
@@ -34,7 +35,7 @@ def render() -> None:
     profile = controller.get_profile(profile_id) if profile_id else None
     if profile is None:
         return
-    st.success(f"Signed in as **{profile.display_name}**.")
+    st.success(f"Signed in as **{escape_md(profile.display_name)}**.")
     if profile.career_id:
         career_names = {c.career_id: c.name for c in controller.list_careers()}
         st.write(

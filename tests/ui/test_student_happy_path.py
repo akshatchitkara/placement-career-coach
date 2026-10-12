@@ -41,7 +41,7 @@ def test_profile_to_roadmap_journey():
     at = _run("roadmap_page", profile_id)
     assert not at.exception
     assert len(at.expander) == 16
-    assert [s.value.split("  ")[0] for s in at.subheader] == [f"Semester {n}" for n in (3, 4, 5, 6)]
+    assert [s.value.split("  ")[0] for s in at.header] == [f"Semester {n}" for n in (3, 4, 5, 6)]
 
 
 def test_non_cs_career_shows_unsupported_message():
@@ -179,7 +179,7 @@ def test_weak_result_leads_to_a_coaching_plan_page():
 
     at = _run("coaching_page", profile_id)
     assert not at.exception
-    assert any("Focus skill" in s.value for s in at.subheader)
+    assert any("Focus skill" in s.value for s in at.header)
     assert 3 <= len(at.markdown) and sum("Do this:" in m.value for m in at.markdown) >= 3
     assert any("You're done when" in m.value for m in at.markdown)
     assert not any("http" in m.value for m in at.markdown)
@@ -275,3 +275,44 @@ def test_every_state_has_a_stepper_position_label_and_next_step():
         assert state_label(state)
         message, label, target = next_step(state)
         assert message and label and target
+
+
+def test_answers_survive_a_reload_in_the_middle_of_a_check():
+    from pcc.content.content_loader import load_question_bank
+
+    bank = {q.question_id: q for q in load_question_bank("devops_engineer")}
+    profile_id = _signed_in_with_roadmap("Reloader", "devops_engineer")
+    at = _run("assessment_page", profile_id)
+    at = at.button[0].click().run()  # start the check
+    first = at.radio[0]
+    question = bank[first.key.split("_", 1)[1]]
+    at = first.set_value(question.correct_option_id).run()
+    at = next(b for b in at.button if b.label == "Next").click().run()
+    assert "1 of 12" in at.get("progress")[0].proto.text
+
+    reloaded = _run("assessment_page", profile_id)  # a new browser session, same profile
+    assert not reloaded.exception
+    assert "1 of 12" in reloaded.get("progress")[0].proto.text  # the answer was kept
+    assert any(
+        "Question 2 of 12" in m.value for m in reloaded.markdown
+    )  # resumes where it left off
+
+
+def test_choosing_an_option_and_pressing_next_in_one_step_keeps_the_answer():
+    """A quick click on Next (or a slow server) delivers both changes together; none may be lost."""
+    from pcc.content.content_loader import load_question_bank
+
+    bank = {q.question_id: q for q in load_question_bank("devops_engineer")}
+    profile_id = _signed_in_with_roadmap("Quick clicker", "devops_engineer")
+    at = _run("assessment_page", profile_id)
+    at = at.button[0].click().run()  # start the check
+
+    first = at.radio[0]
+    question = bank[first.key.split("_", 1)[1]]
+    first.set_value(question.correct_option_id)  # no run() in between: one combined update
+    at = next(b for b in at.button if b.label == "Next").click().run()
+
+    assert any("Question 2 of 12" in m.value for m in at.markdown)
+    assert "1 of 12" in at.get("progress")[0].proto.text  # question 1 was kept
+    back = next(b for b in at.button if b.label == "Back").click().run()
+    assert back.radio[0].value == question.correct_option_id

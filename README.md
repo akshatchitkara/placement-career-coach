@@ -35,7 +35,7 @@ streamlit run src/pcc/main.py
 
 Open http://localhost:8501. The sidebar shows **Offline mode** when no AI is configured. That is a normal, fully working state.
 
-After editing code, restart the server: Streamlit does not always reload edited page modules.
+After editing code, restart the server. The file watcher is switched off in `.streamlit/config.toml` (see the decision log, A72), so edits are not hot-reloaded.
 
 ## Try it in two minutes
 
@@ -107,7 +107,15 @@ python -m mypy src/pcc/domain src/pcc/workflow
 python scripts/validate_content.py
 ```
 
-The suite (about 360 tests) covers the scoring rules and level boundaries, validators, fallbacks, the whole journey for every career with the AI failing in seven different ways (down, crashing, empty, not JSON, wrong shape, prompt injection, hostile JSON), the coach (limits, fallbacks, quiz), the weekly schedule and calendar export, persistence and restore, and the Streamlit pages (headless). Real-browser checks (Edge, via Playwright) are recorded in the test report; their scripts are not part of the repository.
+The suite (about 400 tests) covers the scoring rules and level boundaries, validators, fallbacks, the whole journey for every career with the AI failing in seven different ways (down, crashing, empty, not JSON, wrong shape, prompt injection, hostile JSON), the coach (limits, fallbacks, quiz), the weekly schedule and calendar export, persistence and restore, and the Streamlit pages (headless). A separate suite of 34 real-browser tests (Playwright with Edge or Chrome) is in `tests/e2e`; it is skipped unless you ask for it:
+
+```bash
+pip install -r requirements-e2e.txt
+npm install axe-core                      # only for the accessibility test
+PCC_E2E=1 python -m pytest tests/e2e      # about 10 minutes
+```
+
+The QA report, with every finding and what could not be tested, is in [`test-reports/qa-report.md`](test-reports/qa-report.md).
 
 ## Project layout
 
@@ -123,7 +131,9 @@ src/pcc/
 .streamlit/      theme
 data/content/    content                 schema/   database schema
 scripts/         init_db, reset_demo, validate_content
-tests/           unit, integration and UI tests
+tests/           unit, integration and UI tests; tests/e2e holds the browser tests
+qa/              QA tools: route sweep, question-rendering check, report builder
+test-reports/    results of the last QA pass
 docs/            blueprint, test report, decision log, authoring guide
 ```
 
@@ -135,6 +145,8 @@ docs/            blueprint, test report, decision log, authoring guide
 - Roadmap focus and deliverable text is generic template wording; it passes validation but is placeholder quality.
 - Coaching covers the single weakest skill. The plan cannot be regenerated, because the weekly plan is built from it.
 - Coach replies and AI plans take several seconds on a live model; there is a spinner but no streaming.
+- Lighthouse performance is 38 to 59 and accessibility 83 to 87. The shortfalls are Streamlit's own front end and sidebar markup, not this app's content; `test-reports/lighthouse/summary.md` has the detail.
+- On Python 3.14 and Windows the Streamlit server crashed twice in its file-watcher threads during long test runs. The watcher is now off; Python 3.12 or 3.13 has not been tried.
 - Live AI has been verified with **Anthropic** (`claude-haiku-5-5`) for the DevOps journey only: roadmap, coaching plan and coach replies were accepted by the validators and read well. A first attempt with NVIDIA NIM was refused as overloaded, so the curated plans were shown as designed. Other providers, models and careers are untested live; the AI paths are otherwise covered with scripted fake clients and failure drills.
 - The product note ([`docs/01_PRODUCT_NOTE.md`](docs/01_PRODUCT_NOTE.md)) is not written yet.
 

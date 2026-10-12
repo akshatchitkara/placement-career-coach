@@ -27,8 +27,11 @@ from pcc.ui.pages import (
     roadmap_page,
     weekly_plan_page,
 )
+from pcc.ui.text import escape_md
 from pcc.ui.theme import inject_css
 from pcc.workflow.workflow_controller import get_controller
+
+APP_NAME = "Placement Career Coach"
 
 
 def _ensure_db() -> None:
@@ -68,14 +71,14 @@ def _show_signed_in(slot) -> None:
     profile_id = st.session_state.get("profile_id")
     profile = get_controller().get_profile(profile_id) if profile_id is not None else None
     if profile is not None:
-        slot.caption(f"Signed in as **{profile.display_name}** (change on the Profile page)")
+        slot.caption(
+            f"Signed in as **{escape_md(profile.display_name)}** (change on the Profile page)"
+        )
 
 
 def main() -> None:
     configure_logging(settings.log_level)
-    st.set_page_config(
-        page_title="Placement Career Coach", page_icon=":material/school:", layout="wide"
-    )
+    st.set_page_config(page_icon=":material/school:", layout="wide")
 
     issues = _content_issues()
     if issues:
@@ -94,10 +97,17 @@ def main() -> None:
         st.stop()
 
     def page(render, title, path, **kwargs):
-        return st.Page(safe_page(render), title=title, url_path=path, **kwargs)
+        guarded = safe_page(render)
+        tab_title = APP_NAME if kwargs.get("default") else f"{title} · {APP_NAME}"
+
+        def run() -> None:
+            st.set_page_config(page_title=tab_title)  # each page gets its own browser-tab title
+            guarded()
+
+        return st.Page(run, title=title, url_path=path, **kwargs)
 
     registry = {
-        "home": page(home_page.render, "Home", "home", default=True, icon=":material/home:"),
+        "home": page(home_page.render, "Home", "", default=True, icon=":material/home:"),
         "profile": page(profile_page.render, "Profile", "profile", icon=":material/person:"),
         "career": page(
             career_selection_page.render, "Career & Semester", "career", icon=":material/work:"
