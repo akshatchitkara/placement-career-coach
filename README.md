@@ -163,6 +163,19 @@ For showing the app to a team without running it locally:
    PCC_DEMO_MODE = "true"
    ```
 
+To use live AI on the hosted copy with Groq (or any OpenAI-compatible provider), replace the secrets with the block below. Models are tried left to right, so the later ones are fallbacks if the first is rate-limited or retired. Keep the key in Secrets only, never in the repository.
+
+```toml
+PCC_AI_MODE = "live"
+PCC_AI_PROVIDER = "custom_openai_compatible"
+PCC_AI_BASE_URL = "https://api.groq.com/openai/v1"
+PCC_AI_API_KEY = "your-groq-key"
+PCC_AI_MODEL_NAME = "openai/gpt-oss-20b, openai/gpt-oss-120b, qwen/qwen3.8-27b"
+PCC_DEMO_MODE = "true"
+```
+
+`PCC_AI_PROVIDER` can also be `anthropic` (the default), `openai` or `nvidia`.
+
 `PCC_DEMO_MODE=true` recreates the three demo profiles (Asha, Ravi, Meera) whenever the database is empty and hides the AI Settings page. Limits of the free tier: the disk is not kept, so anything entered during the demo disappears when the app restarts or wakes from sleep; the app sleeps after a period of no visits; and there is no login, so anyone with the link can use it.
 
 ## Product note and delivery review

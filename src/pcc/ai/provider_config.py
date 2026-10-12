@@ -35,6 +35,7 @@ class AiStatus(BaseModel):
 
 
 _PLACEHOLDERS = {"", "changeme"}
+_ENV_PROVIDERS = ("anthropic", "openai", "nvidia", "custom_openai_compatible")
 
 
 def resolve_provider_config(
@@ -44,6 +45,8 @@ def resolve_provider_config(
     env_api_key: str,
     env_model_name: str,
     env_timeout_seconds: int,
+    env_provider: str = "anthropic",
+    env_base_url: str = "",
 ) -> tuple[AiProviderConfig, str]:
     """Precedence: provider saved on the AI Settings page, then .env, then mock.
 
@@ -55,9 +58,15 @@ def resolve_provider_config(
         if env_api_key.strip().lower() in _PLACEHOLDERS:
             return AiProviderConfig(), "PCC_AI_MODE is 'live' but no API key is set."
         model = None if env_model_name.strip().lower() in _PLACEHOLDERS else env_model_name
+        provider = env_provider.strip().lower()
+        if provider not in _ENV_PROVIDERS:
+            return AiProviderConfig(), f"PCC_AI_PROVIDER '{env_provider}' is not supported."
+        if provider == "custom_openai_compatible" and not env_base_url.strip():
+            return AiProviderConfig(), "PCC_AI_BASE_URL is required for a custom provider."
         return (
             AiProviderConfig(
-                provider_type="anthropic",
+                provider_type=provider,  # type: ignore[arg-type]
+                base_url=env_base_url.strip() or None,
                 api_key=env_api_key,
                 model_name=model,
                 timeout_seconds=env_timeout_seconds,

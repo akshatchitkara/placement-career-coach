@@ -223,3 +223,28 @@ def test_openai_compatible_client_falls_back_to_the_next_model(monkeypatch):
     with pytest.raises(AiUnavailableError):
         OpenAiCompatibleAiClient(all_bad).generate("hi")
     assert tried == ["x", "y"]
+
+
+def test_environment_can_select_groq_with_a_model_chain():
+    config, warning = resolve_provider_config(
+        None,
+        env_mode="live",
+        env_api_key="gsk_x",
+        env_model_name="openai/gpt-oss-20b, openai/gpt-oss-120b",
+        env_timeout_seconds=30,
+        env_provider="custom_openai_compatible",
+        env_base_url="https://api.groq.com/openai/v1",
+    )
+    assert warning == "" and config.provider_type == "custom_openai_compatible"
+    assert config.base_url == "https://api.groq.com/openai/v1"
+    assert config.model_name == "openai/gpt-oss-20b, openai/gpt-oss-120b"
+
+
+def test_environment_provider_needs_a_url_when_custom_and_must_be_known():
+    common = dict(env_mode="live", env_api_key="k", env_model_name="m", env_timeout_seconds=30)
+    config, warning = resolve_provider_config(
+        None, **common, env_provider="custom_openai_compatible", env_base_url=""
+    )
+    assert config.provider_type == "mock" and "PCC_AI_BASE_URL" in warning
+    config, warning = resolve_provider_config(None, **common, env_provider="nope")
+    assert config.provider_type == "mock" and "not supported" in warning

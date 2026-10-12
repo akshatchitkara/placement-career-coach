@@ -169,6 +169,8 @@ class WorkflowController:
             env_api_key=settings.ai_api_key,
             env_model_name=settings.ai_model_name,
             env_timeout_seconds=settings.ai_timeout_seconds,
+            env_provider=settings.ai_provider,
+            env_base_url=settings.ai_base_url,
         )
         client = build_ai_client(config)
         if isinstance(client, MockAiClient):

@@ -9,6 +9,12 @@ class Settings(BaseSettings):
 
     env: str = "local"
     ai_mode: str = "mock"  # mock | live
+    ai_provider: str = (
+        "anthropic"  # anthropic | openai | nvidia | custom_openai_compatible (e.g. Groq)
+    )
+    ai_base_url: str = (
+        ""  # needed for custom_openai_compatible, e.g. https://api.groq.com/openai/v1
+    )
     ai_api_key: str = "changeme"
     ai_model_name: str = "changeme"
     ai_timeout_seconds: int = 30
