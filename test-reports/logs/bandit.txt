@@ -1,0 +1,81 @@
+Run started:2026-10-12 07:08:32.762398+00:00
+
+Test results:
+>> Issue: [B311:blacklist] Standard pseudo-random generators are not suitable for security/cryptographic purposes.
+   Severity: Low   Confidence: High
+   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/blacklists/blacklist_calls.html#b311-random
+   Location: src\pcc\agents\evaluation_agent.py:43:10
+42	    last_seen = {qid: i for i, qid in enumerate(seen_question_ids)}
+43	    rng = random.Random(seed)
+44	    picked: list[Question] = []
+
+--------------------------------------------------
+>> Issue: [B311:blacklist] Standard pseudo-random generators are not suitable for security/cryptographic purposes.
+   Severity: Low   Confidence: High
+   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/blacklists/blacklist_calls.html#b311-random
+   Location: src\pcc\agents\evaluation_agent.py:63:4
+62	    ids = [o.option_id for o in question.options]
+63	    random.Random(f"{seed}:{question.question_id}").shuffle(ids)
+64	    return ids
+
+--------------------------------------------------
+>> Issue: [B101:assert_used] Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b101_assert_used.html
+   Location: src\pcc\ui\pages\assessment_page.py:30:4
+29	    profile = controller.get_profile(profile.id)
+30	    assert profile is not None
+31	
+
+--------------------------------------------------
+>> Issue: [B101:assert_used] Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b101_assert_used.html
+   Location: src\pcc\workflow\workflow_controller.py:373:16
+372	                attempt = get_attempt(conn, attempt_id)
+373	                assert attempt is not None
+374	            seen = seen_question_ids_oldest_first(conn, profile_id)
+
+--------------------------------------------------
+>> Issue: [B101:assert_used] Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b101_assert_used.html
+   Location: src\pcc\workflow\workflow_controller.py:540:8
+539	        current = get_profile(conn, profile_id)
+540	        assert current is not None
+541	        assert_transition(current.workflow_state, WorkflowState.WEEKLY_PLAN_ACTIVE)
+
+--------------------------------------------------
+>> Issue: [B101:assert_used] Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b101_assert_used.html
+   Location: src\pcc\workflow\workflow_controller.py:569:20
+568	                    profile = get_profile(conn, profile_id)
+569	                    assert profile is not None
+570	            if profile.workflow_state == WorkflowState.WEEKLY_PLAN_ACTIVE:
+
+--------------------------------------------------
+
+Code scanned:
+	Total lines of code: 5053
+	Total lines skipped (#nosec): 0
+	Total potential issues skipped due to specifically being disabled (e.g., #nosec BXXX): 0
+
+Run metrics:
+	Total issues (by severity):
+		Undefined: 0
+		Low: 6
+		Medium: 0
+		High: 0
+	Total issues (by confidence):
+		Undefined: 0
+		Low: 0
+		Medium: 0
+		High: 6
+Files skipped (0):

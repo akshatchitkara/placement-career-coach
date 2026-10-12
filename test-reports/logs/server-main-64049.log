@@ -1,0 +1,9 @@
+2026-10-12 14:49:40.734 Uvicorn server started on :::64049
+
+  You can now view your Streamlit app in your browser.
+
+  Local URL: http://localhost:64049
+  Network URL: http://10.179.57.213:64049
+  External URL: http://14.143.254.194:64049
+
+{"timestamp": "2026-10-12T09:22:06.720624+00:00", "level": "ERROR", "logger": "asyncio", "message": "Exception in callback _ProactorBasePipeTransport._call_connection_lost()\nhandle: <Handle _ProactorBasePipeTransport._call_connection_lost()>", "exception": "Traceback (most recent call last):\n  File \"C:\\Users\\aksha\\AppData\\Local\\Python\\pythoncore-3.14-64\\Lib\\asyncio\\events.py\", line 94, in _run\n    self._context.run(self._callback, *self._args)\n    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\aksha\\AppData\\Local\\Python\\pythoncore-3.14-64\\Lib\\asyncio\\proactor_events.py\", line 165, in _call_connection_lost\n    self._sock.shutdown(socket.SHUT_RDWR)\n    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^\nConnectionResetError: [WinError 10054] An existing connection was forcibly closed by the remote host"}

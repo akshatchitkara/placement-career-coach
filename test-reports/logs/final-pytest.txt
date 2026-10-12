@@ -1,0 +1,22 @@
+ssssssssssssssssssssssssssssssssss...................................... [ 16%]
+........................................................................ [ 33%]
+........................................................................ [ 50%]
+........................................................................ [ 67%]
+........................................................................ [ 83%]
+.....................................................................    [100%]
+=============================== tests coverage ================================
+_______________ coverage: platform win32, python 3.14.3-final-0 _______________
+
+Name                                                 Stmts   Miss  Cover
+------------------------------------------------------------------------
+src\pcc\domain\progress.py                              49      0   100%
+src\pcc\domain\scoring\__init__.py                       0      0   100%
+src\pcc\domain\scoring\coverage_calculator.py            6      1    83%
+src\pcc\domain\scoring\level_classifier.py              22      0   100%
+src\pcc\domain\scoring\roadmap_position_locator.py      10      0   100%
+src\pcc\domain\scoring\scoring_engine.py                20      1    95%
+src\pcc\domain\scoring\weakest_skill_selector.py        18      1    94%
+src\pcc\domain\weekly_plan_builder.py                   51      0   100%
+------------------------------------------------------------------------
+TOTAL                                                  176      3    98%
+395 passed, 34 skipped in 50.94s

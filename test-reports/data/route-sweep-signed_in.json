@@ -1,0 +1,1652 @@
+[
+ {
+  "state": "signed_in",
+  "size": "mobile",
+  "route": "(root)",
+  "title": "Placement Career Coach",
+  "console_errors": [],
+  "page_errors": [],
+  "bad_requests": [],
+  "overflow_px": {
+   "page": 0,
+   "main": 0
+  },
+  "axe_violations": [
+   {
+    "id": "aria-allowed-attr",
+    "impact": "critical",
+    "help": "Elements must only use supported ARIA attributes",
+    "nodes": 1,
+    "target": ".stSidebar"
+   },
+   {
+    "id": "list",
+    "impact": "serious",
+    "help": "<ul> and <ol> must only directly contain <li>, <script> or <template> elements",
+    "nodes": 1,
+    "target": "ul"
+   },
+   {
+    "id": "listitem",
+    "impact": "serious",
+    "help": "<li> elements must be contained in a <ul> or <ol>",
+    "nodes": 9,
+    "target": ".st-emotion-cache-1jv7wse.ead4nmd12:nth-child(2) > li:nth-child(2)"
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "nodes": 21,
+    "target": "ul > li"
+   }
+  ],
+  "shows_error_text": false,
+  "body_preview": "keyboard_double_arrow_left home Home Plan work Career & Semester map Roadmap Assess quiz Skills Check insights Results Improve school Coaching Plan checklist We",
+  "screenshot": "screenshots\\signed_in_mobile_root.png"
+ },
+ {
+  "state": "signed_in",
+  "size": "mobile",
+  "route": "home",
+  "title": "Placement Career Coach",
+  "console_errors": [
+   "Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "The page that you have requested does not seem to exist. Running the app's main page."
+  ],
+  "page_errors": [],
+  "bad_requests": [],
+  "overflow_px": {
+   "page": 0,
+   "main": 0
+  },
+  "axe_violations": [],
+  "shows_error_text": false,
+  "body_preview": "keyboard_double_arrow_left home Home Plan work Career & Semester map Roadmap Assess quiz Skills Check insights Results Improve school Coaching Plan checklist We",
+  "screenshot": "screenshots\\signed_in_mobile_home.png"
+ },
+ {
+  "state": "signed_in",
+  "size": "mobile",
+  "route": "profile",
+  "title": "Profile · Placement Career Coach",
+  "console_errors": [
+   "Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "page_errors": [],
+  "bad_requests": [],
+  "overflow_px": {
+   "page": 0,
+   "main": 0
+  },
+  "axe_violations": [
+   {
+    "id": "aria-allowed-attr",
+    "impact": "critical",
+    "help": "Elements must only use supported ARIA attributes",
+    "nodes": 1,
+    "target": ".stSidebar"
+   },
+   {
+    "id": "list",
+    "impact": "serious",
+    "help": "<ul> and <ol> must only directly contain <li>, <script> or <template> elements",
+    "nodes": 1,
+    "target": "ul"
+   },
+   {
+    "id": "listitem",
+    "impact": "serious",
+    "help": "<li> elements must be contained in a <ul> or <ol>",
+    "nodes": 9,
+    "target": ".st-emotion-cache-1jv7wse.ead4nmd12:nth-child(2) > li:nth-child(2)"
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "nodes": 20,
+    "target": "ul > li"
+   }
+  ],
+  "shows_error_text": false,
+  "body_preview": "keyboard_double_arrow_left home Home Plan work Career & Semester map Roadmap Assess quiz Skills Check insights Results Improve school Coaching Plan checklist We",
+  "screenshot": "screenshots\\signed_in_mobile_profile.png"
+ },
+ {
+  "state": "signed_in",
+  "size": "mobile",
+  "route": "career",
+  "title": "Career & Semester · Placement Career Coach",
+  "console_errors": [
+   "Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "page_errors": [],
+  "bad_requests": [],
+  "overflow_px": {
+   "page": 0,
+   "main": 0
+  },
+  "axe_violations": [
+   {
+    "id": "aria-allowed-attr",
+    "impact": "critical",
+    "help": "Elements must only use supported ARIA attributes",
+    "nodes": 1,
+    "target": ".stSidebar"
+   },
+   {
+    "id": "list",
+    "impact": "serious",
+    "help": "<ul> and <ol> must only directly contain <li>, <script> or <template> elements",
+    "nodes": 1,
+    "target": "ul"
+   },
+   {
+    "id": "listitem",
+    "impact": "serious",
+    "help": "<li> elements must be contained in a <ul> or <ol>",
+    "nodes": 9,
+    "target": ".st-emotion-cache-1jv7wse.ead4nmd12:nth-child(2) > li:nth-child(2)"
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "nodes": 20,
+    "target": "ul > li"
+   }
+  ],
+  "shows_error_text": false,
+  "body_preview": "keyboard_double_arrow_left home Home Plan work Career & Semester map Roadmap Assess quiz Skills Check insights Results Improve school Coaching Plan checklist We",
+  "screenshot": "screenshots\\signed_in_mobile_career.png"
+ },
+ {
+  "state": "signed_in",
+  "size": "mobile",
+  "route": "roadmap",
+  "title": "Roadmap · Placement Career Coach",
+  "console_errors": [
+   "Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "page_errors": [],
+  "bad_requests": [],
+  "overflow_px": {
+   "page": 0,
+   "main": 0
+  },
+  "axe_violations": [
+   {
+    "id": "aria-allowed-attr",
+    "impact": "critical",
+    "help": "Elements must only use supported ARIA attributes",
+    "nodes": 1,
+    "target": ".stSidebar"
+   },
+   {
+    "id": "list",
+    "impact": "serious",
+    "help": "<ul> and <ol> must only directly contain <li>, <script> or <template> elements",
+    "nodes": 1,
+    "target": ".st-emotion-cache-1gczx66"
+   },
+   {
+    "id": "listitem",
+    "impact": "serious",
+    "help": "<li> elements must be contained in a <ul> or <ol>",
+    "nodes": 9,
+    "target": ".st-emotion-cache-1jv7wse.ead4nmd12:nth-child(2) > .st-emotion-cache-1ag8dug.ead4nmd4:nth-child(2)"
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "nodes": 25,
+    "target": ".st-emotion-cache-1gczx66 > .st-emotion-cache-1ag8dug.ead4nmd4"
+   }
+  ],
+  "shows_error_text": false,
+  "body_preview": "keyboard_double_arrow_left home Home Plan work Career & Semester map Roadmap Assess quiz Skills Check insights Results Improve school Coaching Plan checklist We",
+  "screenshot": "screenshots\\signed_in_mobile_roadmap.png"
+ },
+ {
+  "state": "signed_in",
+  "size": "mobile",
+  "route": "assessment",
+  "title": "Skills Check · Placement Career Coach",
+  "console_errors": [
+   "Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "page_errors": [],
+  "bad_requests": [],
+  "overflow_px": {
+   "page": 0,
+   "main": 0
+  },
+  "axe_violations": [
+   {
+    "id": "aria-allowed-attr",
+    "impact": "critical",
+    "help": "Elements must only use supported ARIA attributes",
+    "nodes": 1,
+    "target": ".stSidebar"
+   },
+   {
+    "id": "list",
+    "impact": "serious",
+    "help": "<ul> and <ol> must only directly contain <li>, <script> or <template> elements",
+    "nodes": 1,
+    "target": "ul"
+   },
+   {
+    "id": "listitem",
+    "impact": "serious",
+    "help": "<li> elements must be contained in a <ul> or <ol>",
+    "nodes": 9,
+    "target": ".st-emotion-cache-1jv7wse.ead4nmd12:nth-child(2) > li:nth-child(2)"
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "nodes": 17,
+    "target": "ul > li"
+   }
+  ],
+  "shows_error_text": false,
+  "body_preview": "keyboard_double_arrow_left home Home Plan work Career & Semester map Roadmap Assess quiz Skills Check insights Results Improve school Coaching Plan checklist We",
+  "screenshot": "screenshots\\signed_in_mobile_assessment.png"
+ },
+ {
+  "state": "signed_in",
+  "size": "mobile",
+  "route": "results",
+  "title": "Results · Placement Career Coach",
+  "console_errors": [
+   "Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "page_errors": [],
+  "bad_requests": [],
+  "overflow_px": {
+   "page": 0,
+   "main": 0
+  },
+  "axe_violations": [
+   {
+    "id": "aria-allowed-attr",
+    "impact": "critical",
+    "help": "Elements must only use supported ARIA attributes",
+    "nodes": 1,
+    "target": ".stSidebar"
+   },
+   {
+    "id": "list",
+    "impact": "serious",
+    "help": "<ul> and <ol> must only directly contain <li>, <script> or <template> elements",
+    "nodes": 1,
+    "target": "ul"
+   },
+   {
+    "id": "listitem",
+    "impact": "serious",
+    "help": "<li> elements must be contained in a <ul> or <ol>",
+    "nodes": 9,
+    "target": ".st-emotion-cache-1jv7wse.ead4nmd12:nth-child(2) > li:nth-child(2)"
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "nodes": 26,
+    "target": "ul > li"
+   }
+  ],
+  "shows_error_text": false,
+  "body_preview": "keyboard_double_arrow_left home Home Plan work Career & Semester map Roadmap Assess quiz Skills Check insights Results Improve school Coaching Plan checklist We",
+  "screenshot": "screenshots\\signed_in_mobile_results.png"
+ },
+ {
+  "state": "signed_in",
+  "size": "mobile",
+  "route": "coaching",
+  "title": "Coaching Plan · Placement Career Coach",
+  "console_errors": [
+   "Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "page_errors": [],
+  "bad_requests": [],
+  "overflow_px": {
+   "page": 0,
+   "main": 0
+  },
+  "axe_violations": [
+   {
+    "id": "aria-allowed-attr",
+    "impact": "critical",
+    "help": "Elements must only use supported ARIA attributes",
+    "nodes": 1,
+    "target": ".stSidebar"
+   },
+   {
+    "id": "list",
+    "impact": "serious",
+    "help": "<ul> and <ol> must only directly contain <li>, <script> or <template> elements",
+    "nodes": 1,
+    "target": "ul"
+   },
+   {
+    "id": "listitem",
+    "impact": "serious",
+    "help": "<li> elements must be contained in a <ul> or <ol>",
+    "nodes": 9,
+    "target": ".st-emotion-cache-1jv7wse.ead4nmd12:nth-child(2) > li:nth-child(2)"
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "nodes": 54,
+    "target": "ul > li"
+   }
+  ],
+  "shows_error_text": false,
+  "body_preview": "keyboard_double_arrow_left home Home Plan work Career & Semester map Roadmap Assess quiz Skills Check insights Results Improve school Coaching Plan checklist We",
+  "screenshot": "screenshots\\signed_in_mobile_coaching.png"
+ },
+ {
+  "state": "signed_in",
+  "size": "mobile",
+  "route": "weekly-plan",
+  "title": "Weekly Plan · Placement Career Coach",
+  "console_errors": [
+   "Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "page_errors": [],
+  "bad_requests": [],
+  "overflow_px": {
+   "page": 0,
+   "main": 0
+  },
+  "axe_violations": [
+   {
+    "id": "aria-allowed-attr",
+    "impact": "critical",
+    "help": "Elements must only use supported ARIA attributes",
+    "nodes": 1,
+    "target": ".stSidebar"
+   },
+   {
+    "id": "list",
+    "impact": "serious",
+    "help": "<ul> and <ol> must only directly contain <li>, <script> or <template> elements",
+    "nodes": 1,
+    "target": "ul"
+   },
+   {
+    "id": "listitem",
+    "impact": "serious",
+    "help": "<li> elements must be contained in a <ul> or <ol>",
+    "nodes": 9,
+    "target": ".st-emotion-cache-1jv7wse.ead4nmd12:nth-child(2) > li:nth-child(2)"
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "nodes": 40,
+    "target": "ul > li"
+   }
+  ],
+  "shows_error_text": false,
+  "body_preview": "keyboard_double_arrow_left home Home Plan work Career & Semester map Roadmap Assess quiz Skills Check insights Results Improve school Coaching Plan checklist We",
+  "screenshot": "screenshots\\signed_in_mobile_weekly-plan.png"
+ },
+ {
+  "state": "signed_in",
+  "size": "mobile",
+  "route": "progress",
+  "title": "Progress · Placement Career Coach",
+  "console_errors": [
+   "Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "page_errors": [],
+  "bad_requests": [],
+  "overflow_px": {
+   "page": 0,
+   "main": 0
+  },
+  "axe_violations": [
+   {
+    "id": "aria-allowed-attr",
+    "impact": "critical",
+    "help": "Elements must only use supported ARIA attributes",
+    "nodes": 1,
+    "target": ".stSidebar"
+   },
+   {
+    "id": "list",
+    "impact": "serious",
+    "help": "<ul> and <ol> must only directly contain <li>, <script> or <template> elements",
+    "nodes": 1,
+    "target": "ul"
+   },
+   {
+    "id": "listitem",
+    "impact": "serious",
+    "help": "<li> elements must be contained in a <ul> or <ol>",
+    "nodes": 9,
+    "target": ".st-emotion-cache-1jv7wse.ead4nmd12:nth-child(2) > li:nth-child(2)"
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "nodes": 32,
+    "target": "ul > li"
+   }
+  ],
+  "shows_error_text": false,
+  "body_preview": "keyboard_double_arrow_left home Home Plan work Career & Semester map Roadmap Assess quiz Skills Check insights Results Improve school Coaching Plan checklist We",
+  "screenshot": "screenshots\\signed_in_mobile_progress.png"
+ },
+ {
+  "state": "signed_in",
+  "size": "mobile",
+  "route": "ai-settings",
+  "title": "AI Settings · Placement Career Coach",
+  "console_errors": [
+   "Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "page_errors": [],
+  "bad_requests": [],
+  "overflow_px": {
+   "page": 0,
+   "main": 0
+  },
+  "axe_violations": [
+   {
+    "id": "aria-allowed-attr",
+    "impact": "critical",
+    "help": "Elements must only use supported ARIA attributes",
+    "nodes": 1,
+    "target": ".stSidebar"
+   },
+   {
+    "id": "list",
+    "impact": "serious",
+    "help": "<ul> and <ol> must only directly contain <li>, <script> or <template> elements",
+    "nodes": 1,
+    "target": "ul"
+   },
+   {
+    "id": "listitem",
+    "impact": "serious",
+    "help": "<li> elements must be contained in a <ul> or <ol>",
+    "nodes": 9,
+    "target": ".st-emotion-cache-1jv7wse.ead4nmd12:nth-child(2) > li:nth-child(2)"
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "nodes": 18,
+    "target": "ul > li"
+   }
+  ],
+  "shows_error_text": false,
+  "body_preview": "keyboard_double_arrow_left home Home Plan work Career & Semester map Roadmap Assess quiz Skills Check insights Results Improve school Coaching Plan checklist We",
+  "screenshot": "screenshots\\signed_in_mobile_ai-settings.png"
+ },
+ {
+  "state": "signed_in",
+  "size": "mobile",
+  "route": "m1-preview",
+  "title": "Placement Career Coach",
+  "console_errors": [
+   "Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "The page that you have requested does not seem to exist. Running the app's main page."
+  ],
+  "page_errors": [],
+  "bad_requests": [],
+  "overflow_px": {
+   "page": 0,
+   "main": 0
+  },
+  "axe_violations": [],
+  "shows_error_text": false,
+  "body_preview": "keyboard_double_arrow_left home Home Plan work Career & Semester map Roadmap Assess quiz Skills Check insights Results Improve school Coaching Plan checklist We",
+  "screenshot": "screenshots\\signed_in_mobile_m1-preview.png"
+ },
+ {
+  "state": "signed_in",
+  "size": "mobile",
+  "route": "does-not-exist",
+  "title": "Placement Career Coach",
+  "console_errors": [
+   "Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "The page that you have requested does not seem to exist. Running the app's main page."
+  ],
+  "page_errors": [],
+  "bad_requests": [],
+  "overflow_px": {
+   "page": 0,
+   "main": 0
+  },
+  "axe_violations": [],
+  "shows_error_text": false,
+  "body_preview": "keyboard_double_arrow_left home Home Plan work Career & Semester map Roadmap Assess quiz Skills Check insights Results Improve school Coaching Plan checklist We",
+  "screenshot": "screenshots\\signed_in_mobile_does-not-exist.png"
+ },
+ {
+  "state": "signed_in",
+  "size": "tablet",
+  "route": "(root)",
+  "title": "Placement Career Coach",
+  "console_errors": [],
+  "page_errors": [],
+  "bad_requests": [],
+  "overflow_px": {
+   "page": 0,
+   "main": 0
+  },
+  "axe_violations": [
+   {
+    "id": "aria-allowed-attr",
+    "impact": "critical",
+    "help": "Elements must only use supported ARIA attributes",
+    "nodes": 1,
+    "target": ".stSidebar"
+   },
+   {
+    "id": "list",
+    "impact": "serious",
+    "help": "<ul> and <ol> must only directly contain <li>, <script> or <template> elements",
+    "nodes": 1,
+    "target": "ul"
+   },
+   {
+    "id": "listitem",
+    "impact": "serious",
+    "help": "<li> elements must be contained in a <ul> or <ol>",
+    "nodes": 9,
+    "target": ".st-emotion-cache-1jv7wse.ead4nmd12:nth-child(2) > li:nth-child(2)"
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "nodes": 22,
+    "target": "ul > li"
+   }
+  ],
+  "shows_error_text": false,
+  "body_preview": "home Home Plan work Career & Semester map Roadmap Assess quiz Skills Check insights Results Improve school Coaching Plan checklist Weekly Plan trending_up Progr",
+  "screenshot": "screenshots\\signed_in_tablet_root.png"
+ },
+ {
+  "state": "signed_in",
+  "size": "tablet",
+  "route": "home",
+  "title": "Placement Career Coach",
+  "console_errors": [
+   "Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "The page that you have requested does not seem to exist. Running the app's main page."
+  ],
+  "page_errors": [],
+  "bad_requests": [],
+  "overflow_px": {
+   "page": 0,
+   "main": 0
+  },
+  "axe_violations": [],
+  "shows_error_text": false,
+  "body_preview": "home Home Plan work Career & Semester map Roadmap Assess quiz Skills Check insights Results Improve school Coaching Plan checklist Weekly Plan trending_up Progr",
+  "screenshot": "screenshots\\signed_in_tablet_home.png"
+ },
+ {
+  "state": "signed_in",
+  "size": "tablet",
+  "route": "profile",
+  "title": "Profile · Placement Career Coach",
+  "console_errors": [
+   "Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "page_errors": [],
+  "bad_requests": [],
+  "overflow_px": {
+   "page": 0,
+   "main": 0
+  },
+  "axe_violations": [
+   {
+    "id": "aria-allowed-attr",
+    "impact": "critical",
+    "help": "Elements must only use supported ARIA attributes",
+    "nodes": 1,
+    "target": ".stSidebar"
+   },
+   {
+    "id": "list",
+    "impact": "serious",
+    "help": "<ul> and <ol> must only directly contain <li>, <script> or <template> elements",
+    "nodes": 1,
+    "target": "ul"
+   },
+   {
+    "id": "listitem",
+    "impact": "serious",
+    "help": "<li> elements must be contained in a <ul> or <ol>",
+    "nodes": 9,
+    "target": ".st-emotion-cache-1jv7wse.ead4nmd12:nth-child(2) > li:nth-child(2)"
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "nodes": 18,
+    "target": "ul > li"
+   }
+  ],
+  "shows_error_text": false,
+  "body_preview": "home Home Plan work Career & Semester map Roadmap Assess quiz Skills Check insights Results Improve school Coaching Plan checklist Weekly Plan trending_up Progr",
+  "screenshot": "screenshots\\signed_in_tablet_profile.png"
+ },
+ {
+  "state": "signed_in",
+  "size": "tablet",
+  "route": "career",
+  "title": "Career & Semester · Placement Career Coach",
+  "console_errors": [
+   "Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "page_errors": [],
+  "bad_requests": [],
+  "overflow_px": {
+   "page": 0,
+   "main": 0
+  },
+  "axe_violations": [
+   {
+    "id": "aria-allowed-attr",
+    "impact": "critical",
+    "help": "Elements must only use supported ARIA attributes",
+    "nodes": 1,
+    "target": ".stSidebar"
+   },
+   {
+    "id": "list",
+    "impact": "serious",
+    "help": "<ul> and <ol> must only directly contain <li>, <script> or <template> elements",
+    "nodes": 1,
+    "target": "ul"
+   },
+   {
+    "id": "listitem",
+    "impact": "serious",
+    "help": "<li> elements must be contained in a <ul> or <ol>",
+    "nodes": 9,
+    "target": ".st-emotion-cache-1jv7wse.ead4nmd12:nth-child(2) > li:nth-child(2)"
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "nodes": 18,
+    "target": "ul > li"
+   }
+  ],
+  "shows_error_text": false,
+  "body_preview": "home Home Plan work Career & Semester map Roadmap Assess quiz Skills Check insights Results Improve school Coaching Plan checklist Weekly Plan trending_up Progr",
+  "screenshot": "screenshots\\signed_in_tablet_career.png"
+ },
+ {
+  "state": "signed_in",
+  "size": "tablet",
+  "route": "roadmap",
+  "title": "Roadmap · Placement Career Coach",
+  "console_errors": [
+   "Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "page_errors": [],
+  "bad_requests": [],
+  "overflow_px": {
+   "page": 0,
+   "main": 0
+  },
+  "axe_violations": [
+   {
+    "id": "aria-allowed-attr",
+    "impact": "critical",
+    "help": "Elements must only use supported ARIA attributes",
+    "nodes": 1,
+    "target": ".stSidebar"
+   },
+   {
+    "id": "list",
+    "impact": "serious",
+    "help": "<ul> and <ol> must only directly contain <li>, <script> or <template> elements",
+    "nodes": 1,
+    "target": ".st-emotion-cache-1gczx66"
+   },
+   {
+    "id": "listitem",
+    "impact": "serious",
+    "help": "<li> elements must be contained in a <ul> or <ol>",
+    "nodes": 9,
+    "target": ".st-emotion-cache-1jv7wse.ead4nmd12:nth-child(2) > .st-emotion-cache-1ag8dug.ead4nmd4:nth-child(2)"
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "nodes": 25,
+    "target": ".st-emotion-cache-1gczx66 > .st-emotion-cache-1ag8dug.ead4nmd4"
+   }
+  ],
+  "shows_error_text": false,
+  "body_preview": "home Home Plan work Career & Semester map Roadmap Assess quiz Skills Check insights Results Improve school Coaching Plan checklist Weekly Plan trending_up Progr",
+  "screenshot": "screenshots\\signed_in_tablet_roadmap.png"
+ },
+ {
+  "state": "signed_in",
+  "size": "tablet",
+  "route": "assessment",
+  "title": "Skills Check · Placement Career Coach",
+  "console_errors": [
+   "Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "page_errors": [],
+  "bad_requests": [],
+  "overflow_px": {
+   "page": 0,
+   "main": 0
+  },
+  "axe_violations": [
+   {
+    "id": "aria-allowed-attr",
+    "impact": "critical",
+    "help": "Elements must only use supported ARIA attributes",
+    "nodes": 1,
+    "target": ".stSidebar"
+   },
+   {
+    "id": "list",
+    "impact": "serious",
+    "help": "<ul> and <ol> must only directly contain <li>, <script> or <template> elements",
+    "nodes": 1,
+    "target": "ul"
+   },
+   {
+    "id": "listitem",
+    "impact": "serious",
+    "help": "<li> elements must be contained in a <ul> or <ol>",
+    "nodes": 9,
+    "target": ".st-emotion-cache-1jv7wse.ead4nmd12:nth-child(2) > li:nth-child(2)"
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "nodes": 17,
+    "target": "ul > li"
+   }
+  ],
+  "shows_error_text": false,
+  "body_preview": "home Home Plan work Career & Semester map Roadmap Assess quiz Skills Check insights Results Improve school Coaching Plan checklist Weekly Plan trending_up Progr",
+  "screenshot": "screenshots\\signed_in_tablet_assessment.png"
+ },
+ {
+  "state": "signed_in",
+  "size": "tablet",
+  "route": "results",
+  "title": "Results · Placement Career Coach",
+  "console_errors": [
+   "Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "page_errors": [],
+  "bad_requests": [],
+  "overflow_px": {
+   "page": 0,
+   "main": 0
+  },
+  "axe_violations": [
+   {
+    "id": "aria-allowed-attr",
+    "impact": "critical",
+    "help": "Elements must only use supported ARIA attributes",
+    "nodes": 1,
+    "target": ".stSidebar"
+   },
+   {
+    "id": "list",
+    "impact": "serious",
+    "help": "<ul> and <ol> must only directly contain <li>, <script> or <template> elements",
+    "nodes": 1,
+    "target": "ul"
+   },
+   {
+    "id": "listitem",
+    "impact": "serious",
+    "help": "<li> elements must be contained in a <ul> or <ol>",
+    "nodes": 9,
+    "target": ".st-emotion-cache-1jv7wse.ead4nmd12:nth-child(2) > li:nth-child(2)"
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "nodes": 26,
+    "target": "ul > li"
+   }
+  ],
+  "shows_error_text": false,
+  "body_preview": "home Home Plan work Career & Semester map Roadmap Assess quiz Skills Check insights Results Improve school Coaching Plan checklist Weekly Plan trending_up Progr",
+  "screenshot": "screenshots\\signed_in_tablet_results.png"
+ },
+ {
+  "state": "signed_in",
+  "size": "tablet",
+  "route": "coaching",
+  "title": "Coaching Plan · Placement Career Coach",
+  "console_errors": [
+   "Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "page_errors": [],
+  "bad_requests": [],
+  "overflow_px": {
+   "page": 0,
+   "main": 0
+  },
+  "axe_violations": [
+   {
+    "id": "aria-allowed-attr",
+    "impact": "critical",
+    "help": "Elements must only use supported ARIA attributes",
+    "nodes": 1,
+    "target": ".stSidebar"
+   },
+   {
+    "id": "list",
+    "impact": "serious",
+    "help": "<ul> and <ol> must only directly contain <li>, <script> or <template> elements",
+    "nodes": 1,
+    "target": "ul"
+   },
+   {
+    "id": "listitem",
+    "impact": "serious",
+    "help": "<li> elements must be contained in a <ul> or <ol>",
+    "nodes": 9,
+    "target": ".st-emotion-cache-1jv7wse.ead4nmd12:nth-child(2) > li:nth-child(2)"
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "nodes": 54,
+    "target": "ul > li"
+   }
+  ],
+  "shows_error_text": false,
+  "body_preview": "home Home Plan work Career & Semester map Roadmap Assess quiz Skills Check insights Results Improve school Coaching Plan checklist Weekly Plan trending_up Progr",
+  "screenshot": "screenshots\\signed_in_tablet_coaching.png"
+ },
+ {
+  "state": "signed_in",
+  "size": "tablet",
+  "route": "weekly-plan",
+  "title": "Weekly Plan · Placement Career Coach",
+  "console_errors": [
+   "Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "page_errors": [],
+  "bad_requests": [],
+  "overflow_px": {
+   "page": 0,
+   "main": 0
+  },
+  "axe_violations": [
+   {
+    "id": "aria-allowed-attr",
+    "impact": "critical",
+    "help": "Elements must only use supported ARIA attributes",
+    "nodes": 1,
+    "target": ".stSidebar"
+   },
+   {
+    "id": "list",
+    "impact": "serious",
+    "help": "<ul> and <ol> must only directly contain <li>, <script> or <template> elements",
+    "nodes": 1,
+    "target": "ul"
+   },
+   {
+    "id": "listitem",
+    "impact": "serious",
+    "help": "<li> elements must be contained in a <ul> or <ol>",
+    "nodes": 9,
+    "target": ".st-emotion-cache-1jv7wse.ead4nmd12:nth-child(2) > li:nth-child(2)"
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "nodes": 23,
+    "target": "ul > li"
+   }
+  ],
+  "shows_error_text": false,
+  "body_preview": "home Home Plan work Career & Semester map Roadmap Assess quiz Skills Check insights Results Improve school Coaching Plan checklist Weekly Plan trending_up Progr",
+  "screenshot": "screenshots\\signed_in_tablet_weekly-plan.png"
+ },
+ {
+  "state": "signed_in",
+  "size": "tablet",
+  "route": "progress",
+  "title": "Progress · Placement Career Coach",
+  "console_errors": [
+   "Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "page_errors": [],
+  "bad_requests": [],
+  "overflow_px": {
+   "page": 0,
+   "main": 0
+  },
+  "axe_violations": [
+   {
+    "id": "aria-allowed-attr",
+    "impact": "critical",
+    "help": "Elements must only use supported ARIA attributes",
+    "nodes": 1,
+    "target": ".stSidebar"
+   },
+   {
+    "id": "list",
+    "impact": "serious",
+    "help": "<ul> and <ol> must only directly contain <li>, <script> or <template> elements",
+    "nodes": 1,
+    "target": "ul"
+   },
+   {
+    "id": "listitem",
+    "impact": "serious",
+    "help": "<li> elements must be contained in a <ul> or <ol>",
+    "nodes": 9,
+    "target": ".st-emotion-cache-1jv7wse.ead4nmd12:nth-child(2) > li:nth-child(2)"
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "nodes": 32,
+    "target": "ul > li"
+   }
+  ],
+  "shows_error_text": false,
+  "body_preview": "home Home Plan work Career & Semester map Roadmap Assess quiz Skills Check insights Results Improve school Coaching Plan checklist Weekly Plan trending_up Progr",
+  "screenshot": "screenshots\\signed_in_tablet_progress.png"
+ },
+ {
+  "state": "signed_in",
+  "size": "tablet",
+  "route": "ai-settings",
+  "title": "AI Settings · Placement Career Coach",
+  "console_errors": [
+   "Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "page_errors": [],
+  "bad_requests": [],
+  "overflow_px": {
+   "page": 0,
+   "main": 0
+  },
+  "axe_violations": [
+   {
+    "id": "aria-allowed-attr",
+    "impact": "critical",
+    "help": "Elements must only use supported ARIA attributes",
+    "nodes": 1,
+    "target": ".stSidebar"
+   },
+   {
+    "id": "list",
+    "impact": "serious",
+    "help": "<ul> and <ol> must only directly contain <li>, <script> or <template> elements",
+    "nodes": 1,
+    "target": "ul"
+   },
+   {
+    "id": "listitem",
+    "impact": "serious",
+    "help": "<li> elements must be contained in a <ul> or <ol>",
+    "nodes": 9,
+    "target": ".st-emotion-cache-1jv7wse.ead4nmd12:nth-child(2) > li:nth-child(2)"
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "nodes": 18,
+    "target": "ul > li"
+   }
+  ],
+  "shows_error_text": false,
+  "body_preview": "home Home Plan work Career & Semester map Roadmap Assess quiz Skills Check insights Results Improve school Coaching Plan checklist Weekly Plan trending_up Progr",
+  "screenshot": "screenshots\\signed_in_tablet_ai-settings.png"
+ },
+ {
+  "state": "signed_in",
+  "size": "tablet",
+  "route": "m1-preview",
+  "title": "Placement Career Coach",
+  "console_errors": [
+   "Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "The page that you have requested does not seem to exist. Running the app's main page."
+  ],
+  "page_errors": [],
+  "bad_requests": [],
+  "overflow_px": {
+   "page": 0,
+   "main": 0
+  },
+  "axe_violations": [],
+  "shows_error_text": false,
+  "body_preview": "home Home Plan work Career & Semester map Roadmap Assess quiz Skills Check insights Results Improve school Coaching Plan checklist Weekly Plan trending_up Progr",
+  "screenshot": "screenshots\\signed_in_tablet_m1-preview.png"
+ },
+ {
+  "state": "signed_in",
+  "size": "tablet",
+  "route": "does-not-exist",
+  "title": "Placement Career Coach",
+  "console_errors": [
+   "Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "The page that you have requested does not seem to exist. Running the app's main page."
+  ],
+  "page_errors": [],
+  "bad_requests": [],
+  "overflow_px": {
+   "page": 0,
+   "main": 0
+  },
+  "axe_violations": [],
+  "shows_error_text": false,
+  "body_preview": "home Home Plan work Career & Semester map Roadmap Assess quiz Skills Check insights Results Improve school Coaching Plan checklist Weekly Plan trending_up Progr",
+  "screenshot": "screenshots\\signed_in_tablet_does-not-exist.png"
+ },
+ {
+  "state": "signed_in",
+  "size": "desktop",
+  "route": "(root)",
+  "title": "Placement Career Coach",
+  "console_errors": [],
+  "page_errors": [],
+  "bad_requests": [],
+  "overflow_px": {
+   "page": 0,
+   "main": 0
+  },
+  "axe_violations": [
+   {
+    "id": "aria-allowed-attr",
+    "impact": "critical",
+    "help": "Elements must only use supported ARIA attributes",
+    "nodes": 1,
+    "target": ".stSidebar"
+   },
+   {
+    "id": "list",
+    "impact": "serious",
+    "help": "<ul> and <ol> must only directly contain <li>, <script> or <template> elements",
+    "nodes": 1,
+    "target": "ul"
+   },
+   {
+    "id": "listitem",
+    "impact": "serious",
+    "help": "<li> elements must be contained in a <ul> or <ol>",
+    "nodes": 9,
+    "target": ".st-emotion-cache-1jv7wse.ead4nmd12:nth-child(2) > li:nth-child(2)"
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "nodes": 22,
+    "target": "ul > li"
+   }
+  ],
+  "shows_error_text": false,
+  "body_preview": "home Home Plan work Career & Semester map Roadmap Assess quiz Skills Check insights Results Improve school Coaching Plan checklist Weekly Plan trending_up Progr",
+  "screenshot": "screenshots\\signed_in_desktop_root.png"
+ },
+ {
+  "state": "signed_in",
+  "size": "desktop",
+  "route": "home",
+  "title": "Placement Career Coach",
+  "console_errors": [
+   "Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "The page that you have requested does not seem to exist. Running the app's main page."
+  ],
+  "page_errors": [],
+  "bad_requests": [],
+  "overflow_px": {
+   "page": 0,
+   "main": 0
+  },
+  "axe_violations": [],
+  "shows_error_text": false,
+  "body_preview": "home Home Plan work Career & Semester map Roadmap Assess quiz Skills Check insights Results Improve school Coaching Plan checklist Weekly Plan trending_up Progr",
+  "screenshot": "screenshots\\signed_in_desktop_home.png"
+ },
+ {
+  "state": "signed_in",
+  "size": "desktop",
+  "route": "profile",
+  "title": "Profile · Placement Career Coach",
+  "console_errors": [
+   "Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "page_errors": [],
+  "bad_requests": [],
+  "overflow_px": {
+   "page": 0,
+   "main": 0
+  },
+  "axe_violations": [
+   {
+    "id": "aria-allowed-attr",
+    "impact": "critical",
+    "help": "Elements must only use supported ARIA attributes",
+    "nodes": 1,
+    "target": ".stSidebar"
+   },
+   {
+    "id": "list",
+    "impact": "serious",
+    "help": "<ul> and <ol> must only directly contain <li>, <script> or <template> elements",
+    "nodes": 1,
+    "target": "ul"
+   },
+   {
+    "id": "listitem",
+    "impact": "serious",
+    "help": "<li> elements must be contained in a <ul> or <ol>",
+    "nodes": 9,
+    "target": ".st-emotion-cache-1jv7wse.ead4nmd12:nth-child(2) > li:nth-child(2)"
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "nodes": 20,
+    "target": "ul > li"
+   }
+  ],
+  "shows_error_text": false,
+  "body_preview": "home Home Plan work Career & Semester map Roadmap Assess quiz Skills Check insights Results Improve school Coaching Plan checklist Weekly Plan trending_up Progr",
+  "screenshot": "screenshots\\signed_in_desktop_profile.png"
+ },
+ {
+  "state": "signed_in",
+  "size": "desktop",
+  "route": "career",
+  "title": "Career & Semester · Placement Career Coach",
+  "console_errors": [
+   "Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "page_errors": [],
+  "bad_requests": [],
+  "overflow_px": {
+   "page": 0,
+   "main": 0
+  },
+  "axe_violations": [
+   {
+    "id": "aria-allowed-attr",
+    "impact": "critical",
+    "help": "Elements must only use supported ARIA attributes",
+    "nodes": 1,
+    "target": ".stSidebar"
+   },
+   {
+    "id": "list",
+    "impact": "serious",
+    "help": "<ul> and <ol> must only directly contain <li>, <script> or <template> elements",
+    "nodes": 1,
+    "target": "ul"
+   },
+   {
+    "id": "listitem",
+    "impact": "serious",
+    "help": "<li> elements must be contained in a <ul> or <ol>",
+    "nodes": 9,
+    "target": ".st-emotion-cache-1jv7wse.ead4nmd12:nth-child(2) > li:nth-child(2)"
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "nodes": 20,
+    "target": "ul > li"
+   }
+  ],
+  "shows_error_text": false,
+  "body_preview": "home Home Plan work Career & Semester map Roadmap Assess quiz Skills Check insights Results Improve school Coaching Plan checklist Weekly Plan trending_up Progr",
+  "screenshot": "screenshots\\signed_in_desktop_career.png"
+ },
+ {
+  "state": "signed_in",
+  "size": "desktop",
+  "route": "roadmap",
+  "title": "Roadmap · Placement Career Coach",
+  "console_errors": [
+   "Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "page_errors": [],
+  "bad_requests": [],
+  "overflow_px": {
+   "page": 0,
+   "main": 0
+  },
+  "axe_violations": [
+   {
+    "id": "aria-allowed-attr",
+    "impact": "critical",
+    "help": "Elements must only use supported ARIA attributes",
+    "nodes": 1,
+    "target": ".stSidebar"
+   },
+   {
+    "id": "list",
+    "impact": "serious",
+    "help": "<ul> and <ol> must only directly contain <li>, <script> or <template> elements",
+    "nodes": 1,
+    "target": ".st-emotion-cache-1gczx66"
+   },
+   {
+    "id": "listitem",
+    "impact": "serious",
+    "help": "<li> elements must be contained in a <ul> or <ol>",
+    "nodes": 9,
+    "target": ".st-emotion-cache-1jv7wse.ead4nmd12:nth-child(2) > .st-emotion-cache-1ag8dug.ead4nmd4:nth-child(2)"
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "nodes": 25,
+    "target": ".st-emotion-cache-1gczx66 > .st-emotion-cache-1ag8dug.ead4nmd4"
+   }
+  ],
+  "shows_error_text": false,
+  "body_preview": "home Home Plan work Career & Semester map Roadmap Assess quiz Skills Check insights Results Improve school Coaching Plan checklist Weekly Plan trending_up Progr",
+  "screenshot": "screenshots\\signed_in_desktop_roadmap.png"
+ },
+ {
+  "state": "signed_in",
+  "size": "desktop",
+  "route": "assessment",
+  "title": "Skills Check · Placement Career Coach",
+  "console_errors": [
+   "Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "page_errors": [],
+  "bad_requests": [],
+  "overflow_px": {
+   "page": 0,
+   "main": 0
+  },
+  "axe_violations": [
+   {
+    "id": "aria-allowed-attr",
+    "impact": "critical",
+    "help": "Elements must only use supported ARIA attributes",
+    "nodes": 1,
+    "target": ".stSidebar"
+   },
+   {
+    "id": "list",
+    "impact": "serious",
+    "help": "<ul> and <ol> must only directly contain <li>, <script> or <template> elements",
+    "nodes": 1,
+    "target": "ul"
+   },
+   {
+    "id": "listitem",
+    "impact": "serious",
+    "help": "<li> elements must be contained in a <ul> or <ol>",
+    "nodes": 9,
+    "target": ".st-emotion-cache-1jv7wse.ead4nmd12:nth-child(2) > li:nth-child(2)"
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "nodes": 17,
+    "target": "ul > li"
+   }
+  ],
+  "shows_error_text": false,
+  "body_preview": "home Home Plan work Career & Semester map Roadmap Assess quiz Skills Check insights Results Improve school Coaching Plan checklist Weekly Plan trending_up Progr",
+  "screenshot": "screenshots\\signed_in_desktop_assessment.png"
+ },
+ {
+  "state": "signed_in",
+  "size": "desktop",
+  "route": "results",
+  "title": "Results · Placement Career Coach",
+  "console_errors": [
+   "Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "page_errors": [],
+  "bad_requests": [],
+  "overflow_px": {
+   "page": 0,
+   "main": 0
+  },
+  "axe_violations": [
+   {
+    "id": "aria-allowed-attr",
+    "impact": "critical",
+    "help": "Elements must only use supported ARIA attributes",
+    "nodes": 1,
+    "target": ".stSidebar"
+   },
+   {
+    "id": "list",
+    "impact": "serious",
+    "help": "<ul> and <ol> must only directly contain <li>, <script> or <template> elements",
+    "nodes": 1,
+    "target": "ul"
+   },
+   {
+    "id": "listitem",
+    "impact": "serious",
+    "help": "<li> elements must be contained in a <ul> or <ol>",
+    "nodes": 9,
+    "target": ".st-emotion-cache-1jv7wse.ead4nmd12:nth-child(2) > li:nth-child(2)"
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "nodes": 26,
+    "target": "ul > li"
+   }
+  ],
+  "shows_error_text": false,
+  "body_preview": "home Home Plan work Career & Semester map Roadmap Assess quiz Skills Check insights Results Improve school Coaching Plan checklist Weekly Plan trending_up Progr",
+  "screenshot": "screenshots\\signed_in_desktop_results.png"
+ },
+ {
+  "state": "signed_in",
+  "size": "desktop",
+  "route": "coaching",
+  "title": "Coaching Plan · Placement Career Coach",
+  "console_errors": [
+   "Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "page_errors": [],
+  "bad_requests": [],
+  "overflow_px": {
+   "page": 0,
+   "main": 0
+  },
+  "axe_violations": [
+   {
+    "id": "aria-allowed-attr",
+    "impact": "critical",
+    "help": "Elements must only use supported ARIA attributes",
+    "nodes": 1,
+    "target": ".stSidebar"
+   },
+   {
+    "id": "list",
+    "impact": "serious",
+    "help": "<ul> and <ol> must only directly contain <li>, <script> or <template> elements",
+    "nodes": 1,
+    "target": "ul"
+   },
+   {
+    "id": "listitem",
+    "impact": "serious",
+    "help": "<li> elements must be contained in a <ul> or <ol>",
+    "nodes": 9,
+    "target": ".st-emotion-cache-1jv7wse.ead4nmd12:nth-child(2) > li:nth-child(2)"
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "nodes": 54,
+    "target": "ul > li"
+   }
+  ],
+  "shows_error_text": false,
+  "body_preview": "home Home Plan work Career & Semester map Roadmap Assess quiz Skills Check insights Results Improve school Coaching Plan checklist Weekly Plan trending_up Progr",
+  "screenshot": "screenshots\\signed_in_desktop_coaching.png"
+ },
+ {
+  "state": "signed_in",
+  "size": "desktop",
+  "route": "weekly-plan",
+  "title": "Weekly Plan · Placement Career Coach",
+  "console_errors": [
+   "Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "page_errors": [],
+  "bad_requests": [],
+  "overflow_px": {
+   "page": 0,
+   "main": 0
+  },
+  "axe_violations": [
+   {
+    "id": "aria-allowed-attr",
+    "impact": "critical",
+    "help": "Elements must only use supported ARIA attributes",
+    "nodes": 1,
+    "target": ".stSidebar"
+   },
+   {
+    "id": "list",
+    "impact": "serious",
+    "help": "<ul> and <ol> must only directly contain <li>, <script> or <template> elements",
+    "nodes": 1,
+    "target": "ul"
+   },
+   {
+    "id": "listitem",
+    "impact": "serious",
+    "help": "<li> elements must be contained in a <ul> or <ol>",
+    "nodes": 9,
+    "target": ".st-emotion-cache-1jv7wse.ead4nmd12:nth-child(2) > li:nth-child(2)"
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "nodes": 40,
+    "target": "ul > li"
+   }
+  ],
+  "shows_error_text": false,
+  "body_preview": "home Home Plan work Career & Semester map Roadmap Assess quiz Skills Check insights Results Improve school Coaching Plan checklist Weekly Plan trending_up Progr",
+  "screenshot": "screenshots\\signed_in_desktop_weekly-plan.png"
+ },
+ {
+  "state": "signed_in",
+  "size": "desktop",
+  "route": "progress",
+  "title": "Progress · Placement Career Coach",
+  "console_errors": [
+   "Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "page_errors": [],
+  "bad_requests": [],
+  "overflow_px": {
+   "page": 0,
+   "main": 0
+  },
+  "axe_violations": [
+   {
+    "id": "aria-allowed-attr",
+    "impact": "critical",
+    "help": "Elements must only use supported ARIA attributes",
+    "nodes": 1,
+    "target": ".stSidebar"
+   },
+   {
+    "id": "list",
+    "impact": "serious",
+    "help": "<ul> and <ol> must only directly contain <li>, <script> or <template> elements",
+    "nodes": 1,
+    "target": "ul"
+   },
+   {
+    "id": "listitem",
+    "impact": "serious",
+    "help": "<li> elements must be contained in a <ul> or <ol>",
+    "nodes": 9,
+    "target": ".st-emotion-cache-1jv7wse.ead4nmd12:nth-child(2) > li:nth-child(2)"
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "nodes": 32,
+    "target": "ul > li"
+   }
+  ],
+  "shows_error_text": false,
+  "body_preview": "home Home Plan work Career & Semester map Roadmap Assess quiz Skills Check insights Results Improve school Coaching Plan checklist Weekly Plan trending_up Progr",
+  "screenshot": "screenshots\\signed_in_desktop_progress.png"
+ },
+ {
+  "state": "signed_in",
+  "size": "desktop",
+  "route": "ai-settings",
+  "title": "AI Settings · Placement Career Coach",
+  "console_errors": [
+   "Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "page_errors": [],
+  "bad_requests": [],
+  "overflow_px": {
+   "page": 0,
+   "main": 0
+  },
+  "axe_violations": [
+   {
+    "id": "aria-allowed-attr",
+    "impact": "critical",
+    "help": "Elements must only use supported ARIA attributes",
+    "nodes": 1,
+    "target": ".stSidebar"
+   },
+   {
+    "id": "list",
+    "impact": "serious",
+    "help": "<ul> and <ol> must only directly contain <li>, <script> or <template> elements",
+    "nodes": 1,
+    "target": "ul"
+   },
+   {
+    "id": "listitem",
+    "impact": "serious",
+    "help": "<li> elements must be contained in a <ul> or <ol>",
+    "nodes": 9,
+    "target": ".st-emotion-cache-1jv7wse.ead4nmd12:nth-child(2) > li:nth-child(2)"
+   },
+   {
+    "id": "region",
+    "impact": "moderate",
+    "help": "All page content should be contained by landmarks",
+    "nodes": 18,
+    "target": "ul > li"
+   }
+  ],
+  "shows_error_text": false,
+  "body_preview": "home Home Plan work Career & Semester map Roadmap Assess quiz Skills Check insights Results Improve school Coaching Plan checklist Weekly Plan trending_up Progr",
+  "screenshot": "screenshots\\signed_in_desktop_ai-settings.png"
+ },
+ {
+  "state": "signed_in",
+  "size": "desktop",
+  "route": "m1-preview",
+  "title": "Placement Career Coach",
+  "console_errors": [
+   "Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "The page that you have requested does not seem to exist. Running the app's main page."
+  ],
+  "page_errors": [],
+  "bad_requests": [],
+  "overflow_px": {
+   "page": 0,
+   "main": 0
+  },
+  "axe_violations": [],
+  "shows_error_text": false,
+  "body_preview": "home Home Plan work Career & Semester map Roadmap Assess quiz Skills Check insights Results Improve school Coaching Plan checklist Weekly Plan trending_up Progr",
+  "screenshot": "screenshots\\signed_in_desktop_m1-preview.png"
+ },
+ {
+  "state": "signed_in",
+  "size": "desktop",
+  "route": "does-not-exist",
+  "title": "Placement Career Coach",
+  "console_errors": [
+   "Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "The page that you have requested does not seem to exist. Running the app's main page."
+  ],
+  "page_errors": [],
+  "bad_requests": [],
+  "overflow_px": {
+   "page": 0,
+   "main": 0
+  },
+  "axe_violations": [],
+  "shows_error_text": false,
+  "body_preview": "home Home Plan work Career & Semester map Roadmap Assess quiz Skills Check insights Results Improve school Coaching Plan checklist Weekly Plan trending_up Progr",
+  "screenshot": "screenshots\\signed_in_desktop_does-not-exist.png"
+ }
+]

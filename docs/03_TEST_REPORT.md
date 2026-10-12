@@ -6,11 +6,12 @@ Each milestone's acceptance items are recorded here as **Pass**, **Fail**, or **
 
 | Check | Result |
 |---|---|
-| Automated suite | 358 passed (unit, integration, headless UI) |
+| Automated suite | 395 passed (unit, integration, headless UI), plus 34 real-browser tests run on request |
 | Lint, formatting, types (domain and workflow, strict), content validation | Clean |
 | Real browser (Edge, Playwright), offline | Journeys for DevOps and Java; home and navigation; one-question check; results; weekly plan; progress dashboard with the seeded demo profiles |
 | Real browser, live Anthropic (`claude-haiku-5-5`) | DevOps journey: roadmap, check, results, coaching plan, coach chat, quiz |
-| Not verified | Live AI for MEAN, Java and AI careers; other AI providers; a person's review of the question banks (about 300 questions are unreviewed drafts); the product note (M7) |
+| QA pass (`test-reports/`) | 34 of 34 browser tests, 78 of 78 route views, 318 of 318 questions displayed as written, no critical or serious accessibility findings except four from Streamlit's sidebar |
+| Not verified | Live AI for MEAN, Java and AI careers; Firefox and Safari; screen readers; other AI providers; a person's review of the question banks (about 300 questions are unreviewed drafts); the product note (M7) |
 
 The sections below keep each milestone's results as they were recorded. Test counts in older sections are the counts at that time.
 
@@ -309,6 +310,21 @@ Not built: a time filter, per-skill drill-down pages, and goal setting. Level gu
 | A person's review of the new questions | **Not done.** Labelled `ai_drafted` |
 
 Not checked: that every technical statement in 240 new questions is correct. The assistant that wrote them also re-read them once; that is not independent review.
+
+## QA pass (2026-10-12)
+
+The full report is `test-reports/qa-report.md`. In short:
+
+| Check | Result |
+|---|---|
+| Browser tests (Edge): four careers across Semesters 3 to 6, weak result, re-check, wizard, reload, stale tab, coach and quiz, weekly plan, hostile input, responsive layout and axe-core, question display | 34 passed |
+| Route sweep: 13 routes, 3 sizes, signed out and in | 78 of 78 ok |
+| Lighthouse on 10 pages, mobile and desktop | Performance 38 to 59, accessibility 83 to 87, best practices 96 to 100, SEO 82; shortfalls are Streamlit's |
+| Bandit, pip-audit, secret scan | No high findings; no known vulnerable dependency; no secrets in tracked files |
+
+Defects found and fixed: dollar signs dropped from content (High); an answer lost on a quick click on Next (High); answers lost on reload (Medium); the saved AI key sent to the browser and echoed in errors (Medium); a display name that became a link (Low); contrast, heading and title problems; and smaller items. Each has a regression test; the two High defects were checked by switching the fix off and watching the test fail.
+
+Not fixed because they come from Streamlit: the sidebar accessibility findings, the Lighthouse performance and layout-shift scores, and console 404s on deep links. The 300 unreviewed questions remain the largest open risk.
 
 ## Prototype acceptance checklist (blueprint Section 3.4)
 
