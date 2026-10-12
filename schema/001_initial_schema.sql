@@ -100,3 +100,17 @@ CREATE INDEX idx_attempts_profile_submitted ON assessment_attempts(profile_id, s
 CREATE INDEX idx_responses_attempt ON assessment_responses(attempt_id);
 CREATE INDEX idx_skill_scores_attempt ON skill_scores(attempt_id);
 CREATE INDEX idx_coaching_plans_profile_status ON coaching_plans(profile_id, status);
+
+CREATE TABLE coaching_messages (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    profile_id INTEGER NOT NULL REFERENCES profiles(id),
+    coaching_plan_id INTEGER NOT NULL REFERENCES coaching_plans(id),
+    task_order INTEGER NOT NULL,
+    role TEXT NOT NULL CHECK (role IN ('student', 'coach')),
+    kind TEXT NOT NULL CHECK (kind IN ('explain_differently', 'example', 'question')),
+    content TEXT NOT NULL,
+    generation_source TEXT NOT NULL CHECK (generation_source IN ('ai', 'template', 'student')),
+    created_at TEXT NOT NULL
+);
+
+CREATE INDEX idx_coaching_messages_task ON coaching_messages(coaching_plan_id, task_order);

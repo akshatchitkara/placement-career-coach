@@ -20,6 +20,7 @@ from pcc.agents.evaluation_agent import (
     shuffled_option_order,
 )
 from pcc.agents.roadmap_agent import generate_roadmap
+from pcc.agents.tutor_agent import tutor_reply
 from pcc.ai.ai_client import AiClient
 from pcc.ai.ai_client_factory import build_ai_client
 from pcc.ai.mock_ai_client import MockAiClient
@@ -43,16 +44,27 @@ from pcc.domain.schemas.assessment_schemas import (
     AssessmentScope,
     AssessmentSession,
     EvaluationResult,
+    PresentedQuestion,
 )
 from pcc.domain.schemas.career_schemas import Career
 from pcc.domain.schemas.coaching_schemas import (
     CoachingInput,
     CoachingPlan,
     CoachingPlanView,
+    CoachingTask,
     MissedQuestion,
 )
 from pcc.domain.schemas.question_schemas import Question
 from pcc.domain.schemas.roadmap_schemas import Roadmap, RoadmapMonth, Skill
+from pcc.domain.schemas.tutor_schemas import (
+    MAX_STUDENT_MESSAGES_PER_TASK,
+    MAX_STUDENT_TEXT,
+    PracticeQuestionResult,
+    TutorContext,
+    TutorKind,
+    TutorMessage,
+    TutorReply,
+)
 from pcc.domain.schemas.weekly_plan_schemas import (
     RoadmapFocus,
     WeeklyPlanConfig,
@@ -73,7 +85,13 @@ from pcc.persistence.repositories.assessment_repository import (
     save_submission,
     seen_question_ids_oldest_first,
 )
-from pcc.persistence.repositories.coaching_repository import get_active_plan, save_active_plan
+from pcc.persistence.repositories.coaching_repository import (
+    add_message,
+    get_active_plan,
+    get_active_plan_id,
+    list_messages,
+    save_active_plan,
+)
 from pcc.persistence.repositories.profile_repository import (
     Profile,
     get_or_create_profile,
@@ -623,6 +641,153 @@ class WorkflowController:
             skill_name=ctx.skills_by_id[plan.skill_id].name,
             question_stems={q.question_id: q.stem for q in ctx.bank},
         )
+
+    # --- coaching tutor (P5) ------------------------------------------------------------------
+    _STUDENT_LABELS = {
+        "explain_differently": "Explain it differently",
+        "example": "Show me an example",
+    }
+
+    def _tutor_task(
+        self, conn: sqlite3.Connection, profile_id: int, task_order: int
+    ) -> tuple[CoachingPlan, int, CoachingTask]:
+        plan = get_active_plan(conn, profile_id)
+        plan_id = get_active_plan_id(conn, profile_id)
+        task = next((t for t in plan.tasks if t.order == task_order), None) if plan else None
+        if plan is None or plan_id is None or task is None:
+            raise PccError("That coaching task was not found.")
+        return plan, plan_id, task
+
+    def _missed_for_task(
+        self, profile_id: int, skill_id: str, task: CoachingTask
+    ) -> list[MissedQuestion]:
+        result = self.get_latest_results(profile_id)
+        if result is None:
+            return []
+        with closing(self._connect()) as conn:
+            ctx = self._check_context(conn, profile_id)
+        tags = {q.question_id: q.concept_tag for q in ctx.bank}
+        missed = [
+            MissedQuestion(
+                question_id=r.question_id,
+                concept_tag=tags[r.question_id],
+                stem=r.stem,
+                selected_option_text=r.selected_option_text,
+                correct_option_text=r.correct_option_text,
+                explanation=r.explanation,
+            )
+            for r in result.reviews
+            if r.skill_id == skill_id and not r.is_correct
+        ]
+        about_task = [
+            m
+            for m in missed
+            if m.question_id == task.linked_question_id or m.concept_tag == task.concept_tag
+        ]
+        return (about_task or missed)[:3]
+
+    def get_tutor_thread(self, profile_id: int, task_order: int) -> list[TutorMessage]:
+        with closing(self._connect()) as conn:
+            _, plan_id, _ = self._tutor_task(conn, profile_id, task_order)
+            return list_messages(conn, plan_id, task_order)
+
+    def ask_tutor(
+        self, profile_id: int, task_order: int, kind: TutorKind, text: str = ""
+    ) -> TutorReply:
+        """One tutor turn on a coaching task. Explains only; scores and plans never change."""
+        text = " ".join(text.split())
+        if kind == "question" and not text:
+            raise PccError("Type your question first.")
+        if len(text) > MAX_STUDENT_TEXT:
+            raise PccError(f"Keep your question under {MAX_STUDENT_TEXT} characters.")
+        with closing(self._connect()) as conn:
+            plan, plan_id, task = self._tutor_task(conn, profile_id, task_order)
+            history = list_messages(conn, plan_id, task_order)
+            if sum(m.role == "student" for m in history) >= MAX_STUDENT_MESSAGES_PER_TASK:
+                raise PccError(
+                    "You have reached the chat limit for this task. Try the quiz, or move on "
+                    "to the next task."
+                )
+            ctx = self._check_context(conn, profile_id)
+            client = self._resolve_ai_client(conn)
+        career = next(c for c in load_careers() if c.career_id == ctx.profile.career_id)
+        context = TutorContext(
+            career_name=career.name,
+            skill_name=ctx.skills_by_id[plan.skill_id].name,
+            task=task,
+            missed=self._missed_for_task(profile_id, plan.skill_id, task),
+            history=history,
+        )
+        reply = tutor_reply(context, kind, text, client)
+        source = "ai" if client is not None and not reply.used_fallback else "template"
+        with closing(self._connect()) as conn:
+            add_message(
+                conn,
+                profile_id,
+                plan_id,
+                task_order,
+                role="student",
+                kind=kind,
+                content=text or self._STUDENT_LABELS[kind],
+                generation_source="student",
+            )
+            add_message(
+                conn,
+                profile_id,
+                plan_id,
+                task_order,
+                role="coach",
+                kind=kind,
+                content=reply.text,
+                generation_source=source,
+            )
+            conn.commit()
+        return reply
+
+    def get_practice_quiz(self, profile_id: int, task_order: int) -> list[PresentedQuestion]:
+        """Up to 3 questions on this task's concept, taken only from ones the student has seen.
+
+        Unseen questions are left alone so the re-check stays fresh. Graded by code, not stored.
+        """
+        with closing(self._connect()) as conn:
+            plan, plan_id, task = self._tutor_task(conn, profile_id, task_order)
+            ctx = self._check_context(conn, profile_id)
+            seen = set(seen_question_ids_oldest_first(conn, profile_id))
+        missed_ids = {m.question_id for m in self._missed_for_task(profile_id, plan.skill_id, task)}
+        tag = task.concept_tag or next(
+            (q.concept_tag for q in ctx.bank if q.question_id == task.linked_question_id), None
+        )
+        pool = [q for q in ctx.bank if q.skill_id == plan.skill_id and q.question_id in seen]
+        pool.sort(
+            key=lambda q: (q.question_id not in missed_ids, q.concept_tag != tag, q.question_id)
+        )
+        return present(pool[:3], ctx.skills_by_id, plan_id * 1000 + task_order)
+
+    def grade_practice_quiz(
+        self, profile_id: int, task_order: int, selections: dict[str, str]
+    ) -> list[PracticeQuestionResult]:
+        quiz = self.get_practice_quiz(profile_id, task_order)
+        if not quiz or set(selections) != {q.question_id for q in quiz}:
+            raise PccError("Answer every quiz question first.")
+        with closing(self._connect()) as conn:
+            bank = {q.question_id: q for q in self._check_context(conn, profile_id).bank}
+        results = []
+        for q in quiz:
+            source = bank[q.question_id]
+            options = {o.option_id: o.text for o in source.options}
+            if selections[q.question_id] not in options:
+                raise PccError("Pick one of the listed options.")
+            results.append(
+                PracticeQuestionResult(
+                    question_id=q.question_id,
+                    stem=q.stem,
+                    selected_option_text=options[selections[q.question_id]],
+                    correct_option_text=options[source.correct_option_id],
+                    is_correct=selections[q.question_id] == source.correct_option_id,
+                    explanation=source.explanation,
+                )
+            )
+        return results
 
     def get_latest_results(self, profile_id: int) -> EvaluationResult | None:
         """Re-derives results from stored answers + the attempt's config snapshot (T-18, T-20)."""
