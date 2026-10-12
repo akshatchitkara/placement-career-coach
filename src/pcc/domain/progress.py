@@ -116,3 +116,52 @@ def build_progress(attempts: list[AttemptSummary], mastery_threshold: float) -> 
             if s.has_sufficient_evidence and s.score < mastery_threshold
         ),
     )
+
+
+class WeekRecord(BaseModel):
+    """One saved weekly plan: which check it followed and how much of it was ticked off."""
+
+    attempt_id: int
+    tasks_done: int
+    tasks_total: int
+    minutes_done: int
+
+
+class WeekEffort(BaseModel):
+    """A week's effort next to what the following check showed. Context, not proof of cause."""
+
+    from_attempt_id: int
+    tasks_done: int
+    tasks_total: int
+    minutes_done: int
+    score_change: float  # the next check's overall score minus this check's
+
+
+def build_effort(attempts: list[AttemptSummary], weeks: list[WeekRecord]) -> list[WeekEffort]:
+    """Pairs each weekly plan with the check that followed it. Plans with no later check wait."""
+    position = {a.attempt_id: i for i, a in enumerate(attempts)}
+    effort = []
+    for week in weeks:
+        index = position.get(week.attempt_id)
+        if index is None or index + 1 >= len(attempts):
+            continue
+        effort.append(
+            WeekEffort(
+                from_attempt_id=week.attempt_id,
+                tasks_done=week.tasks_done,
+                tasks_total=week.tasks_total,
+                minutes_done=week.minutes_done,
+                score_change=attempts[index + 1].overall_score - attempts[index].overall_score,
+            )
+        )
+    return effort
+
+
+def mentor_message(career_name: str, skill_name: str, score: float, concepts: list[str]) -> str:
+    """A message the student can send as it stands, so the advice to ask for help is actionable."""
+    stuck = f" I got stuck on {', '.join(concepts)}." if concepts else ""
+    return (
+        f"Hi, I'm preparing for {career_name} placements. My latest skills check has "
+        f"{skill_name} at {score:.0f}%.{stuck} Could you spare 30 minutes to walk me through it, "
+        "or point me to the best way to practise?"
+    )

@@ -4,6 +4,7 @@ import streamlit as st
 
 from pcc.ui.components.journey import next_step, next_step_button, render_stepper, state_label
 from pcc.ui.components.level_badge import LEVEL_LABELS
+from pcc.ui.components.progress_visuals import sparkline_svg
 from pcc.ui.navigation import go_button
 from pcc.workflow.workflow_controller import get_controller
 
@@ -68,3 +69,18 @@ def render() -> None:
                 c3.metric("Re-check", "Due now")
             else:
                 c3.metric("Re-check in", f"{view.days_until_retest} days")
+        progress = controller.get_progress(profile.id)
+        if len(progress.attempts) > 1:
+            first, last = progress.attempts[0], progress.attempts[-1]
+            change = last.overall_score - first.overall_score
+            trend = sparkline_svg([a.overall_score for a in progress.attempts], 160, 40)
+            if change == 0:
+                headline = "No change"
+            else:
+                headline = f"{'Up' if change > 0 else 'Down'} {abs(change):.1f} points"
+            st.markdown(
+                f"{trend} &nbsp; **{headline}** since your baseline, "
+                f"over {len(progress.attempts)} checks.",
+                unsafe_allow_html=True,
+            )
+            go_button("See my progress", "progress", key="home_progress")

@@ -1271,7 +1271,7 @@ Use this document as the build contract.
 
 ## Appendix D: Changes Since This Blueprint
 
-The blueprint is the original spec and is left as written. This appendix records where the built app now differs. Scoring, level rules, the weakest-skill and position logic, the workflow states, the AI guardrails and the persistence rules are **unchanged**. The decision log (`docs/04_DECISION_LOG.md`, A47-A60) gives the reason for each item.
+The blueprint is the original spec and is left as written. This appendix records where the built app now differs. Scoring, level rules, the weakest-skill and position logic, the workflow states, the AI guardrails and the persistence rules are **unchanged**. The decision log (`docs/04_DECISION_LOG.md`, A47-A63) gives the reason for each item.
 
 | Area | Blueprint | Now |
 |---|---|---|
@@ -1281,4 +1281,5 @@ The blueprint is the original spec and is left as written. This appendix records
 | Results | Metrics, table, weakest-skill box | Score and level with a four-step ladder, "biggest opportunity" wording, per-skill bars with the mastery line, full numbers kept in an expander |
 | Coaching | A read-only plan of 3-5 tasks | Same plan, plus a coach per task: explain differently, example, free question (300 characters, 12 messages per task) and a practice quiz on seen questions graded by code. New: `agents/tutor_agent.py`, validator rules V-TU-01..04, prompt `tutor_reply_v1.md`, table `coaching_messages`. Tasks 1-2 share a done-checkbox with the weekly plan |
 | Weekly plan | A checkbox list with a re-check date | A seven-day schedule plus a re-check day, task links, a time-budget picker that rebuilds the week in place, a completion message, and an `.ics` calendar export. New: `domain/week_schedule.py`, `domain/calendar_export.py` |
+| Progress | Latest check against the previous one, skill by skill | A score trend chart with the level cut-offs, per-skill rows with a previous-check tick and sparklines, "did the effort show up?" pairing weeks with score changes, a ready-to-send mentor message, and a trend line on Home. New: `ui/components/progress_visuals.py`; `domain/progress.py` gains effort pairing and the mentor message |
 | Not built | Section 5 "Build next/later" items | Still not built: Semesters 4-6 banks, full-path check, Career Finder, custom CS career, answer simulator, regenerating a coaching plan, coaching more than one weak skill, per-task skip or swap, streaks |

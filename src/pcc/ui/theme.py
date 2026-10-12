@@ -34,6 +34,12 @@ h1 { letter-spacing: -0.02em; }
 .pcc-bar u { position: absolute; top: -3px; bottom: -3px; width: 2px; background: #1F2937; }
 [data-testid="stProgressBarTrack"] { background: #D9DEF0; height: 10px; border-radius: 8px; }
 [data-testid="stProgressBarTrack"] > div { background: #4F46E5; border-radius: 8px; }
+.pcc-bar b { position: absolute; top: -2px; bottom: -2px; width: 3px; background: #9CA3AF;
+  border-radius: 2px; }
+.pcc-spark { float: right; line-height: 0; margin-top: 2px; }
+.pcc-up { color: #047857 !important; font-weight: 600; }
+.pcc-down { color: #B91C1C !important; font-weight: 600; }
+.pcc-chart { overflow-x: auto; }
 [data-testid="stSidebar"] { border-right: 1px solid #E3E7F2; }
 </style>
 """

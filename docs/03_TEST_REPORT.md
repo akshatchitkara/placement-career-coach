@@ -6,9 +6,9 @@ Each milestone's acceptance items are recorded here as **Pass**, **Fail**, or **
 
 | Check | Result |
 |---|---|
-| Automated suite | 338 passed (unit, integration, headless UI) |
+| Automated suite | 356 passed (unit, integration, headless UI) |
 | Lint, formatting, types (domain and workflow, strict), content validation | Clean |
-| Real browser (Edge, Playwright), offline | Journeys for DevOps and Java; home and navigation; one-question check; results; weekly plan |
+| Real browser (Edge, Playwright), offline | Journeys for DevOps and Java; home and navigation; one-question check; results; weekly plan; progress dashboard with the seeded demo profiles |
 | Real browser, live Anthropic (`claude-haiku-5-5`) | DevOps journey: roadmap, check, results, coaching plan, coach chat, quiz |
 | Not verified | Live AI for MEAN, Java and AI careers; other AI providers; a person's review of the question banks; the product note (M7) |
 
@@ -280,6 +280,21 @@ Not built: regenerating the plan (it would put the weekly plan out of step) and 
 A bug found while writing the export: text escaping in the first draft left raw line breaks in event descriptions. The unit test caught it before any browser run.
 
 Not built: skipping or swapping a single task, streaks across weeks, and replacing the generic filler tasks with skill-specific ones (fillers appear only when a result gives the builder nothing specific).
+
+## Product polish P7 (2026-10-12): progress dashboard
+
+| Check | Result |
+|---|---|
+| Full suite | 356 passed; ruff, mypy (domain + workflow), content validation clean |
+| Effort pairing: each week matched with the next check, a week with no later check left out, unknown checks ignored | Pass (unit) |
+| Mentor message: ready to send, no dangling phrase without concepts, no student name | Pass (unit and integration) |
+| Charts: one-check trend is a point, several checks are joined in order, screen-reader summary, names escaped, sparklines from the third check | Pass (unit) |
+| Page and Home: effort section, mentor message, single-check view, trend on Home after two checks | Pass (headless UI) |
+| Real browser, offline, seeded demo profiles (Meera: 50.0 to 91.7; Ravi: one check, skill under 40%) | 12 checks pass |
+
+Two layout bugs found only in the browser and fixed: the trend chart's right-hand labels were clipped and overlapped the level guide labels, and on a phone the chart shrank until its text was unreadable. The chart now keeps its margins and scrolls sideways on narrow screens.
+
+Not built: a time filter, per-skill drill-down pages, and goal setting. Level guide lines use the current thresholds, not each past check's snapshot.
 
 ## Prototype acceptance checklist (blueprint Section 3.4)
 

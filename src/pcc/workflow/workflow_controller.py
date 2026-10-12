@@ -38,7 +38,15 @@ from pcc.core.constants import SEMESTERS
 from pcc.core.exceptions import PccError
 from pcc.domain.career_resolver import resolve_career
 from pcc.domain.enums import WorkflowState, is_quiz_assessable
-from pcc.domain.progress import AttemptSummary, ProgressView, build_progress
+from pcc.domain.progress import (
+    AttemptSummary,
+    ProgressView,
+    WeekEffort,
+    WeekRecord,
+    build_effort,
+    build_progress,
+    mentor_message,
+)
 from pcc.domain.schemas.assessment_schemas import (
     Answer,
     AssessmentScope,
@@ -107,6 +115,7 @@ from pcc.persistence.repositories.roadmap_repository import (
 )
 from pcc.persistence.repositories.weekly_plan_repository import (
     get_latest_weekly_plan,
+    list_weekly_plans,
     save_weekly_plan,
     set_done_task_ids,
     update_weekly_plan,
@@ -444,6 +453,18 @@ class WorkflowController:
         return result
 
     # --- weekly loop (M5) ---------------------------------------------------------------------
+    @staticmethod
+    def _missed_concepts(ctx: "_CheckContext", result: EvaluationResult) -> dict[str, list[str]]:
+        """Concept tags the student got wrong, per skill, in the order they were first missed."""
+        tags = {q.question_id: q.concept_tag for q in ctx.bank}
+        missed: dict[str, list[str]] = {}
+        for review in result.reviews:
+            if not review.is_correct:
+                bucket = missed.setdefault(review.skill_id, [])
+                if tags[review.question_id] not in bucket:
+                    bucket.append(tags[review.question_id])
+        return missed
+
     def _build_week(
         self,
         conn: sqlite3.Connection,
@@ -473,13 +494,7 @@ class WorkflowController:
             if month
             else None
         )
-        tags = {q.question_id: q.concept_tag for q in ctx.bank}
-        missed: dict[str, list[str]] = {}
-        for review in result.reviews:
-            if not review.is_correct:
-                bucket = missed.setdefault(review.skill_id, [])
-                if tags[review.question_id] not in bucket:
-                    bucket.append(tags[review.question_id])
+        missed = self._missed_concepts(ctx, result)
 
         return build_weekly_plan(
             WeeklyPlanContext(
@@ -645,6 +660,46 @@ class WorkflowController:
                 )
             latest_settings = AppSettings.model_validate_json(records[-1].config_snapshot_json)
         return build_progress(summaries, latest_settings.mastery_threshold)
+
+    def get_effort(self, profile_id: int) -> list[WeekEffort]:
+        """Each past week's ticked tasks next to the score change at the check that followed."""
+        progress = self.get_progress(profile_id)
+        with closing(self._connect()) as conn:
+            saved = list_weekly_plans(conn, profile_id)
+        weeks = []
+        for attempt_id, plan, done in saved:
+            study = [t for t in plan.tasks if t.kind != "recheck"]
+            ticked = [t for t in study if t.task_id in set(done)]
+            weeks.append(
+                WeekRecord(
+                    attempt_id=attempt_id,
+                    tasks_done=len(ticked),
+                    tasks_total=len(study),
+                    minutes_done=sum(t.estimated_minutes for t in ticked),
+                )
+            )
+        return build_effort(progress.attempts, weeks)
+
+    def get_mentor_notes(self, profile_id: int) -> dict[str, str]:
+        """A ready-to-send message for each skill under the mentor bar (skill id -> message)."""
+        progress = self.get_progress(profile_id)
+        result = self.get_latest_results(profile_id)
+        if not progress.mentor_skill_ids or result is None:
+            return {}
+        with closing(self._connect()) as conn:
+            ctx = self._check_context(conn, profile_id)
+        career = next(c for c in load_careers() if c.career_id == ctx.profile.career_id)
+        scores = {s.skill_id: s.score for s in result.skill_scores}
+        missed = self._missed_concepts(ctx, result)
+        return {
+            skill_id: mentor_message(
+                career.name,
+                ctx.skills_by_id[skill_id].name,
+                scores[skill_id],
+                [t.replace("_", " ") for t in missed.get(skill_id, [])],
+            )
+            for skill_id in progress.mentor_skill_ids
+        }
 
     # --- coaching (M4) ------------------------------------------------------------------------
     def _coach(

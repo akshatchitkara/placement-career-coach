@@ -53,14 +53,14 @@ All four careers (DevOps, MEAN, Java, AI) can complete a Semester 3 check. Also 
 
 | Page | Purpose |
 |---|---|
-| Home | Where you are in the journey (five-step tracker), your one next step, latest score and re-check countdown. New visitors see what the app does |
+| Home | Where you are in the journey (five-step tracker), your one next step, latest score, re-check countdown and, after two checks, your trend. New visitors see what the app does |
 | Career & Semester | Pick one of 4 CS careers or type one; shows which semesters have a skills check; builds the validated roadmap |
 | Roadmap | Semesters 3-6, four months each, with topics and deliverables |
 | Skills Check | One question at a time with progress, Back/Next and an unanswered list before submit; 3 questions per skill (1 easy, 1 medium, 1 hard), options shuffled; also hosts the re-check |
 | Results | Score and level with a four-step ladder and the gap to the next level, a "biggest opportunity" skill, per-skill bars with the mastery line, full numbers, roadmap position, answer review |
 | Coaching Plan | 3-5 tasks for the weakest skill, each tied to a question you missed. Each task has a **coach**: explain it differently, show an example, ask your own question, or take a short practice quiz |
 | Weekly Plan | The week laid out over seven days plus a re-check day, task links, a time-budget picker, progress and a calendar (.ics) download |
-| Progress | Latest check against the previous one, skill by skill |
+| Progress | Score trend across checks, skill-by-skill change with a tick for the previous check, whether last week's effort showed up in the score, and a ready-to-send mentor message for any skill under 40% |
 | Profile / AI Settings | Sign in with a display name (no password); optional AI provider |
 
 ## How scoring stays fair
@@ -107,7 +107,7 @@ python -m mypy src/pcc/domain src/pcc/workflow
 python scripts/validate_content.py
 ```
 
-The suite (about 340 tests) covers the scoring rules and level boundaries, validators, fallbacks, the whole journey for every career with the AI failing in seven different ways (down, crashing, empty, not JSON, wrong shape, prompt injection, hostile JSON), the coach (limits, fallbacks, quiz), the weekly schedule and calendar export, persistence and restore, and the Streamlit pages (headless). Real-browser checks (Edge, via Playwright) are recorded in the test report; their scripts are not part of the repository.
+The suite (about 350 tests) covers the scoring rules and level boundaries, validators, fallbacks, the whole journey for every career with the AI failing in seven different ways (down, crashing, empty, not JSON, wrong shape, prompt injection, hostile JSON), the coach (limits, fallbacks, quiz), the weekly schedule and calendar export, persistence and restore, and the Streamlit pages (headless). Real-browser checks (Edge, via Playwright) are recorded in the test report; their scripts are not part of the repository.
 
 ## Project layout
 
@@ -140,6 +140,6 @@ docs/            blueprint, test report, decision log, authoring guide
 
 ## Status
 
-Milestones M0-M6 are complete, followed by a product-polish pass (all careers working at Semester 3, a Home page and navigation, a one-question-at-a-time check, a redesigned Results page, a coach with a practice quiz, and a day-by-day weekly plan). See [`docs/03_TEST_REPORT.md`](docs/03_TEST_REPORT.md) for each acceptance item marked Pass, Fail or Not verified, and Blueprint Section 18 for what comes next (M7 is the product note).
+Milestones M0-M6 are complete, followed by a product-polish pass (all careers working at Semester 3, a Home page and navigation, a one-question-at-a-time check, a redesigned Results page, a coach with a practice quiz, a day-by-day weekly plan, and a progress dashboard). See [`docs/03_TEST_REPORT.md`](docs/03_TEST_REPORT.md) for each acceptance item marked Pass, Fail or Not verified, and Blueprint Section 18 for what comes next (M7 is the product note).
 
 The sidebar's developer-only **M1 Preview** page (content browser and scoring playground) is hidden by default; set `PCC_SHOW_DEV_PAGES=true` to show it.

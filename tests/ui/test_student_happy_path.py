@@ -212,7 +212,7 @@ def test_recheck_and_progress_journey():
     _complete_check(profile_id, correct_first_n=0)
     at = _run("progress_page", profile_id)
     assert not at.exception
-    assert any("Your baseline is" in m.value for m in at.markdown)
+    assert any("This is your baseline" in m.value for m in at.markdown)
     assert any("below 40%" in w.value for w in at.warning)  # mentor prompt
 
     at = _run("assessment_page", profile_id)  # re-check offered, early
@@ -222,8 +222,10 @@ def test_recheck_and_progress_journey():
 
     at = _run("progress_page", profile_id)
     assert not at.exception
-    assert [m.label for m in at.metric] == ["Overall score", "Level"]
-    assert any("→" in m.value for m in at.markdown)  # "33% -> 100%" style lines
+    assert [m.label for m in at.metric] == ["Latest score", "Level", "Checks taken"]
+    text = " ".join(m.value for m in at.markdown)
+    assert "Re-check 1" in text and "<svg" in text  # trend chart with both checks
+    assert "points" in text  # per-skill change labels
     assert len(at.dataframe[0].value) == 2
 
 

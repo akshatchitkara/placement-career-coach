@@ -56,3 +56,22 @@ def update_weekly_plan(
         "UPDATE weekly_plans SET plan_json = ?, tasks_done_json = ? WHERE id = ?",
         (plan.model_dump_json(), json.dumps(sorted(set(done_task_ids))), plan_id),
     )
+
+
+def list_weekly_plans(
+    conn: sqlite3.Connection, profile_id: int
+) -> list[tuple[int, WeeklyPlan, list[str]]]:
+    """(attempt_id, plan, done task ids) for every saved week, oldest first."""
+    rows = conn.execute(
+        "SELECT attempt_id, plan_json, tasks_done_json FROM weekly_plans "
+        "WHERE profile_id = ? ORDER BY id ASC",
+        (profile_id,),
+    ).fetchall()
+    return [
+        (
+            row["attempt_id"],
+            WeeklyPlan.model_validate_json(row["plan_json"]),
+            json.loads(row["tasks_done_json"]),
+        )
+        for row in rows
+    ]
