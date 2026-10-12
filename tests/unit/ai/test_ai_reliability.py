@@ -185,3 +185,41 @@ def test_no_pause_when_the_first_call_succeeds(monkeypatch):
     monkeypatch.setattr("pcc.ai.safe_generate.time.sleep", pauses.append)
     generate_with_retry(ScriptedAiClient("ok"), "p")
     assert pauses == []
+
+
+def test_openai_compatible_client_falls_back_to_the_next_model(monkeypatch):
+    import httpx
+
+    from pcc.ai.openai_compatible_ai_client import OpenAiCompatibleAiClient, split_models
+    from pcc.ai.provider_config import AiProviderConfig
+
+    assert split_models(" a, b ,,c ") == ["a", "b", "c"] and split_models(None) == []
+    tried: list[str] = []
+
+    def fake_post(url, *, json, **kwargs):
+        tried.append(json["model"])
+        request = httpx.Request("POST", url)
+        if json["model"] != "good":
+            return httpx.Response(429, request=request, text="rate limited")
+        body = {"choices": [{"message": {"content": "ok"}}]}
+        return httpx.Response(200, request=request, json=body)
+
+    monkeypatch.setattr(httpx, "post", fake_post)
+    config = AiProviderConfig(
+        provider_type="custom_openai_compatible",
+        base_url="https://example.test/v1",
+        api_key="k",
+        model_name="slow, broken, good",
+    )
+    assert OpenAiCompatibleAiClient(config).generate("hi") == "ok"
+    assert tried == ["slow", "broken", "good"]
+
+    tried.clear()
+    all_bad = config.model_copy(update={"model_name": "x, y"})
+    import pytest
+
+    from pcc.core.exceptions import AiUnavailableError
+
+    with pytest.raises(AiUnavailableError):
+        OpenAiCompatibleAiClient(all_bad).generate("hi")
+    assert tried == ["x", "y"]

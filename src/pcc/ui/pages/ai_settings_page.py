@@ -61,7 +61,13 @@ def render() -> None:
             placeholder="A key is saved; leave blank to keep it" if saved_key else "",
         )
         api_key = typed_key or saved_key
-        model_name = st.text_input("Model name", value=current.model_name or "")
+        model_name = st.text_input(
+            "Model name",
+            value=current.model_name or "",
+            help="For OpenAI-compatible providers (such as Groq) you can list several models "
+            "separated by commas. The first is used; if it fails (rate limit, retired model), "
+            "the next one is tried.",
+        )
 
     col1, col2 = st.columns(2)
     candidate = AiProviderConfig(
