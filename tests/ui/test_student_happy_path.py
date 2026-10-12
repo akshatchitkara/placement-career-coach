@@ -78,6 +78,36 @@ def _signed_in_with_roadmap(name: str, career_id: str, semester: int = 3) -> int
     return profile_id
 
 
+def _walk_check(at, bank, pick, *, submit: bool = True):
+    """Answers the wizard one question at a time. pick(question) returns the option to select."""
+    total = 12
+    for step in range(total):
+        radio = at.radio[0]
+        question = bank[radio.key.split("_", 1)[1]]
+        at = radio.set_value(pick(question)).run()
+        if step < total - 1:
+            at = next(b for b in at.button if b.label == "Next").click().run()
+    if submit:
+        at = next(b for b in at.button if b.label == "Submit answers").click().run()
+    return at
+
+
+def _per_skill_picker(correct_first_n: int):
+    seen: dict[str, int] = {}
+
+    def pick(q):
+        n = seen.get(q.skill_id, 0)
+        seen[q.skill_id] = n + 1
+        right = q.correct_option_id
+        return (
+            right
+            if n < correct_first_n
+            else next(o.option_id for o in q.options if o.option_id != right)
+        )
+
+    return pick
+
+
 def test_check_to_results_journey():
     from pcc.content.content_loader import load_question_bank
 
@@ -87,16 +117,19 @@ def test_check_to_results_journey():
     at = _run("assessment_page", profile_id)
     assert not at.exception
     at.button[0].click().run()  # Start skills check
-    assert len(at.radio) == 12
+    assert len(at.radio) == 1  # one question at a time
+    assert "0 of 12" in at.get("progress")[0].proto.text
 
-    # Submitting with nothing answered is refused (FR-05).
-    at.button[-1].click().run()  # the form's submit button
+    # Submitting with questions unanswered is refused and says which (FR-05).
+    for _ in range(11):
+        at = next(b for b in at.button if b.label == "Next").click().run()
+    at = next(b for b in at.button if b.label == "Submit answers").click().run()
     assert any("Answer every question" in e.value for e in at.error)
+    assert any("unanswered" in c.value for c in at.caption)
 
-    for radio in at.radio:
-        question = bank[radio.key.split("_", 1)[1]]
-        radio.set_value(question.correct_option_id)
-    at.button[-1].click().run()
+    at = _run("assessment_page", profile_id)
+    assert not any(b.label == "Start skills check" for b in at.button)  # resumed, not restarted
+    at = _walk_check(at, bank, lambda q: q.correct_option_id)
     assert not at.exception
 
     results = _run("results_page", profile_id)
@@ -108,8 +141,8 @@ def test_check_to_results_journey():
     assert len(results.dataframe[0].value) == 4
 
 
-def test_tier_b_career_shows_coming_soon_on_the_check():
-    profile_id = _signed_in_with_roadmap("Ravi", "java_backend_developer")
+def test_semester_without_a_bank_shows_coming_soon_on_the_check():
+    profile_id = _signed_in_with_roadmap("Ravi", "java_backend_developer", semester=4)
     at = _run("assessment_page", profile_id)
     assert not at.exception
     assert any("coming soon" in w.value for w in at.warning)
@@ -127,18 +160,8 @@ def _complete_check(profile_id: int, correct_first_n: int) -> None:
 
     bank = {q.question_id: q for q in load_question_bank("devops_engineer")}
     at = _run("assessment_page", profile_id)
-    at.button[0].click().run()
-    seen: dict[str, int] = {}
-    for radio in at.radio:
-        q = bank[radio.key.split("_", 1)[1]]
-        n = seen.get(q.skill_id, 0)
-        seen[q.skill_id] = n + 1
-        right = q.correct_option_id
-        if n < correct_first_n:
-            radio.set_value(right)
-        else:
-            radio.set_value(next(o.option_id for o in q.options if o.option_id != right))
-    at.button[-1].click().run()
+    at = at.button[0].click().run()  # Start skills check
+    at = _walk_check(at, bank, _per_skill_picker(correct_first_n))
     assert not at.exception
 
 
@@ -209,20 +232,8 @@ def _complete_check_retest(profile_id: int, correct_first_n: int) -> None:
 
     bank = {q.question_id: q for q in load_question_bank("devops_engineer")}
     at = _run("assessment_page", profile_id)
-    at.button[0].click().run()  # Start re-check
-    assert len(at.radio) == 12
-    seen: dict[str, int] = {}
-    for radio in at.radio:
-        q = bank[radio.key.split("_", 1)[1]]
-        n = seen.get(q.skill_id, 0)
-        seen[q.skill_id] = n + 1
-        right = q.correct_option_id
-        radio.set_value(
-            right
-            if n < correct_first_n
-            else next(o.option_id for o in q.options if o.option_id != right)
-        )
-    at.button[-1].click().run()
+    at = at.button[0].click().run()  # Start re-check
+    at = _walk_check(at, bank, _per_skill_picker(correct_first_n))
     assert not at.exception
 
 
@@ -232,3 +243,25 @@ def test_results_page_labels_a_recheck():
     _complete_check_retest(profile_id, correct_first_n=3)
     at = _run("results_page", profile_id)
     assert any(c.value == "Re-check" for c in at.caption)
+
+
+def test_home_welcomes_a_new_visitor_and_guides_a_signed_in_student():
+    at = _run("home_page")
+    assert not at.exception
+    assert any("Placement Career Coach" in m.value for m in at.markdown)
+
+    profile_id = _signed_in_with_roadmap("Neha", "mean_stack_developer")
+    at = _run("home_page", profile_id)
+    assert not at.exception
+    assert any("Welcome back, Neha" in t.value for t in at.title)
+    assert any("skills check" in m.value.lower() for m in at.markdown)
+
+
+def test_every_state_has_a_stepper_position_label_and_next_step():
+    from pcc.domain.enums import WorkflowState
+    from pcc.ui.components.journey import next_step, state_label
+
+    for state in WorkflowState:
+        assert state_label(state)
+        message, label, target = next_step(state)
+        assert message and label and target

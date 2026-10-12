@@ -3,6 +3,7 @@
 import streamlit as st
 
 from pcc.core.exceptions import PccError
+from pcc.ui.components.journey import next_step_button, state_label
 from pcc.workflow.workflow_controller import get_controller
 
 
@@ -39,7 +40,8 @@ def render() -> None:
         st.write(
             f"Career: **{career_names.get(profile.career_id, profile.career_id)}** · "
             f"Semester **{profile.current_semester}** · "
-            f"Progress: `{profile.workflow_state.value}`"
+            f"Progress: **{state_label(profile.workflow_state)}**"
         )
     else:
-        st.write("Next: open **Career & Semester** in the sidebar.")
+        st.write("Next: choose your career and semester.")
+    next_step_button(profile.workflow_state, key="profile_next")

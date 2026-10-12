@@ -2,6 +2,7 @@
 
 import streamlit as st
 
+from pcc.ui.components.page_frame import require_profile
 from pcc.workflow.workflow_controller import get_controller
 
 _KIND_LABELS = {
@@ -15,10 +16,8 @@ _KIND_LABELS = {
 def render() -> None:
     st.title("Weekly Plan")
     controller = get_controller()
-    profile_id = st.session_state.get("profile_id")
-    profile = controller.get_profile(profile_id) if profile_id else None
+    profile = require_profile()
     if profile is None:
-        st.info("Create or pick a profile on the **Profile** page first.")
         return
     view = controller.get_weekly_plan(profile.id)
     if view is None:

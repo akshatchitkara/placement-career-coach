@@ -4,7 +4,7 @@ import streamlit as st
 
 from pcc.domain.enums import Level
 
-_LABELS = {
+LEVEL_LABELS = {
     Level.BEGINNER: "Beginner",
     Level.INTERMEDIATE: "Intermediate",
     Level.ADVANCED: "Advanced",
@@ -17,7 +17,7 @@ def render_level_badge(
 ) -> None:
     c1, c2 = st.columns(2)
     c1.metric("Overall score", f"{overall_score:.1f}%")
-    c2.metric(f"Level for {scope_description}", _LABELS[level])
+    c2.metric(f"Level for {scope_description}", LEVEL_LABELS[level])
     for note in notes:
         st.info(note)
 

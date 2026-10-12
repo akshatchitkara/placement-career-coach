@@ -7,6 +7,7 @@ from collections.abc import Callable
 import streamlit as st
 
 from pcc.core.exceptions import PccError
+from pcc.ui.navigation import go_button
 
 logger = logging.getLogger(__name__)
 
@@ -28,5 +29,6 @@ def safe_page(render: Callable[[], None]) -> Callable[[], None]:
         except Exception:
             logger.exception("page_failed page=%s", render.__module__.rsplit(".", 1)[-1])
             st.error(GENERIC_MESSAGE)
+            go_button("Back to Home", "home", key="error_home", primary=True)
 
     return wrapper

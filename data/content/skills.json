@@ -352,7 +352,32 @@
       "async_and_promises",
       "array_object_methods"
     ],
-    "practice_templates": [],
+    "practice_templates": [
+      {
+        "concept_tag": "closures_and_scope",
+        "title": "Closure counter lab",
+        "action": "Write a makeCounter() function that returns increment and reset functions sharing a private count. Then reproduce the var-in-a-loop setTimeout bug and fix it two ways (let, and an IIFE).",
+        "success_check": "Explain why each callback saw the same value and how your fix changes that.",
+        "resource_hint": "MDN: closures; search: javascript var vs let loop closure",
+        "estimated_minutes": 30
+      },
+      {
+        "concept_tag": "async_and_promises",
+        "title": "Promise ordering experiments",
+        "action": "Write a script with console.log, setTimeout, a resolved Promise and an async function. Predict the output order on paper first, then run it and correct your prediction.",
+        "success_check": "Predict the output of a new 5-line mix of timers and promises correctly.",
+        "resource_hint": "search: javascript event loop microtask macrotask",
+        "estimated_minutes": 30
+      },
+      {
+        "concept_tag": "array_object_methods",
+        "title": "Array method workout",
+        "action": "Given an array of 10 order objects, use map, filter and reduce to compute total revenue, the list of paid order ids, and revenue per customer. No for-loops.",
+        "success_check": "Say which method returns a new array and which mutates, for 6 common methods.",
+        "resource_hint": "MDN: Array methods",
+        "estimated_minutes": 30
+      }
+    ],
     "resources": []
   },
   {
@@ -367,7 +392,32 @@
       "flexbox_and_grid",
       "responsive_design"
     ],
-    "practice_templates": [],
+    "practice_templates": [
+      {
+        "concept_tag": "semantic_html",
+        "title": "Semantic page rebuild",
+        "action": "Take a page built only from divs and rebuild it with header, nav, main, section, article, footer and a real button. Run a keyboard-only pass (Tab, Enter) through it.",
+        "success_check": "Name the landmark role of each element you used and show it works with only a keyboard.",
+        "resource_hint": "MDN: HTML elements reference; search: html semantic elements accessibility",
+        "estimated_minutes": 30
+      },
+      {
+        "concept_tag": "flexbox_and_grid",
+        "title": "Layout drills",
+        "action": "Recreate a navbar, a centred card and a 3-column responsive card grid, first with flexbox then with CSS grid.",
+        "success_check": "Explain main axis versus cross axis and when you would choose grid over flex.",
+        "resource_hint": "search: css flexbox froggy; css grid garden",
+        "estimated_minutes": 40
+      },
+      {
+        "concept_tag": "responsive_design",
+        "title": "Mobile-first breakpoints",
+        "action": "Style a page for 360px width first, then add a min-width media query at 768px that changes the layout. Test with the browser device toolbar.",
+        "success_check": "Show the page working at 360px and 1024px and explain what the viewport meta tag does.",
+        "resource_hint": "MDN: responsive design; media queries",
+        "estimated_minutes": 30
+      }
+    ],
     "resources": []
   },
   {
@@ -382,7 +432,32 @@
       "modules_and_npm",
       "file_and_stream_apis"
     ],
-    "practice_templates": [],
+    "practice_templates": [
+      {
+        "concept_tag": "event_loop",
+        "title": "Event loop blocking demo",
+        "action": "Write an HTTP server with one route that runs a 3-second synchronous loop and one fast route. Show the fast route stalls, then move the heavy work to a worker thread or split it up.",
+        "success_check": "Explain why the fast route stalled and what fixed it.",
+        "resource_hint": "search: node.js event loop phases; worker_threads",
+        "estimated_minutes": 40
+      },
+      {
+        "concept_tag": "modules_and_npm",
+        "title": "Package.json tour",
+        "action": "Create a project with npm init, install one dependency and one devDependency, add a start and a test script, and split code into two CommonJS or ES modules.",
+        "success_check": "Explain what each field in your package.json does and why lockfiles matter.",
+        "resource_hint": "npm docs: package.json; search: commonjs vs es modules",
+        "estimated_minutes": 30
+      },
+      {
+        "concept_tag": "file_and_stream_apis",
+        "title": "Stream a large file",
+        "action": "Generate a 200MB text file. Count its lines once with readFileSync and once with createReadStream. Compare memory use with process.memoryUsage().",
+        "success_check": "Explain why the stream version uses less memory.",
+        "resource_hint": "Node docs: stream and fs",
+        "estimated_minutes": 30
+      }
+    ],
     "resources": []
   },
   {
@@ -561,7 +636,32 @@
       "interfaces_vs_abstract_classes",
       "exception_handling"
     ],
-    "practice_templates": [],
+    "practice_templates": [
+      {
+        "concept_tag": "inheritance_and_polymorphism",
+        "title": "Shape hierarchy",
+        "action": "Model Shape, Circle and Rectangle with an overridden area() method. Store them in a List<Shape> and print each area through the base type.",
+        "success_check": "Explain which area() runs and why (dynamic dispatch).",
+        "resource_hint": "Java tutorial: inheritance, polymorphism",
+        "estimated_minutes": 30
+      },
+      {
+        "concept_tag": "interfaces_vs_abstract_classes",
+        "title": "Interface or abstract class?",
+        "action": "Design a Payment feature two ways: an interface with CardPayment and UpiPayment, and an abstract class that shares validation code. Write down when each fits.",
+        "success_check": "Give two concrete reasons to pick an abstract class and two to pick an interface.",
+        "resource_hint": "search: java abstract class vs interface",
+        "estimated_minutes": 30
+      },
+      {
+        "concept_tag": "exception_handling",
+        "title": "Checked vs unchecked drill",
+        "action": "Write a method that reads a file (checked IOException) and parses a number (unchecked NumberFormatException). Handle each properly, add try-with-resources and a custom exception.",
+        "success_check": "Explain checked versus unchecked and when finally or try-with-resources runs.",
+        "resource_hint": "Java tutorial: exceptions",
+        "estimated_minutes": 30
+      }
+    ],
     "resources": []
   },
   {
@@ -576,7 +676,32 @@
       "generics_bounds",
       "comparators"
     ],
-    "practice_templates": [],
+    "practice_templates": [
+      {
+        "concept_tag": "list_set_map",
+        "title": "Pick the right collection",
+        "action": "Solve three tasks: deduplicate a list of emails, count word frequency in a paragraph, and keep items in insertion order. Choose HashSet, HashMap and ArrayList/LinkedHashSet and justify each.",
+        "success_check": "State the average time complexity of get/add/contains for each collection you used.",
+        "resource_hint": "Java Collections framework overview",
+        "estimated_minutes": 30
+      },
+      {
+        "concept_tag": "generics_bounds",
+        "title": "Generic utility methods",
+        "action": "Write a generic max(List<T>) bounded by Comparable<T> and a sum(List<? extends Number>) method. Try to add to the wildcard list and read the compiler error.",
+        "success_check": "Explain extends versus super wildcards (PECS) in your own words.",
+        "resource_hint": "search: java generics wildcards PECS",
+        "estimated_minutes": 40
+      },
+      {
+        "concept_tag": "comparators",
+        "title": "Sort three ways",
+        "action": "Sort a List<Person> by name, then by age descending, then by age then name using Comparator.comparing, thenComparing and reversed.",
+        "success_check": "Write each comparator from memory.",
+        "resource_hint": "Java docs: Comparator",
+        "estimated_minutes": 30
+      }
+    ],
     "resources": []
   },
   {
@@ -591,7 +716,32 @@
       "arrays_and_strings",
       "recursion"
     ],
-    "practice_templates": [],
+    "practice_templates": [
+      {
+        "concept_tag": "time_complexity",
+        "title": "Complexity labelling",
+        "action": "For 8 small functions (single loop, nested loop, halving loop, recursion), write the Big-O and justify it in one line. Check by timing with doubled input sizes.",
+        "success_check": "Label four new snippets correctly without running them.",
+        "resource_hint": "search: big o cheat sheet; analysis of algorithms",
+        "estimated_minutes": 30
+      },
+      {
+        "concept_tag": "arrays_and_strings",
+        "title": "Two pointers and sliding window",
+        "action": "Solve: two-sum on a sorted array, reverse a string in place, longest substring without repeats.",
+        "success_check": "Describe the invariant that makes each solution correct.",
+        "resource_hint": "search: two pointers technique; sliding window",
+        "estimated_minutes": 45
+      },
+      {
+        "concept_tag": "recursion",
+        "title": "Recursion to memoization",
+        "action": "Write recursive factorial and Fibonacci, then add memoization to Fibonacci and measure the speed up for n=40.",
+        "success_check": "Explain the base case, the recursive case and why memoization helps.",
+        "resource_hint": "search: recursion base case memoization",
+        "estimated_minutes": 40
+      }
+    ],
     "resources": []
   },
   {
@@ -606,7 +756,32 @@
       "normalization",
       "indexing"
     ],
-    "practice_templates": [],
+    "practice_templates": [
+      {
+        "concept_tag": "joins",
+        "title": "Join practice set",
+        "action": "On a customers/orders schema write queries with INNER JOIN, LEFT JOIN and one query that finds customers with no orders.",
+        "success_check": "Explain which rows each join keeps, using a 3-row example.",
+        "resource_hint": "search: sql joins visualised; SQLBolt",
+        "estimated_minutes": 40
+      },
+      {
+        "concept_tag": "normalization",
+        "title": "Normalise a messy table",
+        "action": "Take a single orders spreadsheet with repeated customer and product details and split it into 1NF, 2NF and 3NF tables with keys.",
+        "success_check": "Name the anomaly that each normal form removes.",
+        "resource_hint": "search: database normalization 1NF 2NF 3NF",
+        "estimated_minutes": 40
+      },
+      {
+        "concept_tag": "indexing",
+        "title": "Index experiment",
+        "action": "Load 100k rows, time a lookup by email, add an index, time it again, and read the EXPLAIN plan before and after.",
+        "success_check": "Explain why the index helps and one cost it adds.",
+        "resource_hint": "search: sql index explain plan",
+        "estimated_minutes": 30
+      }
+    ],
     "resources": []
   },
   {
@@ -769,7 +944,32 @@
       "data_structures",
       "vectorization"
     ],
-    "practice_templates": [],
+    "practice_templates": [
+      {
+        "concept_tag": "numpy_basics",
+        "title": "NumPy shape drills",
+        "action": "Create arrays with arange, reshape and zeros. Practise slicing, axis sums (axis=0 vs axis=1) and boolean masks on a 3x4 array.",
+        "success_check": "Predict the shape and result of 5 operations before running them.",
+        "resource_hint": "NumPy quickstart",
+        "estimated_minutes": 30
+      },
+      {
+        "concept_tag": "data_structures",
+        "title": "Choose the structure",
+        "action": "Solve small tasks using list, tuple, set and dict (dedupe, counting, lookup by id, immutable record). Say why each structure fits.",
+        "success_check": "Explain mutability and hashability and why lists cannot be dict keys.",
+        "resource_hint": "Python docs: data structures",
+        "estimated_minutes": 30
+      },
+      {
+        "concept_tag": "vectorization",
+        "title": "Loop versus vectorized",
+        "action": "Compute the square of 1 million numbers with a Python loop and with NumPy. Time both and try a broadcasting example.",
+        "success_check": "Explain why the vectorized version is faster and what broadcasting does.",
+        "resource_hint": "search: numpy vectorization broadcasting",
+        "estimated_minutes": 30
+      }
+    ],
     "resources": []
   },
   {
@@ -784,7 +984,32 @@
       "probability_and_stats",
       "calculus_intuition"
     ],
-    "practice_templates": [],
+    "practice_templates": [
+      {
+        "concept_tag": "linear_algebra_basics",
+        "title": "Vectors and matrices by hand",
+        "action": "Compute dot products, a 2x3 times 3x2 matrix product and a transpose by hand, then confirm with NumPy.",
+        "success_check": "Explain the shape rule for matrix multiplication.",
+        "resource_hint": "3Blue1Brown: essence of linear algebra",
+        "estimated_minutes": 40
+      },
+      {
+        "concept_tag": "probability_and_stats",
+        "title": "Probability and Bayes practice",
+        "action": "Compute mean, variance and standard deviation for a small dataset. Work through the rare-disease test example with Bayes' theorem using counts.",
+        "success_check": "Explain why a positive result on an accurate test can still be probably a false alarm.",
+        "resource_hint": "search: bayes theorem natural frequencies; khan academy statistics",
+        "estimated_minutes": 40
+      },
+      {
+        "concept_tag": "calculus_intuition",
+        "title": "Gradient descent by hand",
+        "action": "For f(x) = (x-3)^2 take 5 gradient descent steps by hand with learning rate 0.1, then try a rate that is too large.",
+        "success_check": "Explain what the gradient sign and the learning rate do.",
+        "resource_hint": "search: gradient descent intuition",
+        "estimated_minutes": 30
+      }
+    ],
     "resources": []
   },
   {
@@ -799,7 +1024,32 @@
       "groupby_and_merge",
       "missing_data"
     ],
-    "practice_templates": [],
+    "practice_templates": [
+      {
+        "concept_tag": "dataframes_and_series",
+        "title": "Select and filter drill",
+        "action": "Load a CSV and practise column selection, loc versus iloc, boolean filtering and sorting.",
+        "success_check": "Write the loc and iloc forms for the same selection and say when each is correct.",
+        "resource_hint": "pandas: 10 minutes to pandas",
+        "estimated_minutes": 30
+      },
+      {
+        "concept_tag": "groupby_and_merge",
+        "title": "Groupby and merge workout",
+        "action": "Using sales and customers CSVs, compute average sales per city with groupby and join customer details with merge (inner and left).",
+        "success_check": "Explain what each merge type does to unmatched rows.",
+        "resource_hint": "pandas docs: groupby, merge",
+        "estimated_minutes": 40
+      },
+      {
+        "concept_tag": "missing_data",
+        "title": "Missing data handling",
+        "action": "Find missing values with isna().sum(), then try dropna, fill with mean, fill with median and a missing-indicator column. Compare summary statistics.",
+        "success_check": "Explain a downside of mean imputation and one alternative.",
+        "resource_hint": "pandas docs: working with missing data",
+        "estimated_minutes": 30
+      }
+    ],
     "resources": []
   },
   {

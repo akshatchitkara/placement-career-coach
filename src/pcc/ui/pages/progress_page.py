@@ -3,6 +3,7 @@
 import streamlit as st
 
 from pcc.content.content_loader import load_skills
+from pcc.ui.components.page_frame import require_profile
 from pcc.workflow.workflow_controller import get_controller
 
 _ARROWS = {"up": "▲", "down": "▼", "same": "■", "new": "●"}
@@ -17,10 +18,8 @@ _LEVEL_NAMES = {
 def render() -> None:
     st.title("Progress")
     controller = get_controller()
-    profile_id = st.session_state.get("profile_id")
-    profile = controller.get_profile(profile_id) if profile_id else None
+    profile = require_profile()
     if profile is None:
-        st.info("Create or pick a profile on the **Profile** page first.")
         return
     controller.sync_state(profile.id)
     progress = controller.get_progress(profile.id)

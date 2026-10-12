@@ -1,0 +1,722 @@
+[
+  {
+    "question_id": "q_java_core_oop_001",
+    "skill_id": "java_core_oop",
+    "concept_tag": "inheritance_and_polymorphism",
+    "difficulty": "easy",
+    "stem": "Which keyword is used in Java to inherit from a class?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "implements"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "inherits"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "extends"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "super"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "A class uses `extends` to inherit from a class. `implements` is used for interfaces.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_java_core_oop_002",
+    "skill_id": "java_core_oop",
+    "concept_tag": "exception_handling",
+    "difficulty": "easy",
+    "stem": "Which block always runs, whether or not an exception is thrown?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "catch"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "try"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "throws"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "finally"
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "`finally` runs after try/catch regardless of the outcome, which makes it suitable for cleanup.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_java_core_oop_003",
+    "skill_id": "java_core_oop",
+    "concept_tag": "interfaces_vs_abstract_classes",
+    "difficulty": "medium",
+    "stem": "A class can directly extend how many classes in Java?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "One"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Two"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Any number"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "None"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "Java has single class inheritance. A class may implement many interfaces.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_java_core_oop_004",
+    "skill_id": "java_core_oop",
+    "concept_tag": "inheritance_and_polymorphism",
+    "difficulty": "medium",
+    "stem": "`Animal a = new Dog(); a.speak();` calls which version of `speak`?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Animal's version, because the variable type is Animal"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Dog's overriding version, chosen at runtime"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "It does not compile because Animal cannot hold a Dog"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Whichever method is declared first in the source file"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "Overridden instance methods use dynamic dispatch, so the runtime type (Dog) decides.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_java_core_oop_005",
+    "skill_id": "java_core_oop",
+    "concept_tag": "exception_handling",
+    "difficulty": "hard",
+    "stem": "Which of these is a checked exception?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "NullPointerException"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "IllegalArgumentException"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "IOException"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "ArrayIndexOutOfBoundsException"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "Checked exceptions such as IOException must be caught or declared. The others are unchecked runtime exceptions.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_java_core_oop_006",
+    "skill_id": "java_core_oop",
+    "concept_tag": "interfaces_vs_abstract_classes",
+    "difficulty": "hard",
+    "stem": "When is an abstract class a better choice than an interface?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "When a class must inherit from several parents at once"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "When the type should declare no methods or fields at all"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "When the class must be final and can never be extended"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "When subclasses should share state or common implemented code"
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "Abstract classes can hold instance fields and shared constructors or logic. Interfaces define a contract without instance state.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_collections_and_generics_001",
+    "skill_id": "collections_and_generics",
+    "concept_tag": "list_set_map",
+    "difficulty": "easy",
+    "stem": "Which collection does NOT allow duplicate elements?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "ArrayList"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "HashSet"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "LinkedList"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Vector"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "A Set stores unique elements. Lists allow duplicates.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_collections_and_generics_002",
+    "skill_id": "collections_and_generics",
+    "concept_tag": "list_set_map",
+    "difficulty": "easy",
+    "stem": "Which structure stores key-value pairs?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "ArrayList"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "HashSet"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "HashMap"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "ArrayDeque"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "`HashMap` maps keys to values.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_collections_and_generics_003",
+    "skill_id": "collections_and_generics",
+    "concept_tag": "list_set_map",
+    "difficulty": "medium",
+    "stem": "What is the average time complexity of `get` on a `HashMap`?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "O(n)"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "O(log n)"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "O(n log n)"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "O(1)"
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "Hashing gives constant-time average lookups, degrading only with heavy collisions.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_collections_and_generics_004",
+    "skill_id": "collections_and_generics",
+    "concept_tag": "generics_bounds",
+    "difficulty": "medium",
+    "stem": "What does `List<? extends Number>` accept?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "A list of Number or any subclass such as Integer, for reading"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Only a List<Number>, never a list of a subclass such as Integer"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "A list of any type at all, including String and Object"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Only lists whose element type is exactly Object"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "An upper-bounded wildcard accepts lists of Number or its subtypes. You can read Numbers but cannot safely add.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_collections_and_generics_005",
+    "skill_id": "collections_and_generics",
+    "concept_tag": "comparators",
+    "difficulty": "hard",
+    "stem": "To sort a `List<Person>` by age descending, which is correct?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "list.sort(Person::getAge) which sorts descending by default"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "list.sort(Comparator.comparingInt(Person::getAge).reversed())"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Collections.sort(list, -1) using -1 to request descending order"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "list.sort(null).reverse() to sort naturally then flip the list"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "`Comparator.comparingInt(...).reversed()` builds a comparator for descending age.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_collections_and_generics_006",
+    "skill_id": "collections_and_generics",
+    "concept_tag": "generics_bounds",
+    "difficulty": "hard",
+    "stem": "Why can you not create `new T()` or `new T[10]` inside a generic class?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "T must be abstract"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Generics are only compile-time keywords for interfaces"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Type erasure removes T at runtime"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Java forbids arrays"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "Generics are erased at compile time, so the JVM does not know the actual type argument to instantiate.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_dsa_problem_solving_001",
+    "skill_id": "dsa_problem_solving",
+    "concept_tag": "time_complexity",
+    "difficulty": "easy",
+    "stem": "What is the time complexity of binary search on a sorted array?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "O(log n)"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "O(n)"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "O(1)"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "O(n^2)"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "Each step halves the search range, giving logarithmic time.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_dsa_problem_solving_002",
+    "skill_id": "dsa_problem_solving",
+    "concept_tag": "arrays_and_strings",
+    "difficulty": "easy",
+    "stem": "Reading an array element by index is:",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "O(n)"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "O(1)"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "O(log n)"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "O(n^2)"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "Arrays are contiguous, so the address is computed directly from the index.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_dsa_problem_solving_003",
+    "skill_id": "dsa_problem_solving",
+    "concept_tag": "time_complexity",
+    "difficulty": "medium",
+    "stem": "What is the time complexity of two nested loops that each run n times?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "O(n)"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "O(2n)"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "O(n^2)"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "O(log n)"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "n iterations times n iterations is n squared operations.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_dsa_problem_solving_004",
+    "skill_id": "dsa_problem_solving",
+    "concept_tag": "recursion",
+    "difficulty": "medium",
+    "stem": "What must every recursive function have to avoid infinite recursion?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "A loop"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "A global variable"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "A return type of void"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "A base case"
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "A base case stops the recursion, and each call must move toward it.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_dsa_problem_solving_005",
+    "skill_id": "dsa_problem_solving",
+    "concept_tag": "arrays_and_strings",
+    "difficulty": "hard",
+    "stem": "Given a sorted array, which approach finds two numbers summing to a target in O(n) time and O(1) space?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Two pointers from both ends"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Nested loops"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Sorting again"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Binary search for every element"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "Move the left pointer up if the sum is too small and the right pointer down if too large.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_dsa_problem_solving_006",
+    "skill_id": "dsa_problem_solving",
+    "concept_tag": "recursion",
+    "difficulty": "hard",
+    "stem": "A naive recursive Fibonacci `fib(n) = fib(n-1) + fib(n-2)` has what time complexity?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Linear, about O(n)"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Exponential, about O(2^n)"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Logarithmic, about O(log n)"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Quadratic, about O(n^2)"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "Each call spawns two more with heavy overlap. Memoization reduces it to O(n).",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_sql_and_relational_databases_001",
+    "skill_id": "sql_and_relational_databases",
+    "concept_tag": "joins",
+    "difficulty": "easy",
+    "stem": "Which join returns only rows that have matching values in both tables?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "LEFT JOIN"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "INNER JOIN"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "FULL OUTER JOIN"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "CROSS JOIN"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "INNER JOIN keeps only the matching rows from both sides.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_sql_and_relational_databases_002",
+    "skill_id": "sql_and_relational_databases",
+    "concept_tag": "indexing",
+    "difficulty": "easy",
+    "stem": "What is the main purpose of a database index?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Reduce the number of tables"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Encrypt the data"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Speed up lookups on the indexed columns"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Enforce foreign keys"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "Indexes allow the database to find rows without scanning the whole table, at the cost of slower writes and more storage.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_sql_and_relational_databases_003",
+    "skill_id": "sql_and_relational_databases",
+    "concept_tag": "joins",
+    "difficulty": "medium",
+    "stem": "Which query lists ALL customers, even those without orders?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "SELECT * FROM customers c INNER JOIN orders o ON o.customer_id = c.id"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "SELECT * FROM customers c CROSS JOIN orders o WHERE o.customer_id IS NULL"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "SELECT * FROM customers WHERE id IN orders"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "SELECT * FROM customers c LEFT JOIN orders o ON o.customer_id = c.id"
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "LEFT JOIN keeps every row from the left table and fills missing right-side values with NULL.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_sql_and_relational_databases_004",
+    "skill_id": "sql_and_relational_databases",
+    "concept_tag": "normalization",
+    "difficulty": "medium",
+    "stem": "Which problem does normalisation primarily reduce?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Data redundancy and update anomalies"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "The number of characters in each query"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "The number of columns in every table"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Network latency between the app and the database"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "Normalisation stores each fact once, which avoids inconsistent updates.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_sql_and_relational_databases_005",
+    "skill_id": "sql_and_relational_databases",
+    "concept_tag": "normalization",
+    "difficulty": "hard",
+    "stem": "A table has columns (student_id, course_id, course_name). course_name depends only on course_id. Which normal form is violated?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "First normal form"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Second normal form"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Boyce-Codd is fine, nothing violated"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Zero normal form"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "course_name depends on part of the composite key (course_id), which is a partial dependency that violates 2NF.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_sql_and_relational_databases_006",
+    "skill_id": "sql_and_relational_databases",
+    "concept_tag": "indexing",
+    "difficulty": "hard",
+    "stem": "Which query is LEAST likely to use an index on `email`?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "WHERE email = 'a@b.com'"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "WHERE email LIKE 'a%'"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "WHERE LOWER(email) = 'a@b.com'"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "WHERE email IN ('a@b.com')"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "Wrapping the column in a function typically prevents a plain index from being used unless a functional index exists.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  }
+]

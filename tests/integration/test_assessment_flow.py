@@ -173,8 +173,8 @@ def test_t20_changed_thresholds_do_not_alter_a_past_attempt(db_path, monkeypatch
     assert after.level == before.level == Level.INTERMEDIATE
 
 
-def test_tier_b_career_says_coming_soon_and_stays_ready(db_path):
-    controller, profile = _ready(db_path, career="java_backend_developer", name="Ravi")
+def test_semester_without_a_bank_says_coming_soon_and_stays_ready(db_path):
+    controller, profile = _ready(db_path, career="java_backend_developer", semester=4, name="Ravi")
     scope = controller.get_assessment_scope(profile.id)
     assert scope.assessable_skill_ids == []
     assert scope.coming_soon_skill_ids  # T-22
@@ -202,3 +202,24 @@ def test_cannot_start_before_roadmap(db_path):
     profile = controller.open_profile("Asha")
     with pytest.raises(PccError):
         controller.start_assessment(profile.id)
+
+
+@pytest.mark.parametrize(
+    "career", ["devops_engineer", "mean_stack_developer", "java_backend_developer", "ai_developer"]
+)
+def test_every_career_completes_a_semester_3_check(db_path, career):
+    bank = {q.question_id: q for q in load_question_bank(career)}
+    controller, profile = _ready(db_path, career=career, name="Asha")
+    session = controller.start_assessment(profile.id)
+    assert len(session.questions) == 12
+    picks = {q.question_id: bank[q.question_id].correct_option_id for q in session.questions}
+    result = controller.submit_assessment(profile.id, session.attempt_id, picks)
+    assert result.overall_score == 100.0
+    assert controller.get_profile(profile.id).workflow_state == WorkflowState.WEEKLY_PLAN_ACTIVE
+    assert controller.get_weekly_plan(profile.id).plan.tasks
+
+
+def test_checkable_semesters_lists_only_semesters_with_a_bank(db_path):
+    controller = WorkflowController(db_path)
+    assert controller.checkable_semesters("java_backend_developer") == [3]
+    assert controller.checkable_semesters("devops_engineer") == [3]

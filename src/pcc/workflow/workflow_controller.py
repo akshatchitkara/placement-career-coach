@@ -266,6 +266,23 @@ class WorkflowController:
             coming_soon_skill_ids=soon,
         )
 
+    def checkable_semesters(self, career_id: str) -> list[int]:
+        """Semesters of this career that already have a reviewed question bank to check against."""
+        settings = load_app_settings()
+        skills = {s.skill_id: s for s in load_skills()}
+        bank = load_question_bank(career_id)
+        template = load_roadmap_template(career_id)
+        return [
+            sem
+            for sem in SEMESTERS
+            if any(
+                is_quiz_assessable(skills[m.skill_id].skill_type)
+                and compute_skill_assessability(m.skill_id, bank, settings)
+                for m in template.months
+                if m.semester == sem
+            )
+        ]
+
     def get_assessment_scope(self, profile_id: int) -> AssessmentScope:
         with closing(self._connect()) as conn:
             ctx = self._check_context(conn, profile_id)

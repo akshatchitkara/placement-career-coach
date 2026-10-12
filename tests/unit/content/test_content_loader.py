@@ -80,16 +80,21 @@ def test_real_devops_sem3_bank_is_fully_assessable():
         assert compute_skill_assessability(skill_id, questions, settings) is True
 
 
-def test_real_tier_b_careers_have_no_bank_yet_and_are_not_assessable():
+def test_every_career_has_four_assessable_semester_3_skills():
     settings = load_app_settings()
-    for career_id in ["mean_stack_developer", "java_backend_developer", "ai_developer"]:
+    for career_id in [
+        "devops_engineer",
+        "mean_stack_developer",
+        "java_backend_developer",
+        "ai_developer",
+    ]:
         questions = load_question_bank(career_id)
-        assert questions == []
-        skills = load_skills_for_career(career_id)
-        any_assessable = any(
-            compute_skill_assessability(s.skill_id, questions, settings) for s in skills
-        )
-        assert any_assessable is False
+        assessable = [
+            s.skill_id
+            for s in load_skills_for_career(career_id)
+            if compute_skill_assessability(s.skill_id, questions, settings)
+        ]
+        assert len(assessable) == 4, career_id
 
 
 def test_careers_json_has_all_four_launch_careers():
@@ -100,3 +105,18 @@ def test_careers_json_has_all_four_launch_careers():
         "java_backend_developer",
         "ai_developer",
     }
+
+
+def test_no_question_gives_away_its_answer_by_length():
+    """The right option may not be twice as long as every wrong one (a test-taking cue)."""
+    for career_id in [
+        "devops_engineer",
+        "mean_stack_developer",
+        "java_backend_developer",
+        "ai_developer",
+    ]:
+        for q in load_question_bank(career_id):
+            right = next(len(o.text) for o in q.options if o.option_id == q.correct_option_id)
+            wrong = max(len(o.text) for o in q.options if o.option_id != q.correct_option_id)
+            assert right < 2 * wrong or right - wrong < 15, q.question_id
+            assert len({o.text for o in q.options}) == len(q.options), q.question_id

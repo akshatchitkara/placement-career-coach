@@ -225,6 +225,21 @@ Driven in Microsoft Edge with Playwright (headless, 1280x900) against a second c
 
 ---
 
+## Product polish (2026-10-12): P1 careers, P2 shell, P3 skills check, P4 results
+
+| Check | Result |
+|---|---|
+| Full suite | 294 passed; ruff, mypy (domain + workflow) and content validation clean |
+| All four careers finish a semester-3 check, get results and a weekly plan | Pass (parametrised test) |
+| Semester without a bank shows "coming soon" and names the semesters that are ready | Pass (Java semester 4) |
+| Real browser, offline: Home, grouped navigation, next-step buttons, Java journey end to end | 21 checks pass |
+| Real browser, offline: one-question wizard, Back keeps the answer, Results ladder, bars, coaching button | 13 checks pass |
+| Real browser, live Anthropic (`claude-haiku-5-5`): roadmap, wizard, 50.0% Intermediate, AI coaching in second person | 11 checks pass |
+
+Content review of the 60 new questions (assistant only, not human): one question had a second correct answer (a RIGHT JOIN distractor) and was fixed; the right option was the longest in about half of them, so distractors were lengthened and a test guards it. The 60 are labelled `ai_drafted` until a person reviews them.
+
+Not verified: live AI for MEAN, Java and AI careers (offline tests only); semesters 4-6 have no questions for any career.
+
 ## Prototype acceptance checklist (blueprint Section 3.4)
 
 | Item | Result | Evidence |

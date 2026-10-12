@@ -3,6 +3,7 @@
 import streamlit as st
 
 from pcc.content.content_loader import load_skills
+from pcc.ui.components.page_frame import require_profile
 from pcc.ui.components.roadmap_timeline import render_roadmap_timeline
 from pcc.workflow.workflow_controller import get_controller
 
@@ -16,10 +17,8 @@ _SOURCE_LABELS = {
 def render() -> None:
     st.title("Roadmap")
     controller = get_controller()
-    profile_id = st.session_state.get("profile_id")
-    profile = controller.get_profile(profile_id) if profile_id else None
+    profile = require_profile()
     if profile is None:
-        st.info("Create or pick a profile on the **Profile** page first.")
         return
     roadmap = controller.get_roadmap(profile.id)
     if roadmap is None:

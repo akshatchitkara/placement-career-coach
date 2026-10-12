@@ -1,0 +1,722 @@
+[
+  {
+    "question_id": "q_python_for_data_science_001",
+    "skill_id": "python_for_data_science",
+    "concept_tag": "numpy_basics",
+    "difficulty": "easy",
+    "stem": "What does `np.array([1, 2, 3]).shape` return?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "(3,)"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "3"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "[3]"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "(1, 3)"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "`shape` is a tuple of dimension sizes. A 1-D array of three items has shape (3,).",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_python_for_data_science_002",
+    "skill_id": "python_for_data_science",
+    "concept_tag": "data_structures",
+    "difficulty": "easy",
+    "stem": "Which Python structure is mutable and ordered?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "tuple"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "list"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "frozenset"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "str"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "Lists can be changed in place and keep insertion order. Tuples and strings are immutable.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_python_for_data_science_003",
+    "skill_id": "python_for_data_science",
+    "concept_tag": "vectorization",
+    "difficulty": "medium",
+    "stem": "Why is `a * 2` on a NumPy array faster than a Python for-loop doubling each element?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "NumPy skips elements it considers unlikely to matter"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Python for-loops are not permitted on NumPy arrays"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "It runs in optimised compiled code over the whole array"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "It always runs the work on the GPU instead of the CPU"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "Vectorised operations run in C loops over contiguous memory, avoiding Python interpreter overhead.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_python_for_data_science_004",
+    "skill_id": "python_for_data_science",
+    "concept_tag": "numpy_basics",
+    "difficulty": "medium",
+    "stem": "What is the result of `np.arange(6).reshape(2, 3).sum(axis=0)`?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "[3, 12]"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "15"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "[[0, 1, 2], [3, 4, 5]]"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "[3, 5, 7]"
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "The array is [[0,1,2],[3,4,5]]. Summing down axis 0 adds the rows column by column: [3, 5, 7].",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_python_for_data_science_005",
+    "skill_id": "python_for_data_science",
+    "concept_tag": "vectorization",
+    "difficulty": "hard",
+    "stem": "What does broadcasting do for `np.ones((3, 4)) + np.array([1, 2, 3, 4])`?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Adds the 1-D array to every row"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Raises a shape error"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Adds it only to the first row"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Flattens both arrays"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "A trailing dimension of size 4 matches, so the 1-D array is stretched across the 3 rows.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_python_for_data_science_006",
+    "skill_id": "python_for_data_science",
+    "concept_tag": "data_structures",
+    "difficulty": "hard",
+    "stem": "Why can a list not be used as a dictionary key but a tuple of numbers can?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Lists are usually too long to be hashed efficiently"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Keys must be hashable, and lists are mutable so they are not"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Tuples are always faster than lists inside dictionaries"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Dictionaries accept only numeric keys, and a tuple counts as a number"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "Dictionary keys need a stable hash. Mutable lists are unhashable, while tuples of hashable items are hashable.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_math_for_ml_001",
+    "skill_id": "math_for_ml",
+    "concept_tag": "linear_algebra_basics",
+    "difficulty": "easy",
+    "stem": "What is the dot product of vectors [1, 2, 3] and [4, 5, 6]?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "32"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "21"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "15"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "[4, 10, 18]"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "1*4 + 2*5 + 3*6 = 4 + 10 + 18 = 32.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_math_for_ml_002",
+    "skill_id": "math_for_ml",
+    "concept_tag": "probability_and_stats",
+    "difficulty": "easy",
+    "stem": "What is the probability of getting heads on a fair coin flip?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "0.25"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "0.5"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "1"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "0"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "Two equally likely outcomes give 1/2.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_math_for_ml_003",
+    "skill_id": "math_for_ml",
+    "concept_tag": "probability_and_stats",
+    "difficulty": "medium",
+    "stem": "What does the standard deviation measure?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "The single most common value in the data"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "The middle value once the data is sorted"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "How spread out values are around the mean"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "The largest value minus the smallest value"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "Standard deviation is the typical distance of values from the mean.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_math_for_ml_004",
+    "skill_id": "math_for_ml",
+    "concept_tag": "linear_algebra_basics",
+    "difficulty": "medium",
+    "stem": "If A is 2x3 and B is 3x4, what is the shape of A @ B?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "3x3"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "4x2"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "The product is undefined"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "2x4"
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "Inner dimensions (3 and 3) must match, and the result takes the outer dimensions: 2x4.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_math_for_ml_005",
+    "skill_id": "math_for_ml",
+    "concept_tag": "calculus_intuition",
+    "difficulty": "hard",
+    "stem": "In gradient descent, what does a negative gradient at the current point tell you?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "The loss decreases if you move in the positive direction of the parameter"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "The loss is already at its minimum, so no update is needed"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "You have reached the minimum and should stop training now"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "The learning rate is too high and training will diverge"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "A negative slope means the loss falls as the parameter increases. Updates move opposite the gradient.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_math_for_ml_006",
+    "skill_id": "math_for_ml",
+    "concept_tag": "probability_and_stats",
+    "difficulty": "hard",
+    "stem": "A test is 99% accurate for a disease that affects 1 in 1000 people. A random person tests positive. Roughly how likely are they to have the disease?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "99%"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "About 9%"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "50%"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "1%"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "Among 1000 people about 1 is truly sick and about 10 healthy people test positive, so roughly 1 in 11 positives is real (Bayes' theorem).",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_data_analysis_with_pandas_001",
+    "skill_id": "data_analysis_with_pandas",
+    "concept_tag": "dataframes_and_series",
+    "difficulty": "easy",
+    "stem": "How do you select a single column `age` from DataFrame `df`?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "df.age()"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "df(age)"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "df['age']"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "df.select('age')"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "`df['age']` returns that column as a Series.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_data_analysis_with_pandas_002",
+    "skill_id": "data_analysis_with_pandas",
+    "concept_tag": "missing_data",
+    "difficulty": "easy",
+    "stem": "Which method counts missing values in each column?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "df.count_missing()"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "df.null()"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "df.empty()"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "df.isna().sum()"
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "`isna()` flags missing values and `sum()` counts them per column.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_data_analysis_with_pandas_003",
+    "skill_id": "data_analysis_with_pandas",
+    "concept_tag": "groupby_and_merge",
+    "difficulty": "medium",
+    "stem": "What does `df.groupby('city')['sales'].mean()` return?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "The average sales for each city"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "The mean of the whole sales column"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "The count of cities"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "A sorted DataFrame by city"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "It splits rows by city and averages the sales within each group.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_data_analysis_with_pandas_004",
+    "skill_id": "data_analysis_with_pandas",
+    "concept_tag": "dataframes_and_series",
+    "difficulty": "medium",
+    "stem": "What is the difference between `df.loc[...]` and `df.iloc[...]`?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "loc is for columns and iloc is for rows"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "loc selects by label and iloc selects by integer position"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "They are identical and can be used interchangeably"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "iloc selects by label and loc selects by position"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "`loc` uses index labels (inclusive slices) and `iloc` uses integer positions (exclusive end).",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_data_analysis_with_pandas_005",
+    "skill_id": "data_analysis_with_pandas",
+    "concept_tag": "groupby_and_merge",
+    "difficulty": "hard",
+    "stem": "You merge two DataFrames with `how='left'` on `id`. What happens to left rows with no match?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "They are dropped from the result, as in an inner merge"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "The merge fails with a KeyError for unmatched rows"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "They are kept with NaN in the right-hand columns"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "They are duplicated once for every row on the right"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "A left merge keeps every left row and fills unmatched right columns with NaN.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_data_analysis_with_pandas_006",
+    "skill_id": "data_analysis_with_pandas",
+    "concept_tag": "missing_data",
+    "difficulty": "hard",
+    "stem": "Why can filling missing values with the column mean hurt a model?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Means cannot be computed when any value is missing"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "It always raises an error in scikit-learn pipelines"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "It renames the columns that contained missing values"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "It shrinks variance and can hide that the value was missing"
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "Mean imputation reduces variability and discards the information that data was missing. Consider an indicator column or better imputation.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_git_version_control_001",
+    "skill_id": "git_version_control",
+    "concept_tag": "staging_and_committing",
+    "difficulty": "easy",
+    "stem": "Which command stages all changes in the current directory for the next commit?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "git add ."
+      },
+      {
+        "option_id": "opt_b",
+        "text": "git commit ."
+      },
+      {
+        "option_id": "opt_c",
+        "text": "git push ."
+      },
+      {
+        "option_id": "opt_d",
+        "text": "git stage --all"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "'git add .' stages every changed file under the current directory. commit and push operate on already-staged/committed changes; 'git stage --all' is not a standard git command.",
+    "review_status": "approved",
+    "source": "ai_drafted_human_reviewed",
+    "reviewed_on": "2026-10-10"
+  },
+  {
+    "question_id": "q_git_version_control_002",
+    "skill_id": "git_version_control",
+    "concept_tag": "branching_and_merging",
+    "difficulty": "easy",
+    "stem": "Which command creates a new branch named 'feature-x' and switches to it in one step?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "git checkout -b feature-x"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "git branch feature-x"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "git merge feature-x"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "git switch feature-x"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "'checkout -b' creates the branch and switches to it immediately. 'git branch' alone only creates it without switching; 'git switch feature-x' without -c would fail since the branch doesn't exist yet.",
+    "review_status": "approved",
+    "source": "ai_drafted_human_reviewed",
+    "reviewed_on": "2026-10-10"
+  },
+  {
+    "question_id": "q_git_version_control_003",
+    "skill_id": "git_version_control",
+    "concept_tag": "staging_and_committing",
+    "difficulty": "medium",
+    "stem": "You ran `git commit -m 'fix bug'` but forgot to stage a changed file. After staging that file with `git add`, which command adds it into the previous commit instead of creating a new one?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "git commit --amend"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "git commit --fixup"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "git rebase -i"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "git cherry-pick"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "'git commit --amend' replaces the most recent commit with a new one that includes the currently staged changes. The other commands either prepare a separate fixup commit or operate on commit history/ranges, not the immediately preceding commit.",
+    "review_status": "approved",
+    "source": "ai_drafted_human_reviewed",
+    "reviewed_on": "2026-10-10"
+  },
+  {
+    "question_id": "q_git_version_control_004",
+    "skill_id": "git_version_control",
+    "concept_tag": "remote_workflows",
+    "difficulty": "medium",
+    "stem": "Which command downloads commits from a remote repository WITHOUT merging them into your current branch?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "git fetch"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "git pull"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "git clone"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "git push"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "git fetch updates your local copy of the remote's branches without touching your working branch. git pull is fetch followed by merge; clone is for an initial copy, not ongoing sync; push sends commits, it doesn't download them.",
+    "review_status": "approved",
+    "source": "ai_drafted_human_reviewed",
+    "reviewed_on": "2026-10-10"
+  },
+  {
+    "question_id": "q_git_version_control_005",
+    "skill_id": "git_version_control",
+    "concept_tag": "branching_and_merging",
+    "difficulty": "hard",
+    "stem": "During a merge, git reports a conflict in file.txt. After manually editing the file to resolve the conflict, what are the next two steps?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "git add file.txt, then git commit"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "git checkout file.txt, then git push"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "git reset file.txt, then git merge --continue"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "git stash, then git merge --abort"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "After hand-resolving a conflict, staging the file with 'git add' marks it resolved, and 'git commit' completes the merge. 'git checkout file.txt' would discard your edits; 'reset' unstages rather than resolves; 'merge --abort' cancels the merge entirely.",
+    "review_status": "approved",
+    "source": "ai_drafted_human_reviewed",
+    "reviewed_on": "2026-10-10"
+  },
+  {
+    "question_id": "q_git_version_control_006",
+    "skill_id": "git_version_control",
+    "concept_tag": "remote_workflows",
+    "difficulty": "hard",
+    "stem": "What does `git push --force` risk that `git push --force-with-lease` protects against?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Overwriting remote commits that someone else pushed since your last fetch"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Losing your own local uncommitted changes in the working tree"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Deleting the remote branch entirely along with its history"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Corrupting the local .git directory and its object store"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "'--force-with-lease' checks that the remote branch still points where you last saw it before overwriting, so it refuses the push if someone else has pushed in the meantime. Plain '--force' overwrites blindly, which can silently discard a teammate's commits.",
+    "review_status": "approved",
+    "source": "ai_drafted_human_reviewed",
+    "reviewed_on": "2026-10-10"
+  }
+]

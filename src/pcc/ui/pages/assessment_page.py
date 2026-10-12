@@ -8,7 +8,9 @@ import streamlit as st
 from pcc.content.content_loader import load_skills
 from pcc.core.exceptions import PccError
 from pcc.domain.enums import WorkflowState
-from pcc.ui.components.question_card import render_question_card
+from pcc.ui.components.check_wizard import render_check_wizard
+from pcc.ui.components.page_frame import require_profile
+from pcc.ui.navigation import go_button
 from pcc.workflow.workflow_controller import get_controller
 
 _FLASH_KEY = "check_just_submitted"
@@ -16,12 +18,12 @@ _FLASH_KEY = "check_just_submitted"
 
 def render() -> None:
     st.title("Skills Check")
-    st.caption("Knowledge check. Graded by code, not AI.")
+    st.caption(
+        "A short knowledge check. Your score is calculated by fixed rules, the same for everyone."
+    )
     controller = get_controller()
-    profile_id = st.session_state.get("profile_id")
-    profile = controller.get_profile(profile_id) if profile_id else None
+    profile = require_profile()
     if profile is None:
-        st.info("Create or pick a profile on the **Profile** page first.")
         return
     controller.sync_state(profile.id)
     profile = controller.get_profile(profile.id)
@@ -39,21 +41,34 @@ def render() -> None:
 
     names = {s.skill_id: s.name for s in load_skills()}
     scope = controller.get_assessment_scope(profile.id)
-    st.write(f"**Semester {scope.semester} scope**")
-    if scope.assessable_skill_ids:
-        st.write("Assessed now: " + ", ".join(names[s] for s in scope.assessable_skill_ids))
-    if scope.coming_soon_skill_ids:
-        st.write(
-            "Assessment coming soon: " + ", ".join(names[s] for s in scope.coming_soon_skill_ids)
-        )
-    if scope.assessed_later_skill_ids:
-        st.write(
-            "Assessed later (needs a hands-on or interview method): "
-            + ", ".join(names[s] for s in scope.assessed_later_skill_ids)
-        )
+    with st.expander(f"What's covered in semester {scope.semester}", expanded=False):
+        if scope.assessable_skill_ids:
+            st.write(
+                "**In this check:** " + ", ".join(names[s] for s in scope.assessable_skill_ids)
+            )
+        if scope.coming_soon_skill_ids:
+            st.write(
+                "**Questions coming soon:** "
+                + ", ".join(names[s] for s in scope.coming_soon_skill_ids)
+            )
+        if scope.assessed_later_skill_ids:
+            st.write(
+                "**Not a quiz topic (project or interview based):** "
+                + ", ".join(names[s] for s in scope.assessed_later_skill_ids)
+            )
     if not scope.assessable_skill_ids:
+        ready = controller.checkable_semesters(profile.career_id) if profile.career_id else []
+        hint = (
+            " Skills checks are ready for semester "
+            + ", ".join(str(n) for n in ready)
+            + "."
+            + " Change your semester on **Career & Semester** to try one."
+            if ready
+            else ""
+        )
         st.warning(
             "Assessment coming soon: no skill in this semester has a reviewed question bank yet."
+            + hint
         )
         return
 
@@ -65,6 +80,7 @@ def render() -> None:
         ):
             label = "Start skills check"
             if state != WorkflowState.ROADMAP_READY:
+                go_button("See my latest results", "results", key="check_to_results")
                 view = controller.get_weekly_plan(profile.id)
                 if view is not None and view.retest_due:
                     st.warning("Your re-check is due. Unseen questions are used first.")
@@ -85,17 +101,8 @@ def render() -> None:
 
     kind = "Re-check" if session.attempt_type == "retest" else "Skills check"
     st.subheader(f"{kind} · {session.scope_description} · {len(session.questions)} questions")
-    with st.form(f"check_{session.attempt_id}"):
-        selections = {
-            q.question_id: render_question_card(i, q, f"a{session.attempt_id}")
-            for i, q in enumerate(session.questions, start=1)
-        }
-        submitted = st.form_submit_button("Submit answers", type="primary")
-    if not submitted:
-        return
-    unanswered = sum(v is None for v in selections.values())
-    if unanswered:
-        st.error(f"Answer every question before submitting ({unanswered} left).")
+    selections = render_check_wizard(session.attempt_id, session.questions)
+    if selections is None:
         return
     try:
         controller.submit_assessment(profile.id, session.attempt_id, selections)

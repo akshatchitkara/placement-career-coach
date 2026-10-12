@@ -1,0 +1,722 @@
+[
+  {
+    "question_id": "q_javascript_fundamentals_001",
+    "skill_id": "javascript_fundamentals",
+    "concept_tag": "closures_and_scope",
+    "difficulty": "easy",
+    "stem": "What does `typeof null` return in JavaScript?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "\"object\""
+      },
+      {
+        "option_id": "opt_b",
+        "text": "\"null\""
+      },
+      {
+        "option_id": "opt_c",
+        "text": "\"undefined\""
+      },
+      {
+        "option_id": "opt_d",
+        "text": "\"number\""
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "`typeof null` returns \"object\". This is a long-standing quirk of the language, so check for null with `=== null`.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_javascript_fundamentals_002",
+    "skill_id": "javascript_fundamentals",
+    "concept_tag": "array_object_methods",
+    "difficulty": "easy",
+    "stem": "Which array method returns a NEW array containing only the elements that pass a test?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "forEach"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "filter"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "push"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "reduce"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "`filter` builds a new array of the elements for which the callback returns true. `forEach` returns undefined and `push` mutates.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_javascript_fundamentals_003",
+    "skill_id": "javascript_fundamentals",
+    "concept_tag": "closures_and_scope",
+    "difficulty": "medium",
+    "stem": "In a loop `for (var i = 0; i < 3; i++) { setTimeout(() => console.log(i), 0); }`, what is printed?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "0, 1, 2"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "0, 0, 0"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "3, 3, 3"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Nothing is printed"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "`var` is function-scoped, so all callbacks share one `i`. The callbacks run after the loop ends, when `i` is 3. Using `let` gives 0, 1, 2.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_javascript_fundamentals_004",
+    "skill_id": "javascript_fundamentals",
+    "concept_tag": "async_and_promises",
+    "difficulty": "medium",
+    "stem": "What does an `async` function always return?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "The value it returns, directly"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "undefined"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "A callback"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "A Promise"
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "An async function always wraps its result in a Promise, even if you return a plain value.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_javascript_fundamentals_005",
+    "skill_id": "javascript_fundamentals",
+    "concept_tag": "async_and_promises",
+    "difficulty": "hard",
+    "stem": "What is the output order? `console.log('A'); setTimeout(() => console.log('B'), 0); Promise.resolve().then(() => console.log('C')); console.log('D');`",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "A, D, C, B"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "A, B, C, D"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "A, D, B, C"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "A, C, D, B"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "Synchronous code runs first (A, D). Promise callbacks are microtasks and run before timer callbacks (macrotasks), so C comes before B.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_javascript_fundamentals_006",
+    "skill_id": "javascript_fundamentals",
+    "concept_tag": "array_object_methods",
+    "difficulty": "hard",
+    "stem": "What does `[1, 2, 3].reduce((acc, n) => acc + n)` evaluate to when no initial value is given?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "0"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "6"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "[1, 2, 3]"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "A TypeError is thrown"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "Without an initial value, `acc` starts as the first element (1) and iteration begins at the second element: 1+2+3 = 6.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_html_css_fundamentals_001",
+    "skill_id": "html_css_fundamentals",
+    "concept_tag": "semantic_html",
+    "difficulty": "easy",
+    "stem": "Which element is the most appropriate for the main navigation links of a page?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "<div>"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "<section>"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "<nav>"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "<aside>"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "`<nav>` marks a block of navigation links and is exposed to assistive technology as a navigation landmark.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_html_css_fundamentals_002",
+    "skill_id": "html_css_fundamentals",
+    "concept_tag": "flexbox_and_grid",
+    "difficulty": "easy",
+    "stem": "Which CSS declaration makes an element a flex container?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "flex: container;"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "position: flex;"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "float: flex;"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "display: flex;"
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "`display: flex` turns the element into a flex container so its children become flex items.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_html_css_fundamentals_003",
+    "skill_id": "html_css_fundamentals",
+    "concept_tag": "responsive_design",
+    "difficulty": "medium",
+    "stem": "Which meta tag is needed so a page lays out correctly on a phone?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "<meta name=\"mobile-friendly\" content=\"true; width=device\">"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "<meta charset=\"mobile\" content=\"device-width, scale=1\">"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "<meta name=\"responsive\" content=\"on, width=device-width\">"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "The viewport meta tag tells mobile browsers to use the device width instead of a zoomed-out desktop width.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_html_css_fundamentals_004",
+    "skill_id": "html_css_fundamentals",
+    "concept_tag": "flexbox_and_grid",
+    "difficulty": "medium",
+    "stem": "In a flex row container, which property aligns items along the MAIN axis (horizontally)?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "align-items"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "justify-content"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "align-content"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "flex-wrap"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "`justify-content` distributes items along the main axis. `align-items` works on the cross axis.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_html_css_fundamentals_005",
+    "skill_id": "html_css_fundamentals",
+    "concept_tag": "semantic_html",
+    "difficulty": "hard",
+    "stem": "Why prefer `<button>` over `<div onclick=...>` for an action?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "It downloads and renders noticeably faster than a div does"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "It ignores every CSS rule that the author applies to it"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "It is focusable, keyboard-operable and announced as a button by default"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "It is the only element that can receive a click event in the DOM"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "A native button gives keyboard support (Enter/Space), focus handling and the correct accessibility role for free.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_html_css_fundamentals_006",
+    "skill_id": "html_css_fundamentals",
+    "concept_tag": "responsive_design",
+    "difficulty": "hard",
+    "stem": "What does `@media (min-width: 768px) { ... }` do?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Applies the rules only when the viewport is narrower than 768px"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Forces the page container to be exactly 768px wide at all times"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Hides the whole page whenever the viewport is under 768px"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Applies the rules only when the viewport is at least 768px wide"
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "`min-width` queries match when the viewport is at least that wide, which is the basis of a mobile-first approach.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_nodejs_fundamentals_001",
+    "skill_id": "nodejs_fundamentals",
+    "concept_tag": "event_loop",
+    "difficulty": "easy",
+    "stem": "Node.js executes your JavaScript code on:",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "A single main thread driven by an event loop"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "One new thread for every incoming request"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "A thread pool that runs all of your own code"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Multiple worker processes started by default"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "Node runs JavaScript on one thread and uses the event loop plus libuv's thread pool for I/O work.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_nodejs_fundamentals_002",
+    "skill_id": "nodejs_fundamentals",
+    "concept_tag": "modules_and_npm",
+    "difficulty": "easy",
+    "stem": "Which file lists a project's dependencies and scripts?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "node_modules"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "package.json"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "index.html"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "npm.config"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "`package.json` records metadata, scripts and dependencies. `node_modules` holds the installed packages.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_nodejs_fundamentals_003",
+    "skill_id": "nodejs_fundamentals",
+    "concept_tag": "modules_and_npm",
+    "difficulty": "medium",
+    "stem": "What is the difference between `dependencies` and `devDependencies`?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "dependencies are installed only on production servers, never locally"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "They behave identically; the split is only a naming convention"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "devDependencies are only needed for development and build, such as test tools"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "devDependencies are installed globally rather than inside node_modules"
+      }
+    ],
+    "correct_option_id": "opt_c",
+    "explanation": "Packages needed to run the app go in `dependencies`. Tools used only to develop or test go in `devDependencies`.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_nodejs_fundamentals_004",
+    "skill_id": "nodejs_fundamentals",
+    "concept_tag": "file_and_stream_apis",
+    "difficulty": "medium",
+    "stem": "Why use `fs.createReadStream` for a very large file instead of `fs.readFileSync`?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "It is always faster than readFileSync, even for tiny files"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "It blocks the event loop until the whole file is loaded"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "It compresses the file on disk before reading it"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "It processes the file in chunks without loading it all into memory"
+      }
+    ],
+    "correct_option_id": "opt_d",
+    "explanation": "Streams read data in chunks, which keeps memory use low. `readFileSync` loads everything and blocks the event loop.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_nodejs_fundamentals_005",
+    "skill_id": "nodejs_fundamentals",
+    "concept_tag": "event_loop",
+    "difficulty": "hard",
+    "stem": "What happens if you run a long CPU-heavy loop in an Express request handler?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "The event loop is blocked and other requests wait"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Node starts a new thread automatically"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Only that request is slow"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Express rejects the request"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "Synchronous CPU work monopolises the single thread, so every other request is stalled. Use worker threads or offload the work.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_nodejs_fundamentals_006",
+    "skill_id": "nodejs_fundamentals",
+    "concept_tag": "event_loop",
+    "difficulty": "hard",
+    "stem": "Which runs first in Node: `process.nextTick` callbacks or Promise `.then` callbacks?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Promise callbacks"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "process.nextTick callbacks"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "setTimeout callbacks"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "They run at the same time"
+      }
+    ],
+    "correct_option_id": "opt_b",
+    "explanation": "The nextTick queue is drained before the promise microtask queue, and both run before timers.",
+    "review_status": "approved",
+    "source": "ai_drafted",
+    "reviewed_on": ""
+  },
+  {
+    "question_id": "q_git_version_control_001",
+    "skill_id": "git_version_control",
+    "concept_tag": "staging_and_committing",
+    "difficulty": "easy",
+    "stem": "Which command stages all changes in the current directory for the next commit?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "git add ."
+      },
+      {
+        "option_id": "opt_b",
+        "text": "git commit ."
+      },
+      {
+        "option_id": "opt_c",
+        "text": "git push ."
+      },
+      {
+        "option_id": "opt_d",
+        "text": "git stage --all"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "'git add .' stages every changed file under the current directory. commit and push operate on already-staged/committed changes; 'git stage --all' is not a standard git command.",
+    "review_status": "approved",
+    "source": "ai_drafted_human_reviewed",
+    "reviewed_on": "2026-10-10"
+  },
+  {
+    "question_id": "q_git_version_control_002",
+    "skill_id": "git_version_control",
+    "concept_tag": "branching_and_merging",
+    "difficulty": "easy",
+    "stem": "Which command creates a new branch named 'feature-x' and switches to it in one step?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "git checkout -b feature-x"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "git branch feature-x"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "git merge feature-x"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "git switch feature-x"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "'checkout -b' creates the branch and switches to it immediately. 'git branch' alone only creates it without switching; 'git switch feature-x' without -c would fail since the branch doesn't exist yet.",
+    "review_status": "approved",
+    "source": "ai_drafted_human_reviewed",
+    "reviewed_on": "2026-10-10"
+  },
+  {
+    "question_id": "q_git_version_control_003",
+    "skill_id": "git_version_control",
+    "concept_tag": "staging_and_committing",
+    "difficulty": "medium",
+    "stem": "You ran `git commit -m 'fix bug'` but forgot to stage a changed file. After staging that file with `git add`, which command adds it into the previous commit instead of creating a new one?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "git commit --amend"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "git commit --fixup"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "git rebase -i"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "git cherry-pick"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "'git commit --amend' replaces the most recent commit with a new one that includes the currently staged changes. The other commands either prepare a separate fixup commit or operate on commit history/ranges, not the immediately preceding commit.",
+    "review_status": "approved",
+    "source": "ai_drafted_human_reviewed",
+    "reviewed_on": "2026-10-10"
+  },
+  {
+    "question_id": "q_git_version_control_004",
+    "skill_id": "git_version_control",
+    "concept_tag": "remote_workflows",
+    "difficulty": "medium",
+    "stem": "Which command downloads commits from a remote repository WITHOUT merging them into your current branch?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "git fetch"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "git pull"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "git clone"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "git push"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "git fetch updates your local copy of the remote's branches without touching your working branch. git pull is fetch followed by merge; clone is for an initial copy, not ongoing sync; push sends commits, it doesn't download them.",
+    "review_status": "approved",
+    "source": "ai_drafted_human_reviewed",
+    "reviewed_on": "2026-10-10"
+  },
+  {
+    "question_id": "q_git_version_control_005",
+    "skill_id": "git_version_control",
+    "concept_tag": "branching_and_merging",
+    "difficulty": "hard",
+    "stem": "During a merge, git reports a conflict in file.txt. After manually editing the file to resolve the conflict, what are the next two steps?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "git add file.txt, then git commit"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "git checkout file.txt, then git push"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "git reset file.txt, then git merge --continue"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "git stash, then git merge --abort"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "After hand-resolving a conflict, staging the file with 'git add' marks it resolved, and 'git commit' completes the merge. 'git checkout file.txt' would discard your edits; 'reset' unstages rather than resolves; 'merge --abort' cancels the merge entirely.",
+    "review_status": "approved",
+    "source": "ai_drafted_human_reviewed",
+    "reviewed_on": "2026-10-10"
+  },
+  {
+    "question_id": "q_git_version_control_006",
+    "skill_id": "git_version_control",
+    "concept_tag": "remote_workflows",
+    "difficulty": "hard",
+    "stem": "What does `git push --force` risk that `git push --force-with-lease` protects against?",
+    "options": [
+      {
+        "option_id": "opt_a",
+        "text": "Overwriting remote commits that someone else pushed since your last fetch"
+      },
+      {
+        "option_id": "opt_b",
+        "text": "Losing your own local uncommitted changes in the working tree"
+      },
+      {
+        "option_id": "opt_c",
+        "text": "Deleting the remote branch entirely along with its history"
+      },
+      {
+        "option_id": "opt_d",
+        "text": "Corrupting the local .git directory and its object store"
+      }
+    ],
+    "correct_option_id": "opt_a",
+    "explanation": "'--force-with-lease' checks that the remote branch still points where you last saw it before overwriting, so it refuses the push if someone else has pushed in the meantime. Plain '--force' overwrites blindly, which can silently discard a teammate's commits.",
+    "review_status": "approved",
+    "source": "ai_drafted_human_reviewed",
+    "reviewed_on": "2026-10-10"
+  }
+]

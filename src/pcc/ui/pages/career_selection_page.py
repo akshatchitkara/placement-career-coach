@@ -3,19 +3,30 @@
 import streamlit as st
 
 from pcc.core.exceptions import WorkflowStateError
+from pcc.domain.enums import WorkflowState
+from pcc.ui.components.page_frame import require_profile
+from pcc.ui.navigation import go_button
 from pcc.workflow.workflow_controller import get_controller
 
 _OTHER = "__other__"
+_NOTICE_KEY = "career_notice"
 
 
 def render() -> None:
     st.title("Career & Semester")
     controller = get_controller()
-    profile_id = st.session_state.get("profile_id")
-    profile = controller.get_profile(profile_id) if profile_id else None
+    profile = require_profile()
     if profile is None:
-        st.info("Create or pick a profile on the **Profile** page first.")
         return
+
+    notice = st.session_state.pop(_NOTICE_KEY, "")
+    if notice:
+        st.warning(notice)
+    if profile.workflow_state not in (WorkflowState.PROFILE_READY, WorkflowState.CAREER_SELECTED):
+        # Outside the Build branch so these buttons survive the rerun a click causes.
+        st.success("Roadmap ready.")
+        go_button("View my roadmap", "roadmap", key="career_to_roadmap", primary=True)
+        go_button("Go straight to the skills check", "assessment", key="career_to_check")
 
     careers = {c.career_id: c for c in controller.list_careers()}
     options = [*careers, _OTHER]
@@ -27,12 +38,24 @@ def render() -> None:
     )
     if choice in careers:
         st.caption(careers[choice].description)
+        ready = controller.checkable_semesters(choice)
+        if ready:
+            st.caption(
+                "Skills check available for semester " + ", ".join(str(n) for n in ready) + "."
+            )
+        else:
+            st.caption("Roadmap only for now: skills check questions are being added.")
     custom_text = ""
     if choice == _OTHER:
         custom_text = st.text_input("Type a career", max_chars=60, key="career_custom")
     semester = st.select_slider(
         "Current semester", options=[3, 4, 5, 6], value=profile.current_semester or 3
     )
+    if choice in careers and semester not in controller.checkable_semesters(choice):
+        st.info(
+            f"Semester {semester} has a roadmap but no skills check questions yet. "
+            "You can still build the roadmap, or pick a semester with a check."
+        )
 
     if not st.button("Build my roadmap", type="primary"):
         return
@@ -49,8 +72,7 @@ def render() -> None:
         return
 
     if result.status == "roadmap_ready":
-        if result.message:
-            st.warning(result.message)
-        st.success("Roadmap ready. Open **Roadmap** in the sidebar.")
+        st.session_state[_NOTICE_KEY] = result.message
+        st.rerun()
     else:
         st.error(result.message)
