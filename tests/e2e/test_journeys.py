@@ -116,3 +116,30 @@ def test_recheck_after_a_baseline_shows_improvement(page, app):
     assert "Checks taken" in text and "+" in text  # a positive change is shown
     assert page.locator("svg[role=img] circle").count() == 2
     assert not page.pcc_errors, page.pcc_errors
+
+
+def test_the_full_path_check_reaches_industry_ready_in_the_browser(page, app):
+    sign_in(page, "Full path")
+    build_roadmap(page, "devops_engineer")
+    nav(page, "Skills Check")
+    page.get_by_role("button", name="Take the full-path check").click()
+    page.wait_for_selector("text=Question 1 of 28", timeout=30000)
+    assert answer_check(page, "devops_engineer", None) == 28
+
+    nav(page, "Results")
+    page.wait_for_selector("text=Review your answers", timeout=30000)
+    text = body(page)
+    assert "100.0%" in text and "Industry-ready" in text
+    assert "Level for the full roadmap" in text
+    nav(page, "Progress")
+    settle(page, 1200)
+    assert "Full path" in page.locator("svg[role=img]").first.text_content()
+    rows = db_rows(
+        app.db_path,
+        "SELECT a.attempt_type, a.level, a.coverage_ratio, "
+        "(SELECT count(*) FROM assessment_responses r WHERE r.attempt_id = a.id) "
+        "FROM assessment_attempts a JOIN profiles p ON p.id = a.profile_id "
+        "WHERE p.display_name = 'Full path' AND a.submitted_at IS NOT NULL",
+    )
+    assert rows == [("full_path", "industry_ready", 1.0, 28)]
+    assert not page.pcc_errors, page.pcc_errors

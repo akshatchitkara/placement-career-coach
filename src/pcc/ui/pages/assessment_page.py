@@ -91,16 +91,29 @@ def render() -> None:
                         "You can take it early; unseen questions are used first."
                     )
                 label = "Start re-check"
-            if not st.button(label, type="primary"):
+            start = st.button(label, type="primary")
+            full_path = False
+            if controller.can_take_full_path(profile.id):
+                full_scope = controller.get_assessment_scope(profile.id, full_path=True)
+                questions = 2 * len(full_scope.assessable_skill_ids)
+                st.caption(
+                    f"Or check every skill on your roadmap, Semesters 3 to 6 ({questions} "
+                    "questions, two per skill). It is the only check that can place you at "
+                    "Industry-ready."
+                )
+                full_path = st.button("Take the full-path check", key="start_full_path")
+            if not (start or full_path):
                 return
-            controller.start_assessment(profile.id)
+            controller.start_assessment(profile.id, full_path=full_path)
             st.rerun()  # redraw in the in-progress state so the Start button disappears
         session = controller.start_assessment(profile.id)  # resumes the open attempt
     except PccError as exc:
         st.error(str(exc))
         return
 
-    kind = "Re-check" if session.attempt_type == "retest" else "Skills check"
+    kind = {"retest": "Re-check", "full_path": "Full-path check"}.get(
+        session.attempt_type, "Skills check"
+    )
     st.header(f"{kind} · {session.scope_description} · {len(session.questions)} questions")
 
     def save_draft(answers: dict[str, str]) -> None:

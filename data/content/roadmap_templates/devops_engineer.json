@@ -5,193 +5,209 @@
       "semester": 3,
       "month_index": 1,
       "skill_id": "linux_fundamentals",
-      "focus": "Foundations: Linux Fundamentals",
+      "focus": "Foundations: work confidently on the Linux command line",
       "topics": [
-        "file permissions",
-        "process management",
-        "filesystem navigation"
+        "file permissions and ownership",
+        "processes, signals and services",
+        "navigating and searching the filesystem",
+        "users and groups"
       ],
-      "deliverable": "Produce a short artifact demonstrating linux fundamentals applied to a realistic task."
+      "deliverable": "Set up a small Linux VM or container, create two users and a shared directory with the right permissions, then write a one-page runbook of the commands you used and why."
     },
     {
       "semester": 3,
       "month_index": 2,
       "skill_id": "shell_scripting",
-      "focus": "Foundations: Shell Scripting",
+      "focus": "Foundations: automate routine tasks with Bash",
       "topics": [
-        "bash variables and quoting",
+        "variables, quoting and exit codes",
         "conditionals and loops",
-        "text processing grep sed awk"
+        "text processing with grep, sed and awk",
+        "functions and error handling"
       ],
-      "deliverable": "Produce a short artifact demonstrating shell scripting applied to a realistic task."
+      "deliverable": "Write a backup script that archives a folder, keeps the last five copies, logs what it did and exits with a non-zero code on failure."
     },
     {
       "semester": 3,
       "month_index": 3,
       "skill_id": "python_for_automation",
-      "focus": "Foundations: Python for Automation",
+      "focus": "Foundations: use Python to script operations work",
       "topics": [
-        "file and os operations",
-        "subprocess and scripting",
-        "error handling"
+        "files and the os module",
+        "running commands with subprocess",
+        "error handling and logging",
+        "reading JSON and YAML"
       ],
-      "deliverable": "Produce a short artifact demonstrating python for automation applied to a realistic task."
+      "deliverable": "Build a Python tool that reads a log file, counts errors per hour and writes a JSON summary, with tests for the parsing function."
     },
     {
       "semester": 3,
       "month_index": 4,
       "skill_id": "git_version_control",
-      "focus": "Foundations: Git Version Control",
+      "focus": "Foundations: collaborate safely with Git",
       "topics": [
-        "branching and merging",
         "staging and committing",
-        "remote workflows"
+        "branching and merging",
+        "resolving conflicts",
+        "remotes and pull requests"
       ],
-      "deliverable": "Produce a short artifact demonstrating git version control applied to a realistic task."
+      "deliverable": "Contribute to a small repository through a feature branch and a pull request, resolve a deliberate merge conflict, and write a short note on your branching rules."
     },
     {
       "semester": 4,
       "month_index": 1,
       "skill_id": "networking_fundamentals",
-      "focus": "Build and ship: Networking Fundamentals",
+      "focus": "Build and ship: understand how traffic reaches your service",
       "topics": [
-        "tcp ip basics",
-        "dns and http",
-        "ports and firewalls"
+        "TCP/IP and the handshake",
+        "DNS and HTTP",
+        "ports and firewalls",
+        "load balancing basics"
       ],
-      "deliverable": "Produce a short artifact demonstrating networking fundamentals applied to a realistic task."
+      "deliverable": "Trace a request to a website with dig, curl -v and a packet capture, then draw each hop and write one sentence on what could fail at each."
     },
     {
       "semester": 4,
       "month_index": 2,
       "skill_id": "ci_cd_pipelines",
-      "focus": "Build and ship: CI/CD Pipelines",
+      "focus": "Build and ship: build a pipeline that tests and ships code",
       "topics": [
         "pipeline stages",
         "build triggers",
-        "artifact promotion"
+        "artifacts and promotion",
+        "caching and secrets"
       ],
-      "deliverable": "Produce a short artifact demonstrating ci/cd pipelines applied to a realistic task."
+      "deliverable": "Create a CI pipeline for a small app with lint, test and package stages that runs on every pull request, and promote the same tested artifact to a second environment."
     },
     {
       "semester": 4,
       "month_index": 3,
       "skill_id": "docker_containers",
-      "focus": "Build and ship: Docker Containers",
+      "focus": "Build and ship: package applications as containers",
       "topics": [
         "images and layers",
-        "dockerfile basics",
-        "volumes and networking"
+        "writing a Dockerfile",
+        "volumes and networking",
+        "image size and security basics"
       ],
-      "deliverable": "Produce a short artifact demonstrating docker containers applied to a realistic task."
+      "deliverable": "Containerise a two-service app (web plus database) with Docker Compose, keep the data in a volume, and cut the image size with a multi-stage build."
     },
     {
       "semester": 4,
       "month_index": 4,
       "skill_id": "cloud_fundamentals",
-      "focus": "Build and ship: Cloud Fundamentals",
+      "focus": "Build and ship: run workloads on a cloud platform",
       "topics": [
-        "compute storage network",
-        "iam basics",
-        "regions and availability"
+        "compute, storage and networking",
+        "identity and access management",
+        "regions and availability zones",
+        "cost basics"
       ],
-      "deliverable": "Produce a short artifact demonstrating cloud fundamentals applied to a realistic task."
+      "deliverable": "Deploy your container to a cloud VM or managed service inside a private network using a role with least privilege, and write down its monthly cost estimate."
     },
     {
       "semester": 5,
       "month_index": 1,
       "skill_id": "kubernetes_orchestration",
-      "focus": "Orchestrate and automate: Kubernetes Orchestration",
+      "focus": "Orchestrate and automate: run containers reliably at scale",
       "topics": [
         "pods and deployments",
         "services and ingress",
-        "scaling and health checks"
+        "scaling and health checks",
+        "config maps and secrets"
       ],
-      "deliverable": "Produce a short artifact demonstrating kubernetes orchestration applied to a realistic task."
+      "deliverable": "Deploy your app to a local Kubernetes cluster with three replicas, expose it through an ingress, add readiness and liveness probes, and demonstrate a rolling update and a rollback."
     },
     {
       "semester": 5,
       "month_index": 2,
       "skill_id": "terraform_iac",
-      "focus": "Orchestrate and automate: Terraform (IaC)",
+      "focus": "Orchestrate and automate: describe infrastructure as code",
       "topics": [
         "providers and resources",
-        "state management",
-        "modules and variables"
+        "state and remote backends",
+        "modules and variables",
+        "plan and drift"
       ],
-      "deliverable": "Produce a short artifact demonstrating terraform (iac) applied to a realistic task."
+      "deliverable": "Write Terraform that creates a network and a server, store its state remotely, turn it into a reusable module, and show what a plan reports after a manual change."
     },
     {
       "semester": 5,
       "month_index": 3,
       "skill_id": "configuration_management",
-      "focus": "Orchestrate and automate: Configuration Management",
+      "focus": "Orchestrate and automate: configure servers repeatably",
       "topics": [
         "idempotent playbooks",
-        "inventory management",
-        "secrets handling"
+        "inventories",
+        "handlers and roles",
+        "secrets with a vault"
       ],
-      "deliverable": "Produce a short artifact demonstrating configuration management applied to a realistic task."
+      "deliverable": "Write an Ansible playbook that configures a web server from a bare VM, run it twice to show that nothing changes the second time, and keep its secrets in a vault."
     },
     {
       "semester": 5,
       "month_index": 4,
       "skill_id": "gitops_and_deployment_strategies",
-      "focus": "Orchestrate and automate: GitOps & Deployment Strategies",
+      "focus": "Orchestrate and automate: release with confidence",
       "topics": [
-        "blue green and canary",
+        "blue-green and canary releases",
         "rollback strategies",
-        "declarative sync"
+        "declarative sync",
+        "safe database migrations"
       ],
-      "deliverable": "Produce a short artifact demonstrating gitops & deployment strategies applied to a realistic task."
+      "deliverable": "Set up a GitOps tool that syncs a repository to your cluster, ship a canary release, break it on purpose and roll it back through Git."
     },
     {
       "semester": 6,
       "month_index": 1,
       "skill_id": "monitoring_observability",
-      "focus": "Operate and get hired: Monitoring & Observability",
+      "focus": "Operate and get hired: see what your system is doing",
       "topics": [
         "metrics and dashboards",
-        "logging pipelines",
-        "alerting and slos"
+        "structured logs",
+        "alerting and SLOs",
+        "tracing basics"
       ],
-      "deliverable": "Produce a short artifact demonstrating monitoring & observability applied to a realistic task."
+      "deliverable": "Instrument a service with metrics and logs, build a dashboard for request rate, errors and latency, and define one SLO with an alert on its error budget."
     },
     {
       "semester": 6,
       "month_index": 2,
       "skill_id": "devsecops_basics",
-      "focus": "Operate and get hired: DevSecOps Basics",
+      "focus": "Operate and get hired: build security into the pipeline",
       "topics": [
         "dependency scanning",
         "secrets in pipelines",
-        "least privilege"
+        "least privilege",
+        "container image scanning"
       ],
-      "deliverable": "Produce a short artifact demonstrating devsecops basics applied to a realistic task."
+      "deliverable": "Add dependency and image scanning to your pipeline, fix the highest-severity finding, and move one hard-coded secret into the secret store."
     },
     {
       "semester": 6,
       "month_index": 3,
       "skill_id": "capstone_devops",
-      "focus": "Operate and get hired: DevOps Capstone",
+      "focus": "Operate and get hired: put the whole path together",
       "topics": [
-        "end to end pipeline",
-        "core concepts",
-        "common pitfalls"
+        "a pipeline from commit to production",
+        "infrastructure as code",
+        "monitoring and alerts",
+        "documentation and a demo"
       ],
-      "deliverable": "Produce a short artifact demonstrating devops capstone applied to a realistic task."
+      "deliverable": "Deliver an end-to-end project: an app with a CI/CD pipeline, containers on Kubernetes, infrastructure in Terraform, monitoring with an alert, and a README that lets a stranger reproduce it."
     },
     {
       "semester": 6,
       "month_index": 4,
       "skill_id": "interview_preparation",
-      "focus": "Operate and get hired: Interview Preparation",
+      "focus": "Operate and get hired: prepare to be hired",
       "topics": [
-        "behavioral and technical prep",
-        "core concepts",
-        "common pitfalls"
+        "explaining your projects",
+        "DevOps scenario questions",
+        "troubleshooting under pressure",
+        "behavioural stories"
       ],
-      "deliverable": "Produce a short artifact demonstrating interview preparation applied to a realistic task."
+      "deliverable": "Record a five-minute walkthrough of your capstone, write answers to ten scenario questions (for example a deploy that fails at 2 a.m.), and complete two mock interviews."
     }
   ],
   "generation_source": "template"

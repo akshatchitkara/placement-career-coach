@@ -1,0 +1,41 @@
+Run started:2026-10-12 10:42:01.688337+00:00
+
+Test results:
+>> Issue: [B311:blacklist] Standard pseudo-random generators are not suitable for security/cryptographic purposes.
+   Severity: Low   Confidence: High
+   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/blacklists/blacklist_calls.html#b311-random
+   Location: src\pcc\agents\evaluation_agent.py:55:10
+54	    last_seen = {qid: i for i, qid in enumerate(seen_question_ids)}
+55	    rng = random.Random(seed)
+56	    picked: list[Question] = []
+
+--------------------------------------------------
+>> Issue: [B311:blacklist] Standard pseudo-random generators are not suitable for security/cryptographic purposes.
+   Severity: Low   Confidence: High
+   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/blacklists/blacklist_calls.html#b311-random
+   Location: src\pcc\agents\evaluation_agent.py:80:4
+79	    ids = [o.option_id for o in question.options]
+80	    random.Random(f"{seed}:{question.question_id}").shuffle(ids)
+81	    return ids
+
+--------------------------------------------------
+
+Code scanned:
+	Total lines of code: 5327
+	Total lines skipped (#nosec): 0
+	Total potential issues skipped due to specifically being disabled (e.g., #nosec BXXX): 0
+
+Run metrics:
+	Total issues (by severity):
+		Undefined: 0
+		Low: 2
+		Medium: 0
+		High: 0
+	Total issues (by confidence):
+		Undefined: 0
+		Low: 0
+		Medium: 0
+		High: 2
+Files skipped (0):

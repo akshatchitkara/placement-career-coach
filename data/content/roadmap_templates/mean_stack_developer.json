@@ -5,193 +5,209 @@
       "semester": 3,
       "month_index": 1,
       "skill_id": "javascript_fundamentals",
-      "focus": "Web foundations: JavaScript Fundamentals",
+      "focus": "Web foundations: learn the language the web runs on",
       "topics": [
         "closures and scope",
-        "async and promises",
-        "array object methods"
+        "promises and async/await",
+        "array and object methods",
+        "the event loop"
       ],
-      "deliverable": "Produce a short artifact demonstrating javascript fundamentals applied to a realistic task."
+      "deliverable": "Build a to-do list in plain JavaScript that loads data from a public API with async/await and handles failure, using no libraries."
     },
     {
       "semester": 3,
       "month_index": 2,
       "skill_id": "html_css_fundamentals",
-      "focus": "Web foundations: HTML & CSS Fundamentals",
+      "focus": "Web foundations: build accessible, responsive pages",
       "topics": [
-        "semantic html",
+        "semantic HTML",
         "flexbox and grid",
-        "responsive design"
+        "responsive design",
+        "accessibility basics"
       ],
-      "deliverable": "Produce a short artifact demonstrating html & css fundamentals applied to a realistic task."
+      "deliverable": "Build a responsive portfolio page with semantic markup that passes an accessibility check and works at phone and desktop widths."
     },
     {
       "semester": 3,
       "month_index": 3,
       "skill_id": "git_version_control",
-      "focus": "Web foundations: Git Version Control",
+      "focus": "Web foundations: collaborate safely with Git",
       "topics": [
-        "branching and merging",
         "staging and committing",
-        "remote workflows"
+        "branching and merging",
+        "resolving conflicts",
+        "remotes and pull requests"
       ],
-      "deliverable": "Produce a short artifact demonstrating git version control applied to a realistic task."
+      "deliverable": "Host your project on a remote, work through a feature branch and a pull request, and resolve one deliberate merge conflict."
     },
     {
       "semester": 3,
       "month_index": 4,
       "skill_id": "nodejs_fundamentals",
-      "focus": "Web foundations: Node.js Fundamentals",
+      "focus": "Web foundations: run JavaScript on the server",
       "topics": [
-        "event loop",
+        "the event loop",
         "modules and npm",
-        "file and stream apis"
+        "files and streams",
+        "environment configuration"
       ],
-      "deliverable": "Produce a short artifact demonstrating node.js fundamentals applied to a realistic task."
+      "deliverable": "Build a command-line tool in Node.js that processes a large file with streams and prints a summary, and wire it up as an npm script."
     },
     {
       "semester": 4,
       "month_index": 1,
       "skill_id": "typescript_essentials",
-      "focus": "Back end and data: TypeScript Essentials",
+      "focus": "Back end and data: add types to your JavaScript",
       "topics": [
         "types and interfaces",
         "generics",
-        "narrowing"
+        "narrowing unions",
+        "strict mode"
       ],
-      "deliverable": "Produce a short artifact demonstrating typescript essentials applied to a realistic task."
+      "deliverable": "Convert your Node tool to TypeScript with strict mode on, define interfaces for its data and remove every use of any."
     },
     {
       "semester": 4,
       "month_index": 2,
       "skill_id": "express_rest_apis",
-      "focus": "Back end and data: Express REST APIs",
+      "focus": "Back end and data: build a REST API",
       "topics": [
         "routing and middleware",
         "error handling",
-        "request validation"
+        "request validation",
+        "status codes"
       ],
-      "deliverable": "Produce a short artifact demonstrating express rest apis applied to a realistic task."
+      "deliverable": "Build a REST API for notes with CRUD routes, input validation, central error handling and tests that call it over HTTP."
     },
     {
       "semester": 4,
       "month_index": 3,
       "skill_id": "mongodb_data_modeling",
-      "focus": "Back end and data: MongoDB Data Modeling",
+      "focus": "Back end and data: model data in MongoDB",
       "topics": [
-        "schema design",
-        "indexing",
-        "aggregation pipeline"
+        "schema design: embed or reference",
+        "indexes",
+        "the aggregation pipeline",
+        "query plans"
       ],
-      "deliverable": "Produce a short artifact demonstrating mongodb data modeling applied to a realistic task."
+      "deliverable": "Store your notes in MongoDB, add an index for your slowest query and show the difference with explain, and write an aggregation that reports notes per author."
     },
     {
       "semester": 4,
       "month_index": 4,
       "skill_id": "authentication_authorization",
-      "focus": "Back end and data: Authentication & Authorization",
+      "focus": "Back end and data: secure who can do what",
       "topics": [
-        "jwt and sessions",
-        "role based access",
-        "password hashing"
+        "password hashing",
+        "JWTs and sessions",
+        "role-based access",
+        "refresh tokens"
       ],
-      "deliverable": "Produce a short artifact demonstrating authentication & authorization applied to a realistic task."
+      "deliverable": "Add sign-up, sign-in and an admin role to your API with hashed passwords and short-lived tokens, and write tests that prove a normal user cannot reach admin routes."
     },
     {
       "semester": 5,
       "month_index": 1,
       "skill_id": "angular_core_concepts",
-      "focus": "Front end and quality: Angular Core Concepts",
+      "focus": "Front end and quality: build the front end with Angular",
       "topics": [
         "components and modules",
         "data binding",
-        "dependency injection"
+        "dependency injection",
+        "routing and forms"
       ],
-      "deliverable": "Produce a short artifact demonstrating angular core concepts applied to a realistic task."
+      "deliverable": "Build an Angular front end for your notes API with a list, a form and routing, using a service that is injected into the components."
     },
     {
       "semester": 5,
       "month_index": 2,
       "skill_id": "rxjs_and_state_management",
-      "focus": "Front end and quality: RxJS & State Management",
+      "focus": "Front end and quality: manage asynchronous data and state",
       "topics": [
         "observables and operators",
         "subjects",
-        "state patterns"
+        "state patterns",
+        "error and retry handling"
       ],
-      "deliverable": "Produce a short artifact demonstrating rxjs & state management applied to a realistic task."
+      "deliverable": "Add search-as-you-type with debouncing and switchMap, and move shared state into a service built on a BehaviorSubject."
     },
     {
       "semester": 5,
       "month_index": 3,
       "skill_id": "testing_web_applications",
-      "focus": "Front end and quality: Testing Web Applications",
+      "focus": "Front end and quality: prove it works",
       "topics": [
-        "unit vs integration",
+        "unit and integration tests",
         "mocking",
-        "test coverage"
+        "coverage and its limits",
+        "end-to-end tests"
       ],
-      "deliverable": "Produce a short artifact demonstrating testing web applications applied to a realistic task."
+      "deliverable": "Reach meaningful coverage on your API and front end with unit tests, one integration test against a test database and one end-to-end test of the main flow."
     },
     {
       "semester": 5,
       "month_index": 4,
       "skill_id": "ci_cd_and_deployment",
-      "focus": "Front end and quality: CI/CD and Deployment",
+      "focus": "Front end and quality: ship the app automatically",
       "topics": [
         "pipeline stages",
         "build triggers",
-        "artifact promotion"
+        "artifacts and promotion",
+        "environment configuration"
       ],
-      "deliverable": "Produce a short artifact demonstrating ci/cd and deployment applied to a realistic task."
+      "deliverable": "Create a pipeline that lints, tests, builds and deploys your app to a hosting service on every merge to main, with a manual approval step for production."
     },
     {
       "semester": 6,
       "month_index": 1,
       "skill_id": "web_security_and_performance",
-      "focus": "Production and hiring: Web Security & Performance",
+      "focus": "Production and hiring: make it safe and fast",
       "topics": [
-        "xss and csrf",
+        "XSS and CSRF",
         "caching strategies",
-        "bundle optimization"
+        "bundle size",
+        "security headers"
       ],
-      "deliverable": "Produce a short artifact demonstrating web security & performance applied to a realistic task."
+      "deliverable": "Run a security scan and a performance audit on your app, fix the three worst findings and write down the before and after numbers."
     },
     {
       "semester": 6,
       "month_index": 2,
       "skill_id": "system_design_basics",
-      "focus": "Production and hiring: System Design Basics",
+      "focus": "Production and hiring: design for more users",
       "topics": [
         "load balancing",
         "caching layers",
-        "database scaling"
+        "database scaling",
+        "queues"
       ],
-      "deliverable": "Produce a short artifact demonstrating system design basics applied to a realistic task."
+      "deliverable": "Draw and explain a design that takes your app from 100 to 100,000 users, naming what you would add first and what each addition costs in complexity."
     },
     {
       "semester": 6,
       "month_index": 3,
       "skill_id": "capstone_mean",
-      "focus": "Production and hiring: MEAN Capstone",
+      "focus": "Production and hiring: put the whole stack together",
       "topics": [
-        "end to end app",
-        "core concepts",
-        "common pitfalls"
+        "a full MEAN application",
+        "authentication and roles",
+        "tests and CI",
+        "deployment and documentation"
       ],
-      "deliverable": "Produce a short artifact demonstrating mean capstone applied to a realistic task."
+      "deliverable": "Deliver a deployed full-stack project with sign-in, a database, tests and a pipeline, plus a README and a five-minute demo video."
     },
     {
       "semester": 6,
       "month_index": 4,
       "skill_id": "interview_preparation",
-      "focus": "Production and hiring: Interview Preparation",
+      "focus": "Production and hiring: prepare to be hired",
       "topics": [
-        "behavioral and technical prep",
-        "core concepts",
-        "common pitfalls"
+        "explaining your project",
+        "JavaScript and system design questions",
+        "timed coding practice",
+        "behavioural stories"
       ],
-      "deliverable": "Produce a short artifact demonstrating interview preparation applied to a realistic task."
+      "deliverable": "Record a walkthrough of your capstone, solve ten timed coding problems in JavaScript and complete two mock interviews."
     }
   ],
   "generation_source": "template"

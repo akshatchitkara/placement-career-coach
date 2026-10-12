@@ -26,7 +26,12 @@ def render() -> None:
         return
 
     names = {s.skill_id: s.name for s in load_skills()}
-    st.caption("Re-check" if result.attempt_type == "retest" else "Baseline knowledge check")
+    st.caption(
+        {
+            "retest": "Re-check",
+            "full_path": "Full-path check: every skill on your roadmap",
+        }.get(result.attempt_type, "Baseline knowledge check")
+    )
     with st.container(border=True):
         render_level_badge(
             result.level, result.scope_description, result.overall_score, result.level_notes

@@ -56,7 +56,7 @@ All four careers (DevOps, MEAN, Java, AI) can complete a check in any of Semeste
 | Home | Where you are in the journey (five-step tracker), your one next step, latest score, re-check countdown and, after two checks, your trend. New visitors see what the app does |
 | Career & Semester | Pick one of 4 CS careers or type one; shows which semesters have a skills check; builds the validated roadmap |
 | Roadmap | Semesters 3-6, four months each, with topics and deliverables |
-| Skills Check | One question at a time with progress, Back/Next and an unanswered list before submit; 3 questions per skill (1 easy, 1 medium, 1 hard), options shuffled; also hosts the re-check |
+| Skills Check | One question at a time with progress, Back/Next and an unanswered list before submit; 3 questions per skill (1 easy, 1 medium, 1 hard), options shuffled; also hosts the re-check and the **full-path check** (every roadmap skill, 2 questions each, 28 for a career; the only way to reach Industry-ready) |
 | Results | Score and level with a four-step ladder and the gap to the next level, a "biggest opportunity" skill, per-skill bars with the mastery line, full numbers, roadmap position, answer review |
 | Coaching Plan | 3-5 tasks for the weakest skill, each tied to a question you missed. Each task has a **coach**: explain it differently, show an example, ask your own question, or take a short practice quiz |
 | Weekly Plan | The week laid out over seven days plus a re-check day, task links, a time-budget picker, progress and a calendar (.ics) download |
@@ -140,7 +140,7 @@ docs/            blueprint, test report, decision log, authoring guide
 ## Known limits
 
 - Local, single-user, no login: a profile is just a display name.
-- The full-path "Industry-ready" check, the Career Finder, custom CS careers and a demo answer simulator are designed but not built.
+- The Career Finder, custom CS careers, any career outside the four, the written, assignment and voice assessments, and a demo answer simulator are designed but not built. A student who types another career (for example cybersecurity or VLSI) is told it is not supported yet.
 - Most questions are unreviewed drafts written by an assistant (see above). A student's level is only as trustworthy as the questions behind it.
 - Roadmap focus and deliverable text is generic template wording; it passes validation but is placeholder quality.
 - Coaching covers the single weakest skill. The plan cannot be regenerated, because the weekly plan is built from it.
@@ -148,7 +148,26 @@ docs/            blueprint, test report, decision log, authoring guide
 - Lighthouse performance is 38 to 59 and accessibility 83 to 87. The shortfalls are Streamlit's own front end and sidebar markup, not this app's content; `test-reports/lighthouse/summary.md` has the detail.
 - On Python 3.14 and Windows the Streamlit server crashed twice in its file-watcher threads during long test runs. The watcher is now off; Python 3.12 or 3.13 has not been tried.
 - Live AI has been verified with **Anthropic** (`claude-haiku-5-5`) for the DevOps journey only: roadmap, coaching plan and coach replies were accepted by the validators and read well. A first attempt with NVIDIA NIM was refused as overloaded, so the curated plans were shown as designed. Other providers, models and careers are untested live; the AI paths are otherwise covered with scripted fake clients and failure drills.
-- The product note ([`docs/01_PRODUCT_NOTE.md`](docs/01_PRODUCT_NOTE.md)) is not written yet.
+- Roadmaps are curated per career, not generated for each student; the AI can only reword them. Personalisation comes from the assessment, the coaching plan and the weekly plan.
+
+## Free hosted demo (Streamlit Community Cloud)
+
+For showing the app to a team without running it locally:
+
+1. Push the repository to GitHub (`.env`, `*.db` and `data/runtime/` are git-ignored, so no key or personal data goes up).
+2. At [share.streamlit.io](https://share.streamlit.io) choose **Create app**, pick the repository and branch, and set the main file to `src/pcc/main.py` (Python 3.12).
+3. Under **Advanced settings > Secrets** paste:
+
+   ```toml
+   PCC_AI_MODE = "offline"
+   PCC_DEMO_MODE = "true"
+   ```
+
+`PCC_DEMO_MODE=true` recreates the three demo profiles (Asha, Ravi, Meera) whenever the database is empty and hides the AI Settings page. Limits of the free tier: the disk is not kept, so anything entered during the demo disappears when the app restarts or wakes from sleep; the app sleeps after a period of no visits; and there is no login, so anyone with the link can use it.
+
+## Product note and delivery review
+
+The product note (Task 1 of the assessment) is [`docs/01_PRODUCT_NOTE.md`](docs/01_PRODUCT_NOTE.md), with a 3-page PDF copy, [`docs/01_PRODUCT_NOTE.pdf`](docs/01_PRODUCT_NOTE.pdf). Rebuild the PDF with `python qa/build_product_note.py`. The pre-delivery review, with a requirement-by-requirement compliance matrix, is in [`delivery-review/`](delivery-review/delivery-readiness.md).
 
 ## Status
 

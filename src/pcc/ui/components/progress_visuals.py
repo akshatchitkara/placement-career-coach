@@ -27,6 +27,8 @@ def _y(score: float) -> float:
 
 
 def _check_label(index: int, attempt: AttemptSummary) -> str:
+    if attempt.attempt_type == "full_path":
+        return "Full path"
     return "Baseline" if index == 0 else f"Re-check {index}"
 
 

@@ -5,193 +5,209 @@
       "semester": 3,
       "month_index": 1,
       "skill_id": "python_for_data_science",
-      "focus": "Data and math foundations: Python for Data Science",
+      "focus": "Data and math foundations: learn the data toolkit",
       "topics": [
-        "numpy basics",
-        "data structures",
-        "vectorization"
+        "NumPy arrays and shapes",
+        "lists, dicts and tuples",
+        "vectorisation and broadcasting",
+        "plotting basics"
       ],
-      "deliverable": "Produce a short artifact demonstrating python for data science applied to a realistic task."
+      "deliverable": "Replace a slow Python loop with vectorised NumPy, time both versions and plot the result with a short explanation."
     },
     {
       "semester": 3,
       "month_index": 2,
       "skill_id": "math_for_ml",
-      "focus": "Data and math foundations: Math for ML",
+      "focus": "Data and math foundations: build the maths intuition",
       "topics": [
-        "linear algebra basics",
-        "probability and stats",
-        "calculus intuition"
+        "vectors and matrices",
+        "probability and statistics",
+        "derivatives and gradients",
+        "Bayes' theorem"
       ],
-      "deliverable": "Produce a short artifact demonstrating math for ml applied to a realistic task."
+      "deliverable": "Work through ten exercises on matrix products, probability and gradients, checking each one by hand and in NumPy."
     },
     {
       "semester": 3,
       "month_index": 3,
       "skill_id": "data_analysis_with_pandas",
-      "focus": "Data and math foundations: Data Analysis with Pandas",
+      "focus": "Data and math foundations: analyse real data",
       "topics": [
-        "dataframes and series",
+        "DataFrames and Series",
         "groupby and merge",
-        "missing data"
+        "missing data",
+        "cleaning and reshaping"
       ],
-      "deliverable": "Produce a short artifact demonstrating data analysis with pandas applied to a realistic task."
+      "deliverable": "Clean a messy public dataset, answer five questions with groupby and merge, and write up the findings in a short notebook."
     },
     {
       "semester": 3,
       "month_index": 4,
       "skill_id": "git_version_control",
-      "focus": "Data and math foundations: Git Version Control",
+      "focus": "Data and math foundations: keep experiments reproducible",
       "topics": [
-        "branching and merging",
-        "staging and committing",
-        "remote workflows"
+        "commits and branches",
+        "pull requests",
+        "keeping data and secrets out of the repository",
+        "tagging experiments"
       ],
-      "deliverable": "Produce a short artifact demonstrating git version control applied to a realistic task."
+      "deliverable": "Version a notebook project with a branch per experiment, keep the data out of the repository and tag the commit behind your best result."
     },
     {
       "semester": 4,
       "month_index": 1,
       "skill_id": "machine_learning_fundamentals",
-      "focus": "Machine learning: Machine Learning Fundamentals",
+      "focus": "Machine learning: understand how models learn",
       "topics": [
-        "supervised vs unsupervised",
-        "bias variance",
-        "train test split"
+        "supervised versus unsupervised learning",
+        "bias and variance",
+        "train-test splits",
+        "regularisation"
       ],
-      "deliverable": "Produce a short artifact demonstrating machine learning fundamentals applied to a realistic task."
+      "deliverable": "Train a regression and a classifier on a small dataset, show overfitting with a high-degree model and fix it with regularisation."
     },
     {
       "semester": 4,
       "month_index": 2,
       "skill_id": "feature_engineering_and_evaluation",
-      "focus": "Machine learning: Feature Engineering & Evaluation",
+      "focus": "Machine learning: prepare data and judge models fairly",
       "topics": [
         "feature scaling",
-        "cross validation",
-        "evaluation metrics"
+        "cross-validation",
+        "precision, recall and F1",
+        "data leakage"
       ],
-      "deliverable": "Produce a short artifact demonstrating feature engineering & evaluation applied to a realistic task."
+      "deliverable": "Build a pipeline with scaling and cross-validation on an imbalanced dataset and report accuracy, precision, recall and a confusion matrix."
     },
     {
       "semester": 4,
       "month_index": 3,
       "skill_id": "deep_learning_fundamentals",
-      "focus": "Machine learning: Deep Learning Fundamentals",
+      "focus": "Machine learning: learn how neural networks train",
       "topics": [
-        "neural network basics",
+        "neurons and layers",
         "backpropagation",
-        "activation functions"
+        "activation functions",
+        "learning rates and optimisers"
       ],
-      "deliverable": "Produce a short artifact demonstrating deep learning fundamentals applied to a realistic task."
+      "deliverable": "Train a small neural network on image or tabular data, compare two learning rates and two activations, and plot the loss curves."
     },
     {
       "semester": 4,
       "month_index": 4,
       "skill_id": "nlp_fundamentals",
-      "focus": "Machine learning: NLP Fundamentals",
+      "focus": "Machine learning: work with text",
       "topics": [
-        "tokenization",
+        "tokenisation",
         "embeddings",
-        "sequence models"
+        "sequence models and attention",
+        "evaluating text models"
       ],
-      "deliverable": "Produce a short artifact demonstrating nlp fundamentals applied to a realistic task."
+      "deliverable": "Build a text classifier with embeddings, compare it with a bag-of-words baseline and inspect five of its mistakes."
     },
     {
       "semester": 5,
       "month_index": 1,
       "skill_id": "llm_and_prompt_engineering",
-      "focus": "Build AI applications: LLM & Prompt Engineering",
+      "focus": "Build AI applications: get reliable output from language models",
       "topics": [
-        "prompt structuring",
-        "few shot examples",
-        "context windows"
+        "prompt structure",
+        "few-shot examples",
+        "context windows",
+        "evaluating prompts"
       ],
-      "deliverable": "Produce a short artifact demonstrating llm & prompt engineering applied to a realistic task."
+      "deliverable": "Write a prompt that extracts structured data from emails, test it on 30 examples and improve it until it is right at least 90 percent of the time."
     },
     {
       "semester": 5,
       "month_index": 2,
       "skill_id": "rag_and_vector_databases",
-      "focus": "Build AI applications: RAG & Vector Databases",
+      "focus": "Build AI applications: ground answers in documents",
       "topics": [
         "embeddings and similarity",
         "chunking strategies",
-        "retrieval pipelines"
+        "retrieval and reranking",
+        "citing sources"
       ],
-      "deliverable": "Produce a short artifact demonstrating rag & vector databases applied to a realistic task."
+      "deliverable": "Build a question-answering tool over your own documents with chunking, a vector index and cited answers, and measure how often the answer is supported."
     },
     {
       "semester": 5,
       "month_index": 3,
       "skill_id": "ai_apis_and_agents",
-      "focus": "Build AI applications: AI APIs & Agents",
+      "focus": "Build AI applications: build with model APIs and tools",
       "topics": [
-        "tool use patterns",
-        "api integration",
-        "agent loops"
+        "tool use and function calling",
+        "API errors and rate limits",
+        "agent loops",
+        "step limits and budgets"
       ],
-      "deliverable": "Produce a short artifact demonstrating ai apis & agents applied to a realistic task."
+      "deliverable": "Build an agent with two tools and a step limit, handle API failures with backoff and log every step it takes."
     },
     {
       "semester": 5,
       "month_index": 4,
       "skill_id": "mlops_basics",
-      "focus": "Build AI applications: MLOps Basics",
+      "focus": "Build AI applications: make machine learning repeatable",
       "topics": [
         "model versioning",
         "experiment tracking",
-        "pipeline automation"
+        "pipeline automation",
+        "training-serving skew"
       ],
-      "deliverable": "Produce a short artifact demonstrating mlops basics applied to a realistic task."
+      "deliverable": "Track five experiments with their parameters and metrics, register the best model and automate retraining with a scheduled job."
     },
     {
       "semester": 6,
       "month_index": 1,
       "skill_id": "model_deployment_and_serving",
-      "focus": "Ship and get hired: Model Deployment & Serving",
+      "focus": "Ship and get hired: serve a model to users",
       "topics": [
         "serving frameworks",
         "latency and batching",
-        "monitoring drift"
+        "monitoring drift",
+        "rollbacks"
       ],
-      "deliverable": "Produce a short artifact demonstrating model deployment & serving applied to a realistic task."
+      "deliverable": "Serve a model behind an API, load-test it and report p50 and p99 latency, and add a drift check on its input features."
     },
     {
       "semester": 6,
       "month_index": 2,
       "skill_id": "responsible_ai_and_evaluation",
-      "focus": "Ship and get hired: Responsible AI & Evaluation",
+      "focus": "Ship and get hired: build AI people can trust",
       "topics": [
         "bias and fairness",
-        "hallucination evaluation",
-        "safety guardrails"
+        "evaluating hallucination",
+        "safety guardrails",
+        "prompt injection"
       ],
-      "deliverable": "Produce a short artifact demonstrating responsible ai & evaluation applied to a realistic task."
+      "deliverable": "Audit your project for bias across two groups, measure how often its answers are unsupported and add guardrails against three attack prompts."
     },
     {
       "semester": 6,
       "month_index": 3,
       "skill_id": "capstone_ai",
-      "focus": "Ship and get hired: AI Capstone",
+      "focus": "Ship and get hired: ship an AI application",
       "topics": [
-        "end to end ai app",
-        "core concepts",
-        "common pitfalls"
+        "a retrieval or prediction feature",
+        "evaluation results",
+        "deployment and monitoring",
+        "documentation and a demo"
       ],
-      "deliverable": "Produce a short artifact demonstrating ai capstone applied to a realistic task."
+      "deliverable": "Deliver a deployed AI application with an evaluation report, monitoring, guardrails and a README, plus a five-minute demo."
     },
     {
       "semester": 6,
       "month_index": 4,
       "skill_id": "interview_preparation",
-      "focus": "Ship and get hired: Interview Preparation",
+      "focus": "Ship and get hired: prepare to be hired",
       "topics": [
-        "behavioral and technical prep",
-        "core concepts",
-        "common pitfalls"
+        "explaining your project and its metrics",
+        "machine learning questions",
+        "coding practice in Python",
+        "behavioural stories"
       ],
-      "deliverable": "Produce a short artifact demonstrating interview preparation applied to a realistic task."
+      "deliverable": "Record a project walkthrough, answer fifteen machine learning and LLM questions aloud and complete two mock interviews."
     }
   ],
   "generation_source": "template"

@@ -281,12 +281,16 @@ class WorkflowController:
         )
 
     @staticmethod
-    def _scope(ctx: "_CheckContext", settings: AppSettings) -> AssessmentScope:
+    def _scope(
+        ctx: "_CheckContext", settings: AppSettings, full_path: bool = False
+    ) -> AssessmentScope:
+        """What a check covers: this semester's skills, or every skill on the roadmap."""
         semester = ctx.profile.current_semester or 3
         ready: list[str] = []
         later: list[str] = []
         soon: list[str] = []
-        for skill_id in ctx.semester_skill_ids[semester]:
+        skill_ids = ctx.roadmap_order if full_path else ctx.semester_skill_ids[semester]
+        for skill_id in skill_ids:
             if not is_quiz_assessable(ctx.skills_by_id[skill_id].skill_type):
                 later.append(skill_id)  # T-21: method not built, never scored
             elif not compute_skill_assessability(skill_id, ctx.bank, settings):
@@ -317,26 +321,47 @@ class WorkflowController:
             )
         ]
 
-    def get_assessment_scope(self, profile_id: int) -> AssessmentScope:
+    def get_assessment_scope(self, profile_id: int, full_path: bool = False) -> AssessmentScope:
         with closing(self._connect()) as conn:
             ctx = self._check_context(conn, profile_id)
-        return self._scope(ctx, load_app_settings())
+        return self._scope(ctx, load_app_settings(), full_path)
+
+    def can_take_full_path(self, profile_id: int) -> bool:
+        """The full-path check needs every quiz skill on the roadmap to have enough questions.
+
+        With a thin bank it could never reach 100% coverage, so Industry-ready would be
+        unreachable and offering it would mislead.
+        """
+        scope = self.get_assessment_scope(profile_id, full_path=True)
+        return bool(scope.assessable_skill_ids) and not scope.coming_soon_skill_ids
+
+    @staticmethod
+    def _scope_of(
+        ctx: "_CheckContext", attempt_type: str, settings: AppSettings
+    ) -> AssessmentScope:
+        return WorkflowController._scope(ctx, settings, full_path=attempt_type == "full_path")
 
     @staticmethod
     def _questions_for(
         ctx: "_CheckContext", attempt: AttemptRecord, seen: list[str]
     ) -> tuple[AppSettings, AssessmentScope, list[Question]]:
         settings = AppSettings.model_validate_json(attempt.config_snapshot_json)
-        scope = WorkflowController._scope(ctx, settings)
+        scope = WorkflowController._scope_of(ctx, attempt.attempt_type, settings)
         questions = select_questions(
-            scope.assessable_skill_ids, ctx.bank, settings, seen, attempt.shuffle_seed
+            scope.assessable_skill_ids,
+            ctx.bank,
+            settings,
+            seen,
+            attempt.shuffle_seed,
+            full_path=attempt.attempt_type == "full_path",
         )
         return settings, scope, questions
 
-    def start_assessment(self, profile_id: int) -> AssessmentSession:
-        """Starts a baseline check or a re-check, or resumes the open one.
+    def start_assessment(self, profile_id: int, full_path: bool = False) -> AssessmentSession:
+        """Starts a baseline check, a re-check or a full-path check, or resumes the open one.
 
-        Resuming re-selects from the stored seed, so the same questions come back.
+        Resuming re-selects from the stored seed, so the same questions come back. The full-path
+        check covers every skill on the roadmap and is the only way to reach Industry-ready.
         """
         self.sync_state(profile_id)
         with closing(self._connect()) as conn:
@@ -344,11 +369,16 @@ class WorkflowController:
             attempt = get_open_attempt(conn, profile_id)
             if attempt is None:
                 settings = load_app_settings()
-                scope = self._scope(ctx, settings)
+                scope = self._scope(ctx, settings, full_path)
                 if not scope.assessable_skill_ids:
                     raise PccError(
                         "Assessment coming soon: no skill in this semester has a reviewed "
                         "question bank yet."
+                    )
+                if full_path and scope.coming_soon_skill_ids:
+                    raise PccError(
+                        "The full-path check is not available yet: some skills on your roadmap "
+                        "do not have enough reviewed questions."
                     )
                 state = ctx.profile.workflow_state
                 if state == WorkflowState.ROADMAP_READY:
@@ -361,11 +391,15 @@ class WorkflowController:
                 else:
                     raise PccError("A check cannot be started right now.")
                 assert_transition(state, WorkflowState.ASSESSMENT_IN_PROGRESS)
+                if full_path:
+                    attempt_type = "full_path"
                 attempt_id = create_attempt(
                     conn,
                     profile_id,
                     attempt_type=attempt_type,
-                    scope_description=f"Semester {scope.semester} skills",
+                    scope_description=(
+                        "the full roadmap" if full_path else f"Semester {scope.semester} skills"
+                    ),
                     shuffle_seed=secrets.randbits(31),
                     config_snapshot_json=settings.model_dump_json(),
                     started_at=self._now_iso(),
@@ -594,7 +628,11 @@ class WorkflowController:
                     settings = AppSettings.model_validate_json(attempt.config_snapshot_json)
                     answers = load_answers(conn, attempt.id)
                     result = self._evaluate(
-                        ctx, attempt, answers, settings, self._scope(ctx, settings)
+                        ctx,
+                        attempt,
+                        answers,
+                        settings,
+                        self._scope_of(ctx, attempt.attempt_type, settings),
                     )
                     self._plan_week(conn, ctx, attempt.id, result, settings)
                     conn.commit()
@@ -641,7 +679,11 @@ class WorkflowController:
             ctx = self._check_context(conn, profile_id)
             settings = AppSettings.model_validate_json(attempt.config_snapshot_json)
             result = self._evaluate(
-                ctx, attempt, load_answers(conn, attempt.id), settings, self._scope(ctx, settings)
+                ctx,
+                attempt,
+                load_answers(conn, attempt.id),
+                settings,
+                self._scope_of(ctx, attempt.attempt_type, settings),
             )
             plan = self._build_week(
                 conn, ctx, result, settings, today=current.week_start_date, max_minutes=max_minutes
@@ -680,7 +722,7 @@ class WorkflowController:
                     record,
                     load_answers(conn, record.id),
                     settings,
-                    self._scope(ctx, settings),
+                    self._scope_of(ctx, record.attempt_type, settings),
                 )
                 summaries.append(
                     AttemptSummary(
@@ -938,7 +980,7 @@ class WorkflowController:
             ctx = self._check_context(conn, profile_id)
             settings = AppSettings.model_validate_json(attempt.config_snapshot_json)
             answers = load_answers(conn, attempt.id)
-        scope = self._scope(ctx, settings)
+        scope = self._scope_of(ctx, attempt.attempt_type, settings)
         return self._evaluate(ctx, attempt, answers, settings, scope)
 
 

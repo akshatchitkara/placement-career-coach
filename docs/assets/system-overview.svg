@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 400" width="960" height="400" font-family="Segoe UI, Arial, sans-serif">
+  <defs>
+    <marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#4F46E5"/></marker>
+    <marker id="d" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#9CA3AF"/></marker>
+  </defs>
+  <rect width="960" height="400" fill="#ffffff"/>
+
+  <!-- student -->
+  <rect x="14" y="150" width="150" height="100" rx="12" fill="#EEF2FF" stroke="#4F46E5" stroke-width="2"/>
+  <text x="89" y="190" text-anchor="middle" font-size="15" font-weight="700" fill="#1F2937">Student</text>
+  <text x="89" y="212" text-anchor="middle" font-size="12" fill="#4B5563">Streamlit pages</text>
+  <text x="89" y="230" text-anchor="middle" font-size="12" fill="#4B5563">no scoring, no SQL</text>
+
+  <!-- controller -->
+  <rect x="222" y="60" width="210" height="280" rx="12" fill="#F3F5FB" stroke="#4F46E5" stroke-width="2"/>
+  <text x="327" y="92" text-anchor="middle" font-size="15" font-weight="700" fill="#1F2937">Workflow controller</text>
+  <text x="327" y="112" text-anchor="middle" font-size="12" fill="#4F46E5" font-weight="600">CODE decides what happens next</text>
+  <text x="327" y="140" text-anchor="middle" font-size="12" fill="#4B5563">state machine:</text>
+  <text x="327" y="158" text-anchor="middle" font-size="11" fill="#4B5563">profile, career, roadmap,</text>
+  <text x="327" y="174" text-anchor="middle" font-size="11" fill="#4B5563">check in progress, results,</text>
+  <text x="327" y="190" text-anchor="middle" font-size="11" fill="#4B5563">coaching, weekly plan,</text>
+  <text x="327" y="206" text-anchor="middle" font-size="11" fill="#4B5563">re-check due</text>
+  <text x="327" y="236" text-anchor="middle" font-size="12" fill="#4B5563">passes only what each</text>
+  <text x="327" y="252" text-anchor="middle" font-size="12" fill="#4B5563">module needs, never a</text>
+  <text x="327" y="268" text-anchor="middle" font-size="12" fill="#4B5563">student's name</text>
+  <text x="327" y="304" text-anchor="middle" font-size="11" fill="#6B7280">saves to SQLite, restores</text>
+  <text x="327" y="320" text-anchor="middle" font-size="11" fill="#6B7280">after a restart</text>
+
+  <!-- modules -->
+  <g font-size="12">
+    <rect x="500" y="14" width="300" height="62" rx="10" fill="#fff" stroke="#9CA3AF"/>
+    <text x="512" y="34" font-weight="700" fill="#1F2937">1. Roadmap module  (code + optional AI)</text>
+    <text x="512" y="52" fill="#4B5563">Curated 16-month path; AI may reword months.</text>
+    <text x="512" y="67" fill="#4B5563">Checks V-RM-01..08, else the curated path.</text>
+
+    <rect x="500" y="88" width="300" height="62" rx="10" fill="#ECFDF5" stroke="#10B981" stroke-width="2"/>
+    <text x="512" y="108" font-weight="700" fill="#1F2937">2. Evaluation module  (code only, no AI)</text>
+    <text x="512" y="126" fill="#4B5563">Picks and shuffles questions, grades, scores, level,</text>
+    <text x="512" y="141" fill="#4B5563">weakest skill, roadmap position.</text>
+
+    <rect x="500" y="162" width="300" height="62" rx="10" fill="#fff" stroke="#9CA3AF"/>
+    <text x="512" y="182" font-weight="700" fill="#1F2937">3. Coaching agent  (AI writes, code checks)</text>
+    <text x="512" y="200" fill="#4B5563">Plan for the weakest skill; each task tied to a</text>
+    <text x="512" y="215" fill="#4B5563">missed question; checked, else a curated plan.</text>
+
+    <rect x="500" y="236" width="300" height="62" rx="10" fill="#ECFDF5" stroke="#10B981" stroke-width="2"/>
+    <text x="512" y="256" font-weight="700" fill="#1F2937">4. Weekly planner  (code only)</text>
+    <text x="512" y="274" fill="#4B5563">3-5 tasks, at most 240 minutes, a re-check date.</text>
+    <text x="512" y="289" fill="#4B5563">Coaching first, then roadmap, then revision.</text>
+
+    <rect x="500" y="310" width="300" height="62" rx="10" fill="#fff" stroke="#9CA3AF"/>
+    <text x="512" y="330" font-weight="700" fill="#1F2937">5. Tutor  (AI explains, code checks)</text>
+    <text x="512" y="348" fill="#4B5563">Explains one coaching task; no scores or links.</text>
+    <text x="512" y="363" fill="#4B5563">Else a built-in answer. Quizzes graded by code.</text>
+  </g>
+
+  <!-- AI client -->
+  <rect x="842" y="110" width="104" height="180" rx="12" fill="#FEF3C7" stroke="#D97706" stroke-width="2"/>
+  <text x="894" y="150" text-anchor="middle" font-size="14" font-weight="700" fill="#1F2937">AI provider</text>
+  <text x="894" y="172" text-anchor="middle" font-size="11" fill="#78350F">optional</text>
+  <text x="894" y="196" text-anchor="middle" font-size="11" fill="#4B5563">Anthropic,</text>
+  <text x="894" y="212" text-anchor="middle" font-size="11" fill="#4B5563">OpenAI-style</text>
+  <text x="894" y="228" text-anchor="middle" font-size="11" fill="#4B5563">or none</text>
+  <text x="894" y="256" text-anchor="middle" font-size="11" fill="#78350F">offline mode</text>
+  <text x="894" y="272" text-anchor="middle" font-size="11" fill="#78350F">still works</text>
+
+  <!-- arrows -->
+  <path d="M164 200 L220 200" stroke="#4F46E5" stroke-width="2" fill="none" marker-end="url(#a)"/>
+  <path d="M220 215 L166 215" stroke="#4F46E5" stroke-width="2" fill="none" marker-end="url(#a)"/>
+  <path d="M432 120 L498 45" stroke="#4F46E5" stroke-width="2" fill="none" marker-end="url(#a)"/>
+  <path d="M432 140 L498 119" stroke="#4F46E5" stroke-width="2" fill="none" marker-end="url(#a)"/>
+  <path d="M432 200 L498 193" stroke="#4F46E5" stroke-width="2" fill="none" marker-end="url(#a)"/>
+  <path d="M432 255 L498 267" stroke="#4F46E5" stroke-width="2" fill="none" marker-end="url(#a)"/>
+  <path d="M432 300 L498 341" stroke="#4F46E5" stroke-width="2" fill="none" marker-end="url(#a)"/>
+  <path d="M800 45 L840 140" stroke="#9CA3AF" stroke-width="2" stroke-dasharray="5 4" fill="none" marker-end="url(#d)"/>
+  <path d="M800 193 L840 200" stroke="#9CA3AF" stroke-width="2" stroke-dasharray="5 4" fill="none" marker-end="url(#d)"/>
+  <path d="M800 341 L840 260" stroke="#9CA3AF" stroke-width="2" stroke-dasharray="5 4" fill="none" marker-end="url(#d)"/>
+
+  <!-- legend -->
+  <rect x="14" y="300" width="14" height="14" rx="3" fill="#ECFDF5" stroke="#10B981"/>
+  <text x="34" y="312" font-size="11" fill="#4B5563">code only</text>
+  <rect x="100" y="300" width="14" height="14" rx="3" fill="#fff" stroke="#9CA3AF"/>
+  <text x="120" y="312" font-size="11" fill="#4B5563">AI may write words</text>
+  <path d="M14 340 L44 340" stroke="#9CA3AF" stroke-width="2" stroke-dasharray="5 4"/>
+  <text x="52" y="344" font-size="11" fill="#4B5563">optional call</text>
+</svg>

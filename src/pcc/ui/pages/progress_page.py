@@ -23,7 +23,11 @@ def _effort(
         index = order[week.from_attempt_id]
         before = "your baseline" if index == 0 else f"re-check {index}"
         change = (
-            "no change" if abs(week.score_change) < 0.05 else f"{week.score_change:+.1f} points"
+            "not compared (the two checks covered different skills)"
+            if week.score_change is None
+            else "no change"
+            if abs(week.score_change) < 0.05
+            else f"{week.score_change:+.1f} points"
         )
         st.markdown(
             f"**Week after {before}:** {week.tasks_done} of {week.tasks_total} tasks done "
@@ -58,6 +62,11 @@ def render() -> None:
         if progress.overall_delta is not None
         else None,
     )
+    if progress.scope_changed:
+        st.info(
+            "Your last two checks covered different skills (a semester check and a full-path "
+            "check), so the overall score change is not shown. Compare skill by skill below."
+        )
     previous = progress.previous_level
     c2.metric(
         "Level",
@@ -120,7 +129,9 @@ def render() -> None:
             [
                 {
                     "Check": i,
-                    "Type": "Baseline" if a.attempt_type == "baseline" else "Re-check",
+                    "Type": {"baseline": "Baseline", "full_path": "Full-path check"}.get(
+                        a.attempt_type, "Re-check"
+                    ),
                     "Date": a.submitted_at[:10],
                     "Score": f"{a.overall_score:.1f}%",
                     "Level": LEVEL_LABELS[a.level],

@@ -1,6 +1,7 @@
 """Streamlit entry point. UI pages hold no scoring rules, SQL or prompts (Section 7.3)."""
 
 import sys
+from datetime import UTC, datetime
 from pathlib import Path
 
 import streamlit as st
@@ -29,6 +30,7 @@ from pcc.ui.pages import (
 )
 from pcc.ui.text import escape_md
 from pcc.ui.theme import inject_css
+from pcc.workflow.demo_seed import seed_demo_profiles
 from pcc.workflow.workflow_controller import get_controller
 
 APP_NAME = "Placement Career Coach"
@@ -38,6 +40,12 @@ def _ensure_db() -> None:
     conn = get_connection(settings.db_path)
     init_schema(conn)
     conn.close()
+
+
+def _seed_demo_if_empty() -> None:
+    """Hosted demos start from an empty disk; PCC_DEMO_MODE=true recreates the demo profiles."""
+    if settings.demo_mode and not get_controller().list_profiles():
+        seed_demo_profiles(settings.db_path, datetime.now(UTC).date())
 
 
 @st.cache_resource
@@ -89,6 +97,7 @@ def main() -> None:
 
     try:
         _ensure_db()
+        _seed_demo_if_empty()
     except Exception:  # noqa: BLE001 -- show a clear message rather than a stack trace
         st.error(
             f"Could not open the database at {settings.db_path}. "
@@ -135,7 +144,9 @@ def main() -> None:
         "Plan": [registry["career"], registry["roadmap"]],
         "Assess": [registry["assessment"], registry["results"]],
         "Improve": [registry["coaching"], registry["weekly"], registry["progress"]],
-        "Account": [registry["profile"], registry["ai"]],
+        "Account": [registry["profile"]]
+        if settings.demo_mode
+        else [registry["profile"], registry["ai"]],
     }
     if settings.show_dev_pages:
         sections["Developer"] = [page(m1_preview_page.render, "M1 Preview", "m1-preview")]

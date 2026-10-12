@@ -31,7 +31,8 @@ class AttemptSummary(BaseModel):
 class ProgressView(BaseModel):
     attempts: list[AttemptSummary]  # oldest first
     deltas: list[SkillDelta]  # latest vs previous; empty with a single attempt
-    overall_delta: float | None
+    overall_delta: float | None  # None for a single check or when the scopes differ
+    scope_changed: bool  # a semester check against a full-path check: not like for like
     previous_level: Level | None
     current_level: Level | None
     mentor_skill_ids: list[str]  # latest score below 40
@@ -88,12 +89,18 @@ def mentor_skill_ids(scores: list[SkillScore]) -> list[str]:
     return [s.skill_id for s in scores if s.has_sufficient_evidence and s.score < _MENTOR_BELOW]
 
 
+def _same_scope(a: AttemptSummary, b: AttemptSummary) -> bool:
+    """A full-path check covers every roadmap skill; the others cover one semester's skills."""
+    return (a.attempt_type == "full_path") == (b.attempt_type == "full_path")
+
+
 def build_progress(attempts: list[AttemptSummary], mastery_threshold: float) -> ProgressView:
     if not attempts:
         return ProgressView(
             attempts=[],
             deltas=[],
             overall_delta=None,
+            scope_changed=False,
             previous_level=None,
             current_level=None,
             mentor_skill_ids=[],
@@ -105,7 +112,12 @@ def build_progress(attempts: list[AttemptSummary], mastery_threshold: float) -> 
     return ProgressView(
         attempts=attempts,
         deltas=compare_skill_scores(previous.skill_scores, latest.skill_scores) if previous else [],
-        overall_delta=latest.overall_score - previous.overall_score if previous else None,
+        overall_delta=(
+            latest.overall_score - previous.overall_score
+            if previous and _same_scope(previous, latest)
+            else None
+        ),
+        scope_changed=bool(previous and not _same_scope(previous, latest)),
         previous_level=previous.level if previous else None,
         current_level=latest.level,
         mentor_skill_ids=mentor_skill_ids(latest.skill_scores),
@@ -134,7 +146,7 @@ class WeekEffort(BaseModel):
     tasks_done: int
     tasks_total: int
     minutes_done: int
-    score_change: float  # the next check's overall score minus this check's
+    score_change: float | None  # next check's score minus this one's; None if scopes differ
 
 
 def build_effort(attempts: list[AttemptSummary], weeks: list[WeekRecord]) -> list[WeekEffort]:
@@ -151,7 +163,11 @@ def build_effort(attempts: list[AttemptSummary], weeks: list[WeekRecord]) -> lis
                 tasks_done=week.tasks_done,
                 tasks_total=week.tasks_total,
                 minutes_done=week.minutes_done,
-                score_change=attempts[index + 1].overall_score - attempts[index].overall_score,
+                score_change=(
+                    attempts[index + 1].overall_score - attempts[index].overall_score
+                    if _same_scope(attempts[index], attempts[index + 1])
+                    else None
+                ),
             )
         )
     return effort

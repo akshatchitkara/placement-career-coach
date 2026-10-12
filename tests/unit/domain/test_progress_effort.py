@@ -55,3 +55,26 @@ def test_mentor_message_is_ready_to_send():
 def test_mentor_message_without_known_concepts_has_no_dangling_phrase():
     text = mentor_message("AI Developer", "Math for ML", 20.0, [])
     assert "stuck" not in text and "  " not in text
+
+
+def _typed(n: int, score: float, kind: str) -> AttemptSummary:
+    return _attempt(n, score).model_copy(update={"attempt_type": kind})
+
+
+def test_scores_are_compared_only_between_checks_of_the_same_scope():
+    from pcc.domain.progress import build_progress
+
+    same = build_progress([_typed(1, 50.0, "baseline"), _typed(2, 70.0, "retest")], 60.0)
+    assert same.overall_delta == 20.0 and same.scope_changed is False
+
+    mixed = build_progress([_typed(1, 50.0, "baseline"), _typed(2, 90.0, "full_path")], 60.0)
+    assert mixed.overall_delta is None and mixed.scope_changed is True
+
+    both_full = build_progress([_typed(1, 60.0, "full_path"), _typed(2, 70.0, "full_path")], 60.0)
+    assert both_full.overall_delta == 10.0 and both_full.scope_changed is False
+
+
+def test_effort_does_not_claim_a_score_change_across_different_scopes():
+    attempts = [_typed(1, 50.0, "baseline"), _typed(2, 90.0, "full_path")]
+    (effort,) = build_effort(attempts, [_week(1, 3)])
+    assert effort.score_change is None

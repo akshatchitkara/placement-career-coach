@@ -25,6 +25,16 @@ from pcc.domain.scoring.scoring_engine import compute_overall_score, compute_ski
 from pcc.domain.scoring.weakest_skill_selector import select_weakest_skill
 
 _DIFFICULTY_ORDER = [Difficulty.EASY, Difficulty.MEDIUM, Difficulty.HARD]
+_FULL_PATH_ORDER = [Difficulty.EASY, Difficulty.HARD, Difficulty.MEDIUM]
+
+
+def full_path_mix(per_skill: int) -> dict[str, int]:
+    """Difficulty mix when every skill gets only a few questions: easy and hard first.
+
+    Two questions per skill (the configured default) are one easy and one hard, which spans the
+    range, and still meet the two-answers-per-skill evidence rule.
+    """
+    return {d.value: 1 for d in _FULL_PATH_ORDER[: max(per_skill, 0)]}
 
 
 def select_questions(
@@ -33,6 +43,8 @@ def select_questions(
     settings: AppSettings,
     seen_question_ids: list[str],
     seed: int,
+    *,
+    full_path: bool = False,
 ) -> list[Question]:
     """Fixed difficulty mix per skill; unseen first, then least recently seen.
 
@@ -42,9 +54,14 @@ def select_questions(
     last_seen = {qid: i for i, qid in enumerate(seen_question_ids)}
     rng = random.Random(seed)
     picked: list[Question] = []
+    mix = (
+        full_path_mix(settings.full_path_questions_per_skill)
+        if full_path
+        else settings.difficulty_mix_per_skill
+    )
     for skill_id in scope_skill_ids:
         for difficulty in _DIFFICULTY_ORDER:
-            need = settings.difficulty_mix_per_skill.get(difficulty.value, 0)
+            need = mix.get(difficulty.value, 0)
             pool = [q for q in bank if q.skill_id == skill_id and q.difficulty == difficulty]
             pool.sort(key=lambda q: q.question_id)  # stable base order before seeded choice
             unseen = [q for q in pool if q.question_id not in last_seen]

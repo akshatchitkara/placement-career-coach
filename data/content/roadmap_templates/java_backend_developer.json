@@ -5,193 +5,209 @@
       "semester": 3,
       "month_index": 1,
       "skill_id": "java_core_oop",
-      "focus": "Core Java and data: Java Core & OOP",
+      "focus": "Core Java and data: master object-oriented Java",
       "topics": [
-        "inheritance and polymorphism",
-        "interfaces vs abstract classes",
-        "exception handling"
+        "classes and inheritance",
+        "interfaces and abstract classes",
+        "exceptions",
+        "immutability and records"
       ],
-      "deliverable": "Produce a short artifact demonstrating java core & oop applied to a realistic task."
+      "deliverable": "Model a library system with at least four classes using inheritance and interfaces, custom exceptions and unit tests for its rules."
     },
     {
       "semester": 3,
       "month_index": 2,
       "skill_id": "collections_and_generics",
-      "focus": "Core Java and data: Collections & Generics",
+      "focus": "Core Java and data: choose the right data structure",
       "topics": [
-        "list set map",
-        "generics bounds",
-        "comparators"
+        "lists, sets and maps",
+        "generics and bounds",
+        "comparators and sorting",
+        "streams"
       ],
-      "deliverable": "Produce a short artifact demonstrating collections & generics applied to a realistic task."
+      "deliverable": "Build a word-frequency tool with the right collections, sort the results with a comparator and explain the time cost of each structure you picked."
     },
     {
       "semester": 3,
       "month_index": 3,
       "skill_id": "dsa_problem_solving",
-      "focus": "Core Java and data: DSA Problem Solving",
+      "focus": "Core Java and data: solve problems efficiently",
       "topics": [
         "time complexity",
         "arrays and strings",
-        "recursion"
+        "recursion",
+        "two pointers and hash maps"
       ],
-      "deliverable": "Produce a short artifact demonstrating dsa problem solving applied to a realistic task."
+      "deliverable": "Solve 20 graded problems on arrays, strings and recursion, writing the time and space complexity next to each solution."
     },
     {
       "semester": 3,
       "month_index": 4,
       "skill_id": "sql_and_relational_databases",
-      "focus": "Core Java and data: SQL & Relational Databases",
+      "focus": "Core Java and data: work with relational data",
       "topics": [
         "joins",
-        "normalization",
-        "indexing"
+        "normalisation",
+        "indexes",
+        "transactions"
       ],
-      "deliverable": "Produce a short artifact demonstrating sql & relational databases applied to a realistic task."
+      "deliverable": "Design a normalised schema for a shop, load sample data, write ten queries including joins and aggregates, and speed one of them up with an index."
     },
     {
       "semester": 4,
       "month_index": 1,
       "skill_id": "spring_boot_fundamentals",
-      "focus": "Spring foundations: Spring Boot Fundamentals",
+      "focus": "Spring foundations: start a Spring Boot service",
       "topics": [
-        "autoconfiguration",
+        "auto-configuration",
         "dependency injection",
-        "application properties"
+        "properties and profiles",
+        "controller, service and repository layers"
       ],
-      "deliverable": "Produce a short artifact demonstrating spring boot fundamentals applied to a realistic task."
+      "deliverable": "Create a Spring Boot service with controller, service and repository layers, separate dev and prod profiles and a health endpoint."
     },
     {
       "semester": 4,
       "month_index": 2,
       "skill_id": "rest_api_design",
-      "focus": "Spring foundations: REST API Design",
+      "focus": "Spring foundations: design a clean REST API",
       "topics": [
-        "resource modeling",
+        "resource modelling",
         "status codes",
-        "versioning"
+        "versioning",
+        "pagination and error formats"
       ],
-      "deliverable": "Produce a short artifact demonstrating rest api design applied to a realistic task."
+      "deliverable": "Design and implement a REST API for orders with consistent errors and pagination, and document it with an OpenAPI file."
     },
     {
       "semester": 4,
       "month_index": 3,
       "skill_id": "jpa_hibernate",
-      "focus": "Spring foundations: JPA & Hibernate",
+      "focus": "Spring foundations: persist data with JPA",
       "topics": [
         "entity mapping",
-        "lazy vs eager",
-        "transactions"
+        "lazy and eager loading",
+        "transactions",
+        "the N+1 problem"
       ],
-      "deliverable": "Produce a short artifact demonstrating jpa & hibernate applied to a realistic task."
+      "deliverable": "Map your order model with JPA, find and fix an N+1 query using the SQL log, and show a transaction rolling back."
     },
     {
       "semester": 4,
       "month_index": 4,
       "skill_id": "multithreading_and_concurrency",
-      "focus": "Spring foundations: Multithreading & Concurrency",
+      "focus": "Spring foundations: write correct concurrent code",
       "topics": [
         "thread lifecycle",
-        "synchronization",
-        "executor services"
+        "synchronisation",
+        "executor services",
+        "deadlocks"
       ],
-      "deliverable": "Produce a short artifact demonstrating multithreading & concurrency applied to a realistic task."
+      "deliverable": "Process 1,000 tasks with a thread pool, show a race condition in a counter and fix it, and cause then fix a deadlock."
     },
     {
       "semester": 5,
       "month_index": 1,
       "skill_id": "spring_security",
-      "focus": "Secure, distributed services: Spring Security",
+      "focus": "Secure, distributed services: secure the service",
       "topics": [
         "authentication filters",
-        "authorization rules",
-        "csrf protection"
+        "authorisation rules",
+        "CSRF",
+        "password storage"
       ],
-      "deliverable": "Produce a short artifact demonstrating spring security applied to a realistic task."
+      "deliverable": "Secure your API with sign-in, roles and method-level rules, and test that each role can do only what it should."
     },
     {
       "semester": 5,
       "month_index": 2,
       "skill_id": "microservices_architecture",
-      "focus": "Secure, distributed services: Microservices Architecture",
+      "focus": "Secure, distributed services: split into services",
       "topics": [
         "service boundaries",
-        "api gateway",
-        "circuit breakers"
+        "an API gateway",
+        "circuit breakers",
+        "data ownership"
       ],
-      "deliverable": "Produce a short artifact demonstrating microservices architecture applied to a realistic task."
+      "deliverable": "Split your application into two services behind a gateway, add a circuit breaker to one call and show what happens when a service is down."
     },
     {
       "semester": 5,
       "month_index": 3,
       "skill_id": "messaging_and_events",
-      "focus": "Secure, distributed services: Messaging & Events",
+      "focus": "Secure, distributed services: communicate with events",
       "topics": [
-        "pub sub",
-        "message queues",
-        "event driven design"
+        "publish and subscribe",
+        "queues and acknowledgements",
+        "idempotent consumers",
+        "dead-letter queues"
       ],
-      "deliverable": "Produce a short artifact demonstrating messaging & events applied to a realistic task."
+      "deliverable": "Publish an order-created event, consume it idempotently in a second service and show a failing message landing in a dead-letter queue."
     },
     {
       "semester": 5,
       "month_index": 4,
       "skill_id": "testing_junit_mockito",
-      "focus": "Secure, distributed services: Testing: JUnit & Mockito",
+      "focus": "Secure, distributed services: test with confidence",
       "topics": [
-        "unit vs integration",
-        "mocking",
-        "test coverage"
+        "unit versus integration tests",
+        "mocking with Mockito",
+        "coverage and its limits",
+        "test data"
       ],
-      "deliverable": "Produce a short artifact demonstrating testing: junit & mockito applied to a realistic task."
+      "deliverable": "Write unit tests with mocks for your service layer and an integration test for the API against a test database, and produce a coverage report."
     },
     {
       "semester": 6,
       "month_index": 1,
       "skill_id": "docker_and_deployment",
-      "focus": "Production and hiring: Docker & Deployment",
+      "focus": "Production and hiring: containerise and deploy",
       "topics": [
         "images and layers",
-        "dockerfile basics",
-        "container orchestration basics"
+        "multi-stage builds",
+        "orchestration basics",
+        "memory and health settings"
       ],
-      "deliverable": "Produce a short artifact demonstrating docker & deployment applied to a realistic task."
+      "deliverable": "Package your service with a multi-stage Dockerfile and deploy two replicas with health checks to a local orchestrator."
     },
     {
       "semester": 6,
       "month_index": 2,
       "skill_id": "system_design_basics",
-      "focus": "Production and hiring: System Design Basics",
+      "focus": "Production and hiring: design for scale",
       "topics": [
         "load balancing",
         "caching layers",
-        "database scaling"
+        "database scaling",
+        "queues"
       ],
-      "deliverable": "Produce a short artifact demonstrating system design basics applied to a realistic task."
+      "deliverable": "Design a URL shortener for ten million users: estimate the load, choose storage and caching, and explain the trade-offs you made."
     },
     {
       "semester": 6,
       "month_index": 3,
       "skill_id": "capstone_java",
-      "focus": "Production and hiring: Java Capstone",
+      "focus": "Production and hiring: deliver an end-to-end service",
       "topics": [
-        "end to end service",
-        "core concepts",
-        "common pitfalls"
+        "a Spring Boot service with a database",
+        "security and tests",
+        "containers and deployment",
+        "documentation and a demo"
       ],
-      "deliverable": "Produce a short artifact demonstrating java capstone applied to a realistic task."
+      "deliverable": "Deliver a deployed service with authentication, a relational database, tests, a container image and a README, plus a five-minute demo."
     },
     {
       "semester": 6,
       "month_index": 4,
       "skill_id": "interview_preparation",
-      "focus": "Production and hiring: Interview Preparation",
+      "focus": "Production and hiring: prepare to be hired",
       "topics": [
-        "behavioral and technical prep",
-        "core concepts",
-        "common pitfalls"
+        "explaining your project",
+        "Java and concurrency questions",
+        "data structure practice",
+        "behavioural stories"
       ],
-      "deliverable": "Produce a short artifact demonstrating interview preparation applied to a realistic task."
+      "deliverable": "Record a project walkthrough, solve ten timed problems in Java and complete two mock interviews, one of them a system design round."
     }
   ],
   "generation_source": "template"

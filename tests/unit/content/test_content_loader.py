@@ -136,3 +136,21 @@ def test_no_question_gives_away_its_answer_by_length():
             wrong = max(len(o.text) for o in q.options if o.option_id != q.correct_option_id)
             assert right < 2 * wrong or right - wrong < 15, q.question_id
             assert len({o.text for o in q.options}) == len(q.options), q.question_id
+
+
+def test_roadmap_months_are_specific_not_templated_filler():
+    """Every month of every roadmap has its own deliverable and real topics."""
+    for career_id in [
+        "devops_engineer",
+        "mean_stack_developer",
+        "java_backend_developer",
+        "ai_developer",
+    ]:
+        months = load_roadmap_template(career_id).months
+        deliverables = [m.deliverable for m in months]
+        assert len(set(deliverables)) == len(deliverables), career_id
+        for m in months:
+            assert len(m.topics) >= 3, (career_id, m.skill_id)
+            assert not {"core concepts", "common pitfalls"} & set(m.topics), (career_id, m.skill_id)
+            assert len(m.deliverable.split()) >= 12, (career_id, m.skill_id)  # a real task
+            assert "short artifact demonstrating" not in m.deliverable, (career_id, m.skill_id)
