@@ -139,15 +139,14 @@ def main() -> None:
             ai_settings_page.render, "AI Settings", "ai-settings", icon=":material/settings:"
         ),
     }
-    sections = {
-        "": [registry["home"]],
-        "Plan": [registry["career"], registry["roadmap"]],
-        "Assess": [registry["assessment"], registry["results"]],
-        "Improve": [registry["coaching"], registry["weekly"], registry["progress"]],
-        "Account": [registry["profile"]]
-        if settings.demo_mode
-        else [registry["profile"], registry["ai"]],
+    sections = {  # the sidebar reads as the funnel: account first, then plan, assess, improve
+        "": [registry["profile"], registry["home"]],
+        "2 · Plan": [registry["career"], registry["roadmap"]],
+        "3 · Assess": [registry["assessment"], registry["results"]],
+        "4 · Improve": [registry["coaching"], registry["weekly"], registry["progress"]],
     }
+    if not settings.demo_mode:
+        sections["Settings"] = [registry["ai"]]
     if settings.show_dev_pages:
         sections["Developer"] = [page(m1_preview_page.render, "M1 Preview", "m1-preview")]
     register_pages(registry)
