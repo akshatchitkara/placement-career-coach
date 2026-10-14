@@ -17,6 +17,8 @@ h1 { letter-spacing: -0.02em; }
 .pcc-step.done { background: #ECFDF5; border-color: #A7F3D0; color: #065F46; }
 .pcc-step.current { background: #EEF2FF; border-color: #4F46E5; color: #3730A3;
   box-shadow: 0 0 0 2px #C7D2FE; }
+.pcc-features { display: grid; gap: .8rem; margin-bottom: .4rem;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); }
 .pcc-feature { background: #F8F9FD; border: 1px solid #E3E7F2; border-radius: 14px;
   padding: 1rem 1.1rem; height: 100%; }
 .pcc-feature h2 { margin: 0 0 .3rem 0; font-size: 1.1rem; font-weight: 600; }
@@ -57,15 +59,18 @@ h1 { letter-spacing: -0.02em; }
 [data-testid="stMetricDelta"]:has([data-testid="stMetricDeltaIcon-Down"]) {
   color: #B91C1C !important; }
 [data-testid="stSidebar"] { border-right: 1px solid #E3E7F2; }
+[data-testid="stHeaderActionElements"] { display: none !important; }
+.pcc-grow-step { margin-left: 0 !important; list-style: none; }
 
 .pcc-career-card { background: #F8F9FD; border: 1px solid #E3E7F2; border-radius: 16px;
   padding: 1.1rem 1.3rem; margin: .6rem 0 1.2rem 0; }
-.pcc-career-card h3 { margin: 0 0 .3rem 0; font-size: 1.25rem; }
-.pcc-career-card h4 { margin: .9rem 0 .3rem 0; font-size: .8rem; letter-spacing: .06em;
-  text-transform: uppercase; color: #3730A3; }
+.pcc-card-title { margin: 0 0 .3rem 0; font-size: 1.25rem; font-weight: 700; color: #1F2937; }
+.pcc-card-label { margin: .9rem 0 .3rem 0; font-size: .8rem; font-weight: 700;
+  letter-spacing: .06em; text-transform: uppercase; color: #3730A3; }
 .pcc-career-card p, .pcc-career-card li { color: #1F2937; font-size: .95rem; }
 .pcc-career-card ul { margin: 0; padding-left: 1.2rem; }
-.pcc-career-card ol.pcc-grow { margin: 0 !important; padding: 0 !important; }
+.pcc-career-card ol.pcc-grow { margin: 0 !important; padding: 0 !important;
+  padding-inline-start: 0 !important; margin-inline-start: 0 !important; }
 .pcc-grow { display: flex; flex-wrap: wrap; gap: .5rem; list-style: none; padding: 0; margin: 0; }
 .pcc-grow-step { flex: 1 1 150px; background: #fff; border: 1px solid #C7D2FE; border-radius: 12px;
   padding: .55rem .7rem; font-size: .88rem; font-weight: 600; color: #312E81; }
@@ -104,7 +109,12 @@ h1 { letter-spacing: -0.02em; }
 .pcc-badges { display: grid; gap: .6rem;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   list-style: none; padding: 0; margin: .4rem 0 1rem 0; }
-.pcc-badges { margin: 0 !important; padding: 0 !important; }
+.pcc-badges { margin: 0 !important; padding: 0 !important;
+  padding-inline-start: 0 !important; margin-inline-start: 0 !important; }
+[data-testid="stHorizontalBlock"]:has(.pcc-feature) { align-items: stretch; }
+[data-testid="stColumn"]:has(.pcc-feature) > div, [data-testid="stColumn"]:has(.pcc-feature)
+  [data-testid="stMarkdownContainer"] { height: 100%; }
+.pcc-feature { height: 100%; box-sizing: border-box; }
 .pcc-badge { border-radius: 14px; padding: .7rem .9rem; border: 1px solid #E3E7F2; }
 .pcc-badge b { display: block; }
 .pcc-badge small { display: block; color: #4B5563; margin: .15rem 0 .35rem 0; }
@@ -116,6 +126,10 @@ h1 { letter-spacing: -0.02em; }
 @media (max-width: 640px) {
   .block-container { padding: 1.2rem .9rem 3rem .9rem; }
   .pcc-hero { padding: 1.3rem 1.1rem; }
+  .pcc-features { grid-template-columns: 1fr 1fr; gap: .6rem; }
+  .pcc-feature { padding: .7rem .8rem; }
+  .pcc-feature h2 { font-size: 1rem; }
+  .pcc-feature p { font-size: .85rem; }
   .pcc-road { flex-direction: column; margin-left: .2rem; }
   .pcc-node { display: flex; align-items: flex-start; text-align: left; gap: .8rem;
     padding: 0 0 1.1rem 0; }
@@ -130,6 +144,12 @@ h1 { letter-spacing: -0.02em; }
   .stButton { display: flex; justify-content: flex-start; }
   [data-testid="stRadio"] label { min-height: 44px; }
   .pcc-game-top b { font-size: 1.1rem; }
+  [data-testid="stHorizontalBlock"]:has([data-testid="stMetric"]) {
+    flex-wrap: nowrap !important; gap: .5rem !important; }
+  [data-testid="stColumn"]:has([data-testid="stMetric"]) {
+    min-width: 0 !important; flex: 1 1 0 !important; width: auto !important; }
+  [data-testid="stMetricValue"] { font-size: 1.35rem !important; }
+  [data-testid="stMetricLabel"] { font-size: .8rem !important; }
 }
 </style>
 """

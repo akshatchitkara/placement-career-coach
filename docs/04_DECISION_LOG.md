@@ -80,4 +80,6 @@ Decisions A1-A16 and open items D1-D6 are carried from the blueprint (`00_PROJEC
 
 | A88 | The coaching chat screens a typed question before any AI call (steering phrases and abuse get a fixed reply and cost nothing), turns angle brackets in student text and earlier student turns into look-alike characters, and rejects AI replies that leak the instructions or swear (rules V-TU-05 and V-TU-06) | Prompt wording alone relies on the model behaving; these checks are enforced by code and covered by tests. No per-profile or per-day usage cap yet | Guardrails, 2026-10-14 |
 
+| A89 | UX test pass: results are the main action after a check (re-check secondary until due), the career page shows the outcome once a roadmap exists, a hosted demo no longer signs a new visitor in as the previous one, and XP is shown in on-page messages rather than toasts | A first-time-student walkthrough at desktop and phone size; Streamlit's toast has no accessible name (axe finding) | UX pass, 2026-10-14 |
+
 Open decisions D1-D6 (blueprint Appendix B) remain at their stated defaults unless revisited.

@@ -32,8 +32,7 @@ def render() -> None:
 
     if st.session_state.pop(_FLASH_KEY, False):
         st.success(
-            "Submitted. See **Results** for your level, **Coaching Plan** and **Weekly Plan** "
-            "for what to do next."
+            "Check submitted, +100 XP. Your results, coaching plan and weekly plan are ready."
         )
     state = profile.workflow_state
     if state in (WorkflowState.PROFILE_READY, WorkflowState.CAREER_SELECTED):
@@ -80,9 +79,14 @@ def render() -> None:
             WorkflowState.RETEST_DUE,
         ):
             label = "Start skills check"
+            primary_start = True
             if state != WorkflowState.ROADMAP_READY:
-                go_button("See my latest results", "results", key="check_to_results")
                 view = controller.get_weekly_plan(profile.id)
+                due = view is not None and view.retest_due
+                primary_start = due  # results come first until the re-check is due
+                go_button(
+                    "See my latest results", "results", key="check_to_results", primary=not due
+                )
                 if view is not None and view.retest_due:
                     st.warning("Your re-check is due. Unseen questions are used first.")
                 elif view is not None:
@@ -91,7 +95,7 @@ def render() -> None:
                         "You can take it early; unseen questions are used first."
                     )
                 label = "Start re-check"
-            start = st.button(label, type="primary")
+            start = st.button(label, type="primary" if primary_start else "secondary")
             full_path = False
             if controller.can_take_full_path(profile.id):
                 full_scope = controller.get_assessment_scope(profile.id, full_path=True)

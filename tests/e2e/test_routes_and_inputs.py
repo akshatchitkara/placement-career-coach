@@ -133,15 +133,15 @@ def test_semester_and_build_button_appear_in_order(page):
     assert page.get_by_role("button", name="Build my roadmap").count() == 1
 
 
-def test_changing_career_after_a_roadmap_is_blocked_with_a_clear_message(page):
+def test_career_page_after_a_roadmap_shows_the_outcome_not_the_form_again(page):
     sign_in(page, "Career changer")
     build_roadmap(page, "devops_engineer")
     nav(page, "Career & Semester")
-    page.get_by_text("AI Developer", exact=True).first.click()
-    settle(page, 600)
-    page.get_by_role("button", name="Build my roadmap").click()
-    settle(page, 1500)
     text = body(page)
+    assert "Your roadmap is ready" in text and "DevOps Engineer" in text
+    assert page.get_by_role("button", name="Start my journey").count() == 1
+    assert page.get_by_role("button", name="Build my roadmap").count() == 0  # no second build
+    assert page.get_by_text("Choose your career", exact=True).count() == 0
     assert "Traceback" not in text
     assert not page.pcc_errors, page.pcc_errors
 

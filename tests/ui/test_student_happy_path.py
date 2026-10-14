@@ -46,6 +46,7 @@ def test_profile_to_roadmap_journey():
     at = _run("career_selection_page", profile_id)
     assert any("Your roadmap is ready" in s.value for s in at.success)
     assert not at.warning and not at.error  # a fallback is never shown as a warning
+    assert len(at.radio) == 0 and _button(at, "career_build") is None  # the form is not shown again
 
     at = _run("roadmap_page", profile_id)
     assert not at.exception

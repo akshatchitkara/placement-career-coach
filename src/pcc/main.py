@@ -67,7 +67,7 @@ def _restore_session() -> None:
     profile_id = st.session_state.get("profile_id")
     if profile_id is not None and controller.get_profile(profile_id) is not None:
         return
-    last = controller.last_active_profile()
+    last = None if settings.demo_mode else controller.last_active_profile()
     if last is not None:
         st.session_state["profile_id"] = last.id
     else:

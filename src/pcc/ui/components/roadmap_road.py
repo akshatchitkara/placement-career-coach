@@ -63,8 +63,6 @@ def _quiz_result(
         if not st.session_state.get(shown_key):  # celebrate once, not on every rerun
             st.session_state[shown_key] = True
             st.balloons()
-            if result.xp_gained:
-                st.toast(f"+{result.xp_gained} XP", icon=":material/bolt:")
         if result.rank_after != result.rank_before:
             st.info(f"Rank up! You are now **{escape_md(result.rank_after)}**.")
     else:

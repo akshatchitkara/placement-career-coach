@@ -45,3 +45,20 @@ def test_seeded_demo_profiles_show_progress_on_the_road(monkeypatch):
         controller.get_game_state(by_name["Meera"]).xp
         > controller.get_game_state(by_name["Ravi"]).xp
     )
+
+
+def test_a_new_visitor_is_not_signed_in_as_the_previous_visitor(monkeypatch):
+    monkeypatch.setattr(settings, "demo_mode", True)
+    AppTest.from_file(MAIN, default_timeout=60).run()  # seeds the demo profiles
+    ravi = next(p for p in get_controller().list_profiles() if p.display_name == "Ravi")
+    first = AppTest.from_file(MAIN, default_timeout=60)
+    first.session_state["profile_id"] = ravi.id
+    first.run()
+    assert first.session_state["profile_id"] == ravi.id  # a visitor who picked Ravi stays Ravi
+
+    second = AppTest.from_file(MAIN, default_timeout=60).run()  # a different visitor
+    assert "profile_id" not in second.session_state  # not handed Ravi's progress
+
+    monkeypatch.setattr(settings, "demo_mode", False)
+    local = AppTest.from_file(MAIN, default_timeout=60).run()  # local use keeps the reload memory
+    assert "profile_id" in local.session_state

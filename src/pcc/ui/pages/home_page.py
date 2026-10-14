@@ -25,14 +25,12 @@ def _welcome() -> None:
         "the gap before placements.</p></div>",
         unsafe_allow_html=True,
     )
-    cols = st.columns(4)
-    for col, (title, text) in zip(cols, _FEATURES, strict=True):
-        col.markdown(
-            f'<div class="pcc-feature"><h2>{title}</h2><p>{text}</p></div>', unsafe_allow_html=True
-        )
-    st.write("")
     go_button("Get started", "profile", key="home_get_started", primary=True)
     st.caption("No password needed. Enter a display name on the Profile page to begin.")
+    cards = "".join(
+        f'<div class="pcc-feature"><h2>{title}</h2><p>{text}</p></div>' for title, text in _FEATURES
+    )
+    st.markdown(f'<div class="pcc-features">{cards}</div>', unsafe_allow_html=True)
 
 
 def render() -> None:

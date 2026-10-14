@@ -25,10 +25,11 @@ def _career_card(career: Career) -> None:
     )
     days = "".join(f"<li>{html.escape(item)}</li>" for item in career.day_to_day)
     st.markdown(
-        f'<div class="pcc-career-card"><h3>{html.escape(career.name)}</h3>'
+        f'<div class="pcc-career-card"><div class="pcc-card-title">{html.escape(career.name)}</div>'
         f"<p>{html.escape(career.overview or career.description)}</p>"
-        f"<h4>What you will do</h4><ul>{days}</ul>"
-        f'<h4>How you can grow</h4><ol class="pcc-grow">{steps}</ol></div>',
+        f'<div class="pcc-card-label">What you will do</div><ul>{days}</ul>'
+        '<div class="pcc-card-label">How you can grow</div>'
+        f'<ol class="pcc-grow">{steps}</ol></div>',
         unsafe_allow_html=True,
     )
 
@@ -51,13 +52,21 @@ def render() -> None:
     if profile is None:
         return
 
+    careers = {c.career_id: c for c in controller.list_careers()}
     if profile.workflow_state not in (WorkflowState.PROFILE_READY, WorkflowState.CAREER_SELECTED):
-        # Outside the Build branch so these buttons survive the rerun a click causes.
+        # The career is fixed once the roadmap exists, so show the outcome, not the form again.
+        chosen = careers.get(profile.career_id or "")
         st.success("Your roadmap is ready.")
+        if chosen is not None:
+            st.markdown(
+                f"**{escape_md(chosen.name)}** · Semester {profile.current_semester}",
+            )
+            _career_card(chosen)
         go_button("Start my journey", "roadmap", key="career_to_roadmap", primary=True)
         go_button("Go straight to the skills check", "assessment", key="career_to_check")
+        st.caption("Want a different career? Create a new profile on the Profile page.")
+        return
 
-    careers = {c.career_id: c for c in controller.list_careers()}
     options = list(careers)
     default_index = options.index(profile.career_id) if profile.career_id in careers else None
 
@@ -66,6 +75,7 @@ def render() -> None:
         options,
         format_func=lambda cid: careers[cid].name,
         index=default_index,
+        captions=[careers[cid].description for cid in options],
         key="career_choice",
     )
     if choice is None:
