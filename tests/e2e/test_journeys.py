@@ -28,7 +28,7 @@ def test_full_journey(page, app, career, semester, questions):
 
     nav(page, "Roadmap")
     assert page.locator("[data-testid=stExpander]").count() == 16
-    assert page.get_by_text("you are in this semester").count() == 1
+    assert page.get_by_text("your semester").count() == 1
 
     start_check(page)
     assert page.get_by_text(f"Question 1 of {questions}").count() == 1
