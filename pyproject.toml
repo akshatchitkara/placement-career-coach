@@ -11,6 +11,9 @@ src = ["src"]
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "B"]
 
+[tool.ruff.lint.per-file-ignores]
+"qa/build_product_note_docx.py" = ["E501"]  # long prose strings in the document text
+
 [tool.mypy]
 python_version = "3.11"
 packages = ["pcc.domain", "pcc.workflow"]
