@@ -228,7 +228,7 @@ Priorities: **P0** critical (core journey unusable or severe security issue), **
 
 - **Reproduction:** Open `src/pcc/workflow/workflow_controller.py`.
 - **Expected:** Use cases split by concern (check, coaching, tutor, weekly plan, progress).
-- **Actual:** About 1,000 lines and 45 methods in one class.
+- **Actual:** About 1,100 lines and 51 methods in one class (module quizzes, the wish list and game state were added on 2026-10-14).
 - **Evidence:** `wc -l` and a method count; the file is the most changed in this project.
 - **Root cause:** It grew one feature at a time; each addition was small and well tested.
 - **Affected files:** `src/pcc/workflow/workflow_controller.py`

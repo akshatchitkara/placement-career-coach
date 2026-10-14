@@ -24,6 +24,10 @@ def _run(module: str, profile_id: int | None = None) -> AppTest:
     return at.run()
 
 
+def _button(at, key):
+    return next((b for b in at.button if b.key == key), None)
+
+
 def test_profile_to_roadmap_journey():
     at = _run("profile_page")
     at.text_input[0].set_value("Asha")
@@ -33,10 +37,15 @@ def test_profile_to_roadmap_journey():
 
     at = _run("career_selection_page", profile_id)
     assert not at.exception
-    at.radio[0].set_value("devops_engineer")
-    at.button[0].click().run()
-    assert not at.exception
-    assert any("Roadmap ready" in s.value for s in at.success)
+    assert len(at.radio) == 1 and _button(at, "career_build") is None  # nothing chosen yet
+    at = at.radio[0].set_value("devops_engineer").run()
+    assert len(at.radio) == 2  # the semester choice appears once a career is chosen
+    assert _button(at, "career_build") is None  # and the build button waits for the semester
+    at = at.radio[1].set_value(3).run()
+    _button(at, "career_build").click().run()
+    at = _run("career_selection_page", profile_id)
+    assert any("Your roadmap is ready" in s.value for s in at.success)
+    assert not at.warning and not at.error  # a fallback is never shown as a warning
 
     at = _run("roadmap_page", profile_id)
     assert not at.exception
@@ -44,20 +53,31 @@ def test_profile_to_roadmap_journey():
     assert [s.value.split("  ")[0] for s in at.header] == [f"Semester {n}" for n in (3, 4, 5, 6)]
 
 
-def test_non_cs_career_shows_unsupported_message():
+def test_students_cannot_type_a_career_but_can_ask_for_one():
     at = _run("profile_page")
     at.text_input[0].set_value("Ravi")
     at.button[0].click().run()
     profile_id = at.session_state["profile_id"]
 
     at = _run("career_selection_page", profile_id)
-    at.radio[0].set_value("__other__").run()
+    assert "__other__" not in at.radio[0].options and len(at.radio[0].options) == 4
     at.text_input[0].set_value("Doctor")
-    at.button[0].click().run()
-    assert any("not supported yet" in e.value for e in at.error)
+    _button(at, "career_wish_send").click().run()
+    assert any("noted" in s.value for s in at.success)
 
     at = _run("roadmap_page", profile_id)
     assert any("No roadmap yet" in i.value for i in at.info)
+
+
+def test_career_card_says_what_the_career_is_and_how_it_grows():
+    at = _run("profile_page")
+    at.text_input[0].set_value("Meera")
+    at.button[0].click().run()
+    at = _run("career_selection_page", at.session_state["profile_id"])
+    at = at.radio[0].set_value("java_backend_developer").run()
+    card = next(m.value for m in at.markdown if "pcc-career-card" in m.value)
+    assert "What you will do" in card and "How you can grow" in card
+    assert card.count("pcc-grow-step") == 4
 
 
 def test_pages_ask_for_a_profile_first():
@@ -72,9 +92,9 @@ def _signed_in_with_roadmap(name: str, career_id: str, semester: int = 3) -> int
     at.button[0].click().run()
     profile_id = at.session_state["profile_id"]
     at = _run("career_selection_page", profile_id)
-    at.radio[0].set_value(career_id)
-    at.select_slider[0].set_value(semester)
-    at.button[0].click().run()
+    at = at.radio[0].set_value(career_id).run()
+    at = at.radio[1].set_value(semester).run()
+    _button(at, "career_build").click().run()
     return profile_id
 
 

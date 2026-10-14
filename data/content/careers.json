@@ -11,6 +11,18 @@
       "sre",
       "cloud engineer",
       "platform engineer"
+    ],
+    "overview": "DevOps engineers are the people who make software reach users quickly and safely. You connect developers and operations: you automate builds and releases, run applications in the cloud, and make sure that when something breaks, the team finds out fast and fixes it.",
+    "day_to_day": [
+      "Build automated pipelines that test and deploy code on every change",
+      "Package applications in containers and run them on cloud infrastructure",
+      "Watch dashboards and alerts, and trace why a service slowed down or failed"
+    ],
+    "growth_path": [
+      "Junior DevOps / Cloud Support Engineer",
+      "DevOps Engineer",
+      "Senior DevOps / Site Reliability Engineer",
+      "Platform Architect or Engineering Lead"
     ]
   },
   {
@@ -26,6 +38,18 @@
       "full stack web developer",
       "web developer",
       "node developer"
+    ],
+    "overview": "MEAN stack developers build complete web applications on their own, from the screen a user clicks to the database behind it. You use one language, JavaScript, across MongoDB, Express, Angular and Node.js, which makes it a quick way to ship real products.",
+    "day_to_day": [
+      "Build interactive pages and forms with Angular",
+      "Write the server routes and APIs that power them with Node.js and Express",
+      "Design and query the MongoDB data the application stores"
+    ],
+    "growth_path": [
+      "Junior Web Developer",
+      "Full-Stack Developer",
+      "Senior Full-Stack Developer",
+      "Tech Lead or Solutions Architect"
     ]
   },
   {
@@ -39,6 +63,18 @@
       "backend developer",
       "spring developer",
       "spring boot developer"
+    ],
+    "overview": "Java backend developers build the engines behind apps: the services, APIs and databases that handle payments, orders and accounts. Banks, e-commerce and large enterprises rely on Java because it is dependable at scale, so this is a steady, in-demand path.",
+    "day_to_day": [
+      "Write REST APIs and business logic with Java and Spring Boot",
+      "Design relational database tables and write efficient SQL",
+      "Test, debug and improve the performance of services that many users depend on"
+    ],
+    "growth_path": [
+      "Junior Java Developer",
+      "Backend Developer",
+      "Senior Backend Engineer",
+      "Software Architect or Engineering Manager"
     ]
   },
   {
@@ -53,6 +89,18 @@
       "genai developer",
       "data scientist",
       "ai ml developer"
+    ],
+    "overview": "AI developers build software that learns from data or uses large language models. You prepare data, train and evaluate models, and then turn them into working features such as recommendations, chatbots and predictions that people can actually use.",
+    "day_to_day": [
+      "Clean and explore data, then train and evaluate machine learning models",
+      "Build apps on top of language models, including prompts and retrieval of documents",
+      "Deploy models behind APIs and monitor whether they keep working well"
+    ],
+    "growth_path": [
+      "Junior ML / AI Engineer",
+      "AI Developer",
+      "Senior AI or ML Engineer",
+      "AI Architect or Research and Product Lead"
     ]
   }
 ]

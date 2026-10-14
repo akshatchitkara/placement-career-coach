@@ -68,14 +68,10 @@ def build_roadmap(page, career_id: str, semester: int = 3) -> None:
     nav(page, "Career & Semester")
     page.get_by_text(CAREER_NAMES[career_id], exact=True).first.click()
     settle(page, 800)
-    slider = page.get_by_role("slider")
-    if semester != 3:
-        slider.focus()
-        for _ in range(semester - 3):
-            page.keyboard.press("ArrowRight")
-            page.wait_for_timeout(250)
+    page.get_by_text(f"Semester {semester}", exact=True).first.click()
+    settle(page, 800)
     page.get_by_role("button", name="Build my roadmap").click()
-    page.wait_for_selector("text=Roadmap ready", timeout=60000)
+    page.wait_for_selector("text=Your roadmap is ready", timeout=60000)
     settle(page, 800)
 
 

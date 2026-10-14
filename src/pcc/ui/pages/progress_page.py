@@ -4,6 +4,7 @@ import streamlit as st
 
 from pcc.content.content_loader import load_app_settings, load_skills
 from pcc.domain.progress import AttemptSummary
+from pcc.ui.components.game_strip import render_badge_shelf
 from pcc.ui.components.level_badge import LEVEL_LABELS
 from pcc.ui.components.page_frame import page_header, require_profile
 from pcc.ui.components.progress_visuals import render_skill_changes, render_trend
@@ -95,6 +96,9 @@ def render() -> None:
         elif view is not None:
             st.write(f"Your re-check is in {view.days_until_retest} days.")
             go_button("Open this week's plan", "weekly", key="progress_weekly", primary=True)
+
+    st.header("Your badges")
+    render_badge_shelf(controller.get_game_state(profile.id))
 
     st.header("Your score over time")
     render_trend(attempts, settings.level_lower_bounds)

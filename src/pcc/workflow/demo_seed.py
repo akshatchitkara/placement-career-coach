@@ -54,6 +54,17 @@ def _take_check(controller: WorkflowController, profile_id: int, correct: dict[s
     controller.submit_assessment(profile_id, session.attempt_id, _answers(session, correct, bank))
 
 
+def _pass_modules(controller: WorkflowController, profile_id: int, count: int) -> None:
+    """Passes the first `count` modules through the real quiz, so the road shows progress."""
+    bank = {q.question_id: q for q in load_question_bank(_CAREER)}
+    roadmap = controller.get_roadmap(profile_id)
+    assert roadmap is not None
+    for skill_id in roadmap.skill_ids_in_order()[:count]:
+        quiz = controller.get_module_quiz(profile_id, skill_id)
+        picks = {q.question_id: bank[q.question_id].correct_option_id for q in quiz}
+        controller.grade_module_quiz(profile_id, skill_id, picks)
+
+
 def seed_demo_profiles(db_path: str, today: date) -> None:
     """Creates Asha (new), Ravi (one baseline) and Meera (baseline then improved re-check)."""
     clock = _Clock(today)
@@ -74,5 +85,7 @@ def seed_demo_profiles(db_path: str, today: date) -> None:
     _take_check(controller, meera.id, MEERA_RECHECK)
 
     clock.today = today
+    _pass_modules(controller, ravi.id, 1)
+    _pass_modules(controller, meera.id, 3)
     controller.sync_state(ravi.id)
     controller.sync_state(meera.id)

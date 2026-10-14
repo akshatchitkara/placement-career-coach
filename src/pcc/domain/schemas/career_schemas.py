@@ -10,4 +10,7 @@ class Career(BaseModel):
     name: str
     tier: Literal["A", "B", "C"]
     description: str = ""
+    overview: str = ""
+    day_to_day: list[str] = Field(default_factory=list)
+    growth_path: list[str] = Field(default_factory=list)
     aliases: list[str] = Field(default_factory=list)

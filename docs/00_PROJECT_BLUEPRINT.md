@@ -369,14 +369,14 @@ Rules: roadmap must validate before an assessment; questions must reference road
 class StudentContext(BaseModel):
     profile_id: int
     career_id: str
-    current_semester: int                  # 3..6
+    current_semester: int  # 3..6
     roadmap: Roadmap | None
     attempt_id: int | None
     answers: list[Answer]
-    skill_scores: dict[str, SkillScore]    # skill_id -> score object
+    skill_scores: dict[str, SkillScore]  # skill_id -> score object
     overall_score: float | None
     level: Level | None
-    level_notes: list[str]                 # gate / coverage explanations
+    level_notes: list[str]  # gate / coverage explanations
     weakest_skill_id: str | None
     missed_question_ids: list[str]
     roadmap_position: RoadmapPosition | None

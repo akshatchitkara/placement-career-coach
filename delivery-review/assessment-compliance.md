@@ -50,7 +50,7 @@
 
 | ID | Status | Reason |
 |---|---|---|
-| A1 | PARTIAL | P2. A deliberate scope decision, stated in the product note section 1. Cybersecurity and VLSI are refused too. Adding a career is a content task |
+| A1 | PARTIAL (weaker since 2026-10-14) | P2. A deliberate scope decision. Students can no longer type a career at all: they pick one of four, or leave a request in a wish-list box. A literal reader of the brief could now rate this FAIL |
 | A4 | PARTIAL | P2. Quiz only; the choice logic exists and the note explains it (section 4). Written, assignment and voice assessments are 'later' |
 | B10 | NOT VERIFIED | Not measurable here |
 | D1 | NOT VERIFIED | Process item for the owner |

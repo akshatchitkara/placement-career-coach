@@ -2,6 +2,7 @@
 
 import streamlit as st
 
+from pcc.ui.components.game_strip import render_game_strip
 from pcc.ui.components.journey import next_step, next_step_button, render_stepper, state_label
 from pcc.ui.components.level_badge import LEVEL_LABELS
 from pcc.ui.components.progress_visuals import sparkline_svg
@@ -52,6 +53,7 @@ def render() -> None:
             f"Semester {profile.current_semester} · {state_label(profile.workflow_state)}"
         )
     render_stepper(profile.workflow_state)
+    render_game_strip(controller.get_game_state(profile.id))
 
     message, _, _ = next_step(profile.workflow_state)
     with st.container(border=True):

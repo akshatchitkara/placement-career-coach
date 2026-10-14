@@ -18,7 +18,7 @@
 
 | Stage | The student thinks | The product does |
 |---|---|---|
-| 1 Choose | "Which role?" | Four careers with a plain description; a typed career is matched or politely refused |
+| 1 Choose | "Which role?" | Four careers, each with what it is, what you do and how you can grow; a wish-list box takes requests for other careers |
 | 2 Plan | "What do I learn, and when?" | A 16-month roadmap, four months per semester, with topics and a deliverable for each month |
 | 3 Baseline | "Where do I stand?" | A 12-question check on this semester's skills: level, per-skill scores, and a "you are here" marker on the roadmap |
 | 4 Improve | "What do I fix first?" | A practice plan for the weakest skill; every task is tied to a question they missed, and a coach they can question |

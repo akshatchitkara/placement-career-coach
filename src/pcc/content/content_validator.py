@@ -24,6 +24,12 @@ def validate_careers(careers: list[Career]) -> list[str]:
         if career.career_id in seen:
             issues.append(f"careers.json: duplicate career_id '{career.career_id}'")
         seen.add(career.career_id)
+        if not career.overview.strip():
+            issues.append(f"careers.json: '{career.career_id}' has no overview")
+        if len(career.day_to_day) != 3:
+            issues.append(f"careers.json: '{career.career_id}' needs exactly 3 day_to_day items")
+        if len(career.growth_path) != 4:
+            issues.append(f"careers.json: '{career.career_id}' needs exactly 4 growth_path steps")
     return issues
 
 

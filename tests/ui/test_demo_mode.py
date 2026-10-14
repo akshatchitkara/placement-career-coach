@@ -31,3 +31,17 @@ def test_normal_mode_does_not_seed(monkeypatch):
     at = AppTest.from_file(MAIN, default_timeout=60).run()
     assert not at.exception
     assert _names() == []
+
+
+def test_seeded_demo_profiles_show_progress_on_the_road(monkeypatch):
+    monkeypatch.setattr(settings, "demo_mode", True)
+    AppTest.from_file(MAIN, default_timeout=60).run()
+    controller = get_controller()
+    by_name = {p.display_name: p.id for p in controller.list_profiles()}
+    passed = {n: sum(v.passed for v in controller.get_module_progress(i).values())
+              for n, i in by_name.items()}  # fmt: skip
+    assert passed == {"Asha": 0, "Ravi": 1, "Meera": 3}
+    assert (
+        controller.get_game_state(by_name["Meera"]).xp
+        > controller.get_game_state(by_name["Ravi"]).xp
+    )

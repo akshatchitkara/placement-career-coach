@@ -54,13 +54,13 @@ All four careers (DevOps, MEAN, Java, AI) can complete a check in any of Semeste
 | Page | Purpose |
 |---|---|
 | Home | Where you are in the journey (five-step tracker), your one next step, latest score, re-check countdown and, after two checks, your trend. New visitors see what the app does |
-| Career & Semester | Pick one of 4 CS careers or type one; shows which semesters have a skills check; builds the validated roadmap |
-| Roadmap | Semesters 3-6, four months each, with topics and deliverables |
+| Career & Semester | Pick one of 4 CS careers; each shows what it is, what you will do and how you can grow. The semester choice appears after the career, and the build button after the semester. A small box takes requests for careers we do not have yet |
+| Roadmap | A road with one stop per month (16), by semester, with the current stop highlighted. Finish a module, then pass its 3-question quiz (2 right) to complete it and earn XP. Shows your rank, XP and a button to the skills check |
 | Skills Check | One question at a time with progress, Back/Next and an unanswered list before submit; 3 questions per skill (1 easy, 1 medium, 1 hard), options shuffled; also hosts the re-check and the **full-path check** (every roadmap skill, 2 questions each, 28 for a career; the only way to reach Industry-ready) |
 | Results | Score and level with a four-step ladder and the gap to the next level, a "biggest opportunity" skill, per-skill bars with the mastery line, full numbers, roadmap position, answer review |
 | Coaching Plan | 3-5 tasks for the weakest skill, each tied to a question you missed. Each task has a **coach**: explain it differently, show an example, ask your own question, or take a short practice quiz |
 | Weekly Plan | The week laid out over seven days plus a re-check day, task links, a time-budget picker, progress and a calendar (.ics) download |
-| Progress | Score trend across checks, skill-by-skill change with a tick for the previous check, whether last week's effort showed up in the score, and a ready-to-send mentor message for any skill under 40% |
+| Progress | Badges you have earned, score trend across checks, skill-by-skill change with a tick for the previous check, whether last week's effort showed up in the score, and a ready-to-send mentor message for any skill under 40% |
 | Profile / AI Settings | Sign in with a display name (no password); optional AI provider |
 
 ## How scoring stays fair

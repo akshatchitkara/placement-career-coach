@@ -71,4 +71,11 @@ Decisions A1-A16 and open items D1-D6 are carried from the blueprint (`00_PROJEC
 
 | A81 | `PCC_DEMO_MODE=true` seeds the demo profiles into an empty database at start and hides AI Settings; the team demo is hosted on Streamlit Community Cloud in offline AI mode | Free hosting has a throwaway disk, so the demo data must be recreated on every start, and a key typed into AI Settings would be stored on a shared machine | Deployment, 2026-10-12 |
 
+| A82 | Students can no longer type their own career; the page has a wish-list box that saves the request. The typed-career code stays in the backend | Product decision from the owner: a simpler choice. It weakens assessment item A1 (any field accepted), now recorded as a known gap | Career page rework, 2026-10-14 |
+| A83 | Each career shows an overview, three day-to-day points and a four-step growth path (no salary figures) | Students choose a career without knowing what it is; the text is AI-drafted and unreviewed | Career page rework, 2026-10-14 |
+| A84 | The roadmap is a road: one stop per month, with a 3-question quiz (one easy, one medium, one hard from the skill's question bank, unseen questions first, 2 right to pass). The quiz is practice only and never changes a score or level | Gamification and a check on each module, without writing about 190 new questions; the bank has only 6 per skill, so some questions repeat the skills check | Career page rework, 2026-10-14 |
+| A85 | XP, rank and badges are computed from stored activity (modules passed, checks, ticked weekly tasks, improvement) and never stored; the point values are constants in `domain/gamification.py`. No streaks | Derived numbers cannot drift from the real data; weekly ticks carry no timestamp, so a streak would be invented | Career page rework, 2026-10-14 |
+| A86 | A roadmap built from the curated template after an AI failure is no longer announced to the student; it is logged | A fallback is a normal outcome and the message read like an error | Career page rework, 2026-10-14 |
+| A87 | The sidebar starts with Profile (step 1) then Home, then numbered Plan, Assess and Improve sections; AI Settings moves to its own Settings section and is hidden in demo mode | The account step leads the funnel | UI rework, 2026-10-14 |
+
 Open decisions D1-D6 (blueprint Appendix B) remain at their stated defaults unless revisited.

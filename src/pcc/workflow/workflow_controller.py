@@ -38,6 +38,13 @@ from pcc.core.constants import SEMESTERS
 from pcc.core.exceptions import PccError
 from pcc.domain.career_resolver import resolve_career
 from pcc.domain.enums import WorkflowState, is_quiz_assessable
+from pcc.domain.gamification import (
+    MODULE_QUIZ_PASS,
+    Activity,
+    GameState,
+    game_state,
+    semesters_completed,
+)
 from pcc.domain.progress import (
     AttemptSummary,
     ProgressView,
@@ -67,6 +74,7 @@ from pcc.domain.schemas.roadmap_schemas import Roadmap, RoadmapMonth, Skill
 from pcc.domain.schemas.tutor_schemas import (
     MAX_STUDENT_MESSAGES_PER_TASK,
     MAX_STUDENT_TEXT,
+    ModuleQuizResult,
     PracticeQuestionResult,
     TutorContext,
     TutorKind,
@@ -103,6 +111,14 @@ from pcc.persistence.repositories.coaching_repository import (
     get_active_plan_id,
     list_messages,
     save_active_plan,
+)
+from pcc.persistence.repositories.module_progress_repository import (
+    ModuleProgress,
+    add_career_request,
+    record_module_attempt,
+)
+from pcc.persistence.repositories.module_progress_repository import (
+    get_module_progress as load_module_progress,
 )
 from pcc.persistence.repositories.profile_repository import (
     Profile,
@@ -927,6 +943,129 @@ class WorkflowController:
             )
             conn.commit()
         return reply
+
+    # --- roadmap modules and game state ------------------------------------------------------
+    def request_career(self, profile_id: int, text: str) -> str:
+        """Wish list: remember a career the student wants that the catalog lacks."""
+        resolution = resolve_career(text, load_careers())
+        if resolution.status == "invalid_input":
+            raise PccError(resolution.message)
+        if resolution.career is not None:
+            return f"{resolution.career.name} is already on the list above. Pick it there."
+        with closing(self._connect()) as conn:
+            if get_profile(conn, profile_id) is None:
+                raise PccError("Profile not found.")
+            add_career_request(conn, profile_id, " ".join(text.split()))
+            conn.commit()
+        return "Thanks, noted. We use these requests to decide which career to add next."
+
+    def get_module_progress(self, profile_id: int) -> dict[str, ModuleProgress]:
+        with closing(self._connect()) as conn:
+            return load_module_progress(conn, profile_id)
+
+    def get_module_quiz(self, profile_id: int, skill_id: str) -> list[PresentedQuestion]:
+        """One easy, one medium and one hard question on this module's skill.
+
+        Questions the student has not met in a skills check come first, so the quiz does not
+        spoil the next check. A retry rotates to the other question of each difficulty.
+        Empty when the skill has no quiz questions (it is then marked done without a quiz).
+        """
+        with closing(self._connect()) as conn:
+            ctx = self._check_context(conn, profile_id)
+            if skill_id not in ctx.months_by_skill:
+                raise PccError("That module is not on your roadmap.")
+            seen = set(seen_question_ids_oldest_first(conn, profile_id))
+            attempts = load_module_progress(conn, profile_id).get(skill_id)
+        turn = attempts.attempts if attempts else 0
+        chosen = []
+        for difficulty in ("easy", "medium", "hard"):
+            pool = sorted(
+                (q for q in ctx.bank if q.skill_id == skill_id and q.difficulty == difficulty),
+                key=lambda q: (q.question_id in seen, q.question_id),
+            )
+            if pool:
+                chosen.append(pool[turn % len(pool)])
+        return present(chosen, ctx.skills_by_id, 7000 + turn)
+
+    def grade_module_quiz(
+        self, profile_id: int, skill_id: str, selections: dict[str, str]
+    ) -> ModuleQuizResult:
+        quiz = self.get_module_quiz(profile_id, skill_id)
+        if not quiz or set(selections) != {q.question_id for q in quiz}:
+            raise PccError("Answer every quiz question first.")
+        before = self.get_game_state(profile_id)
+        with closing(self._connect()) as conn:
+            bank = {q.question_id: q for q in self._check_context(conn, profile_id).bank}
+            prior = load_module_progress(conn, profile_id).get(skill_id)
+            results = []
+            for q in quiz:
+                source = bank[q.question_id]
+                options = {o.option_id: o.text for o in source.options}
+                if selections[q.question_id] not in options:
+                    raise PccError("Pick one of the listed options.")
+                results.append(
+                    PracticeQuestionResult(
+                        question_id=q.question_id,
+                        stem=q.stem,
+                        selected_option_text=options[selections[q.question_id]],
+                        correct_option_text=options[source.correct_option_id],
+                        is_correct=selections[q.question_id] == source.correct_option_id,
+                        explanation=source.explanation,
+                    )
+                )
+            correct = sum(r.is_correct for r in results)
+            passed = correct >= MODULE_QUIZ_PASS
+            record_module_attempt(conn, profile_id, skill_id, correct, passed)
+            conn.commit()
+        after = self.get_game_state(profile_id)
+        return ModuleQuizResult(
+            skill_id=skill_id,
+            results=results,
+            correct=correct,
+            total=len(results),
+            passed=passed,
+            newly_passed=passed and not (prior and prior.passed),
+            xp_gained=after.xp - before.xp,
+            rank_before=before.rank,
+            rank_after=after.rank,
+        )
+
+    def complete_module_without_quiz(self, profile_id: int, skill_id: str) -> None:
+        """For the few modules (projects, interview prep) that have no quiz questions."""
+        if self.get_module_quiz(profile_id, skill_id):
+            raise PccError("This module has a quiz. Take the quiz to complete it.")
+        with closing(self._connect()) as conn:
+            record_module_attempt(conn, profile_id, skill_id, 0, True)
+            conn.commit()
+
+    def get_game_state(self, profile_id: int) -> GameState:
+        """XP, rank and badges, derived from stored activity (never stored itself)."""
+        with closing(self._connect()) as conn:
+            profile = get_profile(conn, profile_id)
+            records = list_submitted_attempts(conn, profile_id)
+            progress = load_module_progress(conn, profile_id)
+            weeks = list_weekly_plans(conn, profile_id)
+            roadmap = get_active_roadmap(conn, profile_id)
+        passed = {k for k, v in progress.items() if v.passed}
+        by_semester: dict[int, int] = {}
+        if roadmap is not None:
+            for month in roadmap.months:
+                if month.skill_id in passed:
+                    by_semester[month.semester] = by_semester.get(month.semester, 0) + 1
+        improved = False
+        if len(records) >= 2 and profile is not None and profile.career_id:
+            view = self.get_progress(profile_id)
+            improved = view.overall_delta is not None and view.overall_delta > 0
+        return game_state(
+            Activity(
+                modules_passed=len(passed),
+                semesters_completed=semesters_completed(by_semester),
+                checks_completed=len(records),
+                tasks_done=sum(len(done) for _, _, done in weeks),
+                improved=improved,
+                full_path_done=any(r.attempt_type == "full_path" for r in records),
+            )
+        )
 
     def get_practice_quiz(self, profile_id: int, task_order: int) -> list[PresentedQuestion]:
         """Up to 3 questions on this task's concept, taken only from ones the student has seen.

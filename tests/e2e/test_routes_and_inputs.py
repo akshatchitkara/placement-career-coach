@@ -84,32 +84,53 @@ def test_sql_in_a_display_name_is_stored_as_plain_text(page, app):
     assert "After the attack" in body(page)
 
 
-def _type_career(page, text: str) -> None:
+def _ask_for_career(page, text: str) -> None:
     nav(page, "Career & Semester")
-    page.get_by_text("My career isn't listed", exact=True).click()
-    settle(page, 600)
-    page.get_by_label("Type a career").fill(text)
-    page.get_by_role("button", name="Build my roadmap").click()
+    box = page.get_by_label("Career you would like")
+    if not box.is_visible():
+        page.get_by_text("Want a career we don't have yet?", exact=True).click()
+        settle(page, 600)
+    box.fill(text)
+    page.get_by_role("button", name="Send request").click()
     settle(page, 1800)
 
 
-def test_free_text_career_cases(page):
+def test_career_wish_list_cases(page):
     sign_in(page, "Career text tester")
-    _type_career(page, "Doctor")
-    assert "is not supported yet" in body(page) and "Computer Science careers only" in body(page)
+    nav(page, "Career & Semester")
+    assert "My career isn't listed" not in body(page)  # students cannot type their own career
 
-    _type_career(page, "")
+    _ask_for_career(page, "Doctor")
+    assert "Thanks, noted" in body(page)
+
+    _ask_for_career(page, "")
     assert "Enter a career name." in body(page)
 
-    _type_career(page, "Robert'); DROP TABLE profiles;--")
+    _ask_for_career(page, "Robert'); DROP TABLE profiles;--")
     assert "letters, digits, spaces" in body(page)  # rejected by the character allow-list
 
-    _type_career(page, "<script>window.__xss=1</script>")
+    _ask_for_career(page, "<script>window.__xss=1</script>")
     assert page.evaluate("window.__xss") is None
     assert "letters, digits, spaces" in body(page)
 
-    _type_career(page, "aspiring java developer")  # matches a catalog alias
-    assert "Roadmap ready" in body(page)
+    _ask_for_career(page, "aspiring java developer")  # matches a catalog alias
+    assert "already on the list" in body(page)
+
+
+def test_semester_and_build_button_appear_in_order(page):
+    sign_in(page, "Order tester")
+    nav(page, "Career & Semester")
+    assert "Your current semester" not in body(page)
+    assert page.get_by_role("button", name="Build my roadmap").count() == 0
+    page.get_by_text("DevOps Engineer", exact=True).first.click()
+    settle(page, 800)
+    shown = body(page).lower()  # the card headings are styled upper-case
+    assert "what you will do" in shown and "how you can grow" in shown
+    assert "Your current semester" in body(page)
+    assert page.get_by_role("button", name="Build my roadmap").count() == 0
+    page.get_by_text("Semester 3", exact=True).first.click()
+    settle(page, 800)
+    assert page.get_by_role("button", name="Build my roadmap").count() == 1
 
 
 def test_changing_career_after_a_roadmap_is_blocked_with_a_clear_message(page):

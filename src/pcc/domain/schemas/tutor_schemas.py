@@ -42,3 +42,17 @@ class PracticeQuestionResult(BaseModel):
     correct_option_text: str
     is_correct: bool
     explanation: str
+
+
+class ModuleQuizResult(BaseModel):
+    """The graded end-of-module quiz, plus what it changed in the student's game state."""
+
+    skill_id: str
+    results: list[PracticeQuestionResult]
+    correct: int
+    total: int
+    passed: bool
+    newly_passed: bool  # first time this module was passed
+    xp_gained: int
+    rank_before: str
+    rank_after: str

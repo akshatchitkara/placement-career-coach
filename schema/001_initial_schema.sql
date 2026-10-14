@@ -122,3 +122,23 @@ CREATE TABLE assessment_drafts (
     answers_json TEXT NOT NULL,
     updated_at TEXT NOT NULL
 );
+
+-- Careers students asked for that the catalog does not have yet (a wish list, never used by scoring).
+CREATE TABLE career_requests (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    profile_id INTEGER NOT NULL REFERENCES profiles(id),
+    requested_text TEXT NOT NULL,
+    created_at TEXT NOT NULL
+);
+
+-- One row per roadmap module (skill) the student has taken the end-of-module quiz for.
+-- passed_at is set the first time they get enough right. Never read by scoring.
+CREATE TABLE module_progress (
+    profile_id INTEGER NOT NULL REFERENCES profiles(id),
+    skill_id TEXT NOT NULL,
+    best_correct INTEGER NOT NULL,
+    attempts INTEGER NOT NULL,
+    passed_at TEXT,
+    updated_at TEXT NOT NULL,
+    PRIMARY KEY (profile_id, skill_id)
+);

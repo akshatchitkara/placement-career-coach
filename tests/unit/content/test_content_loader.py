@@ -154,3 +154,17 @@ def test_roadmap_months_are_specific_not_templated_filler():
             assert not {"core concepts", "common pitfalls"} & set(m.topics), (career_id, m.skill_id)
             assert len(m.deliverable.split()) >= 12, (career_id, m.skill_id)  # a real task
             assert "short artifact demonstrating" not in m.deliverable, (career_id, m.skill_id)
+
+
+def test_every_career_explains_itself_and_validation_catches_gaps():
+    from pcc.content.content_loader import load_careers
+    from pcc.content.content_validator import validate_careers
+
+    careers = load_careers()
+    assert validate_careers(careers) == []
+    for career in careers:
+        assert career.overview and len(career.day_to_day) == 3 and len(career.growth_path) == 4
+
+    bare = careers[0].model_copy(update={"overview": " ", "day_to_day": [], "growth_path": ["a"]})
+    issues = validate_careers([bare])
+    assert len(issues) == 3
