@@ -11,7 +11,11 @@ import time
 from pathlib import Path
 
 from pcc.agents.fallbacks.tutor_fallback import template_reply
-from pcc.agents.validators.tutor_validator import validate_tutor_reply
+from pcc.agents.validators.tutor_validator import (
+    sanitize_student_text,
+    screen_student_text,
+    validate_tutor_reply,
+)
 from pcc.ai.ai_client import AiClient
 from pcc.ai.safe_generate import generate_with_retry
 from pcc.core.exceptions import AiUnavailableError
@@ -41,7 +45,13 @@ def _build_prompt(context: TutorContext, kind: TutorKind, student_text: str) -> 
         m.model_dump(include={"stem", "selected_option_text", "correct_option_text", "explanation"})
         for m in context.missed
     ]
-    history = [{"role": m.role, "text": m.content} for m in context.history[-_HISTORY_TURNS:]]
+    history = [
+        {
+            "role": m.role,
+            "text": sanitize_student_text(m.content) if m.role == "student" else m.content,
+        }
+        for m in context.history[-_HISTORY_TURNS:]
+    ]
     return _PROMPT_PATH.read_text(encoding="utf-8").format(
         career_name=context.career_name,
         skill_name=context.skill_name,
@@ -49,13 +59,19 @@ def _build_prompt(context: TutorContext, kind: TutorKind, student_text: str) -> 
         missed_json=json.dumps(missed),
         history_json=json.dumps(history),
         request=_REQUESTS[kind],
-        student_text=student_text[:MAX_STUDENT_TEXT] if student_text else "(none)",
+        student_text=(
+            sanitize_student_text(student_text[:MAX_STUDENT_TEXT]) if student_text else "(none)"
+        ),
     )
 
 
 def tutor_reply(
     context: TutorContext, kind: TutorKind, student_text: str, ai_client: AiClient | None
 ) -> TutorReply:
+    blocked = screen_student_text(student_text) if kind == "question" else None
+    if blocked is not None:  # never sent to the AI
+        logger.info("tutor_agent prompt=%s input_blocked", PROMPT_VERSION)
+        return TutorReply(text=blocked, used_fallback=True, message="")
     if ai_client is None:
         return TutorReply(text=template_reply(context, kind), used_fallback=False)
 

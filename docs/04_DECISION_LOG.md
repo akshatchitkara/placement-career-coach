@@ -78,4 +78,6 @@ Decisions A1-A16 and open items D1-D6 are carried from the blueprint (`00_PROJEC
 | A86 | A roadmap built from the curated template after an AI failure is no longer announced to the student; it is logged | A fallback is a normal outcome and the message read like an error | Career page rework, 2026-10-14 |
 | A87 | The sidebar starts with Profile (step 1) then Home, then numbered Plan, Assess and Improve sections; AI Settings moves to its own Settings section and is hidden in demo mode | The account step leads the funnel | UI rework, 2026-10-14 |
 
+| A88 | The coaching chat screens a typed question before any AI call (steering phrases and abuse get a fixed reply and cost nothing), turns angle brackets in student text and earlier student turns into look-alike characters, and rejects AI replies that leak the instructions or swear (rules V-TU-05 and V-TU-06) | Prompt wording alone relies on the model behaving; these checks are enforced by code and covered by tests. No per-profile or per-day usage cap yet | Guardrails, 2026-10-14 |
+
 Open decisions D1-D6 (blueprint Appendix B) remain at their stated defaults unless revisited.
